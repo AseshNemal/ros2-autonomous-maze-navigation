@@ -1,3 +1,5 @@
-# Add only Python packages actually required by the DQN / analysis code.
-# Core ROS 2 dependencies should normally be managed via apt/rosdep,
-# not duplicated here. Pin versions once the implementation is tested.
+# Python-only dependencies for the DQN / analysis work (Member 4).
+# ROS 2, Gazebo, Nav2 and SLAM Toolbox come from apt/rosdep, NOT from here.
+#
+# Nothing is pinned yet: add packages (e.g. torch, numpy, matplotlib) and exact
+# versions only after they have been installed and tested on the target platform.

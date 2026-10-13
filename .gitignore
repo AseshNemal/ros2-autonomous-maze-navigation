@@ -5,6 +5,7 @@ ros2_ws/log/
 build/
 install/
 log/
+.colcon*/
 
 # Python
 __pycache__/
@@ -35,14 +36,21 @@ venv/
 *.bag
 *.bag.active
 *.log
+rosbag2_*/
 
 # DQN model weights and large experiments
 *.pt
 *.pth
 *.ckpt
 checkpoints/
+ros2_ws/src/dqn_navigation/models/*
+!ros2_ws/src/dqn_navigation/models/.gitkeep
+!ros2_ws/src/dqn_navigation/models/README.md
 wandb/
 runs/
+tensorboard/
 
 # Common Gazebo/cache artifacts
 .cache/
+.gz/
+.ignition/
