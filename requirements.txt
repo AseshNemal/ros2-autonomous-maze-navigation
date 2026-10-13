@@ -1,0 +1,3 @@
+# Add only Python packages actually required by the DQN / analysis code.
+# Core ROS 2 dependencies should normally be managed via apt/rosdep,
+# not duplicated here. Pin versions once the implementation is tested.

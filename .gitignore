@@ -1,0 +1,48 @@
+# ROS 2 / colcon build outputs
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Credentials / environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ROS bags and simulation logs
+*.db3
+*.mcap
+*.bag
+*.bag.active
+*.log
+
+# DQN model weights and large experiments
+*.pt
+*.pth
+*.ckpt
+checkpoints/
+wandb/
+runs/
+
+# Common Gazebo/cache artifacts
+.cache/
