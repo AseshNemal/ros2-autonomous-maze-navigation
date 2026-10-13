@@ -3,7 +3,7 @@ from glob import glob
 
 from setuptools import find_packages, setup
 
-package_name = 'dqn_navigation'
+package_name = 'dqn_agent'
 
 setup(
     name=package_name,
@@ -23,7 +23,7 @@ setup(
     license='TODO: choose a licence agreed by the group',
     entry_points={
         # Add console_scripts here as nodes are implemented, e.g.
-        # 'train = dqn_navigation.train:main',
+        # 'train = dqn_agent.train:main',
         'console_scripts': [],
     },
 )

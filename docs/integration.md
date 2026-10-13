@@ -4,9 +4,9 @@ All four packages live in one ROS 2 workspace (`ros2_ws/`) and are built togethe
 
 ## Dependency order
 ```
-maze_simulation  ->  slam_mapping  ->  nav2_navigation
+maze_simulation  ->  slam_mapping  ->  maze_navigation
         \                                   \
-         ------------------------------->  dqn_navigation (also compares with nav2_navigation)
+         ------------------------------->  dqn_agent (also compares with maze_navigation)
 ```
 
 ## Shared interface (TO BE AGREED — not yet defined)

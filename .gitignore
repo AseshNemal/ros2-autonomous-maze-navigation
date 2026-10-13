@@ -43,9 +43,9 @@ rosbag2_*/
 *.pth
 *.ckpt
 checkpoints/
-ros2_ws/src/dqn_navigation/models/*
-!ros2_ws/src/dqn_navigation/models/.gitkeep
-!ros2_ws/src/dqn_navigation/models/README.md
+ros2_ws/src/dqn_agent/models/*
+!ros2_ws/src/dqn_agent/models/.gitkeep
+!ros2_ws/src/dqn_agent/models/README.md
 wandb/
 runs/
 tensorboard/

@@ -1,6 +1,6 @@
 # Member 4 — Deep Q-Learning & Performance Analysis
 
-**Package:** `ros2_ws/src/dqn_navigation` (`ament_python`)
+**Package:** `ros2_ws/src/dqn_agent` (`ament_python`)
 **Status:** scaffold only. No environment, network, training or evaluation code exists. No model has been trained and no results exist.
 
 ## Tasks
@@ -12,11 +12,11 @@
 - Compare DQN with the Nav2 baseline from Member 3 using the same start/goal pairs.
 
 ## Expected files
-| Path (inside `dqn_navigation/`) | Purpose |
+| Path (inside `dqn_agent/`) | Purpose |
 |---|---|
-| `dqn_navigation/env.py` | Gym-style environment over `/scan`, `/odom`, `/cmd_vel` and a reset mechanism |
-| `dqn_navigation/agent.py`, `network.py`, `replay_buffer.py` | DQN components |
-| `dqn_navigation/train.py`, `evaluate.py` | Entry points; register in `setup.py` `console_scripts` |
+| `dqn_agent/env.py` | Gym-style environment over `/scan`, `/odom`, `/cmd_vel` and a reset mechanism |
+| `dqn_agent/agent.py`, `network.py`, `replay_buffer.py` | DQN components |
+| `dqn_agent/train.py`, `evaluate.py` | Entry points; register in `setup.py` `console_scripts` |
 | `config/dqn_params.yaml` | Hyper-parameters and reward weights |
 | `models/` | Local checkpoints (git-ignored) |
 | `test/` | Unit tests that do not need Gazebo |
@@ -31,7 +31,7 @@ ROS: `rclpy`, `geometry_msgs`, `sensor_msgs`, `nav_msgs`. Python: PyTorch and Nu
 - Where trained checkpoints are shared (external link) and which run produced them.
 
 ## Validation
-1. `colcon build --packages-select dqn_navigation` succeeds and `colcon test --packages-select dqn_navigation` passes.
+1. `colcon build --packages-select dqn_agent` succeeds and `colcon test --packages-select dqn_agent` passes.
 2. Training runs end to end and logs episode reward.
 3. Evaluation runs a fixed set of start/goal pairs for both DQN and Nav2 and writes results to `docs/results/`.
 

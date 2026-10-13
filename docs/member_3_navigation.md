@@ -1,6 +1,6 @@
 # Member 3 — Autonomous Navigation & Path Planning
 
-**Package:** `ros2_ws/src/nav2_navigation` (`ament_cmake`)
+**Package:** `ros2_ws/src/maze_navigation` (`ament_cmake`)
 **Status:** scaffold only. No Nav2 configuration, planner or launch file exists yet.
 
 ## Tasks
@@ -11,13 +11,13 @@
 - Demonstrate navigation to at least three selected goals.
 
 ## Expected files
-| Path (inside `nav2_navigation/`) | Purpose |
+| Path (inside `maze_navigation/`) | Purpose |
 |---|---|
 | `config/nav2_params.yaml` | Nav2 parameters |
 | `launch/navigation.launch.py` | Nav2 bringup with map and `use_sim_time:=true` |
 | `rviz/navigation.rviz` | RViz layout with goal tool |
 | `maps/` | Only if a map copy is unavoidable; prefer the one from `slam_mapping` |
-| `nav2_navigation/` Python module + `scripts/` | Only if a custom planner or goal-sequence runner is written (switch to `ament_cmake_python` or `ament_python` at that point) |
+| `maze_navigation/` Python module + `scripts/` | Only if a custom planner or goal-sequence runner is written (switch to `ament_cmake_python` or `ament_python` at that point) |
 
 ## Dependencies
 `nav2_bringup`, `nav2_map_server`, `nav2_amcl`, `nav2_navfn_planner`, `rviz2`. Requires Member 1's simulation and Member 2's saved map.
@@ -29,7 +29,7 @@
 - Screenshots in `docs/screenshots/`, data in `docs/results/`.
 
 ## Validation
-1. `colcon build --packages-select nav2_navigation` succeeds.
+1. `colcon build --packages-select maze_navigation` succeeds.
 2. Nav2 lifecycle nodes all reach *active*.
 3. A goal clicked in RViz yields a planned path and the robot reaches it.
 4. Three distinct goals are reached; obstacle avoidance is observed (describe how it was tested).

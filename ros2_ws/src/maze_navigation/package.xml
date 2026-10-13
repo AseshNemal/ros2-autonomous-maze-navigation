@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>nav2_navigation</name>
+  <name>maze_navigation</name>
   <version>0.0.1</version>
   <description>Member 3: Nav2 configuration, global path planning, obstacle avoidance and RViz goal navigation.</description>
   <maintainer email="aseshnemal@gmail.com">AseshNemal</maintainer>

@@ -24,8 +24,8 @@ ros2-autonomous-maze-navigation/
 │   └── src/
 │       ├── maze_simulation/   # Member 1 (ament_cmake)
 │       ├── slam_mapping/      # Member 2 (ament_cmake)
-│       ├── nav2_navigation/   # Member 3 (ament_cmake)
-│       └── dqn_navigation/    # Member 4 (ament_python)
+│       ├── maze_navigation/   # Member 3 (ament_cmake)
+│       └── dqn_agent/    # Member 4 (ament_python)
 ├── docs/
 │   ├── member_1_environment.md
 │   ├── member_2_slam.md
@@ -47,8 +47,8 @@ The root-level `worlds/`, `maps/`, `config/`, `launch/` and `dqn/` folders are l
 |---|---|---|---|
 | 1 | `maze_simulation` | Gazebo maze world, TurtleBot3 Burger, LiDAR, simulation launch | [docs/member_1_environment.md](docs/member_1_environment.md) |
 | 2 | `slam_mapping` | SLAM Toolbox, occupancy-grid mapping, map saving, localization | [docs/member_2_slam.md](docs/member_2_slam.md) |
-| 3 | `nav2_navigation` | Nav2, A*/Dijkstra planning, obstacle avoidance, RViz goals, 3-goal demo | [docs/member_3_navigation.md](docs/member_3_navigation.md) |
-| 4 | `dqn_navigation` | DQN design, training/evaluation, comparison with Nav2 baseline | [docs/member_4_dqn.md](docs/member_4_dqn.md) |
+| 3 | `maze_navigation` | Nav2, A*/Dijkstra planning, obstacle avoidance, RViz goals, 3-goal demo | [docs/member_3_navigation.md](docs/member_3_navigation.md) |
+| 4 | `dqn_agent` | DQN design, training/evaluation, comparison with Nav2 baseline | [docs/member_4_dqn.md](docs/member_4_dqn.md) |
 
 Integration plan and shared interface: [docs/integration.md](docs/integration.md).
 
