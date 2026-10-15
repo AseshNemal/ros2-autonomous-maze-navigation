@@ -78,3 +78,33 @@ Coordinate final topic names, TF frames and command message types with the simul
 
 Full robot navigation has not been tested yet.
 
+## Goal evaluation tool
+
+The evaluator sends its own Nav2 goal. It does not record goals clicked in RViz.
+
+After simulation, localization and Nav2 are ready, run from the repository's ros2_ws directory:
+
+```bash
+ros2 run maze_navigation evaluate_goal.py \
+  --x 1.0 --y 1.0 --yaw 0.0 \
+  --run-id goal_01 \
+  --csv ../docs/results/nav2_results.csv \
+  --ros-args -p use_sim_time:=true
+```
+
+The coordinates above are examples, not validated maze goals.
+Replace them with agreed reachable goals. Yaw is in radians.
+
+CSV fields include the goal, outcome, elapsed simulation time,
+odometry distance, sample count and metrics_valid.
+
+Timing begins when goal acceptance is received. Distance is estimated
+from odometry samples received during the run; it is not planned path
+length or a collision count.
+
+Do not reset the simulation, send another goal or use teleoperation
+during a recorded run. If interrupted with Ctrl+C, the goal may remain
+active and must be canceled separately.
+
+Validation completed: Python syntax, package build and --help.
+Goal execution and CSV measurements still require runtime testing.
