@@ -5,7 +5,9 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-
+from launch.conditions import IfCondition
+from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     package_share = Path(
@@ -16,6 +18,11 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            "use_rviz",
+            default_value="true",
+            description="Open RViz with the navigation layout",
+        ),
         DeclareLaunchArgument(
             "map",
             description="Absolute path to the saved map YAML file",
@@ -45,5 +52,22 @@ def generate_launch_description():
                 "autostart": "true",
                 "use_composition": "false",
             }.items(),
+        ),
+        Node(
+            package="rviz2",
+            executable="rviz2",
+            name="rviz2",
+            output="screen",
+            arguments=[
+                "-d",
+                str(package_share / "rviz" / "navigation.rviz"),
+            ],
+            parameters=[{
+                "use_sim_time": ParameterValue(
+                    LaunchConfiguration("use_sim_time"),
+                    value_type=bool,
+                ),
+            }],
+            condition=IfCondition(LaunchConfiguration("use_rviz")),
         ),
     ])
