@@ -1,0 +1,6 @@
+episode,start_cell,goal_cell,guidance,reward,steps,success,collision,elapsed_sim_s,path_length_m,epsilon,loss,train_steps
+1,"1,1","0,1",none,-44.2805,12,False,True,4.76,0.2314,0.9994,,0
+2,"0,2","0,1",none,-49.3925,15,False,True,5.96,0.2717,0.9987,,0
+3,"4,3","3,3",none,-45.1992,14,False,True,5.58,0.2481,0.9981,,0
+4,"4,0","1,0",none,-46.2387,16,False,True,6.36,0.2809,0.9973,,0
+5,"4,5","5,4",none,-43.1724,6,False,True,2.38,0.1204,0.997,,0

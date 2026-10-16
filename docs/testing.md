@@ -1,5 +1,20 @@
 # Testing
 
+## Latest verified status (VM, 2026-10-16/17; evidence in `docs/results/vm/`)
+| Stage | Result |
+|---|---|
+| build + tests | PASS, 22/22 tests |
+| sim (headless) | PASS, 7/7 checks |
+| nav (Nav2, 3 goals, ground-truth map) | PASS, 3/3 goals, 0 recoveries (`nav2_results_20261016-214253.csv`) |
+| control (teleop + Nav2 goal + `/cmd_vel` publishers) | PASS, 22/22 after adding `cmd_vel_watchdog` (first run 21/22: runaway after teleop killed) |
+| slam | **FAIL**: coverage 0.759, precision 0.577 (need 0.85 / 0.85); map has the right size and structure |
+| dqn | stage ran; **no learning**: 50 episodes 0 successes, evaluation 0/9 |
+| Nav2 on the SLAM map | NOT TESTED |
+| remote-desktop input delay / disconnects | NOT VERIFIABLE by script (sim real-time factor 1.00) |
+
+The older sections below were written before these runs and are kept for history.
+
+
 ## Automated, no ROS (run on the Mac) - `python3 tools/verify_static.py`
 Result on this branch (run 2026-10-16): **PASS** - python compiles; 6 YAML + 5 XML files parse; package names match; `maze.world` and ground-truth map equal their regeneration from `maze_layout.yaml`; pytest: slam_mapping 3 passed, maze_navigation 6 passed, dqn_agent 11 passed.
 This shows internal consistency only.
