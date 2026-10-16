@@ -1,12 +1,12 @@
 # Settings used by the Member 4 command-line scripts.
 environment:
-  world: dqn
+  world: maze   # Gazebo world name in maze_simulation/worlds/maze.world
   robot: turtlebot3_burger
   scan_topic: /scan
   odom_topic: /odom
   velocity_topic: /cmd_vel
   velocity_type: geometry_msgs/msg/TwistStamped
-  goal: [1.0, 0.0]
+  goal: [-1.25, 0.25]   # default short evaluation goal (cell 2,0); start (-1.25,-1.25)
   goal_tolerance_m: 0.22
   collision_distance_m: 0.15
   action_duration_s: 0.30

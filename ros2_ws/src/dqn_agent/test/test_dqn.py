@@ -86,3 +86,37 @@ def test_comparison_rejects_missing_and_preserves_failure():
                           goal_x="1", goal_y="2")], "nav2")
     assert nav["success_rate"] == 1
     assert nav["mean_path_m"] == 0.9
+
+
+def test_odom_to_world_handles_teleport_offset():
+    from dqn_agent.env import odom_to_world
+    import math
+    # odom thinks we are at (5, 5) facing 90 deg right after a teleport to world (-1.25,-1.25) yaw 0
+    ref = (5.0, 5.0, math.pi / 2)
+    start = (-1.25, -1.25, 0.0)
+    xy, yaw = odom_to_world((5.0, 5.0), math.pi / 2, ref, start)
+    assert xy == pytest.approx((-1.25, -1.25)) and yaw == pytest.approx(0.0)
+    # moving +0.5 m "forward" in odom (odom +y here) must be +x in the world
+    xy, yaw = odom_to_world((5.0, 5.5), math.pi / 2, ref, start)
+    assert xy == pytest.approx((-0.75, -1.25), abs=1e-9) and yaw == pytest.approx(0.0)
+
+
+def test_curriculum_pairs_and_waypoints():
+    from dqn_agent import maze
+    layout = maze.load_layout()
+    rng = maze.rng_from_seed(3)
+    for _ in range(20):
+        a, b = maze.sample_pair(layout, rng, 1, 3)
+        assert 1 <= len(maze.cell_path(layout, a, b)) - 1 <= 3
+    pairs = maze.evaluation_pairs(layout)
+    assert len(pairs) == 3
+    wps = maze.waypoints(layout, *pairs[0])
+    assert len(wps) == 16 and wps[-1] == pytest.approx(maze.cell_xy(layout, pairs[0][1]))
+
+
+def test_config_builds_agent():
+    from dqn_agent.config import load_config, agent_kwargs
+    cfg = load_config()
+    assert cfg["environment"]["world"] == "maze"
+    a = DQNAgent(**agent_kwargs(cfg))
+    assert a.gamma == cfg["training"]["gamma"]

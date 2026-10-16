@@ -42,6 +42,27 @@ def compute_reward(before, after, clearance, collision=False, reached=False):
             - (0.4 if clearance < 0.30 else 0.0))
 
 
+def wrap_angle(a):
+    return math.atan2(math.sin(a), math.cos(a))
+
+
+def odom_to_world(xy, yaw, odom_ref, start):
+    """Map an odom-frame pose to the world frame.
+
+    gz DiffDrive integrates wheel motion, so /odom is NOT reset when the robot is
+    teleported with set_pose. At each reset we record the odom pose (odom_ref) that
+    corresponds to the known world start pose (x, y, yaw) and map relative motion
+    from there.
+    """
+    ox, oy, oyaw = odom_ref
+    sx, sy, syaw = start
+    d = syaw - oyaw
+    dx, dy = xy[0] - ox, xy[1] - oy
+    return ((sx + math.cos(d) * dx - math.sin(d) * dy,
+             sy + math.sin(d) * dx + math.cos(d) * dy),
+            wrap_angle(yaw + d))
+
+
 def pose_xyyaw(odom):
     p = odom.pose.pose.position
     q = odom.pose.pose.orientation
@@ -51,9 +72,10 @@ def pose_xyyaw(odom):
 
 
 class GazeboDQNEnv:
-    def __init__(self, world="dqn", goal=(1.0, 0.0),
-                 start=(0.0, 0.0, 0.0), action_duration=0.30,
-                 goal_tolerance=0.22, collision_distance=0.15):
+    def __init__(self, world="maze", goal=(-1.25, 0.25),
+                 start=(-1.25, -1.25, 0.0), action_duration=0.30,
+                 goal_tolerance=0.22, collision_distance=0.15,
+                 waypoint_tolerance=0.25, waypoint_bonus=5.0):
         import rclpy
         from rclpy.node import Node
         from rclpy.qos import qos_profile_sensor_data
@@ -72,6 +94,10 @@ class GazeboDQNEnv:
         self.node.create_subscription(Odometry, "/odom", self._on_odom, qos_profile_sensor_data)
         self.pub = self.node.create_publisher(TwistStamped, "/cmd_vel", 10)
         self.world, self.goal, self.start = world, tuple(goal), tuple(start)
+        self.waypoints = []          # optional guidance: intermediate targets (world xy)
+        self.wp_index = 0
+        self.waypoint_tolerance, self.waypoint_bonus = waypoint_tolerance, waypoint_bonus
+        self.odom_ref = None
         self.action_duration = action_duration
         self.goal_tolerance, self.collision_distance = goal_tolerance, collision_distance
         self.previous_distance = None
@@ -99,8 +125,18 @@ class GazeboDQNEnv:
     def _state(self):
         if self.scan is None or self.odom is None:
             raise RuntimeError("Sensor topics not ready")
+        xy, yaw = self.world_pose()
+        return get_observation(self.scan.ranges, xy, yaw, self.target())
+
+    def world_pose(self):
         xy, yaw = pose_xyyaw(self.odom)
-        return get_observation(self.scan.ranges, xy, yaw, self.goal)
+        return odom_to_world(xy, yaw, self.odom_ref, self.start)
+
+    def target(self):
+        """Current target: next waypoint when guidance is on, else the final goal."""
+        if self.wp_index < len(self.waypoints):
+            return self.waypoints[self.wp_index]
+        return self.goal
 
     def publish(self, linear=0.0, angular=0.0):
         msg = self.TwistStamped()
@@ -115,8 +151,19 @@ class GazeboDQNEnv:
             self.publish()
             self.rclpy.spin_once(self.node, timeout_sec=0.05)
 
-    def reset(self):
+    def reset(self, start=None, goal=None, waypoints=None):
+        """Teleport the robot to `start` (x, y, yaw world) and begin an episode.
+
+        goal / waypoints override the constructor values for this and later episodes.
+        """
         self.stop()
+        if start is not None:
+            self.start = tuple(start)
+        if goal is not None:
+            self.goal = tuple(goal)
+        if waypoints is not None:
+            self.waypoints = [tuple(w) for w in waypoints]
+        self.wp_index = 0
         x, y, yaw = self.start
         # No Gazebo-wide reset: other simulations and nodes remain untouched.
         req = ('name: "turtlebot3_burger" '
@@ -132,12 +179,14 @@ class GazeboDQNEnv:
             raise RuntimeError("Gazebo pose-reset service unavailable") from error
         if result.returncode or not re.search(r"data:\s*true", result.stdout):
             raise RuntimeError("Gazebo robot reset failed: " + (result.stdout + result.stderr)[-600:])
+        self.stop()
         s0, o0 = self.scan_count, self.odom_count
-        self._wait(lambda: self.scan_count > s0 and self.odom_count > o0)
+        self._wait(lambda: self.scan_count > s0 + 1 and self.odom_count > o0 + 1)
+        self.odom_ref = (*pose_xyyaw(self.odom)[0], pose_xyyaw(self.odom)[1])
         state, distance, _ = self._state()
         self.previous_distance = distance
         self.path_length = 0.0
-        self.previous_xy = pose_xyyaw(self.odom)[0]
+        self.previous_xy = self.world_pose()[0]
         self.sim_start = self.odom.header.stamp.sec + self.odom.header.stamp.nanosec * 1e-9
         self.steps = 0
         return state
@@ -156,20 +205,32 @@ class GazeboDQNEnv:
             self.rclpy.spin_once(self.node, timeout_sec=0.05)
         self.stop()
         self._wait(lambda: self.scan_count > s0 and self.odom_count > o0, timeout=4.0)
-        state, distance, clearance = self._state()
-        xy = pose_xyyaw(self.odom)[0]
+        xy = self.world_pose()[0]
+        waypoint_hit = False
+        while (self.wp_index < len(self.waypoints) and
+               math.hypot(self.waypoints[self.wp_index][0] - xy[0],
+                          self.waypoints[self.wp_index][1] - xy[1]) <= self.waypoint_tolerance):
+            self.wp_index += 1
+            waypoint_hit = True
+        state, distance, clearance = self._state()   # distance is to the current target
         self.path_length += math.hypot(xy[0] - self.previous_xy[0], xy[1] - self.previous_xy[1])
         self.previous_xy = xy
         self.previous_distance = distance
         self.steps += 1
         collision = clearance < self.collision_distance
-        success = distance <= self.goal_tolerance
+        final_distance = math.hypot(self.goal[0] - xy[0], self.goal[1] - xy[1])
+        success = final_distance <= self.goal_tolerance
         terminated = collision or success
+        if waypoint_hit:   # target switched: progress term would compare different targets
+            before = distance
         reward = compute_reward(before, distance, clearance, collision, success)
+        if waypoint_hit and not (collision or success):
+            reward += self.waypoint_bonus
         elapsed = (self.odom.header.stamp.sec + self.odom.header.stamp.nanosec * 1e-9
                    - self.sim_start)
         return state, reward, terminated, {
-            "success": success, "collision": collision, "distance_to_goal": distance,
+            "success": success, "collision": collision, "distance_to_goal": final_distance,
+            "waypoint_index": self.wp_index,
             "min_scan": clearance, "path_length_m": self.path_length,
             "elapsed_sim_s": max(0.0, elapsed), "steps": self.steps,
         }
