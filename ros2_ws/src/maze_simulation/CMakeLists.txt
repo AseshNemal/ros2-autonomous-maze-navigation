@@ -3,14 +3,11 @@ project(maze_simulation)
 
 find_package(ament_cmake REQUIRED)
 
-# Resource-only package for now: no nodes or libraries are built yet.
-install(DIRECTORY
-  launch
-  worlds
-  models
-  config
-  rviz
+install(DIRECTORY launch config worlds
   DESTINATION share/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/maze_tools.py scripts/check_sim_topics.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()
