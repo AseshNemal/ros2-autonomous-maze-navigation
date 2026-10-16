@@ -13,7 +13,7 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 WS="$REPO/ros2_ws"
 OUT="$REPO/docs/results/vm"; mkdir -p "$OUT"
 TS="$(date +%Y%m%d-%H%M%S)"
-STAGE="${1:?stage: build|sim|slam|nav|dqn}"
+STAGE="${1:?stage: build|sim|slam|nav|control|dqn}"
 LOG="$OUT/${STAGE}_$TS.log"
 export TURTLEBOT3_MODEL=burger MAZE_REPO="$REPO"
 set +u
@@ -98,6 +98,27 @@ nav)
       run ros2 run maze_navigation run_three_goals.py --csv "$OUT/nav2_results_$TS.csv" \
           --map-source "$MAPSRC" --reset-to-start || fail "run_three_goals: not all goals reached"
     else fail "Nav2 never became active (bt_navigator / /navigate_to_pose)"; fi
+  fi ;;
+control)
+  bg ros2 launch maze_simulation maze_simulation.launch.py gui:=false
+  wait_scan || fail "no /scan"
+  if [ "$RC" = 0 ]; then
+    run python3 "$WS/src/maze_simulation/scripts/check_control.py" teleop --json "$OUT/control_teleop_$TS.json" \
+      || fail "teleoperation checks (see control_teleop_$TS.json)"
+    bg ros2 launch maze_navigation navigation.launch.py use_rviz:=false \
+        map:="$WS/src/slam_mapping/maps/maze_groundtruth.yaml" initial_x:=-1.25 initial_y:=-1.25
+    UP=0
+    for _ in $(seq 1 40); do
+      ros2 lifecycle get /bt_navigator 2>/dev/null | grep -q "active \[3\]" && { UP=1; break; }; sleep 2; done
+    if [ "$UP" = 1 ]; then
+      # teleop moved the robot: put it back at the start pose AMCL was initialised with
+      gz service -s /world/maze/set_pose --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean --timeout 3000 \
+        --req 'name: "turtlebot3_burger" position {x: -1.25 y: -1.25 z: 0.01} orientation {w: 1}' >/dev/null 2>&1
+      sleep 2
+      python3 "$WS/src/slam_mapping/scripts/set_initial_pose.py" --x -1.25 --y -1.25 --yaw 0 --timeout 20 >/dev/null 2>&1
+      run python3 "$WS/src/maze_simulation/scripts/check_control.py" nav --json "$OUT/control_nav_$TS.json" \
+        || fail "Nav2 goal checks (see control_nav_$TS.json)"
+    else fail "Nav2 never became active"; fi
   fi ;;
 dqn)
   bg ros2 launch maze_simulation maze_simulation.launch.py gui:=false

@@ -81,6 +81,7 @@ def main(argv=None):
             self.create_subscription(LaserScan, "/scan", self.on_scan, qos_profile_sensor_data)
             self.pose, self.ref, self.front, self.idx = None, None, float("inf"), 1
             self.finished = False
+            self.t_log = 0.0
             self.create_timer(0.05, self.tick)
             self.get_logger().info(f"tour: {len(route)} cells, {len(wps)} waypoints")
 
@@ -101,7 +102,8 @@ def main(argv=None):
             for k in range(-15, 16):
                 i = int(round((math.radians(k) - m.angle_min) / m.angle_increment)) % n
                 r = m.ranges[i]
-                if math.isfinite(r) and m.range_min <= r <= m.range_max:
+                # r == range_min is a clipped near return (robot pitching, floor/body hit), not an obstacle
+                if math.isfinite(r) and m.range_min + 0.01 < r <= m.range_max:
                     best = min(best, r)
             self.front = best
 
@@ -123,6 +125,12 @@ def main(argv=None):
             x, y, yaw = self.pose
             tx, ty = wps[self.idx]
             dist = math.hypot(tx - x, ty - y)
+            now = self.get_clock().now().nanoseconds / 1e9
+            if now - self.t_log > 15.0:
+                self.t_log = now
+                self.get_logger().info(
+                    f"progress wp {self.idx}/{len(wps)-1} pos=({x:.2f},{y:.2f}) yaw={yaw:.2f} "
+                    f"target=({tx:.2f},{ty:.2f}) dist={dist:.2f} front={self.front:.2f} sim_t={now:.0f}")
             if dist < 0.07:
                 self.idx += 1
                 return
