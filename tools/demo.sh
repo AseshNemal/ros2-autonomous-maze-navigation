@@ -11,7 +11,7 @@ set +u; source /opt/ros/jazzy/setup.bash
 cd "$REPO/ros2_ws" && colcon build --symlink-install --parallel-workers 1 || exit 1
 source install/setup.bash
 kill_stack() { pkill -f "ros2 launch" 2>/dev/null; pkill -f "gz sim" 2>/dev/null; pkill -f parameter_bridge 2>/dev/null
-  pkill -f robot_state_publisher 2>/dev/null; sleep 2; pkill -9 -f "gz sim|parameter_bridge" 2>/dev/null; true; }
+  pkill -f robot_state_publisher 2>/dev/null; pkill -f rviz2 2>/dev/null; pkill -f "nav2_|opennav" 2>/dev/null; sleep 2; pkill -9 -f "gz sim|parameter_bridge" 2>/dev/null; true; }
 kill_stack   # a leaked bridge from an earlier run causes TF/clock jumps
 trap 'kill $(jobs -p) 2>/dev/null; kill_stack' EXIT
 ros2 launch maze_simulation maze_simulation.launch.py &

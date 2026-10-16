@@ -50,6 +50,8 @@ ros2 launch maze_navigation navigation.launch.py \
   initial_x:=-1.25 initial_y:=-1.25
 ```
 
+**Window layout:** press **Super+Left** on the Gazebo window and **Super+Right** on RViz to tile them side by side (see [docs/gui_review.md](docs/gui_review.md)).
+
 **Click a goal:** in RViz press **2D Goal Pose** (top toolbar), then click on the map where you want the robot to go and drag to set the direction. The robot drives there by itself. Repeat for 3 different points (this is the VIVA demo).
 
 **SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `python3 ros2_ws/src/slam_mapping/scripts/tour_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.

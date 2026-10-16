@@ -10,20 +10,6 @@
       <render_engine>ogre2</render_engine>
     </plugin>
     <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
-    <gui fullscreen="0">
-      <plugin filename="GzScene3D" name="3D View">
-        <gz-gui><title>3D View</title><property type="bool" key="showTitleBar">false</property>
-          <property type="string" key="state">docked</property></gz-gui>
-        <engine>ogre2</engine><scene>scene</scene>
-        <camera_pose>0 -4.5 5 0 0.9 1.5708</camera_pose>
-      </plugin>
-      <plugin filename="WorldControl" name="World control"><gz-gui><title>World control</title>
-        <property type="bool" key="showTitleBar">false</property><property type="bool" key="resizable">false</property>
-        <property type="double" key="height">72</property><property type="double" key="width">121</property>
-        <property type="double" key="z">1</property><property type="string" key="state">floating</property>
-        <anchors target="3D View"><line own="left" target="left"/><line own="bottom" target="bottom"/></anchors></gz-gui>
-        <play_pause>true</play_pause><step>true</step></plugin>
-    </gui>
     <light type="directional" name="sun">
       <cast_shadows>false</cast_shadows><pose>0 0 10 0 0 0</pose>
       <diffuse>0.9 0.9 0.9 1</diffuse><specular>0.2 0.2 0.2 1</specular>

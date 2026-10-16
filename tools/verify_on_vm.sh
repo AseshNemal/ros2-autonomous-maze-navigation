@@ -25,8 +25,8 @@ set -u
 kill_stack() {
   pkill -f "ros2 launch" 2>/dev/null
   pkill -f "gz sim" 2>/dev/null; pkill -f "gz_tools_vendor" 2>/dev/null
-  pkill -f parameter_bridge 2>/dev/null; pkill -f robot_state_publisher 2>/dev/null
-  pkill -f "slam_toolbox|nav2_|lib/nav2|auto_map_drive|twist_stamper|set_initial_pose" 2>/dev/null
+  pkill -f parameter_bridge 2>/dev/null; pkill -f robot_state_publisher 2>/dev/null; pkill -f rviz2 2>/dev/null
+  pkill -f "slam_toolbox|nav2_|lib/nav2|opennav|auto_map_drive|twist_stamper|set_initial_pose" 2>/dev/null
   sleep 3
   pkill -9 -f "gz sim|parameter_bridge|robot_state_publisher" 2>/dev/null; true
 }
