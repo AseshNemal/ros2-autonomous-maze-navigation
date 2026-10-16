@@ -1,0 +1,40 @@
+# Settings used by the Member 4 command-line scripts.
+environment:
+  world: dqn
+  robot: turtlebot3_burger
+  scan_topic: /scan
+  odom_topic: /odom
+  velocity_topic: /cmd_vel
+  velocity_type: geometry_msgs/msg/TwistStamped
+  goal: [1.0, 0.0]
+  goal_tolerance_m: 0.22
+  collision_distance_m: 0.15
+  action_duration_s: 0.30
+model:
+  observation_dimensions: 15
+  lidar_sectors: 12
+  hidden_layers: [64, 64]
+  actions: # [linear m/s, angular rad/s]
+    - [0.14, 0.0]
+    - [0.10, 0.8]
+    - [0.10, -0.8]
+    - [0.0, 1.0]
+    - [0.0, -1.0]
+training:
+  algorithm: double_dqn
+  gamma: 0.99
+  learning_rate: 0.0005
+  batch_size: 32
+  replay_capacity: 20000
+  warmup_steps: 100
+  target_update_steps: 200
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  epsilon_decay_steps: 20000
+  seed: 42
+rewards:
+  progress_per_meter: 12
+  step_penalty: -0.05
+  near_obstacle_penalty: -0.4
+  collision_penalty: -40
+  goal_reward: 80
