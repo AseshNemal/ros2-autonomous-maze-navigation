@@ -12,8 +12,8 @@ OUT = ROOT / "docs" / "figures"
 MAPS = ROOT / "ros2_ws/src/slam_mapping/maps"
 
 
-def panel(img, size, caption):
-    img = img.convert("L").resize(size, Image.NEAREST).convert("RGB")
+def panel(img, size, caption, smooth=False):
+    img = img.convert("L").resize(size, Image.LANCZOS if smooth else Image.NEAREST).convert("RGB")
     out = Image.new("RGB", (size[0], size[1] + 28), "white")
     out.paste(img, (0, 28))
     ImageDraw.Draw(out).text((6, 8), caption, fill="black")
@@ -35,8 +35,8 @@ def main():
     gt = Image.open(MAPS / "maze_groundtruth.pgm")
     slam = Image.open(MAPS / "maze_slam.pgm")
     fig1 = Image.open(ROOT / "docs/figure1_from_assignment.png")
-    side = 360
-    row([panel(fig1, (side, round(side * fig1.height / fig1.width)), "Figure 1 (assignment PDF)"),
+    side = 300
+    row([panel(fig1, (side, round(side * fig1.height / fig1.width)), "Figure 1 (assignment PDF)", smooth=True),
          panel(gt, (side, side), "Our ground-truth map (from maze_layout.yaml)")], OUT / "fig_maze.png")
     row([panel(gt, (side, side), "Ground truth"),
          panel(slam, (side, round(side * slam.height / slam.width)),

@@ -5,8 +5,18 @@
 | | |
 |---|---|
 | GitHub repository | https://github.com/AseshNemal/ros2-autonomous-maze-navigation (branch `dev-integration`) |
-| Group members / contributions | see `docs/OWNERSHIP.md` and `docs/members/member_1..4.md` |
+| Group members / contributions | see the table below and `docs/OWNERSHIP.md` |
 | Environment | Ubuntu 24.04 (ARM64 VM, 4 CPUs, 3 GB RAM), ROS 2 Jazzy, Gazebo Harmonic, Nav2, SLAM Toolbox |
+
+| Member (GitHub user) | Package | Contribution |
+|---|---|---|
+| Member 1 - JayangaWeerasinghe | `maze_simulation` | environment-versions document, test-map assets, optional prototype world `custom_maze` (3 commits on `main`) |
+| Member 2 - dhanushka403 | `slam_mapping` | partial prototype map `test_map` (1 commit, PR #1) |
+| Member 3 - RavinduYashas | `maze_navigation` | Nav2 parameters, launch file, RViz layout, goal evaluator (7 commits, PR #2) |
+| Member 4 - AseshNemal | `dqn_agent` | NumPy Double DQN, environment, training/evaluation/comparison, Stage-1 trial (2 commits, PR #3) |
+| Integration - AseshNemal (AI-assisted, labelled as such) | all four | Figure-1 maze generator and world, bridge/spawn, watchdog, SLAM tour and validation, Nav2 fixes, three-goal script, VM verification scripts, DQN maze adaptation |
+
+Student names and IDs are to be added on the submitted cover page. Original teammate commits are preserved unmodified in the Git history; `docs/OWNERSHIP.md` separates them from the integration work.
 
 > **Honesty note.** Every number in this report comes from a recorded run in `docs/results/vm/` (command, date and log are in that folder). Where a requirement was not met, the report says so. Items marked **NOT MEASURED** have no data yet.
 
@@ -25,9 +35,11 @@ Nav2 and DQN are alternative controllers of the same robot; they are never run t
 
 ## 2. Maze design
 
-Figure 1 is a 6 x 6 grid of 0.5 m cells (3 m x 3 m). Thick lines are walls, thin lines are open cell boundaries; wall positions were taken from the figure's line thickness and stored in `maze_layout.yaml`. A generator (`maze_tools.py`) produces the Gazebo SDF world (walls 0.05 m thick, 0.5 m high) and a ground-truth occupancy map from the same file, so the simulated maze, the validation map and the path-planning graph cannot disagree. The free corridor is 0.45 m, only about 2.5 times the Burger's diameter, which makes the maze hard for the costmaps and controller (Section 6). The robot starts in the bottom-left cell; the three evaluation goals are cells (0,5), (2,0) and (3,3).
+Figure 1 is a 6 x 6 grid of 0.5 m cells (3 m x 3 m). Thick lines are walls, thin lines are open cell boundaries; wall positions were taken from the figure's line thickness and stored in `maze_layout.yaml`. A generator (`maze_tools.py`) produces the Gazebo SDF world (walls 0.05 m thick, 0.5 m high) and a ground-truth occupancy map from the same file, so the simulated maze, the validation map and the path-planning graph cannot disagree. The free corridor is 0.45 m, only about 2.5 times the Burger's diameter, which makes the maze hard for the costmaps and controller (Section 7). The robot starts in the bottom-left cell; the three evaluation goals are cells (0,5), (2,0) and (3,3).
 
-Verification: the committed `maze.world` equals its regeneration from the layout (`tools/verify_static.py`), the headless simulation loads it, and a raycast of the ground-truth map from the robot's true pose reproduces the real LiDAR scan with a mean range error of 0.05 m. Comparison with Figure 1 by eye should still be done by a human in the VIVA.
+Verification: the committed `maze.world` equals its regeneration from the layout (`tools/verify_static.py`), the headless simulation loads it, and a raycast of the ground-truth map from the robot's true pose reproduces the real LiDAR scan with a mean range error of 0.05 m. The layout was also compared with Figure 1 automatically (Section 2.1).
+
+![Figure 1 of the brief (left) and the ground-truth occupancy map generated from our layout (right)](figures/fig_maze.png)
 
 ### 2.1 Figure-1 check and the additional prototype world
 
@@ -72,7 +84,11 @@ Earlier runs, kept in `docs/results/vm/`, document the path to this result: 0 of
 
 One further run was discarded: its saved map came from a stray Nav2 map server, not SLAM (identical to the ground-truth map); the script now refuses to save unless `slam_toolbox` is the only `/map` publisher.
 
+![Ground truth (left) and the SLAM Toolbox map of the last recorded VM run (right)](figures/fig_slam.png)
+
 **The SLAM map does not meet our own validation thresholds.** The map has the right size and recognisable structure, but walls are smeared (precision) and about a quarter of the wall length is not scanned. Navigation therefore uses the ground-truth map in the test above; navigation on the SLAM map was not demonstrated.
+
+*Diagnosis from the saved map (offline, `docs/cloud_analysis.md`).* Re-validating the committed map reproduces the 0.759 / 0.577 above. It is distorted, not merely offset: the best rigid re-alignment only reaches precision 0.598, and only 20 % of line-like wall pixels are within 5 degrees of a maze axis (77 % for the ground-truth map): the heading was lost part-way through the tour. A simulated perfect-pose LiDAR map of the same tour passes (1.0 / 1.0), so the tour and the validator are not the limit; the validator tolerates only about 0.2 degrees of uncorrected heading drift per metre. Odometry was accurate in the control test (yaw within 0.04 rad per turn). The most likely cause is the scan-matcher search window (+-0.5 m, +-20 degrees), far larger than the odometry error in 0.45 m self-similar corridors. We narrowed it to 0.2 m and 10 degrees; **this change has not been run in Gazebo yet**, so the table above is unchanged and the SLAM requirement is still unmet.
 
 ### 4.4 Remote / manual control (`verify_on_vm.sh control`, `check_control.py`)
 Real `teleop_twist_keyboard` driven through a pseudo-terminal; robot motion compared between `/odom` and Gazebo's ground truth. First run: 21 of 22 checks passed (spawn, `/odom`, `/scan`, TF, message type, bridge, forward +0.46 m, backward -0.32 m, left +1.01 rad, right -1.03 rad, stop, Nav2 goal reached in 21 s, only the Nav2 chain publishing during Nav2, real-time factor 1.00). The one failure was a genuine safety defect: after teleop was killed mid-motion, Gazebo kept executing the last command (0.15 m/s, 0.39 m in 2.5 s). A command watchdog (`cmd_vel_watchdog.py`) was added; see Section 4.6 for its re-test.
@@ -80,7 +96,9 @@ Real `teleop_twist_keyboard` driven through a pseudo-terminal; robot motion comp
 ### 4.5 DQN (`dqn_train_20261017-000035.csv`, `dqn_eval_20261017-000035.csv`; 5-episode timing run `dqn_train_20261016-235928.csv`)
 Unit tests pass (11 of 11). Timing test: 5 episodes lasted about 5 s of simulated time each (collision after 6 to 16 steps), roughly 4 to 6 s of wall time per episode, so training cost was measured rather than assumed. Real training: **50 episodes, 595 optimizer updates, pure DQN (no guidance)**: 0 successes, 50 collisions, mean 13.9 steps and 5.5 simulated seconds per episode, mean reward -45.9, epsilon still 0.967 at the end (exploration had barely started to decay). Greedy evaluation on the three Nav2 goals, 3 trials each: **0 of 9 reached the goal**; every trial ended in a collision after 6 to 8 steps. **The DQN did not learn to navigate the maze in 50 episodes.** This is expected for so little training (an earlier trial also reached 0 of 3), and longer training was not attempted: it is not evidence either way about the method with more training. The comparison with Nav2 is therefore Nav2 3/3 against DQN 0/9.
 
-### 4.6 Watchdog re-test (`control_20261016-235730.log`)
+*Diagnosis without Gazebo (offline, `docs/cloud_analysis.md`).* The 50 episodes made only about 700 environment steps because each ended in a collision, so epsilon (decayed over 20 000 steps) never left random exploration. A kinematic surrogate of the environment (real agent and reward, ray-cast LiDAR on the real maze, no Gazebo) reproduces this run (0 successes). The surrogate also exposed a defect in the hybrid (waypoint) mode: the waypoint switched 0.25 m from a cell centre, i.e. on entering the 0.5 m cell, so each turn cut into the corner (success 92 % for one-cell paths, 29 % for two, 14 % for three). We changed the tolerance to 0.15 m and the epsilon decay to 3000 steps. On the surrogate this gives 20 of 30 greedy trials on the three assignment goals for the hybrid agent, while a pure DQN, which sees only local LiDAR and a straight-line bearing, stays at 0 of 30. **These are surrogate numbers, not Gazebo results**; the new settings have not been run in Gazebo and the table above is unchanged. A DQN that reaches goals only with A\* waypoints is a hybrid and will be reported as one.
+
+### 4.6 Watchdog re-test (`control_teleop_20261016-235730.json`, `control_nav_20261016-235730.json`)
 After adding the watchdog: **22 of 22 checks passed** (teleop 16/16, Nav2 6/6). Killing teleop mid-motion now leaves the robot at 0.000 m/s with 0.00 m moved in the following 2.5 s (before: 0.15 m/s, 0.39 m). The Nav2 goal was reached in 13 s. Not verifiable by script: remote-desktop input delay and disconnections; the simulation itself ran at a real-time factor of 1.00 (headless).
 
 ## 5. Challenges faced (all from real runs)
@@ -92,8 +110,11 @@ After adding the watchdog: **22 of 22 checks passed** (teleop 16/16, Nav2 6/6). 
 6. **GUI configuration.** RViz used an unmodified generic Nav2 layout centred 5 m away from the maze and a custom Gazebo GUI block; both replaced by standard configurations (`docs/gui_review.md`).
 7. **Small VM.** Concurrent Gazebo, Nav2 and RViz on 3 GB RAM; Nav2's 4 s lifecycle heartbeat shut navigation down, so it was raised to 30 s.
 
-## 6. Possible improvements
+## 6. Limitations
+SLAM map fails our validation thresholds; Nav2 was tested only on the ground-truth map, from reset start poses, in three runs; DQN has no Gazebo goal-reaching result; the fixes in Sections 4.3 and 4.5 are untested in Gazebo; travel-efficiency uses a cell-count reference rather than the planner path; the LiDAR rate was about 4.4 Hz on a 3 GB VM; collisions are detected from LiDAR range, not a contact sensor.
+
+## 7. Possible improvements
 SLAM accuracy (tune scan-matching parameters, slower motion, re-enable loop closure with stricter thresholds, evaluate with a real exploration algorithm such as frontier exploration); navigate on the SLAM map instead of the ground-truth map; measure path efficiency against the planner's path rather than a cell-count estimate; longer and randomised DQN training, LiDAR history in the state, PyTorch with prioritised replay; a contact sensor for collision counting; automated cross-checking of the maze against Figure 1.
 
-## 7. How to reproduce
-`bash tools/run_all.sh` (all stages, headless) or `bash tools/verify_on_vm.sh <build|sim|slam|nav|control|dqn>`; live demo `bash tools/demo.sh`. Details in `README.md`.
+## 8. How to reproduce
+`bash tools/run_all.sh` (all stages, headless) or `bash tools/verify_on_vm.sh <build|sim|slam|nav|control|dqn>`; live demo `bash tools/demo.sh`. Details in `README.md`; the Ubuntu test order is `docs/ubuntu_test_checklist.md`.

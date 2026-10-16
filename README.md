@@ -148,7 +148,8 @@ One controller at a time on `/cmd_vel`: mapping, Nav2 or DQN - see [docs/archite
 - [x] Member 2: SLAM/localization workflow + map validator (IMPLEMENTED; real SLAM map pending)
 - [x] Member 3: Nav2 config fixes + 3-goal runner (IMPLEMENTED; no navigation result yet)
 - [x] Member 4: DQN maze adaptation (IMPLEMENTED; unit-tested; no goal-reaching evidence)
-- [ ] Reproducible three-goal demonstration (needs VM run)
+- [ ] Reproducible three-goal demonstration (needs VM run; order in [docs/ubuntu_test_checklist.md](docs/ubuntu_test_checklist.md))
+- [ ] Re-run SLAM and DQN stages with the cloud-analysis fixes ([docs/cloud_analysis.md](docs/cloud_analysis.md)); both still unverified
 - [ ] Evidence, results and final report numbers
 
 ## Repository hygiene
