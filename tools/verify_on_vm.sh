@@ -12,8 +12,10 @@ TS="$(date +%Y%m%d-%H%M%S)"
 STAGE="${1:?stage: build|sim|slam|nav|dqn}"
 LOG="$OUT/${STAGE}_$TS.log"
 export TURTLEBOT3_MODEL=burger MAZE_REPO="$REPO"
+set +u
 source /opt/ros/jazzy/setup.bash
 [ -f "$WS/install/setup.bash" ] && source "$WS/install/setup.bash"
+set -u
 PIDS=()
 cleanup() { for p in "${PIDS[@]:-}"; do kill "$p" 2>/dev/null; done; pkill -f "gz sim" 2>/dev/null; true; }
 trap cleanup EXIT

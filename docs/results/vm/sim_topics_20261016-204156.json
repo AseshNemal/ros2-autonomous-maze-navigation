@@ -1,0 +1,39 @@
+{
+  "results": {
+    "scan_rate_hz": 4.375,
+    "odom_rate_hz": 43.625,
+    "clock_rate_hz": 218.5,
+    "tf_msgs": 483,
+    "scan_frame": "base_scan",
+    "scan_beams": 360,
+    "scan_range_max": 3.5,
+    "odom_frame": "odom",
+    "odom_child": "base_footprint",
+    "tf_pairs": [
+      [
+        "base_link",
+        "wheel_left_link"
+      ],
+      [
+        "base_link",
+        "wheel_right_link"
+      ],
+      [
+        "odom",
+        "base_footprint"
+      ]
+    ],
+    "cmd_vel_types": [
+      "geometry_msgs/msg/TwistStamped"
+    ]
+  },
+  "checks": {
+    "/scan publishing (>=3 Hz)": true,
+    "/odom publishing (>=5 Hz)": true,
+    "/clock publishing": true,
+    "odom frame is 'odom'": true,
+    "odom child is base_footprint": true,
+    "TF odom->base_footprint present": true,
+    "/cmd_vel type is TwistStamped": true
+  }
+}
