@@ -12,4 +12,9 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  scripts/evaluate_goal.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()
