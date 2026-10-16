@@ -9,7 +9,7 @@ declare -A RES
 for s in build sim slam nav dqn; do
   echo "================ STAGE: $s ================"
   # nav needs the SLAM map only if the slam stage produced one; otherwise use the ground-truth map
-  if bash tools/verify_on_vm.sh "$s"; then RES[$s]=done; else RES[$s]=ERROR; fi
+  if bash tools/verify_on_vm.sh "$s"; then RES[$s]=PASS; else RES[$s]=FAIL; fi
 done
 echo; echo "================ SUMMARY (check PASS/FAIL lines in docs/results/vm/*.log) ================"
 for s in build sim slam nav dqn; do echo "$s: ${RES[$s]}"; done

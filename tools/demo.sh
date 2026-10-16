@@ -7,8 +7,10 @@ export TURTLEBOT3_MODEL=burger MAZE_REPO="$REPO"
 set +u; source /opt/ros/jazzy/setup.bash
 cd "$REPO/ros2_ws" && colcon build --symlink-install --parallel-workers 1 || exit 1
 source install/setup.bash
-pkill -f "gz sim" 2>/dev/null
-trap 'kill $(jobs -p) 2>/dev/null; pkill -f "gz sim" 2>/dev/null' EXIT
+kill_stack() { pkill -f "ros2 launch" 2>/dev/null; pkill -f "gz sim" 2>/dev/null; pkill -f parameter_bridge 2>/dev/null
+  pkill -f robot_state_publisher 2>/dev/null; sleep 2; pkill -9 -f "gz sim|parameter_bridge" 2>/dev/null; true; }
+kill_stack   # a leaked bridge from an earlier run causes TF/clock jumps
+trap 'kill $(jobs -p) 2>/dev/null; kill_stack' EXIT
 ros2 launch maze_simulation maze_simulation.launch.py &
 for _ in $(seq 1 60); do ros2 topic list 2>/dev/null | grep -qx /scan && break; sleep 2; done
 case "${1:-nav}" in

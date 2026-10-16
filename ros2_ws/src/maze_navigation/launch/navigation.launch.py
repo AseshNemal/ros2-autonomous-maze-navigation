@@ -106,10 +106,12 @@ def generate_launch_description():
                 "map": LaunchConfiguration("map"),
                 "params_file": LaunchConfiguration("params_file"),
                 "use_sim_time": LaunchConfiguration("use_sim_time"),
-                "slam": "false",
-                "use_localization": "true",
-                "autostart": "true",
-                "use_composition": "false",
+                # Nav2 evaluates these with PythonExpression: they must be
+                # capitalised Python literals ("false" -> NameError, no Nav2).
+                "slam": "False",
+                "use_localization": "True",
+                "autostart": "True",
+                "use_composition": "False",
             }.items(),
         ),
         # Integration additions: Nav2 (Jazzy) emits Twist on cmd_vel_nav2; the

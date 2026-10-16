@@ -34,7 +34,7 @@ def generate_launch_description():
                 "map": LaunchConfiguration("map"),
                 "params_file": LaunchConfiguration("params_file"),
                 "use_sim_time": LaunchConfiguration("use_sim_time"),
-                "autostart": "true", "use_composition": "False",
+                "autostart": "True", "use_composition": "False",
             }.items()),
         Node(package="slam_mapping", executable="set_initial_pose.py", output="screen",
              arguments=["--x", LaunchConfiguration("initial_x"),

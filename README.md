@@ -63,7 +63,7 @@ ros2 launch maze_navigation navigation.launch.py \
 | `ros2: error ... invalid choice: 'run'` | `bash tools/install_deps_ubuntu.sh` |
 | No window opens | You used method A (headless) or SSH. Use method B on the VM desktop. |
 | Gazebo very slow / VM freezes | Give the VM more RAM (6 GB+), close other programs. |
-| `package not found` | Run the 2 `source` lines above in that terminal. |
+| `ros2: command not found` / `package not found` | New terminal has no ROS. Run the 3 setup lines above, or add them once to `~/.bashrc` (`source /opt/ros/jazzy/setup.bash`, `source ~/ros2-autonomous-maze-navigation/ros2_ws/install/setup.bash`, `export TURTLEBOT3_MODEL=burger`). |
 | Robot does not move | Check Gazebo is running and you only have one Nav2/SLAM/DQN running. |
 
 More detail: [docs/demonstration.md](docs/demonstration.md), [docs/installation.md](docs/installation.md), [docs/testing.md](docs/testing.md).
