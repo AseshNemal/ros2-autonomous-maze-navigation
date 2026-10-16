@@ -10,7 +10,7 @@ Authorship is taken from `git log`; names are Git author names, not claims about
 | 3 Navigation | `feature/maze_navigation`, PR #2 | `744dc77` `de04a64` `dd6d60a` `8e8a9b8` `fa84c96` `59bafe8` `e9bcffe` | RavinduYashas | Nav2 params, launch, RViz layout, goal evaluator, docs |
 | 4 DQN | `feature/dqn-agent`, PR #3 | `af87978` `8a76435` | Asesh Nemal | NumPy Double DQN, env, train/eval/compare, tests, Stage-1 trial evidence |
 
-## Emergency integration commits (branch `feature/group-integration`, AI-assisted, NOT teammate work)
+## Emergency integration commits (branch `dev-integration`, AI-assisted, NOT teammate work)
 | Commit | Scope |
 |---|---|
 | `82efae1` feat(simulation) | `maze_simulation` package, maze world, ground-truth map |
@@ -23,4 +23,4 @@ Authorship is taken from `git log`; names are Git author names, not claims about
 `feature/dqn-agent-manual` was neither read nor modified. `main` is unchanged. No teammate branch was modified.
 
 ## Merge records
-`701b8a5`, `725cc15`, `1c16c1c` are `--no-ff` merge commits of the three source branches into `feature/group-integration`, created locally (the GitHub PR merge button/CLI was not used - see integration.md). Each source branch's commits remain reachable and unmodified.
+`701b8a5`, `725cc15`, `1c16c1c` are `--no-ff` merge commits of the three source branches into `dev-integration`, created locally (the GitHub PR merge button/CLI was not used - see integration.md). Each source branch's commits remain reachable and unmodified.

@@ -2,7 +2,7 @@
 
 ```bash
 git clone https://github.com/AseshNemal/ros2-autonomous-maze-navigation.git && cd ros2-autonomous-maze-navigation
-git checkout feature/group-integration
+git checkout dev-integration
 tools/install_deps_ubuntu.sh        # apt: ros-gz, turtlebot3, nav2, slam-toolbox, rviz2, colcon...
 source /opt/ros/jazzy/setup.bash && export TURTLEBOT3_MODEL=burger
 cd ros2_ws && colcon build --symlink-install --parallel-workers 1   # 1 worker: small VM

@@ -52,7 +52,7 @@ The root-level `worlds/`, `config/`, `launch/` and `dqn/` folders are leftovers 
 
 Also: [architecture](docs/architecture.md) · [integration](docs/integration.md) · [installation](docs/installation.md) · [testing & status](docs/testing.md) · [demonstration](docs/demonstration.md) · [VIVA notes](docs/viva.md) · [report draft](docs/report_draft.md).
 
-> **Branch status:** `feature/group-integration` is an emergency full-project backup. It is code-complete but **runtime-unverified in Gazebo** - read [docs/testing.md](docs/testing.md) for the honest status of each requirement.
+> **Branch status:** `dev-integration` is an emergency full-project backup. It is code-complete but **runtime-unverified in Gazebo** - read [docs/testing.md](docs/testing.md) for the honest status of each requirement.
 
 ## Target environment
 
