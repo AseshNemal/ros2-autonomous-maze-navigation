@@ -1,0 +1,4 @@
+run_id,method,world,goal_x,goal_y,success,collision,outcome,elapsed_sim_s,path_length_m,steps,distance_to_goal_m
+dqn_001,dqn,dqn,1.0,0.0,False,False,timeout,4.04,0.1978,20,0.4395
+dqn_002,dqn,dqn,1.0,0.0,False,False,timeout,4.22,0.1921,20,0.4295
+dqn_003,dqn,dqn,1.0,0.0,False,False,timeout,4.26,0.2048,20,0.5029
