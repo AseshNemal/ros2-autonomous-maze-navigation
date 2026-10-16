@@ -56,6 +56,8 @@ ros2 launch maze_navigation navigation.launch.py \
 
 **SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `python3 ros2_ws/src/slam_mapping/scripts/tour_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.
 
+**Alternative world (optional, prototype):** `ros2 launch maze_simulation maze_simulation.launch.py world:=custom_maze x_pose:=0.0 y_pose:=0.0` loads the extra 8 x 8 m arena `worlds/custom_maze.sdf` (not Figure 1, not used for the reported results). `world` accepts a name in `worlds/` or a file path; the default is the assignment maze, and the spawn uses the world's own name from the file. The Nav2 / SLAM / DQN stages, `tools/` scripts and the ground-truth map assume the default maze (`/world/maze/...`, start pose -1.25, -1.25), so use the alternative world for viewing and manual driving only. Not yet tested.
+
 **Rules:** run only ONE of Nav2 / SLAM mapping / DQN at a time (they all control the same robot), and close Gazebo (`Ctrl+C`) before starting something new.
 
 ### Problems

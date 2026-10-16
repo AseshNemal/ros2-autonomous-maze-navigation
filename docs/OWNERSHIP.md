@@ -5,10 +5,12 @@ Authorship is taken from `git log`; names are Git author names, not claims about
 ## Original teammate contributions (preserved, merged with merge commits)
 | Member | Branch / PR | Commits | Author | Content |
 |---|---|---|---|---|
-| 1 Simulation | - | **none found on any branch** | - | nothing to preserve |
+| 1 Simulation | `main` (found later; not on a feature branch) | `541b10a` `a26c3cf` | JayangaWeerasinghe | `docs/environment_versions.md`, test-map/screenshots, and an additional 8 x 8 m prototype arena `worlds/custom_maze.sdf` + `launch/custom_maze.launch.py` (not Figure 1; see report section 2). His ament_python packaging (`setup.py`, `setup.cfg`) was NOT adopted: `maze_simulation` stays ament_cmake. |
 | 2 SLAM | `feature/slam-mapping`, PR #1 | `7544234` | dhanushka403 | `maps/test_map.pgm/.yaml` (partial prototype map) |
 | 3 Navigation | `feature/maze_navigation`, PR #2 | `744dc77` `de04a64` `dd6d60a` `8e8a9b8` `fa84c96` `59bafe8` `e9bcffe` | RavinduYashas | Nav2 params, launch, RViz layout, goal evaluator, docs |
 | 4 DQN | `feature/dqn-agent`, PR #3 | `af87978` `8a76435` | Asesh Nemal | NumPy Double DQN, env, train/eval/compare, tests, Stage-1 trial evidence |
+
+Member 1 note: these two commits were not found in the earlier inventory because they are on `main`, not on a feature branch. `origin/main` was merged into `dev-integration` with a merge commit; the only conflict was `maze_simulation/CMakeLists.txt` (deleted on `main`), resolved by keeping the ament_cmake package. The merge has not been built or run in Gazebo yet.
 
 ## Emergency integration commits (branch `dev-integration`, AI-assisted, NOT teammate work)
 | Commit | Scope |

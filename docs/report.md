@@ -29,6 +29,10 @@ Figure 1 is a 6 x 6 grid of 0.5 m cells (3 m x 3 m). Thick lines are walls, thin
 
 Verification: the committed `maze.world` equals its regeneration from the layout (`tools/verify_static.py`), the headless simulation loads it, and a raycast of the ground-truth map from the robot's true pose reproduces the real LiDAR scan with a mean range error of 0.05 m. Comparison with Figure 1 by eye should still be done by a human in the VIVA.
 
+### 2.1 Additional prototype arena (not used for results)
+
+The repository also contains `worlds/custom_maze.sdf`, an earlier prototype by a team member (JayangaWeerasinghe): an 8 m x 8 m walled arena with four inner walls, launched by `custom_maze.launch.py`. It is **not** the maze of Figure 1 (different size, layout and corridor width), so it does not satisfy the environment requirement and **no reported result in this report was obtained in it**. It is kept as an optional extra world, selectable with `world:=custom_maze` (README). Whether it loads and the robot spawns in it with the current packages has not been tested yet.
+
 ## 3. Navigation method
 
 **Mapping and localisation.** SLAM Toolbox (asynchronous, loop closing disabled because the simulated odometry is clean and the self-similar 0.5 m corridors produced false loop closures) builds an occupancy grid. The mapping driver `tour_map_drive.py` drives through every cell along open corridors (a greedy nearest-unvisited tour over the cell graph, 48 waypoints, about 23.5 m, 0.12 m/s, slow in-place turns so consecutive 5 Hz scans overlap). The layout is used only to choose where to drive; the map itself comes from the LiDAR. AMCL localises on the saved map.
