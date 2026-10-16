@@ -26,6 +26,10 @@ bash tools/run_all.sh
 
 ### B. Live demo (see the robot, click a goal)
 
+**One command** (VM desktop): `bash tools/demo.sh` - builds, opens Gazebo + RViz. In RViz press **2D Goal Pose** and click the map. `Ctrl+C` stops all. Variants: `bash tools/demo.sh slam` (build the map live), `bash tools/demo.sh teleop` (drive with keyboard).
+
+Or step by step:
+
 Use the VM's desktop (not SSH). Run this in **every** new terminal first:
 
 ```bash
