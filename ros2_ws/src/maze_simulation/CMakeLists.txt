@@ -6,7 +6,7 @@ find_package(ament_cmake REQUIRED)
 install(DIRECTORY launch config worlds
   DESTINATION share/${PROJECT_NAME}
 )
-install(PROGRAMS scripts/maze_tools.py scripts/check_sim_topics.py scripts/check_control.py
+install(PROGRAMS scripts/maze_tools.py scripts/check_sim_topics.py scripts/check_control.py scripts/cmd_vel_watchdog.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

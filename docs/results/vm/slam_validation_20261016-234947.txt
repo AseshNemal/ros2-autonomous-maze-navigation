@@ -1,0 +1,9 @@
+size_px: [73, 75]
+size_m: [3.65, 3.75]
+resolution: 0.05
+unknown_fraction: 0.403
+wall_coverage: 0.759
+precision: 0.577
+free_ok: 0.944
+pass: False
+RESULT: FAIL

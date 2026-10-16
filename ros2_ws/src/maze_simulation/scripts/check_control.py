@@ -47,7 +47,7 @@ def gz_pose():
 def cmd_vel_publishers():
     """Node names publishing /cmd_vel right now."""
     out = subprocess.run("ros2 topic info /cmd_vel -v", shell=True, capture_output=True, text=True).stdout
-    names, section = set(), None
+    names, section = set(), None   # the dead-man watchdog is a safety net, not a driver: ignored
     for line in out.splitlines():
         if line.startswith("Publisher count"):
             section = "pub"
@@ -56,6 +56,7 @@ def cmd_vel_publishers():
         m = re.match(r"Node name: (\S+)", line)
         if m and section == "pub":
             names.add(m.group(1))
+    names.discard("cmd_vel_watchdog")
     return names
 
 

@@ -177,7 +177,7 @@ def main():
             ref = (len(path) - 1) * layout["cell_size_m"] if path else None
             prev_cell = gc
         eff = round(ref / dist, 3) if (ref and dist > 0 and outcome == "SUCCEEDED") else ""
-        rows.append([args.run_id, "nav2_navfn_astar_mppi", i, round(gw[0], 3), round(gw[1], 3),
+        rows.append([args.run_id, "nav2_navfn_astar_rpp", i, round(gw[0], 3), round(gw[1], 3),
                      outcome, round(elapsed, 2), round(dist, 3), rec,
                      ref if ref is not None else "", eff, args.reset_to_start, args.map_source])
         node.get_logger().info(f"goal {i}: {outcome} in {elapsed:.1f}s sim, {dist:.2f} m, recoveries {rec}")

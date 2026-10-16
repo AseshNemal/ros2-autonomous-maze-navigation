@@ -57,6 +57,9 @@ def generate_launch_description():
              arguments=["-world", "maze", "-name", ROBOT_NAME, "-file", model_sdf,
                         "-x", LaunchConfiguration("x_pose"), "-y", LaunchConfiguration("y_pose"),
                         "-z", "0.01", "-Y", LaunchConfiguration("yaw")]),
+        # dead-man safety: stops the robot if /cmd_vel commands stop arriving (see script docstring)
+        Node(package="maze_simulation", executable="cmd_vel_watchdog.py", output="screen",
+             parameters=[{"timeout": 0.5}]),
         Node(package="ros_gz_bridge", executable="parameter_bridge", output="screen",
              parameters=[{"config_file": os.path.join(sim, "config", "bridge.yaml"),
                           "use_sim_time": use_sim_time}]),

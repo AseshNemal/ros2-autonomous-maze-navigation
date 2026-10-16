@@ -130,7 +130,7 @@ class GoalEvaluator(Node):
                     "odom_samples", "metrics_valid",
                 ])
             writer.writerow([
-                self.args.run_id, "nav2_astar_mppi",
+                self.args.run_id, "nav2_astar_rpp",
                 self.args.x, self.args.y, self.args.yaw,
                 outcome, elapsed,
                 round(self.distance, 4) if valid else "",
