@@ -39,18 +39,20 @@ ros2-autonomous-maze-navigation/
 └── requirements.txt
 ```
 
-The root-level `worlds/`, `maps/`, `config/`, `launch/` and `dqn/` folders are leftovers from the initial scaffold (they contain only placeholder READMEs). Package assets belong inside the packages above; these folders are slated for removal once the group agrees.
+The root-level `worlds/`, `config/`, `launch/` and `dqn/` folders are leftovers from the initial scaffold (placeholder READMEs); root `maps/` holds the teammate's prototype `test_map` (not the final maze). Package assets belong inside the packages above; these folders are slated for removal once the group agrees.
 
-## Team division
+## Team division (see [docs/OWNERSHIP.md](docs/OWNERSHIP.md) for who wrote what)
 
 | Member | Package | Scope | Guide |
 |---|---|---|---|
-| 1 | `maze_simulation` | Gazebo maze world, TurtleBot3 Burger, LiDAR, simulation launch | [docs/member_1_environment.md](docs/member_1_environment.md) |
-| 2 | `slam_mapping` | SLAM Toolbox, occupancy-grid mapping, map saving, localization | [docs/member_2_slam.md](docs/member_2_slam.md) |
-| 3 | `maze_navigation` | Nav2, A*/Dijkstra planning, obstacle avoidance, RViz goals, 3-goal demo | [docs/member_3_navigation.md](docs/member_3_navigation.md) |
-| 4 | `dqn_agent` | DQN design, training/evaluation, comparison with Nav2 baseline | [docs/member_4_dqn.md](docs/member_4_dqn.md) |
+| 1 | `maze_simulation` | Gazebo maze from Figure 1, TurtleBot3 Burger, bridge, launch | [docs/members/member_1.md](docs/members/member_1.md) |
+| 2 | `slam_mapping` | SLAM Toolbox, map save/validate, AMCL localization | [docs/members/member_2.md](docs/members/member_2.md) |
+| 3 | `maze_navigation` | Nav2 (A* + MPPI), RViz goals, 3-goal metrics | [docs/members/member_3.md](docs/members/member_3.md) |
+| 4 | `dqn_agent` | Double DQN training/evaluation, comparison with Nav2 | [docs/members/member_4.md](docs/members/member_4.md) |
 
-Integration plan and shared interface: [docs/integration.md](docs/integration.md).
+Also: [architecture](docs/architecture.md) · [integration](docs/integration.md) · [installation](docs/installation.md) · [testing & status](docs/testing.md) · [demonstration](docs/demonstration.md) · [VIVA notes](docs/viva.md) · [report draft](docs/report_draft.md).
+
+> **Branch status:** `feature/group-integration` is an emergency full-project backup. It is code-complete but **runtime-unverified in Gazebo** - read [docs/testing.md](docs/testing.md) for the honest status of each requirement.
 
 ## Target environment
 
@@ -62,30 +64,26 @@ Integration plan and shared interface: [docs/integration.md](docs/integration.md
 
 **Note:** Installation and platform compatibility have not yet been verified for this repository. Gazebo, ROS 2, Nav2 and PyTorch support can vary by platform and package source.
 
-## Getting started (after implementation exists)
-
-Install and configure the chosen ROS 2 distribution before following these steps.
+## Getting started
 
 ```bash
-# From the repository root:
-source /opt/ros/jazzy/setup.bash
-cd ros2_ws
-colcon build --symlink-install
-# or build one member's package only:
-# colcon build --symlink-install --packages-select maze_simulation
-source install/setup.bash
+tools/install_deps_ubuntu.sh                       # once, on the Ubuntu VM
+source /opt/ros/jazzy/setup.bash && export TURTLEBOT3_MODEL=burger
+cd ros2_ws && colcon build --symlink-install --parallel-workers 1 && source install/setup.bash
+ros2 launch maze_simulation maze_simulation.launch.py       # maze + robot
+ros2 launch maze_navigation navigation.launch.py            # Nav2 (click goals in RViz)
+python3 ../tools/verify_static.py                            # no-ROS consistency checks (any machine)
 ```
+One controller at a time on `/cmd_vel`: mapping, Nav2 or DQN - see [docs/architecture.md](docs/architecture.md).
 
-The four packages are valid, buildable scaffolds, but **contain no functionality yet**: there is no world, launch file, map, Nav2 configuration or DQN code. Launch and training commands will be added as each member implements their part.
+## Implementation checklist (honest)
 
-## Implementation checklist
-
-- [ ] Member 1: robot model, LiDAR and custom Gazebo maze world
-- [ ] Member 2: mapping and saved SLAM map
-- [ ] Member 3: Nav2 configuration, A*/Dijkstra planning and goal navigation
-- [ ] Member 4: DQN environment, network, training, evaluation and Nav2 comparison
-- [ ] Reproducible three-goal demonstration
-- [ ] Evidence, screenshots, results and final report
+- [x] Member 1: maze world + spawn launch (IMPLEMENTED; Gazebo run pending)
+- [x] Member 2: SLAM/localization workflow + map validator (IMPLEMENTED; real SLAM map pending)
+- [x] Member 3: Nav2 config fixes + 3-goal runner (IMPLEMENTED; no navigation result yet)
+- [x] Member 4: DQN maze adaptation (IMPLEMENTED; unit-tested; no goal-reaching evidence)
+- [ ] Reproducible three-goal demonstration (needs VM run)
+- [ ] Evidence, results and final report numbers
 
 ## Repository hygiene
 

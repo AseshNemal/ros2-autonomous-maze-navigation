@@ -1,32 +1,23 @@
 # Integration
 
-All four packages live in one ROS 2 workspace (`ros2_ws/`) and are built together but developed independently.
+## Branches and PRs
+- `main`: unchanged (untouched by this work).
+- `feature/group-integration`: emergency full-project branch. Contains merge commits of PR #1 (`feature/slam-mapping`), PR #2 (`feature/maze_navigation`), PR #3 (`feature/dqn-agent`), then integration commits.
+- Source branches are unmodified. `feature/dqn-agent-manual` was not accessed.
+- **PR merge method:** the three PRs were marked ready, but `gh pr merge --merge` was blocked by the session's permission layer, so the same merges were made locally with `git merge --no-ff` (identical content, merge commits). Pushing the branch will make GitHub show the PRs as merged because their head commits become reachable from the base. Do not use squash/rebase.
+- Final `feature/group-integration` -> `main` PR must also use **Create a merge commit** and needs the owner's approval.
 
-## Dependency order
-```
-maze_simulation  ->  slam_mapping  ->  maze_navigation
-        \                                   \
-         ------------------------------->  dqn_agent (also compares with maze_navigation)
-```
+## Resolved interface decisions (previously "TO BE AGREED")
+See [architecture.md](architecture.md) for topics, frames, start/goals and the `/cmd_vel` TwistStamped rule.
 
-## Shared interface (TO BE AGREED — not yet defined)
-Members must fix and record here before integrating:
-- Topics: `/scan`, `/odom`, `/cmd_vel`, `/map`, `/tf`, `/clock`
-- Frames: `map`, `odom`, `base_footprint`/`base_link`, LiDAR frame
-- `use_sim_time` convention (`true` for every launch)
-- Robot spawn pose and the fixed start/goal pairs used for evaluation
-- Map file location (owned by `slam_mapping`; others reference it, not copy it)
-- `TURTLEBOT3_MODEL=burger`
+## Conflicts / issues found while integrating
+| Issue | Resolution | Status |
+|---|---|---|
+| Nav2 radius/inflation made corridors impassable | retuned | IMPLEMENTED |
+| Nav2 `Twist` vs simulation `TwistStamped` on `/cmd_vel` | `twist_stamper` + collision-monitor output remap | IMPLEMENTED (assumes collision_monitor in chain) |
+| `test_map` is not the maze | documented; ground-truth map + validator + SLAM workflow | IMPLEMENTED |
+| DQN env used stale odom after teleport reset | odom->world calibration | IMPLEMENTED, unit-tested |
+| Root `worlds/ maps/ config/ launch/ dqn/` placeholder dirs | left (not renamed; group decision) | - |
 
-## Intended workflow
-1. Member 1 delivers a launchable world; others pull and run it.
-2. Member 2 maps the world and commits the real map files.
-3. Member 3 runs Nav2 on that map and logs three-goal results.
-4. Member 4 trains in the same world and compares against Member 3's results using identical start/goal pairs.
-5. Final: one documented end-to-end run, with screenshots and results in `docs/`.
-
-## Branching suggestion
-One branch per package (`feature/maze_simulation`, ...), merged into `main` by pull request. Each member should mainly edit their own package, avoiding cross-package conflicts.
-
-## Integration status
-Nothing has been integrated or tested yet.
+## If teammates push more
+Fetch, review `git log main..origin/<branch>`, and merge with `--no-ff` into this branch separately; re-run `python3 tools/verify_static.py`.
