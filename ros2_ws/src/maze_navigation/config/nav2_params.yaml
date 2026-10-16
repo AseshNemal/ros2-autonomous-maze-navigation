@@ -13,8 +13,8 @@ amcl:
     global_frame_id: "map"
     lambda_short: 0.1
     laser_likelihood_max_dist: 2.0
-    laser_max_range: 100.0
-    laser_min_range: -1.0
+    laser_max_range: 3.5   # integration fix: LDS-01 range
+    laser_min_range: 0.12
     laser_model_type: "likelihood_field"
     max_beams: 60
     max_particles: 2000
@@ -92,8 +92,8 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.25
-      yaw_goal_tolerance: 0.25
+      xy_goal_tolerance: 0.15   # integration fix: tighter than half a 0.5 m cell
+      yaw_goal_tolerance: 3.14  # integration fix: clicked goals have no required heading
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
       time_steps: 56
@@ -107,7 +107,7 @@ controller_server:
       vx_std: 0.2
       vy_std: 0.2
       wz_std: 0.4
-      vx_max: 0.15
+      vx_max: 0.18  # integration fix: modest speed-up for travel-time goal
       vx_min: -0.10
       vy_max: 0.0
       wz_max: 1.0
@@ -196,12 +196,12 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      robot_radius: 0.22
+      robot_radius: 0.11  # integration fix: Burger radius ~0.105; 0.22 blocked 0.45 m maze corridors
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
-        inflation_radius: 0.70
+        cost_scaling_factor: 8.0  # integration fix: tuned for 0.5 m corridors
+        inflation_radius: 0.25
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -234,7 +234,7 @@ global_costmap:
       publish_frequency: 1.0
       global_frame: map
       robot_base_frame: base_link
-      robot_radius: 0.22
+      robot_radius: 0.11  # integration fix: Burger radius ~0.105; 0.22 blocked 0.45 m maze corridors
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
@@ -257,8 +257,8 @@ global_costmap:
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
-        inflation_radius: 0.7
+        cost_scaling_factor: 8.0  # integration fix
+        inflation_radius: 0.25
       always_send_full_costmap: True
 
 # The yaml_filename does not need to be specified since it going to be set by defaults in launch.
@@ -282,7 +282,7 @@ planner_server:
     costmap_update_timeout: 1.0
     GridBased:
       plugin: "nav2_navfn_planner::NavfnPlanner"
-      tolerance: 0.5
+      tolerance: 0.1  # integration fix: 0.5 could place the goal in the next cell through a wall
       use_astar: true
       allow_unknown: true
 
@@ -362,7 +362,7 @@ velocity_smoother:
     stamp_smoothed_velocity_with_smoothing_time: False
     scale_velocities: False
     feedback: "OPEN_LOOP"
-    max_velocity: [0.15, 0.0, 1.0]
+    max_velocity: [0.18, 0.0, 1.0]
     min_velocity: [-0.10, 0.0, -1.0]
     max_accel: [2.5, 0.0, 3.2]
     max_decel: [-2.5, 0.0, -3.2]
@@ -376,7 +376,7 @@ collision_monitor:
     base_frame_id: "base_footprint"
     odom_frame_id: "odom"
     cmd_vel_in_topic: "cmd_vel_smoothed"
-    cmd_vel_out_topic: "cmd_vel"
+    cmd_vel_out_topic: "cmd_vel_nav2"  # integration fix: Twist; twist_stamper -> /cmd_vel (TwistStamped)
     state_topic: "collision_monitor_state"
     transform_tolerance: 0.2
     source_timeout: 1.0

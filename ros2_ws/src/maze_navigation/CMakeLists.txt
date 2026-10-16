@@ -14,7 +14,14 @@ install(DIRECTORY
 
 install(PROGRAMS
   scripts/evaluate_goal.py
+  scripts/run_three_goals.py
+  scripts/twist_stamper.py
   DESTINATION lib/${PROJECT_NAME}
 )
+
+if(BUILD_TESTING)
+  find_package(ament_cmake_pytest REQUIRED)
+  ament_add_pytest_test(test_config test/test_config.py)
+endif()
 
 ament_package()

@@ -73,8 +73,18 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             "map",
-            description="Absolute path to the saved map YAML file",
+            default_value=str(
+                Path(get_package_share_directory("slam_mapping"))
+                / "maps" / "maze_groundtruth.yaml"
+            ),
+            description="Absolute path to the saved map YAML file "
+            "(default: ground-truth maze map; pass your SLAM map for the real pipeline)",
         ),
+        DeclareLaunchArgument("initial_x", default_value="-1.25",
+                              description="Spawn x in the MAP frame (SLAM map: 0.0)"),
+        DeclareLaunchArgument("initial_y", default_value="-1.25",
+                              description="Spawn y in the MAP frame (SLAM map: 0.0)"),
+        DeclareLaunchArgument("initial_yaw", default_value="0.0"),
         DeclareLaunchArgument(
             "use_sim_time",
             default_value="true",
@@ -101,6 +111,26 @@ def generate_launch_description():
                 "autostart": "true",
                 "use_composition": "false",
             }.items(),
+        ),
+        # Integration additions: Nav2 (Jazzy) emits Twist on cmd_vel_nav2; the
+        # simulation expects TwistStamped on /cmd_vel.
+        Node(
+            package="maze_navigation",
+            executable="twist_stamper.py",
+            name="twist_stamper",
+            output="screen",
+            parameters=[{"use_sim_time": True}],
+        ),
+        Node(
+            package="slam_mapping",
+            executable="set_initial_pose.py",
+            output="screen",
+            arguments=[
+                "--x", LaunchConfiguration("initial_x"),
+                "--y", LaunchConfiguration("initial_y"),
+                "--yaw", LaunchConfiguration("initial_yaw"),
+            ],
+            parameters=[{"use_sim_time": True}],
         ),
         Node(
             package="rviz2",
