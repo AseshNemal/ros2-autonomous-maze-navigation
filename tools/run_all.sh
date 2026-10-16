@@ -2,6 +2,9 @@
 # Runs every verification stage in order and prints a summary. One command for the whole project.
 # Continues past a failed stage so you see all results. Logs: docs/results/vm/
 cd "$(dirname "$0")/.."
+# install dependencies on first run (skipped once ros2 run exists)
+set +u; source /opt/ros/jazzy/setup.bash 2>/dev/null; set -u
+ros2 run -h >/dev/null 2>&1 || bash tools/install_deps_ubuntu.sh
 declare -A RES
 for s in build sim slam nav dqn; do
   echo "================ STAGE: $s ================"

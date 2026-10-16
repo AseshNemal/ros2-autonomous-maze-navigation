@@ -6,16 +6,13 @@ An academic robotics simulation project intended to combine **ROS 2 Jazzy**, **G
 
 
 
-## Run everything with one command
-
-ROS 2 Jazzy + Gazebo Harmonic only run on Ubuntu 24.04, so on **macOS** use your Ubuntu 24.04 VM and on **Windows** use WSL2 (`wsl --install -d Ubuntu-24.04`) or a VM. Inside Ubuntu, from the repo folder:
+## Run everything with one command (Ubuntu 24.04 + ROS 2 Jazzy)
 
 ```bash
-bash tools/install_deps_ubuntu.sh   # once: installs ROS packages (needs sudo)
-bash tools/run_all.sh               # build+tests, sim, SLAM, Nav2 3 goals, DQN, then a PASS/FAIL summary
+bash tools/run_all.sh
 ```
 
-Logs and CSVs go to `docs/results/vm/`. Shorter run: `MAP_SECONDS=120 EPISODES=50 bash tools/run_all.sh`. A single stage: `bash tools/verify_on_vm.sh <build|sim|slam|nav|dqn>`. This run is headless; for the live click-to-goal demo see [docs/demonstration.md](docs/demonstration.md).
+Installs missing dependencies on first run (needs sudo), then runs build + tests, simulation check, SLAM, Nav2 three goals and DQN, and prints a PASS/FAIL summary. Logs and CSVs go to `docs/results/vm/`. Shorter run: `MAP_SECONDS=120 EPISODES=50 bash tools/run_all.sh`. Single stage: `bash tools/verify_on_vm.sh <build|sim|slam|nav|dqn>`. Headless; for the live click-to-goal demo see [docs/demonstration.md](docs/demonstration.md).
 
 ## Planned capabilities
 
