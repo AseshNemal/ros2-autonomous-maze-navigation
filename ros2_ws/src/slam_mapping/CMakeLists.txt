@@ -10,6 +10,7 @@ install(PROGRAMS
   scripts/save_map.sh
   scripts/validate_map.py
   scripts/auto_map_drive.py
+  scripts/tour_map_drive.py
   scripts/set_initial_pose.py
   DESTINATION lib/${PROJECT_NAME}
 )

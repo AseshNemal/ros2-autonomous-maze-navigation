@@ -492,3 +492,12 @@ loopback_simulator:
     scan_angle_max: 3.1415
     scan_angle_increment: 0.02617
     scan_use_inf: true
+
+# The default 4 s heartbeat is too strict for a small VM that is also drawing Gazebo + RViz:
+# a missed bond made the manager shut navigation down ("Navigation: inactive").
+lifecycle_manager_navigation:
+  ros__parameters:
+    bond_timeout: 30.0
+lifecycle_manager_localization:
+  ros__parameters:
+    bond_timeout: 30.0

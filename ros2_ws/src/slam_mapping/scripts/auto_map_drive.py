@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Right-hand wall follower for unattended mapping (publishes TwistStamped /cmd_vel).
+"""Wall follower (right hand, then left hand) for unattended mapping (publishes TwistStamped /cmd_vel).
 
 Only for the mapping phase: stop it before Nav2 or DQN. Simulation only.
   ros2 run slam_mapping auto_map_drive.py --duration 400
+The first half follows the right wall, the second half the left wall, so both sides of
+every wall (including interior wall islands) are scanned.
 Behaviour is a simple reactive heuristic; coverage must be judged from the map
 (see validate_map.py). It is not a proven exploration algorithm.
 """
@@ -31,12 +33,15 @@ def sector_min(scan, centre_deg, half_deg):
 
 
 class WallFollower(Node):
-    def __init__(self, duration, target, speed):
+    def __init__(self, duration, target, speed, side="both"):
         super().__init__("auto_map_drive")
         self.target, self.speed = target, speed
+        self.side = side
+        self.total = duration
         self.pub = self.create_publisher(TwistStamped, "/cmd_vel", 10)
         self.create_subscription(LaserScan, "/scan", self.on_scan, qos_profile_sensor_data)
-        self.end = self.get_clock().now().nanoseconds + int(duration * 1e9)
+        self.t0 = self.get_clock().now().nanoseconds
+        self.end = self.t0 + int(duration * 1e9)
         self.finished = False
 
     def command(self, lin, ang):
@@ -51,25 +56,29 @@ class WallFollower(Node):
             self.command(0.0, 0.0)
             self.finished = True
             return
+        elapsed = (self.get_clock().now().nanoseconds - self.t0) / 1e9
+        left_hand = self.side == "left" or (self.side == "both" and elapsed > self.total / 2)
+        s = -1.0 if left_hand else 1.0                   # +1: wall on the right, -1: wall on the left
         front = sector_min(scan, 0, 20)
-        right = sector_min(scan, -90, 25)
+        wall = sector_min(scan, -90 * s, 25)
         if front < 0.28:
-            self.command(0.0, 0.9)                       # blocked: turn left in place
-        elif right > 0.45:
-            self.command(self.speed * 0.6, -0.7)         # lost wall: curve right
+            self.command(0.0, 0.45 * s)                   # blocked: turn away from the wall (slow: ~5 Hz lidar needs overlapping scans)
+        elif wall > 0.45:
+            self.command(self.speed * 0.6, -0.5 * s)     # lost wall: curve back towards it
         else:
-            ang = max(-0.8, min(0.8, -3.0 * (right - self.target)))
+            ang = max(-0.5, min(0.5, -3.0 * (wall - self.target) * s))
             self.command(self.speed, ang)
 
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--duration", type=float, default=400.0, help="simulated seconds")
+    p.add_argument("--duration", type=float, default=600.0, help="simulated seconds")
     p.add_argument("--target", type=float, default=0.22, help="right wall distance (m)")
-    p.add_argument("--speed", type=float, default=0.12)
+    p.add_argument("--speed", type=float, default=0.10)
+    p.add_argument("--side", choices=["right", "left", "both"], default="both")
     a = p.parse_args(rclpy.utilities.remove_ros_args()[1:])
     rclpy.init()
-    node = WallFollower(a.duration, a.target, a.speed)
+    node = WallFollower(a.duration, a.target, a.speed, a.side)
     while rclpy.ok() and not node.finished:
         rclpy.spin_once(node, timeout_sec=0.2)
     node.destroy_node()

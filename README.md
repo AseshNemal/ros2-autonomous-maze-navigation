@@ -21,7 +21,7 @@ bash tools/run_all.sh
 - It is **headless**: no Gazebo or RViz window opens, so you will only see text. That is normal.
 - Takes 30-60 minutes. Do not start another Gazebo while it runs (the VM is small).
 - Logs and CSV files are saved in `docs/results/vm/`.
-- Shorter test: `MAP_SECONDS=120 EPISODES=50 bash tools/run_all.sh`
+- Shorter test: `EPISODES=50 bash tools/run_all.sh`
 - One stage only: `bash tools/verify_on_vm.sh <build|sim|slam|nav|dqn>`
 
 ### B. Live demo (see the robot, click a goal)
@@ -52,7 +52,7 @@ ros2 launch maze_navigation navigation.launch.py \
 
 **Click a goal:** in RViz press **2D Goal Pose** (top toolbar), then click on the map where you want the robot to go and drag to set the direction. The robot drives there by itself. Repeat for 3 different points (this is the VIVA demo).
 
-**SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `ros2 run slam_mapping auto_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.
+**SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `python3 ros2_ws/src/slam_mapping/scripts/tour_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.
 
 **Rules:** run only ONE of Nav2 / SLAM mapping / DQN at a time (they all control the same robot), and close Gazebo (`Ctrl+C`) before starting something new.
 

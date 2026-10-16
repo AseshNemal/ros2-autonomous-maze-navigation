@@ -114,7 +114,7 @@ class GazeboDQNEnv:
         self.odom = msg
         self.odom_count += 1
 
-    def _wait(self, predicate, timeout=15.0):
+    def _wait(self, predicate, timeout=60.0):
         end = time.monotonic() + timeout
         while time.monotonic() < end:
             self.rclpy.spin_once(self.node, timeout_sec=0.10)

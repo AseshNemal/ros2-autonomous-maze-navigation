@@ -6,6 +6,9 @@
 # Run ONE Gazebo at a time (VM is small). Nothing here is claimed as verified until
 # you have run it and committed the logs.
 set -uo pipefail
+# never run on top of the live demo: it would kill your Gazebo/RViz (set FORCE=1 to override)
+if [ "${FORCE:-0}" != 1 ] && pgrep -f "tools/demo.sh" >/dev/null; then
+  echo "tools/demo.sh is running. Close it (Ctrl+C) first, or run with FORCE=1."; exit 3; fi
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 WS="$REPO/ros2_ws"
 OUT="$REPO/docs/results/vm"; mkdir -p "$OUT"
@@ -37,6 +40,8 @@ fail() { say "FAIL: $*"; RC=1; }
 # run a command, tee its output to the log, and keep ITS exit status (not tee's)
 run() { "$@" 2>&1 | tee -a "$LOG"; return "${PIPESTATUS[0]}"; }
 say() { echo "[$(date +%T)] $*" | tee -a "$LOG"; }
+# wait until /scan is actually delivering messages (topic listed != data flowing on a slow VM)
+wait_scan() { for _ in $(seq 1 45); do timeout 8 ros2 topic echo --once /scan >/dev/null 2>&1 && return 0; sleep 1; done; return 1; }
 wait_topic() { for _ in $(seq 1 "${2:-60}"); do ros2 topic list 2>/dev/null | grep -qx "$1" && return 0; sleep 2; done; return 1; }
 
 case "$STAGE" in
@@ -47,17 +52,21 @@ build)
   run colcon test-result --verbose || fail "colcon test-result (tests failed)" ;;
 sim)
   bg ros2 launch maze_simulation maze_simulation.launch.py gui:=false
-  wait_topic /scan 90 || { fail "/scan never appeared"; }
+  wait_scan || { fail "/scan never appeared"; }
   [ "$RC" = 0 ] && { run python3 "$WS/src/maze_simulation/scripts/check_sim_topics.py" --duration 8 \
       --json "$OUT/sim_topics_$TS.json" || fail "check_sim_topics reported failures"; } ;;
 slam)
   bg ros2 launch maze_simulation maze_simulation.launch.py gui:=false
-  wait_topic /scan 90 || fail "no /scan"
+  wait_scan || fail "no /scan"
   if [ "$RC" = 0 ]; then
     bg ros2 launch slam_mapping mapping.launch.py use_rviz:=false
     sleep 10
-    run python3 "$WS/src/slam_mapping/scripts/auto_map_drive.py" --duration "${MAP_SECONDS:-420}" || fail "auto_map_drive"
-    MAPYAML="$WS/src/slam_mapping/maps/maze_slam.yaml"; rm -f "$MAPYAML"
+    run timeout "${MAP_TIMEOUT:-900}" python3 "$WS/src/slam_mapping/scripts/tour_map_drive.py" || fail "tour_map_drive (coverage tour did not finish)"
+    MAPYAML="$WS/src/slam_mapping/maps/maze_slam.yaml"; rm -f "$MAPYAML" "${MAPYAML%.yaml}.pgm"
+    # the saved map must come from slam_toolbox ONLY (a stray map_server/Nav2 would save the wrong map)
+    PUBS=$(ros2 topic info /map -v 2>/dev/null | grep "Node name:" | awk '{print $3}' | sort -u | tr '\n' ' ')
+    say "/map publishers: $PUBS"
+    [ "$PUBS" = "slam_toolbox " ] || fail "/map is not published by slam_toolbox alone (found: $PUBS) - stop other ROS stacks"
     run bash "$WS/src/slam_mapping/scripts/save_map.sh" maze_slam "$WS/src/slam_mapping/maps" || fail "save_map"
     [ -f "$MAPYAML" ] || fail "maze_slam.yaml was not written"
     if [ -f "$MAPYAML" ]; then
@@ -71,7 +80,7 @@ nav)
   if [ "$MAPSRC" = slam ]; then MAP="$WS/src/slam_mapping/maps/maze_slam.yaml"; IX=0.0; IY=0.0
   else MAP="$WS/src/slam_mapping/maps/maze_groundtruth.yaml"; IX=-1.25; IY=-1.25; fi
   bg ros2 launch maze_simulation maze_simulation.launch.py gui:=false
-  wait_topic /scan 90 || fail "no /scan"
+  wait_scan || fail "no /scan"
   if [ "$RC" = 0 ]; then
     bg ros2 launch maze_navigation navigation.launch.py use_rviz:=false map:="$MAP" initial_x:=$IX initial_y:=$IY
     # wait (max ~4 min) until Nav2 is really active instead of a blind sleep
@@ -92,7 +101,7 @@ nav)
   fi ;;
 dqn)
   bg ros2 launch maze_simulation maze_simulation.launch.py gui:=false
-  wait_topic /scan 90 || fail "no /scan"
+  wait_scan || fail "no /scan"
   if [ "$RC" = 0 ]; then
     run ros2 run dqn_agent train_dqn --episodes "${EPISODES:-300}" --curriculum-max-cells 3 \
         --guidance "${GUIDANCE:-none}" --csv "$OUT/dqn_train_$TS.csv" || fail "train_dqn"
