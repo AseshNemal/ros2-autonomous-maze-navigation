@@ -33,8 +33,8 @@ class SurrogateEnv:
     """Same step/reset contract and logic as GazeboDQNEnv, on a kinematic model."""
 
     def __init__(self, layout, goal_tolerance=0.22, collision_distance=0.15, action_duration=0.30,
-                 waypoint_tolerance=0.25, waypoint_bonus=5.0, seed=0, noise=0.01, actions=ACTIONS):
-        self.actions = actions
+                 waypoint_tolerance=0.25, waypoint_bonus=5.0, seed=0, noise=0.01, actions=ACTIONS, obs_range=3.5):
+        self.actions, self.obs_range = actions, obs_range
         half = layout["wall_thickness_m"] / 2
         self.boxes = np.array([(min(a, c) - half, min(b, d) - half, max(a, c) + half, max(b, d) + half)
                                for a, b, c, d in maze.tools.wall_segments(layout)])
@@ -54,7 +54,7 @@ class SurrogateEnv:
         return self.waypoints[self.wp_index] if self.wp_index < len(self.waypoints) else self.goal
 
     def _state(self):
-        return get_observation(self._scan(), (self.x, self.y), self.yaw, self.target())
+        return get_observation(self._scan(), (self.x, self.y), self.yaw, self.target(), self.obs_range)
 
     def reset(self, start, goal, waypoints=()):
         self.x, self.y, self.yaw = start
@@ -121,6 +121,10 @@ def main(argv=None):
     p.add_argument("--epsilon-decay", type=int, default=None, help="env steps (default: config 20000)")
     p.add_argument("--actions", choices=["default", "fine"], default="default",
                    help="fine = gentler turning while moving (angular 0.4 rad/s); experiment only")
+    p.add_argument("--obs-range", type=float, default=3.5,
+                   help="LiDAR clip / normalisation range in the observation (default 3.5 = current code)")
+    p.add_argument("--wp-tol", type=float, default=0.25, help="waypoint tolerance (m); current code 0.25")
+    p.add_argument("--eval-episodes", type=int, default=3, help="greedy episodes per assignment goal")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--report-every", type=int, default=100)
     a = p.parse_args(argv)
@@ -132,7 +136,8 @@ def main(argv=None):
     agent = DQNAgent(state_dim=STATE_DIM, action_dim=len(ACTIONS), **kw)
     env = SurrogateEnv(layout, goal_tolerance=cfg["environment"]["goal_tolerance_m"],
                        collision_distance=cfg["environment"]["collision_distance_m"], seed=a.seed,
-                       actions=FINE if a.actions == "fine" else ACTIONS)
+                       actions=FINE if a.actions == "fine" else ACTIONS, obs_range=a.obs_range,
+                       waypoint_tolerance=a.wp_tol)
     rng = maze.rng_from_seed(a.seed)
     wins = coll = 0
     for ep in range(1, a.episodes + 1):
@@ -155,7 +160,7 @@ def main(argv=None):
             print(f"ep {ep:4d}: last{a.report_every} success={wins}/{a.report_every} collision={coll} "
                   f"eps={agent.epsilon:.2f} env_steps={agent.env_steps}", flush=True)
             wins = coll = 0
-    ev = evaluate(agent, env, layout, a.guidance)
+    ev = evaluate(agent, env, layout, a.guidance, a.eval_episodes)
     total = sum(w for _, w, _ in ev)
     print("greedy eval on the 3 assignment goals (surrogate):",
           ", ".join(f"{g}: {w}/{n}" for g, w, n in ev), f"=> {total}/{sum(n for *_, n in ev)}")

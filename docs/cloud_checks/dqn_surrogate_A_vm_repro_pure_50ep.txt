@@ -1,0 +1,4 @@
+# command: python3 tools/offline_dqn_surrogate.py --episodes 50 --report-every 50 --epsilon-decay 20000 --wp-tol 0.25 --guidance none --eval-episodes 3
+# KINEMATIC SURROGATE, not Gazebo. Run 2026-10-16 in Claude Cloud.
+ep   50: last50 success=0/50 collision=50 eps=0.98 env_steps=421
+greedy eval on the 3 assignment goals (surrogate): (0, 5): 0/3, (2, 0): 0/3, (3, 3): 0/3 => 0/9

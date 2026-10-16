@@ -40,6 +40,8 @@ def arguments(argv=None):
     p.add_argument("--random-heading", action="store_true", help="random start yaw each episode")
     p.add_argument("--world", default=None)
     p.add_argument("--action-duration", type=float, default=None)
+    p.add_argument("--epsilon-decay", type=int, default=None,
+                   help="env steps over which epsilon decays 1.0 -> 0.05 (default: config, 3000)")
     p.add_argument("--seed", type=int, default=None)
     p.add_argument("--checkpoint", default="~/.ros/dqn_agent/checkpoints/dqn_maze.npz")
     p.add_argument("--resume", action="store_true", help="continue from --checkpoint if it exists")
@@ -73,7 +75,10 @@ def run(args):
         agent = DQNAgent.load(ckpt)
         print(f"resumed from {ckpt}: train_steps={agent.train_steps} env_steps={agent.env_steps}")
     else:
-        agent = DQNAgent(state_dim=STATE_DIM, action_dim=len(ACTIONS), **agent_kwargs(cfg, seed))
+        kwargs = agent_kwargs(cfg, seed)
+        if args.epsilon_decay:
+            kwargs["epsilon_decay"] = args.epsilon_decay
+        agent = DQNAgent(state_dim=STATE_DIM, action_dim=len(ACTIONS), **kwargs)
     log_path = Path(args.csv).expanduser()
     log_path.parent.mkdir(parents=True, exist_ok=True)
     rclpy.init()
@@ -82,7 +87,8 @@ def run(args):
     try:
         env = GazeboDQNEnv(world=world, action_duration=duration,
                            goal_tolerance=env_cfg["goal_tolerance_m"],
-                           collision_distance=env_cfg["collision_distance_m"])
+                           collision_distance=env_cfg["collision_distance_m"],
+                           waypoint_tolerance=env_cfg.get("waypoint_tolerance_m", 0.15))
         with log_path.open("a" if args.resume else "w", newline="") as file:
             writer = csv.DictWriter(file, fieldnames=FIELDS)
             if file.tell() == 0:

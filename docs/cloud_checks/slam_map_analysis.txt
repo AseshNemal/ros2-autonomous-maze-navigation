@@ -1,0 +1,4 @@
+validate_map at assumed alignment: {'size_px': [73, 75], 'size_m': [3.65, 3.75], 'resolution': 0.05, 'unknown_fraction': 0.403, 'wall_coverage': 0.759, 'precision': 0.577, 'free_ok': 0.944, 'pass': False}
+occupied pixels: 1138
+best rigid alignment: precision 0.598 at yaw 0.0 deg, origin (-1.275, -1.275)
+line-like pixels within 5 deg of an axis: this map 0.20 (n=634); ground truth 0.77 (n=618)

@@ -120,3 +120,15 @@ def test_config_builds_agent():
     assert cfg["environment"]["world"] == "maze"
     a = DQNAgent(**agent_kwargs(cfg))
     assert a.gamma == cfg["training"]["gamma"]
+
+
+def test_waypoint_tolerance_is_less_than_half_a_cell_and_matches_config():
+    """A tolerance of half a cell (0.25 m) switches the target on cell ENTRY and cuts corners."""
+    import inspect
+    from dqn_agent.config import load_config
+    from dqn_agent.env import GazeboDQNEnv
+    cfg = load_config()["environment"]
+    default = inspect.signature(GazeboDQNEnv.__init__).parameters["waypoint_tolerance"].default
+    assert cfg["waypoint_tolerance_m"] == default
+    assert cfg["waypoint_tolerance_m"] < 0.25
+    assert cfg["waypoint_tolerance_m"] >= 0.07   # still reachable with odometry/step quantisation (0.04 m/step)

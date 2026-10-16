@@ -53,7 +53,8 @@ def run(args):
         env = GazeboDQNEnv(world=args.world or env_cfg["world"],
                            action_duration=args.action_duration or env_cfg["action_duration_s"],
                            goal_tolerance=env_cfg["goal_tolerance_m"],
-                           collision_distance=env_cfg["collision_distance_m"])
+                           collision_distance=env_cfg["collision_distance_m"],
+                           waypoint_tolerance=env_cfg.get("waypoint_tolerance_m", 0.15))
         with path.open("w", newline="") as file:
             writer = csv.DictWriter(file, fieldnames=FIELDS)
             writer.writeheader()

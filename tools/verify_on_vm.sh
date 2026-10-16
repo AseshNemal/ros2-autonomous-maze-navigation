@@ -124,10 +124,16 @@ dqn)
   bg ros2 launch maze_simulation maze_simulation.launch.py gui:=false
   wait_scan || fail "no /scan"
   if [ "$RC" = 0 ]; then
-    run ros2 run dqn_agent train_dqn --episodes "${EPISODES:-300}" --curriculum-max-cells 3 \
-        --guidance "${GUIDANCE:-none}" --csv "$OUT/dqn_train_$TS.csv" || fail "train_dqn"
-    run ros2 run dqn_agent evaluate_dqn --checkpoint ~/.ros/dqn_agent/checkpoints/dqn_maze.npz \
-        --guidance "${GUIDANCE:-none}" --csv "$OUT/dqn_eval_$TS.csv" || fail "evaluate_dqn"
+    # GUIDANCE=none -> pure DQN only; GUIDANCE=waypoints -> hybrid only; default: both, separate checkpoints/CSVs.
+    # (A pure DQN only sees local LiDAR and a straight-line goal bearing: it cannot plan around walls over
+    # 5-8 cells. The hybrid steers between A* cell centres and must be reported as hybrid.)
+    for G in ${GUIDANCE:-none waypoints}; do
+      CK="$HOME/.ros/dqn_agent/checkpoints/dqn_maze_$G.npz"
+      run ros2 run dqn_agent train_dqn --episodes "${EPISODES:-300}" --curriculum-max-cells 3 \
+          --guidance "$G" --checkpoint "$CK" --csv "$OUT/dqn_train_${G}_$TS.csv" || fail "train_dqn ($G)"
+      run ros2 run dqn_agent evaluate_dqn --checkpoint "$CK" --episodes "${EVAL_EPISODES:-3}" \
+          --guidance "$G" --csv "$OUT/dqn_eval_${G}_$TS.csv" || fail "evaluate_dqn ($G)"
+    done
   fi ;;
 *) echo "unknown stage"; exit 2 ;;
 esac

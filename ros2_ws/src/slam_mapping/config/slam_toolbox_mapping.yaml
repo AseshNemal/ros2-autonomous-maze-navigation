@@ -32,7 +32,13 @@ slam_toolbox:
     loop_match_maximum_variance_coarse: 3.0
     loop_match_minimum_response_coarse: 0.35
     loop_match_minimum_response_fine: 0.45
-    correlation_search_space_dimension: 0.5
+    # Scan-matcher search window (HYPOTHESIS, not yet verified on the VM). The committed SLAM map from the
+    # last VM run has its walls rotated/sheared (only 20 % of wall pixels within 5 deg of an axis vs 77 %
+    # for the ground truth, see docs/slam_analysis.md): the matcher jumped to wrong correlation peaks in the
+    # self-similar 0.45 m corridors. Odometry here is accurate (odom vs Gazebo truth: yaw within 0.04 rad per
+    # turn, distance exact), and slam_toolbox searches AROUND the odometry-predicted pose, so the window only
+    # has to cover odometry error, not 0.5 m / 20 deg. Previous values: 0.5 m, 0.349 rad.
+    correlation_search_space_dimension: 0.2
     correlation_search_space_resolution: 0.01
     correlation_search_space_smear_deviation: 0.1
     loop_search_space_dimension: 8.0
@@ -41,7 +47,7 @@ slam_toolbox:
     distance_variance_penalty: 0.5
     angle_variance_penalty: 1.0
     fine_search_angle_offset: 0.00349
-    coarse_search_angle_offset: 0.349
+    coarse_search_angle_offset: 0.175
     coarse_angle_resolution: 0.0349
     minimum_angle_penalty: 0.9
     minimum_distance_penalty: 0.5

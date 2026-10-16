@@ -29,9 +29,11 @@ Figure 1 is a 6 x 6 grid of 0.5 m cells (3 m x 3 m). Thick lines are walls, thin
 
 Verification: the committed `maze.world` equals its regeneration from the layout (`tools/verify_static.py`), the headless simulation loads it, and a raycast of the ground-truth map from the robot's true pose reproduces the real LiDAR scan with a mean range error of 0.05 m. Comparison with Figure 1 by eye should still be done by a human in the VIVA.
 
-### 2.1 Additional prototype arena (not used for results)
+### 2.1 Figure-1 check and the additional prototype world
 
-The repository also contains `worlds/custom_maze.sdf`, an earlier prototype by a team member (JayangaWeerasinghe): an 8 m x 8 m walled arena with four inner walls, launched by `custom_maze.launch.py`. It is **not** the maze of Figure 1 (different size, layout and corridor width), so it does not satisfy the environment requirement and **no reported result in this report was obtained in it**. It is kept as an optional extra world, selectable with `world:=custom_maze` (README). Whether it loads and the robot spawns in it with the current packages has not been tested yet.
+`tools/check_figure1.py` re-measures Figure 1 from the assignment PDF (the 480 x 493 image, line widths sampled at three points on each of the 60 interior cell boundaries) and compares the wall set with `maze_layout.yaml`: **12 vertical + 12 horizontal interior walls, 0 differences** (static check, not a Gazebo run). The figure is a 6 x 6 grid.
+
+The repository also contains `worlds/custom_maze.sdf`, a separate prototype by a team member (JayangaWeerasinghe, `generate_maze.py`): a 7 x 6 grid with 0.2 m high, 0.01 m thick walls. It is **not** Figure 1 (7 columns instead of 6, different wall set and size), so it is not the required environment and **no reported result was obtained in it**. It is kept as an optional world (`world:=custom_maze`, README); that it loads and spawns the robot has not been tested yet.
 
 ## 3. Navigation method
 
