@@ -6,13 +6,63 @@ An academic robotics simulation project intended to combine **ROS 2 Jazzy**, **G
 
 
 
-## Run everything with one command (Ubuntu 24.04 + ROS 2 Jazzy)
+## How to run (Ubuntu 24.04 + ROS 2 Jazzy)
+
+Open a terminal in the repo folder. There are two ways to run: an automatic test, and a live demo you can watch.
+
+### A. Automatic test (one command, no window)
 
 ```bash
 bash tools/run_all.sh
 ```
 
-Installs missing dependencies on first run (needs sudo), then runs build + tests, simulation check, SLAM, Nav2 three goals and DQN, and prints a PASS/FAIL summary. Logs and CSVs go to `docs/results/vm/`. Shorter run: `MAP_SECONDS=120 EPISODES=50 bash tools/run_all.sh`. Single stage: `bash tools/verify_on_vm.sh <build|sim|slam|nav|dqn>`. Headless; for the live click-to-goal demo see [docs/demonstration.md](docs/demonstration.md).
+- On the first run it installs missing ROS packages (asks for your sudo password once).
+- It then runs, in order: build + tests, simulation check, SLAM mapping, Nav2 (3 goals), DQN, and prints a PASS/FAIL summary.
+- It is **headless**: no Gazebo or RViz window opens, so you will only see text. That is normal.
+- Takes 30-60 minutes. Do not start another Gazebo while it runs (the VM is small).
+- Logs and CSV files are saved in `docs/results/vm/`.
+- Shorter test: `MAP_SECONDS=120 EPISODES=50 bash tools/run_all.sh`
+- One stage only: `bash tools/verify_on_vm.sh <build|sim|slam|nav|dqn>`
+
+### B. Live demo (see the robot, click a goal)
+
+Use the VM's desktop (not SSH). Run this in **every** new terminal first:
+
+```bash
+cd ~/ros2-autonomous-maze-navigation/ros2_ws && colcon build --symlink-install   # only once, or after code changes
+source /opt/ros/jazzy/setup.bash && source ~/ros2-autonomous-maze-navigation/ros2_ws/install/setup.bash
+export TURTLEBOT3_MODEL=burger
+```
+
+**Terminal 1 - Gazebo (maze + robot window):**
+```bash
+ros2 launch maze_simulation maze_simulation.launch.py
+```
+
+**Terminal 2 - Navigation (RViz window with the map):**
+```bash
+ros2 launch maze_navigation navigation.launch.py \
+  map:=$HOME/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_groundtruth.yaml \
+  initial_x:=-1.25 initial_y:=-1.25
+```
+
+**Click a goal:** in RViz press **2D Goal Pose** (top toolbar), then click on the map where you want the robot to go and drag to set the direction. The robot drives there by itself. Repeat for 3 different points (this is the VIVA demo).
+
+**SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `ros2 run slam_mapping auto_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.
+
+**Rules:** run only ONE of Nav2 / SLAM mapping / DQN at a time (they all control the same robot), and close Gazebo (`Ctrl+C`) before starting something new.
+
+### Problems
+
+| Problem | Fix |
+|---|---|
+| `ros2: error ... invalid choice: 'run'` | `bash tools/install_deps_ubuntu.sh` |
+| No window opens | You used method A (headless) or SSH. Use method B on the VM desktop. |
+| Gazebo very slow / VM freezes | Give the VM more RAM (6 GB+), close other programs. |
+| `package not found` | Run the 2 `source` lines above in that terminal. |
+| Robot does not move | Check Gazebo is running and you only have one Nav2/SLAM/DQN running. |
+
+More detail: [docs/demonstration.md](docs/demonstration.md), [docs/installation.md](docs/installation.md), [docs/testing.md](docs/testing.md).
 
 ## Planned capabilities
 
