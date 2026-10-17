@@ -1,9 +1,9 @@
 """Map server + AMCL localization on a saved map (no Nav2 planners).
 
   ros2 launch slam_mapping localization.launch.py map:=/abs/path/map.yaml \
-      initial_x:=0.25 initial_y:=-0.25
+      initial_x:=-1.25 initial_y:=-1.25
 Use initial_x/y = spawn pose in the *map* frame: the ground-truth map shares the
-world frame (0.25, -0.25); a SLAM-built map starts at its own origin (0, 0).
+world frame (-1.25, -1.25); a SLAM-built map starts at its own origin (0, 0).
 """
 import os
 
@@ -25,8 +25,8 @@ def generate_launch_description():
         DeclareLaunchArgument("map", default_value=default_map),
         DeclareLaunchArgument("params_file", default_value=nav_params),
         DeclareLaunchArgument("use_sim_time", default_value="true"),
-        DeclareLaunchArgument("initial_x", default_value="0.25"),
-        DeclareLaunchArgument("initial_y", default_value="-0.25"),
+        DeclareLaunchArgument("initial_x", default_value="-1.25"),
+        DeclareLaunchArgument("initial_y", default_value="-1.25"),
         DeclareLaunchArgument("initial_yaw", default_value="0.0"),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(nav2, "launch", "localization_launch.py")),

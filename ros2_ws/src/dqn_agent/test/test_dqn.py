@@ -111,7 +111,7 @@ def test_curriculum_pairs_and_waypoints():
     pairs = maze.evaluation_pairs(layout)
     assert len(pairs) == 3
     wps = maze.waypoints(layout, *pairs[0])
-    assert len(wps) == len(maze.cell_path(layout, *pairs[0])) - 1 and wps[-1] == pytest.approx(maze.cell_xy(layout, pairs[0][1]))
+    assert len(wps) == 16 and wps[-1] == pytest.approx(maze.cell_xy(layout, pairs[0][1]))
 
 
 def test_config_builds_agent():

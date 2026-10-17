@@ -28,7 +28,7 @@ SLAM Toolbox mapping, occupancy grid generation, map save/load, localization (AM
 
 ## Architecture
 `/scan + /odom TF` -> `slam_toolbox` (scan matching, pose graph) -> `/map` + `map->odom` TF -> `map_saver_cli` -> `.pgm/.yaml` -> `map_server` + `amcl` (particle filter, likelihood field) -> `map->odom`.
-The SLAM map frame origin is the robot's spawn pose, so a SLAM map is offset from world coordinates by (0.25,-0.25); the validator, `set_initial_pose.py` and `run_three_goals.py --map-source slam` all account for this (assumes spawn yaw 0).
+The SLAM map frame origin is the robot's spawn pose, so a SLAM map is offset from world coordinates by (-1.25,-1.25); the validator, `set_initial_pose.py` and `run_three_goals.py --map-source slam` all account for this (assumes spawn yaw 0).
 
 ## Topics
 Subscribes `/scan`, `/tf`, `/odom` (via TF); publishes `/map`, `/map_metadata`, `map->odom` TF; AMCL publishes `/amcl_pose`, subscribes `/initialpose`.
@@ -39,7 +39,7 @@ ros2 launch maze_simulation maze_simulation.launch.py gui:=false
 ros2 launch slam_mapping mapping.launch.py
 ros2 run slam_mapping auto_map_drive.py --duration 420     # or: ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -p stamped:=true
 export MAZE_REPO=$PWD; ros2 run slam_mapping save_map.sh maze_slam
-python3 ros2_ws/src/slam_mapping/scripts/validate_map.py ros2_ws/src/slam_mapping/maps/maze_slam.yaml --map-origin-in-world 0.25 -0.25
+python3 ros2_ws/src/slam_mapping/scripts/validate_map.py ros2_ws/src/slam_mapping/maps/maze_slam.yaml --map-origin-in-world -1.25 -1.25
 ros2 launch slam_mapping localization.launch.py map:=$PWD/ros2_ws/src/slam_mapping/maps/maze_slam.yaml initial_x:=0.0 initial_y:=0.0
 ```
 Or staged: `tools/verify_on_vm.sh slam`.

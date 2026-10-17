@@ -49,8 +49,8 @@ class InitialPose(Node):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--x", type=float, default=0.25)
-    p.add_argument("--y", type=float, default=-0.25)
+    p.add_argument("--x", type=float, default=-1.25)
+    p.add_argument("--y", type=float, default=-1.25)
     p.add_argument("--yaw", type=float, default=0.0)
     p.add_argument("--timeout", type=float, default=120.0)
     args = p.parse_args(rclpy.utilities.remove_ros_args()[1:])

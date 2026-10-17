@@ -5,7 +5,7 @@
 
 --map-origin-in-world: world position of the map frame origin. 0 0 (default) for a
 map built from the world frame (ground truth); a SLAM map starts where the robot
-spawned, e.g. 0.25 -0.25. Yaw offset is assumed 0 (spawn yaw 0).
+spawned, e.g. -1.25 -1.25. Yaw offset is assumed 0 (spawn yaw 0).
 
 Metrics: wall_coverage = fraction of true wall points with an occupied pixel
 within 2 px; precision = fraction of occupied pixels within 0.1 m of a true wall;

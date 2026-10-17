@@ -25,7 +25,7 @@ case "$MODE" in
         bash src/slam_mapping/scripts/save_map.sh maze_slam ;;
   teleop) ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -p stamped:=true ;;
   *) ros2 launch maze_navigation navigation.launch.py \
-       map:="$REPO/ros2_ws/src/slam_mapping/maps/maze_groundtruth.yaml" initial_x:=0.25 initial_y:=-0.25 &
+       map:="$REPO/ros2_ws/src/slam_mapping/maps/maze_groundtruth.yaml" initial_x:=-1.25 initial_y:=-1.25 &
      NAV=$!
      # wait until Nav2 is really active; if the lifecycle manager gave up, start it again
      for i in $(seq 1 90); do
