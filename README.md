@@ -2,7 +2,7 @@
 
 **IE4060 Robotics and Intelligent Systems — Assignment 02**
 
-An academic robotics simulation project intended to combine **ROS 2 Jazzy**, **Gazebo**, **SLAM**, **Nav2**, classical path planning, and **Deep Q-Learning (DQN)** for autonomous navigation in a maze.
+An academic robotics simulation project that combines **ROS 2 Jazzy**, **Gazebo**, **SLAM**, **Nav2**, classical path planning, and **Deep Q-Learning (DQN)** for autonomous navigation in a maze.
 
 
 
@@ -38,7 +38,7 @@ bash tools/auto.sh       # AUTOMATIC: Gazebo + RViz + Nav2 -> in RViz press "Nav
 
 ```bash
 bash tools/demo.sh                    # start Gazebo + RViz + Nav2 (leave running in terminal 1)
-bash tools/send_goal.sh G1            # terminal 2: send goal 1 / G2 / G3 (config/mission.yaml), or: send_goal.sh 1.25 0.75
+bash tools/send_goal.sh G1            # terminal 2: send goal 1 / G2 / G3 (maze_simulation/config/mission.yaml), or: send_goal.sh 1.25 0.75
 bash tools/demo.sh teleop             # alternative: keyboard driving (terminal must be focused); stop Nav2 demo first
 bash tools/drive.sh forward 2         # alternative: timed driving (forward|back|left|right|stop); needs only the simulation
                                       # (ros2 launch maze_simulation maze_simulation.launch.py), NOT Nav2 at the same time
@@ -96,7 +96,7 @@ The default speed is fast for the 0.5 m corridors: press `z` a few times before 
 
 **SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `python3 ros2_ws/src/slam_mapping/scripts/tour_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.
 
-**Maze:** the only world is main's `worlds/custom_maze.sdf` (unmodified); the planners, ground-truth map and goal cells are read from that file (`maze_tools.py`) plus `config/mission.yaml` (start and goals); see `ros2_ws/src/maze_simulation/FIGURE1_README.md`: 7 x 6 cells, 3.5 m x 3.0 m, spawn (0.25, 0.0). Its Gazebo world name is `custom_maze` (`/world/custom_maze/...`); `tools/demo.sh` uses main's `custom_maze.launch.py`; `maze_simulation.launch.py` (adds the headless option and a cmd_vel watchdog) loads the same world. **Note:** the assignment's Figure 1 is a 6 x 6 grid; main's 7 x 6 maze is an approximation of it (see report section 2). The earlier 6 x 6 results and the cloud checks were measured on the previous layout.
+**Maze:** the only world is `ros2_ws/src/maze_simulation/worlds/custom_maze.sdf` (unmodified); the planners, ground-truth map and goal cells are read from that file (`maze_tools.py`) plus `ros2_ws/src/maze_simulation/config/mission.yaml` (start and goals); see `ros2_ws/src/maze_simulation/FIGURE1_README.md`: 7 x 6 cells, 3.5 m x 3.0 m, spawn (0.25, 0.0). Its Gazebo world name is `custom_maze` (`/world/custom_maze/...`); `tools/demo.sh` uses `custom_maze.launch.py`; `maze_simulation.launch.py` (adds the headless option and a cmd_vel watchdog) loads the same world. **Note:** the assignment's Figure 1 is a 6 x 6 grid; the 7 x 6 maze is an approximation of it (see report section 2). The earlier 6 x 6 results and the cloud checks were measured on the previous layout.
 
 **Rules:** run only ONE of Nav2 / SLAM mapping / DQN at a time (they all control the same robot), and close Gazebo (`Ctrl+C`) before starting something new.
 
@@ -104,7 +104,7 @@ The default speed is fast for the 0.5 m corridors: press `z` a few times before 
 ROS 2 Jazzy must be installed first ([docs/installation.md](docs/installation.md)); git does not install it. Committing the trained model removes the need to *train* again, not the need to install ROS 2, Gazebo and the dependencies.
 ```bash
 git clone https://github.com/AseshNemal/ros2-autonomous-maze-navigation.git
-cd ros2-autonomous-maze-navigation && git checkout dev-integration
+cd ros2-autonomous-maze-navigation
 bash tools/install_deps_ubuntu.sh   # once: Gazebo bridge, TurtleBot3, Nav2, SLAM Toolbox, RViz (needs sudo + internet)
 bash tools/setup.sh                 # 1. build the workspace and check the prerequisites and the DQN model
 bash tools/auto.sh                  # 2. Gazebo window + RViz + Nav2: press "Nav2 Goal" in RViz and click the maze
@@ -140,15 +140,13 @@ bash tools/run_dqn_model.sh         # 3. the trained DQN model in the Gazebo win
 
 More detail: [docs/demonstration.md](docs/demonstration.md), [docs/installation.md](docs/installation.md), [docs/testing.md](docs/testing.md).
 
-## Planned capabilities
+## Capabilities
 
-- Build and simulate a maze world in Gazebo.
-- Simulate a mobile robot with a LiDAR sensor.
-- Generate and save a map using SLAM.
-- Navigate to user-selected goals with Nav2.
-- Experiment with A* / Dijkstra path planning (subject to the assignment's required implementation details).
-- Implement and evaluate DQN-based navigation.
-- Document tests and a multi-goal demonstration for the viva.
+- Maze world in Gazebo with a TurtleBot3 Burger and LiDAR.
+- SLAM Toolbox mapping (map precision 0.819, below our own 0.85 target; see the report).
+- Nav2 navigation to user-selected goals (3 of 3 scripted goals reached on the ground-truth map).
+- Double DQN navigation, trained and evaluated: **0 of 9 goals reached**, so it does not work as a navigation policy.
+- Tests and a multi-goal demonstration for the viva (`tools/verify_on_vm.sh`, `docs/demonstration.md`).
 
 ## Repository structure
 
@@ -156,24 +154,24 @@ More detail: [docs/demonstration.md](docs/demonstration.md), [docs/installation.
 ros2-autonomous-maze-navigation/
 ├── ros2_ws/
 │   └── src/
-│       ├── maze_simulation/   # Member 1 (ament_cmake)
-│       ├── slam_mapping/      # Member 2 (ament_cmake)
-│       ├── maze_navigation/   # Member 3 (ament_cmake)
-│       └── dqn_agent/    # Member 4 (ament_python)
+│       ├── maze_simulation/   # Member 1 (ament_cmake): world, spawn, watchdog
+│       ├── slam_mapping/      # Member 2 (ament_cmake): SLAM, map tools
+│       ├── maze_navigation/   # Member 3 (ament_cmake): Nav2, goal evaluator
+│       └── dqn_agent/         # Member 4 (ament_python): Double DQN, trained model
+├── tools/                     # setup.sh, auto.sh, manual.sh, demo.sh, run_dqn_model.sh, verify_*.{sh,py}
+├── maps/                      # teammate prototype test_map (not the final maze)
 ├── docs/
-│   ├── member_1_environment.md
-│   ├── member_2_slam.md
-│   ├── member_3_navigation.md
-│   ├── member_4_dqn.md
-│   ├── integration.md
-│   ├── results/
+│   ├── members/               # per-member guides
+│   ├── results/               # logs and CSVs from VM runs (old_6x6_maze/ = earlier layout)
+│   ├── report.md / report.pdf
+│   ├── OWNERSHIP.md, architecture.md, testing.md, ...
 │   └── screenshots/
 ├── README.md
 ├── .gitignore
 └── requirements.txt
 ```
 
-The root-level `worlds/`, `config/`, `launch/` and `dqn/` folders are leftovers from the initial scaffold (placeholder READMEs); root `maps/` holds the teammate's prototype `test_map` (not the final maze). Package assets belong inside the packages above; these folders are slated for removal once the group agrees.
+Package assets (worlds, config, launch files, models) live inside the packages above. Root `maps/` holds only the teammate's prototype `test_map` (not the final maze).
 
 ## Team division (see [docs/OWNERSHIP.md](docs/OWNERSHIP.md) for who wrote what)
 
@@ -186,7 +184,7 @@ The root-level `worlds/`, `config/`, `launch/` and `dqn/` folders are leftovers 
 
 Also: [architecture](docs/architecture.md) · [integration](docs/integration.md) · [installation](docs/installation.md) · [testing & status](docs/testing.md) · [demonstration](docs/demonstration.md) · [VIVA notes](docs/viva.md) · [report](docs/report.md).
 
-> **Branch status:** `dev-integration` is an emergency full-project backup. It is code-complete but **runtime-unverified in Gazebo** - read [docs/testing.md](docs/testing.md) for the honest status of each requirement.
+> **Status:** all four workstreams are integrated on `main` and were run on an Ubuntu 24.04 VM: Nav2 3/3, DQN 0/9, SLAM precision 0.819 (below the 0.85 target). See [docs/testing.md](docs/testing.md) and the report for the per-requirement status.
 
 ## Target environment
 
@@ -194,9 +192,9 @@ Also: [architecture](docs/architecture.md) · [integration](docs/integration.md)
 - ROS 2 Jazzy
 - Gazebo Harmonic and compatible ROS-Gazebo packages
 - TurtleBot3 Burger, Nav2, SLAM Toolbox and compatible packages (versions to be pinned when selected)
-- Python 3 for DQN experiments; Python-only packages go in `requirements.txt` (currently empty)
+- Python 3 for DQN experiments; Python-only packages are listed in `requirements.txt` (numpy, PyYAML, pytest)
 
-**Note:** Installation and platform compatibility have not yet been verified for this repository. Gazebo, ROS 2, Nav2 and PyTorch support can vary by platform and package source.
+**Note:** validated only on one Ubuntu 24.04 ARM64 VM, not from a clean install. Gazebo, ROS 2 and Nav2 package availability can vary by platform and package source. The DQN uses NumPy (no PyTorch).
 
 ## Getting started
 
@@ -212,13 +210,13 @@ One controller at a time on `/cmd_vel`: mapping, Nav2 or DQN - see [docs/archite
 
 ## Implementation checklist (honest)
 
-- [x] Member 1: maze world + spawn launch (IMPLEMENTED; Gazebo run pending)
-- [x] Member 2: SLAM/localization workflow + map validator (IMPLEMENTED; real SLAM map pending)
-- [x] Member 3: Nav2 config fixes + 3-goal runner (IMPLEMENTED; no navigation result yet)
-- [x] Member 4: DQN maze adaptation (IMPLEMENTED; unit-tested; no goal-reaching evidence)
-- [ ] Reproducible three-goal demonstration (needs VM run; order in [docs/ubuntu_test_checklist.md](docs/ubuntu_test_checklist.md))
-- [ ] Re-run SLAM and DQN stages with the cloud-analysis fixes ([docs/cloud_analysis.md](docs/cloud_analysis.md)); both still unverified
-- [ ] Evidence, results and final report numbers
+- [x] Member 1: maze world + spawn launch (run on the VM)
+- [x] Member 2: SLAM/localization workflow + map validator (SLAM map precision 0.819, below the 0.85 target; FAIL)
+- [x] Member 3: Nav2 config + 3-goal runner (3 of 3 goals reached on the ground-truth map)
+- [x] Member 4: Double DQN, trained 60 episodes (0 of 9 goals reached, truth-confirmed)
+- [x] Reproducible three-goal demonstration (`bash tools/auto.sh`; scripted `bash tools/verify_on_vm.sh nav`)
+- [ ] SLAM map that meets the 0.85 precision target, and Nav2 run on the SLAM map
+- [ ] A DQN that reaches goals (needs more training or a hybrid design; not run)
 
 ## Repository hygiene
 
