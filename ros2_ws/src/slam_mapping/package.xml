@@ -16,6 +16,7 @@
   <exec_depend>maze_simulation</exec_depend>
   <exec_depend>teleop_twist_keyboard</exec_depend>
   <exec_depend>rclpy</exec_depend>
+  <exec_depend>tf2_ros_py</exec_depend>   <!-- tour_map_drive.py: from tf2_ros import Buffer, TransformListener -->
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
   <exec_depend>ament_index_python</exec_depend>

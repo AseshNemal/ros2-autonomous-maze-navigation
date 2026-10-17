@@ -81,8 +81,9 @@ slam)
     if [ -f "$MAPYAML" ]; then
       python3 "$WS/src/slam_mapping/scripts/validate_map.py" "$MAPYAML" --map-origin-in-world 0.25 0.0 \
         2>&1 | tee -a "$OUT/slam_validation_$TS.txt" | tee -a "$LOG"
+      VALIDATE_RC=${PIPESTATUS[0]}   # read immediately: any later [ ] test resets PIPESTATUS (it made PASS look like FAIL)
       if [ -n "${QUICK:-}" ]; then say "QUICK smoke test: partial tour, map validation result is NOT a pass/fail"; else
-      [ "${PIPESTATUS[0]}" = 0 ] || fail "map validation (see slam_validation_$TS.txt)"; fi
+      [ "$VALIDATE_RC" = 0 ] || fail "map validation (see slam_validation_$TS.txt)"; fi
     fi
   fi ;;
 nav)
@@ -125,7 +126,8 @@ control)
       gz service -s /world/custom_maze/set_pose --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean --timeout 3000 \
         --req 'name: "burger" position {x: 0.25 y: 0.0 z: 0.01} orientation {w: 1}' >/dev/null 2>&1
       sleep 2
-      python3 "$WS/src/slam_mapping/scripts/set_initial_pose.py" --x 0.25 --y 0.0 --yaw 0 --timeout 20 >/dev/null 2>&1
+      python3 "$WS/src/slam_mapping/scripts/set_initial_pose.py" --x 0.25 --y 0.0 --yaw 0 --timeout 20 \
+        --ros-args -p use_sim_time:=true >/dev/null 2>&1
       run python3 "$WS/src/maze_simulation/scripts/check_control.py" nav --json "$OUT/control_nav_$TS.json" \
         || fail "Nav2 goal checks (see control_nav_$TS.json)"
     else fail "Nav2 never became active"; fi

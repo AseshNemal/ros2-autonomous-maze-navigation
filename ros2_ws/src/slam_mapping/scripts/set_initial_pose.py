@@ -8,12 +8,16 @@ import time
 import rclpy
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from rclpy.node import Node
+from rclpy.parameter import Parameter
 from rclpy.qos import QoSProfile, DurabilityPolicy, ReliabilityPolicy
 
 
 class InitialPose(Node):
     def __init__(self, x, y, yaw, timeout):
-        super().__init__("set_initial_pose")
+        # The pose is stamped with the node clock and AMCL looks the stamp up in TF, which runs on Gazebo's
+        # /clock. A wall-clock stamp (~1.8e9 s) is "in the future" for AMCL and the pose is dropped, so the
+        # node always uses simulation time (this project only drives the simulated robot).
+        super().__init__("set_initial_pose", parameter_overrides=[Parameter("use_sim_time", Parameter.Type.BOOL, True)])
         self.x, self.y, self.yaw = x, y, yaw
         self.pub = self.create_publisher(PoseWithCovarianceStamped, "/initialpose", 10)
         qos = QoSProfile(depth=1, reliability=ReliabilityPolicy.RELIABLE,
