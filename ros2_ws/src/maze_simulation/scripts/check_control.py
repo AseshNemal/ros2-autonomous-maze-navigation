@@ -260,7 +260,7 @@ def run_nav():
     st = subprocess.run("ros2 lifecycle get /bt_navigator", shell=True, capture_output=True, text=True).stdout
     check("Nav2 bt_navigator is active", "active [3]" in st, st.strip())
     g0 = gz_pose()
-    goal = (-1.25, 0.25)
+    goal = (-0.25, 0.75)
     m = PoseStamped()
     m.header.frame_id = "map"
     m.pose.position.x, m.pose.position.y, m.pose.orientation.w = goal[0], goal[1], 1.0

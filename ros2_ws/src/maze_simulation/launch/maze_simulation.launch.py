@@ -83,9 +83,9 @@ def generate_launch_description():
     args = [
         DeclareLaunchArgument("gui", default_value="true",
                               description="false = headless server only (-s), for the VM / training"),
-        DeclareLaunchArgument("x_pose", default_value="-1.25",
+        DeclareLaunchArgument("x_pose", default_value="0.25",
                               description="spawn x (default: start cell (5,0))"),
-        DeclareLaunchArgument("y_pose", default_value="-1.25"),
+        DeclareLaunchArgument("y_pose", default_value="-0.25"),
         DeclareLaunchArgument("yaw", default_value="0.0"),
         DeclareLaunchArgument("use_sim_time", default_value="true"),
         DeclareLaunchArgument("world", default_value="maze.world",

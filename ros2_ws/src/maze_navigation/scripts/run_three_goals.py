@@ -8,7 +8,7 @@ cell-centre A* lower-bound estimates (0.5 m per cell), so efficiency can exceed
 1.0 when Nav2 cuts corners; they are a yardstick, not a true optimum.
 
   ros2 run maze_navigation run_three_goals.py --csv ~/nav2_results.csv \\
-      [--map-source world|slam] [--reset-to-start] [--goals 1.25,1.25;-1.25,0.25]
+      [--map-source world|slam] [--reset-to-start] [--goals 1.25,2.25;-0.25,0.75]
 
 --reset-to-start teleports the robot back to the start cell via Gazebo before each
 goal (same start->goal pairs as the DQN evaluation, for a like-for-like comparison).
