@@ -29,10 +29,10 @@ kill_stack() {
   pkill -f "ros2 launch" 2>/dev/null
   pkill -f "gz sim" 2>/dev/null; pkill -f "gz_tools_vendor" 2>/dev/null
   pkill -f parameter_bridge 2>/dev/null; pkill -f robot_state_publisher 2>/dev/null; pkill -f rviz2 2>/dev/null
-  pkill -f "slam_toolbox|nav2_|lib/nav2|opennav|auto_map_drive|twist_stamper|set_initial_pose" 2>/dev/null
+  pkill -f "slam_toolbox|nav2_|lib/nav2|opennav|auto_map_drive|twist_stamper|set_initial_pose|cmd_vel_watchdog" 2>/dev/null
   sleep 3
   # a Nav2 node that ignores SIGTERM (seen: a stale lifecycle_manager) must not survive into the next run
-  pkill -9 -f "gz sim|parameter_bridge|robot_state_publisher|lib/nav2_|opennav" 2>/dev/null; true
+  pkill -9 -f "gz sim|parameter_bridge|robot_state_publisher|lib/nav2_|opennav|cmd_vel_watchdog" 2>/dev/null; true
 }
 [ "$STAGE" = build ] || kill_stack
 PIDS=()
