@@ -7,14 +7,15 @@
 | GitHub repository | https://github.com/AseshNemal/ros2-autonomous-maze-navigation (branch `dev-integration`) |
 | Environment | Ubuntu 24.04 (ARM64 VM), ROS 2 Jazzy, Gazebo Harmonic, Nav2, SLAM Toolbox |
 
-| Member | Student ID | Name | Package / responsibility |
-|---|---|---|---|
-| Member 1 | IT22273680 | Weerasinghe KGJP | `maze_simulation` - maze environment and simulation (`custom_maze.sdf`, `generate_maze.py`) |
-| Member 2 | IT23367562 | Lakshitha W G D | `slam_mapping` - mapping and localisation |
-| Member 3 | IT23185470 | Yashas S.P.R | `maze_navigation` - Nav2 navigation and evaluation |
-| Member 4 | IT23236264 | Nemal L A | `dqn_agent` - Deep Q-learning |
+| Member (GitHub user) | Student ID | Name | Package and assigned responsibility | Contribution (GitHub record, unchanged) |
+|---|---|---|---|---|
+| Member 1 - JayangaWeerasinghe | IT22273680 | Weerasinghe KGJP | `maze_simulation` - Maze Environment and Simulation | environment-versions document, test-map assets, optional prototype world `custom_maze` (3 commits on `main`) |
+| Member 2 - dhanushka403 | IT23367562 | Lakshitha W G D | `slam_mapping` - Mapping and Localization | partial prototype map `test_map` (1 commit, PR #1) |
+| Member 3 - RavinduYashas | IT23185470 | Yashas S.P.R | `maze_navigation` - Nav2 Navigation and Evaluation | Nav2 parameters, launch file, RViz layout, goal evaluator (7 commits, PR #2) |
+| Member 4 - AseshNemal | IT23236264 | Nemal L A | `dqn_agent` - Deep Q-Learning | NumPy Double DQN, environment, training/evaluation/comparison, Stage-1 trial (2 commits, PR #3) |
+| Integration - AseshNemal (AI-assisted, labelled as such) | - | - | all four packages | Figure-1 maze generator and world, bridge/spawn, watchdog, SLAM tour and validation, Nav2 fixes, three-goal script, VM verification scripts, DQN maze adaptation |
 
-Integration work (launch wrapper and command watchdog, layout reader, SLAM tour and validation, Nav2 fixes, VM verification scripts, DQN adaptation to the maze) was done by Member 4's GitHub account with AI assistance, and is labelled as such in `docs/OWNERSHIP.md`, which also separates the original teammate commits from the integration commits.
+The contribution column is the original GitHub record and has not been edited; the name, ID and responsibility columns are the team's assignment. For the current state: the world used for every result in this report is `custom_maze.sdf` with its generator `generate_maze.py`, both committed on `main` through Member 1's GitHub account (Section 2). Original teammate commits are preserved unmodified in the Git history; `docs/OWNERSHIP.md` separates them from the integration work.
 
 > **Honesty note.** Numbers marked as measured come from recorded runs on the Ubuntu VM, stored in `docs/results/vm/` (current maze), `docs/results/old_6x6_maze/` (previous maze, labelled) or, for the offline analyses, `docs/cloud_checks/` (labelled as not Gazebo). Anything not yet run is marked **PENDING**. Where a requirement is not met, the report says so.
 
