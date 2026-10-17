@@ -1,0 +1,13 @@
+before: truth (0.12, -0.10)  amcl (1.70, 1.88)
+after wrong pose estimate: truth (0.12, -0.10)  amcl (2.45, 1.99)   <- mismatch (the user's symptom)
+Teleporting the robot to the spawn pose (0.25, 0.0) in Gazebo ...
+data: true
+Setting the AMCL initial pose to the same place ...
+[INFO] [1792231830.220896980] [set_initial_pose]: AMCL pose (0.22, 0.02) confirmed after 3 publishes
+done: Gazebo and RViz should now show the robot at the same place
+after reset_robot.sh: truth (0.24, 0.00)  amcl (0.22, 0.02)
+--- goal G3 after the reset
+  distance remaining 0.15 m, recoveries 0
+RESULT: SUCCEEDED after 10.3 s
+after goal: truth (-0.25, 0.60)  amcl (-0.28, 0.61)
+finished

@@ -1,0 +1,121 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-20-57-11-349389-asesh-QEMU-Virtual-Machine-31367
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [31380]
+[INFO] [robot_state_publisher-2]: process started with pid [31381]
+[INFO] [create-3]: process started with pid [31383]
+[INFO] [parameter_bridge-4]: process started with pid [31384]
+[robot_state_publisher-2] [INFO] [1792164431.631371111] [robot_state_publisher]: Robot initialized
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-20-57-11-717407-asesh-QEMU-Virtual-Machine-31376
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [async_slam_toolbox_node-1]: process started with pid [31460]
+[async_slam_toolbox_node-1] [INFO] [1792164432.009845863] [slam_toolbox]: Node using stack size 40000000
+[async_slam_toolbox_node-1] [INFO] [1792164432.188360106] [slam_toolbox]: Configuring
+[async_slam_toolbox_node-1] [INFO] [1792164432.218988216] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[async_slam_toolbox_node-1] [INFO] [1792164432.240538190] [slam_toolbox]: Activating
+[create-3] [INFO] [1792164432.274536002] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 31383]
+[parameter_bridge-4] [INFO] [1792164432.655278844] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792164432.656806032] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792164432.659152305] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792164432.660740358] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792164432.661934845] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792164432.662356657] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792164432.662890827] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> /cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[async_slam_toolbox_node-1] Info: clipped range threshold to be within minimum and maximum range!
+[async_slam_toolbox_node-1] Registering sensor: [Custom Described Lidar]
+[async_slam_toolbox_node-1] [WARN] [1792164436.133203157] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164436.134117980] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164436.416900099] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164436.416992710] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164436.680657580] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164436.808981931] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164436.809124744] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.052656872] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.052836304] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.204643367] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.204847586] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.233143529] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164437.277212308] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.277326291] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.434683575] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.434854675] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.581140596] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.581431886] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.645100434] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.645324693] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.800768135] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.800935360] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.816939245] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.817011651] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.884659277] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.884902075] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164437.909075210] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164437.909195276] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[robot_state_publisher-2] [WARN] [1792164437.944877836] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164438.097187409] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164438.180861662] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164438.360856764] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164438.361173675] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164438.393224411] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164438.405026755] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164438.405306256] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164438.516925433] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164438.517040957] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164438.560802884] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164438.560693067] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164438.744599134] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164438.744869094] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [INFO] [1792164438.748118865] [slam_toolbox]: Message Filter dropping message: frame 'base_scan' at time 3.800 for reason 'discarding message because the queue is full'
+[robot_state_publisher-2] [WARN] [1792164438.801255702] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164438.801293029] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164439.028214062] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164439.028281593] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164439.046130138] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164439.046245871] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164439.308819627] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164439.457192994] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164439.457307811] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164439.564956745] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164439.565045690] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[robot_state_publisher-2] [WARN] [1792164439.845138331] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164439.845137623] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164439.917314727] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164439.917833234] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[robot_state_publisher-2] [WARN] [1792164439.977271210] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164439.977178890] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164440.124779424] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164440.240702943] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164440.241071139] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164440.352659167] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164440.352922128] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[robot_state_publisher-2] [WARN] [1792164440.705215396] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164440.705138407] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164440.968657887] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164440.968704089] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164441.109330534] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164441.109457891] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164441.442837611] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164441.442927598] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164441.493265371] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[parameter_bridge-4] [INFO] [1792164441.954167714] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+[async_slam_toolbox_node-1] [WARN] [1792164444.059998017] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164444.060215944] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164447.494231036] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[robot_state_publisher-2] [WARN] [1792164447.494949683] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164483.171675463] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [INFO] [1792164483.179303088] [slam_toolbox]: Message Filter dropping message: frame 'base_scan' at time 48.000 for reason 'discarding message because the queue is full'
+[robot_state_publisher-2] [WARN] [1792164483.173990326] [robot_state_publisher]: Moved backwards in time, re-publishing joint transforms!
+[async_slam_toolbox_node-1] [WARN] [1792164517.894489447] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [WARN] [1792164532.588825135] [tf2_buffer]: Detected jump back in time. Clearing TF buffer.
+[async_slam_toolbox_node-1] [INFO] [1792164554.309318142] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-4] [INFO] [1792164554.306516314] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-2] [INFO] [1792164554.308125161] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[async_slam_toolbox_node-1] Unregistering sensor: Custom Described Lidar

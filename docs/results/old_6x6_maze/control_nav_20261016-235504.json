@@ -1,0 +1,32 @@
+[
+  {
+    "check": "Nav2 bt_navigator is active",
+    "pass": true,
+    "detail": "active [3]"
+  },
+  {
+    "check": "Nav2 received the clicked goal and planned a path (/plan, frame map)",
+    "pass": true,
+    "detail": "map\n---"
+  },
+  {
+    "check": "Nav2 drove the robot to the clicked goal autonomously",
+    "pass": true,
+    "detail": "start (0.5735961844802795, -1.2499480112511099) -> end (-1.28, 0.07), goal (-1.25, 0.25), 21 s"
+  },
+  {
+    "check": "robot is at rest after reaching the goal",
+    "pass": true,
+    "detail": "0.000 m/s"
+  },
+  {
+    "check": "during Nav2 only the Nav2 chain publishes /cmd_vel (no teleop/SLAM/DQN driver)",
+    "pass": true,
+    "detail": "publishers: ['docking_server', 'twist_stamper']"
+  },
+  {
+    "check": "simulation runs near real time with Nav2 + sim (smooth enough for a remote session)",
+    "pass": true,
+    "detail": "real-time factor 1.00, load average 4.0 on 4 CPUs (headless: GUI/remote desktop adds load)"
+  }
+]

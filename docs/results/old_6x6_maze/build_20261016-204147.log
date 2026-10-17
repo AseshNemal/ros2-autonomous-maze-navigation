@@ -1,0 +1,22 @@
+Starting >>> maze_simulation
+Finished <<< maze_simulation [1.09s]
+Starting >>> slam_mapping
+Finished <<< slam_mapping [0.92s]
+Starting >>> dqn_agent
+Finished <<< dqn_agent [0.99s]
+Starting >>> maze_navigation
+Finished <<< maze_navigation [0.84s]
+
+Summary: 4 packages finished [3.93s]
+Starting >>> maze_simulation
+Finished <<< maze_simulation [0.04s]
+Starting >>> slam_mapping
+Finished <<< slam_mapping [0.35s]
+Starting >>> dqn_agent
+Finished <<< dqn_agent [0.41s]
+Starting >>> maze_navigation
+Finished <<< maze_navigation [0.32s]
+
+Summary: 4 packages finished [1.20s]
+Summary: 22 tests, 0 errors, 0 failures, 0 skipped
+[20:41:53] stage build finished; log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/build_20261016-204147.log

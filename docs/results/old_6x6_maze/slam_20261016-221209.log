@@ -1,0 +1,34 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-22-12-13-873610-asesh-QEMU-Virtual-Machine-44168
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [44177]
+[INFO] [robot_state_publisher-2]: process started with pid [44178]
+[INFO] [create-3]: process started with pid [44179]
+[INFO] [parameter_bridge-4]: process started with pid [44181]
+[robot_state_publisher-2] [INFO] [1792168934.234569055] [robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1792168934.876971642] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 44179]
+[parameter_bridge-4] [INFO] [1792168935.242189065] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792168935.394275543] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792168935.396651447] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792168935.397782022] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792168935.400008670] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792168935.401266749] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792168935.401849558] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> /cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-22-12-21-316402-asesh-QEMU-Virtual-Machine-44313
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [async_slam_toolbox_node-1]: process started with pid [44330]
+[async_slam_toolbox_node-1] [INFO] [1792168941.522021624] [slam_toolbox]: Node using stack size 40000000
+[async_slam_toolbox_node-1] [INFO] [1792168941.719861695] [slam_toolbox]: Configuring
+[async_slam_toolbox_node-1] [INFO] [1792168941.742326231] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[async_slam_toolbox_node-1] [INFO] [1792168941.757975358] [slam_toolbox]: Activating
+[async_slam_toolbox_node-1] Info: clipped range threshold to be within minimum and maximum range!
+[async_slam_toolbox_node-1] Registering sensor: [Custom Described Lidar]
+[parameter_bridge-4] [INFO] [1792168951.845567924] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)

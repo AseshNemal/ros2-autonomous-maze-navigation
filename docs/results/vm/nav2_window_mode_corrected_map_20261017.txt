@@ -1,0 +1,21 @@
+Nav2 goals in WINDOW MODE (Gazebo GUI + RViz) on the CORRECTED ground-truth map (east wall present), Ubuntu VM, 2026-10-17 ~16:40-16:50.
+Run live against the user's running `bash tools/auto.sh` session: `tools/reset_robot.sh`, then `tools/send_goal.sh <goal>`, with /rosout and AMCL/cmd_vel monitoring.
+This is NOT the scripted `verify_on_vm.sh nav` stage (no CSV); it is a manual live check.
+
+Machine state: 4 CPUs, load average 25-29, ~143 MB RAM free, ~1.6 GB swap in use, Gazebo real-time factor 1.08.
+
+WITH a stale second `lifecycle_manager_navigation` process (PID 40952, 81 min old, ignored SIGTERM) running next to the current one:
+  run 1  G1  ABORTED after 46.5 s   AMCL (1.72, 2.00) / Gazebo truth (1.75, 2.03), 1.08 m of path left; cmd_vel_nav dropped to 0.000
+  run 2  G1  ABORTED after 15.0 s   planner_server: "Failed to create plan from (0.26,-0.01) to (1.25,2.25) with tolerance 0.1";
+                                    "Planner loop missed its desired rate of 20 Hz. Current loop rate is 2.457 Hz";
+                                    bt_navigator: "Timed out while waiting for action server to acknowledge goal request for compute_path_to_pose"
+The stale process was removed with kill -9 (plain kill did not stop it).
+
+WITHOUT the stale process (same map, same window-mode session):
+  run 3  G1  SUCCEEDED after 50.1 s   (no WARN/ERROR in /rosout)
+  run 4  G2  SUCCEEDED after 20.5 s   (no WARN/ERROR)
+  run 5  G3  SUCCEEDED after 13.7 s   (no WARN/ERROR)
+  run 6  G1  SUCCEEDED after 49.0 s   (one transient planner failure 1.8 s after the reset; the BT replanned and finished)
+
+Reading: the aborts were not caused by the corrected map. A leaked Nav2 lifecycle manager plus an overloaded VM is the evidence-backed
+explanation; this was not isolated further. Times in window mode are longer than the headless run (nav2_results_20261017-113157.csv).

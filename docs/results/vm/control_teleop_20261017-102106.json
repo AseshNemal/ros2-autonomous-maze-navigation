@@ -1,0 +1,82 @@
+[
+  {
+    "check": "robot 'burger' exists in the Gazebo world",
+    "pass": true,
+    "detail": "pose=(0.25, 0.00)"
+  },
+  {
+    "check": "/odom publishing",
+    "pass": true,
+    "detail": "149 msgs in 3 s"
+  },
+  {
+    "check": "/scan publishing (360 beams)",
+    "pass": true,
+    "detail": "15 msgs"
+  },
+  {
+    "check": "TF odom->base_footprint publishing",
+    "pass": true,
+    "detail": "150 msgs"
+  },
+  {
+    "check": "/cmd_vel type is geometry_msgs/msg/TwistStamped",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "check": "Gazebo receives /cmd_vel (ros_gz_bridge is its subscriber)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "check": "nothing publishes /cmd_vel while the robot is idle",
+    "pass": true,
+    "detail": "publishers: []"
+  },
+  {
+    "check": "only teleop_twist_keyboard publishes /cmd_vel during teleoperation",
+    "pass": true,
+    "detail": "publishers: ['teleop_twist_keyboard']"
+  },
+  {
+    "check": "teleop FORWARD ('i') moves the robot forward",
+    "pass": true,
+    "detail": "odom +0.46 m, Gazebo truth +0.46 m along heading"
+  },
+  {
+    "check": "/scan changes while driving",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "check": "TF odom->base_footprint advances while driving",
+    "pass": true,
+    "detail": "stamp 11.18 -> 14.9"
+  },
+  {
+    "check": "teleop BACKWARD (',') moves the robot backward",
+    "pass": true,
+    "detail": "odom -0.31 m, Gazebo truth -0.30 m along heading"
+  },
+  {
+    "check": "teleop LEFT ('j') turns the robot left",
+    "pass": true,
+    "detail": "odom yaw +1.02 rad, Gazebo truth +0.99 rad"
+  },
+  {
+    "check": "teleop RIGHT ('l') turns the robot right",
+    "pass": true,
+    "detail": "odom yaw -1.02 rad, Gazebo truth -1.07 rad"
+  },
+  {
+    "check": "teleop STOP ('k') brings the robot to rest",
+    "pass": true,
+    "detail": "speed 0.000 m/s, yaw rate 0.000, drift 0.001 m in 2 s"
+  },
+  {
+    "check": "robot STOPS by itself after teleop is killed mid-motion (no runaway)",
+    "pass": true,
+    "detail": "speed 0.000 m/s, moved 0.00 m in the 2.5 s after the kill"
+  }
+]

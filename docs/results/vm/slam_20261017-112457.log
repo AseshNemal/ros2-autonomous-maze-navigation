@@ -1,0 +1,28 @@
+[11:25:00] stage slam started; log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/slam_20261017-112457.log
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-17-11-25-01-169238-asesh-QEMU-Virtual-Machine-30589
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [30597]
+[INFO] [create-2]: process started with pid [30598]
+[INFO] [parameter_bridge-3]: process started with pid [30600]
+[INFO] [robot_state_publisher-4]: process started with pid [30601]
+[INFO] [cmd_vel_watchdog.py-5]: process started with pid [30602]
+[robot_state_publisher-4] [INFO] [1792216501.370028468] [robot_state_publisher]: Robot initialized
+[create-2] [37;1m2026-10-17 11:25:01.386 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[parameter_bridge-3] [37;1m2026-10-17 11:25:01.387 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[cmd_vel_watchdog.py-5] [37;1m2026-10-17 11:25:01.558 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[create-2] [INFO] [1792216501.830322588] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-2]: process has finished cleanly [pid 30598]
+[parameter_bridge-3] [INFO] [1792216502.396888717] [ros_gz_bridge]: Creating GZ->ROS Bridge: [clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792216502.398112202] [ros_gz_bridge]: Creating GZ->ROS Bridge: [joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792216502.401100349] [ros_gz_bridge]: Creating GZ->ROS Bridge: [odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792216502.402717258] [ros_gz_bridge]: Creating GZ->ROS Bridge: [tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792216502.404134247] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792216502.405224520] [ros_gz_bridge]: Creating GZ->ROS Bridge: [imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792216502.405890659] [ros_gz_bridge]: Creating GZ->ROS Bridge: [scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast

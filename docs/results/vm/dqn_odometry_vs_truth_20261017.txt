@@ -1,0 +1,31 @@
+DQN env pose (wheel odometry) vs Gazebo ground truth, greedy policy from the 60-episode checkpoint, goal (3,3) = (1.25, 0.75), 2026-10-17 ~17:10.
+Diagnostic that exposed false successes in the odometry-based evaluation (dqn_eval_none_20261017-165910.csv: 5 of 9 'successes').
+Only the first episode is valid. The remainder of the original capture was contaminated by a second client that was still resetting the robot (discarded).
+At step 146 the env declared success at 0.21 m from the goal (odometry) while the true distance at step 144 was 0.41 m: the robot was pressed against the wall below the goal cell.
+The 'truth=(0.28,0.00)' value on the final line is the contaminated reading (robot reset by the second client), not a real pose.
+
+--- goal 1 (3, 3) xy=(1.25, 0.75)  start truth=(0.27788041592443735, -7.192563535873222e-05)
+step   6 env=(0.43,0.03) truth=(0.42,0.02) err=0.02 truth_dist_to_goal=1.11 min_scan=0.46
+step  12 env=(0.61,0.07) truth=(0.55,0.04) err=0.07 truth_dist_to_goal=1.00 min_scan=0.45
+step  18 env=(0.76,0.11) truth=(0.65,0.04) err=0.13 truth_dist_to_goal=0.93 min_scan=0.44
+step  24 env=(0.87,0.17) truth=(0.75,0.04) err=0.17 truth_dist_to_goal=0.87 min_scan=0.44
+step  30 env=(0.90,0.19) truth=(0.77,0.05) err=0.19 truth_dist_to_goal=0.84 min_scan=0.43
+step  36 env=(0.91,0.21) truth=(0.79,0.06) err=0.19 truth_dist_to_goal=0.83 min_scan=0.43
+step  42 env=(0.93,0.23) truth=(0.79,0.07) err=0.21 truth_dist_to_goal=0.82 min_scan=0.42
+step  48 env=(0.94,0.24) truth=(0.83,0.08) err=0.20 truth_dist_to_goal=0.79 min_scan=0.40
+step  54 env=(0.96,0.26) truth=(0.87,0.09) err=0.19 truth_dist_to_goal=0.76 min_scan=0.39
+step  60 env=(0.99,0.28) truth=(0.89,0.11) err=0.20 truth_dist_to_goal=0.74 min_scan=0.38
+step  66 env=(1.03,0.30) truth=(0.94,0.13) err=0.20 truth_dist_to_goal=0.69 min_scan=0.37
+step  72 env=(1.07,0.34) truth=(0.97,0.14) err=0.22 truth_dist_to_goal=0.67 min_scan=0.35
+step  78 env=(1.11,0.36) truth=(1.00,0.17) err=0.22 truth_dist_to_goal=0.63 min_scan=0.33
+step  84 env=(1.13,0.38) truth=(1.02,0.18) err=0.22 truth_dist_to_goal=0.61 min_scan=0.31
+step  90 env=(1.16,0.40) truth=(1.05,0.21) err=0.22 truth_dist_to_goal=0.58 min_scan=0.29
+step  96 env=(1.17,0.41) truth=(1.08,0.22) err=0.21 truth_dist_to_goal=0.56 min_scan=0.27
+step 102 env=(1.21,0.42) truth=(1.12,0.24) err=0.20 truth_dist_to_goal=0.53 min_scan=0.26
+step 108 env=(1.23,0.42) truth=(1.13,0.25) err=0.20 truth_dist_to_goal=0.52 min_scan=0.25
+step 114 env=(1.25,0.43) truth=(1.13,0.25) err=0.22 truth_dist_to_goal=0.52 min_scan=0.25
+step 120 env=(1.26,0.44) truth=(1.15,0.26) err=0.21 truth_dist_to_goal=0.50 min_scan=0.23
+step 126 env=(1.29,0.46) truth=(1.17,0.27) err=0.23 truth_dist_to_goal=0.49 min_scan=0.23
+step 132 env=(1.30,0.48) truth=(1.19,0.29) err=0.22 truth_dist_to_goal=0.46 min_scan=0.22
+step 138 env=(1.30,0.50) truth=(1.21,0.31) err=0.21 truth_dist_to_goal=0.44 min_scan=0.19
+step 144 env=(1.32,0.52) truth=(1.24,0.34) err=0.19 truth_dist_to_goal=0.41 min_scan=0.16

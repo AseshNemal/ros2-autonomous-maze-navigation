@@ -1,0 +1,85 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-23-49-51-630022-asesh-QEMU-Virtual-Machine-58821
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [58841]
+[INFO] [robot_state_publisher-2]: process started with pid [58843]
+[INFO] [create-3]: process started with pid [58844]
+[INFO] [parameter_bridge-4]: process started with pid [58845]
+[robot_state_publisher-2] [INFO] [1792174791.942196030] [robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1792174792.470962953] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 58844]
+[parameter_bridge-4] [INFO] [1792174792.970167191] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792174792.971895084] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792174792.975014659] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792174792.976553383] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792174792.978011065] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792174792.978567238] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792174792.979061159] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> /cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-23-49-56-422914-asesh-QEMU-Virtual-Machine-58949
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [async_slam_toolbox_node-1]: process started with pid [58967]
+[async_slam_toolbox_node-1] [INFO] [1792174796.772100742] [slam_toolbox]: Node using stack size 40000000
+[async_slam_toolbox_node-1] [INFO] [1792174796.923248205] [slam_toolbox]: Configuring
+[async_slam_toolbox_node-1] [INFO] [1792174796.929158226] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[async_slam_toolbox_node-1] [INFO] [1792174796.946228072] [slam_toolbox]: Activating
+[async_slam_toolbox_node-1] Info: clipped range threshold to be within minimum and maximum range!
+[async_slam_toolbox_node-1] Registering sensor: [Custom Described Lidar]
+[INFO] [1792174806.649922469] [tour_map_drive]: tour: 48 cells, 48 waypoints
+[INFO] [1792174806.690619106] [tour_map_drive]: progress wp 1/47 pos=(-1.25,-1.25) yaw=0.00 target=(-0.75,-1.25) dist=0.50 front=inf sim_t=1792174807
+[parameter_bridge-4] [INFO] [1792174806.692572418] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+[INFO] [1792174821.741837335] [tour_map_drive]: progress wp 3/47 pos=(-1.00,-0.76) yaw=3.06 target=(-1.25,-0.75) dist=0.25 front=0.56 sim_t=1792174822
+[INFO] [1792174836.791287165] [tour_map_drive]: progress wp 6/47 pos=(-1.25,0.55) yaw=1.57 target=(-1.25,0.75) dist=0.20 front=0.28 sim_t=1792174837
+[INFO] [1792174851.791155645] [tour_map_drive]: progress wp 9/47 pos=(-0.79,1.20) yaw=-1.34 target=(-0.75,0.75) dist=0.45 front=0.18 sim_t=1792174852
+[INFO] [1792174866.841892991] [tour_map_drive]: progress wp 11/47 pos=(-0.26,1.07) yaw=1.50 target=(-0.25,1.25) dist=0.18 front=0.65 sim_t=1792174867
+[INFO] [1792174881.891306627] [tour_map_drive]: progress wp 14/47 pos=(0.25,0.81) yaw=-0.96 target=(0.75,0.75) dist=0.51 front=inf sim_t=1792174882
+[INFO] [1792174896.891562429] [tour_map_drive]: progress wp 16/47 pos=(0.85,1.22) yaw=0.16 target=(1.25,1.25) dist=0.40 front=0.55 sim_t=1792174897
+[INFO] [1792174911.941059317] [tour_map_drive]: progress wp 19/47 pos=(1.25,0.31) yaw=-2.27 target=(0.75,0.25) dist=0.50 front=inf sim_t=1792174912
+[INFO] [1792174926.941877457] [tour_map_drive]: progress wp 21/47 pos=(1.19,0.25) yaw=0.35 target=(1.25,0.75) dist=0.51 front=0.13 sim_t=1792174927
+[INFO] [1792174941.991160514] [tour_map_drive]: progress wp 23/47 pos=(0.95,1.24) yaw=3.08 target=(0.75,1.25) dist=0.20 front=inf sim_t=1792174942
+[INFO] [1792174957.041347121] [tour_map_drive]: progress wp 26/47 pos=(0.31,0.75) yaw=2.73 target=(0.25,1.25) dist=0.50 front=0.13 sim_t=1792174957
+[INFO] [1792174972.091313744] [tour_map_drive]: progress wp 28/47 pos=(-0.21,1.18) yaw=-1.79 target=(-0.25,0.75) dist=0.43 front=inf sim_t=1792174972
+[INFO] [1792174987.091290275] [tour_map_drive]: progress wp 30/47 pos=(-0.74,0.39) yaw=-1.64 target=(-0.75,0.25) dist=0.14 front=0.13 sim_t=1792174987
+[INFO] [1792175002.091451540] [tour_map_drive]: progress wp 33/47 pos=(-0.28,-0.13) yaw=1.42 target=(-0.25,0.25) dist=0.38 front=0.14 sim_t=1792175002
+[INFO] [1792175017.141206491] [tour_map_drive]: progress wp 35/47 pos=(0.24,-0.14) yaw=-1.51 target=(0.25,-0.25) dist=0.11 front=inf sim_t=1792175017
+[INFO] [1792175032.141319507] [tour_map_drive]: progress wp 38/47 pos=(0.75,-0.69) yaw=-2.41 target=(0.25,-0.75) dist=0.50 front=0.50 sim_t=1792175032
+[INFO] [1792175047.191405309] [tour_map_drive]: progress wp 41/47 pos=(-0.69,-0.75) yaw=-2.11 target=(-0.75,-1.25) dist=0.50 front=0.13 sim_t=1792175047
+[INFO] [1792175062.191308345] [tour_map_drive]: progress wp 44/47 pos=(0.22,-1.25) yaw=0.00 target=(0.75,-1.25) dist=0.53 front=inf sim_t=1792175062
+[INFO] [1792175077.241332976] [tour_map_drive]: progress wp 47/47 pos=(1.25,-0.74) yaw=1.55 target=(1.25,-0.25) dist=0.49 front=0.15 sim_t=1792175077
+[INFO] [1792175080.841384154] [tour_map_drive]: tour complete
+[23:54:41] /map publishers: slam_toolbox 
+[INFO] [1792175081.604189443] [map_saver]: 
+	map_saver lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792175081.604681740] [map_saver]: Creating
+[INFO] [1792175081.604873451] [map_saver]: Configuring
+[INFO] [1792175081.615060691] [map_saver]: Saving map from 'map' topic to '/home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam' file
+[WARN] [1792175081.615078691] [map_saver]: Free threshold unspecified. Setting it to default value: 0.250000
+[WARN] [1792175081.615083066] [map_saver]: Occupied threshold unspecified. Setting it to default value: 0.650000
+[WARN] [1792175081.790984138] [map_io]: Image format unspecified. Setting it to: pgm
+[INFO] [1792175081.791064097] [map_io]: Received a 73 X 75 map @ 0.05 m/pix
+[INFO] [1792175081.795230186] [map_io]: Writing map occupancy data to /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.pgm
+[INFO] [1792175081.796978664] [map_io]: Writing map metadata to /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml
+[INFO] [1792175081.797095499] [map_io]: Map saved
+[INFO] [1792175081.797244751] [map_saver]: Map saved successfully
+[INFO] [1792175081.798044843] [map_saver]: Destroying
+Saved: /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml
+Validate: python3 validate_map.py /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml --map-origin-in-world -1.25 -1.25
+size_px: [73, 75]
+size_m: [3.65, 3.75]
+resolution: 0.05
+unknown_fraction: 0.403
+wall_coverage: 0.759
+precision: 0.577
+free_ok: 0.944
+pass: False
+RESULT: FAIL
+[23:54:41] FAIL: map validation (see slam_validation_20261016-234947.txt)
+[23:54:41] STAGE RESULT: FAIL (slam); log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/slam_20261016-234947.log

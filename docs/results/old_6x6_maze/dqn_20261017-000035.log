@@ -1,0 +1,93 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-17-00-00-38-830074-asesh-QEMU-Virtual-Machine-63465
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [63478]
+[INFO] [robot_state_publisher-2]: process started with pid [63479]
+[INFO] [create-3]: process started with pid [63481]
+[INFO] [cmd_vel_watchdog.py-4]: process started with pid [63482]
+[INFO] [parameter_bridge-5]: process started with pid [63483]
+[robot_state_publisher-2] [INFO] [1792175439.166332111] [robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1792175439.682591141] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 63481]
+[parameter_bridge-5] [INFO] [1792175440.204997411] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175440.206028007] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175440.208712705] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175440.210212181] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175440.211608990] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175440.212121996] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175440.212414457] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> /cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[parameter_bridge-5] [INFO] [1792175446.094610889] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+episode=1 (1, 1)->(0, 1) reward=-44.25 steps=12 success=False collision=True epsilon=0.999 updates=0
+episode=2 (0, 2)->(0, 1) reward=-50.63 steps=17 success=False collision=True epsilon=0.999 updates=0
+episode=3 (4, 3)->(3, 3) reward=-43.61 steps=11 success=False collision=True epsilon=0.998 updates=0
+episode=4 (4, 0)->(1, 0) reward=-45.46 steps=16 success=False collision=True epsilon=0.997 updates=0
+episode=5 (4, 5)->(5, 4) reward=-42.78 steps=5 success=False collision=True epsilon=0.997 updates=0
+episode=6 (4, 5)->(3, 5) reward=-41.82 steps=6 success=False collision=True epsilon=0.997 updates=0
+episode=7 (2, 5)->(0, 4) reward=-51.53 steps=22 success=False collision=True epsilon=0.996 updates=0
+episode=8 (2, 2)->(3, 2) reward=-45.81 steps=16 success=False collision=True epsilon=0.995 updates=6
+episode=9 (3, 2)->(2, 1) reward=-42.09 steps=5 success=False collision=True epsilon=0.995 updates=11
+[cmd_vel_watchdog.py-4] [WARN] [1792175540.131128309] [cmd_vel_watchdog]: no /cmd_vel for 0.5 s: sent stop
+episode=10 (5, 1)->(4, 1) reward=-52.35 steps=22 success=False collision=True epsilon=0.994 updates=33
+checkpoint: /home/asesh/.ros/dqn_agent/checkpoints/dqn_maze.npz
+episode=11 (4, 3)->(4, 1) reward=-49.33 steps=14 success=False collision=True epsilon=0.993 updates=47
+episode=12 (0, 3)->(1, 1) reward=-44.27 steps=8 success=False collision=True epsilon=0.993 updates=55
+episode=13 (1, 3)->(1, 4) reward=-44.92 steps=17 success=False collision=True epsilon=0.992 updates=72
+episode=14 (4, 5)->(5, 3) reward=-43.63 steps=7 success=False collision=True epsilon=0.992 updates=79
+episode=15 (0, 0)->(1, 1) reward=-42.32 steps=14 success=False collision=True epsilon=0.991 updates=93
+episode=16 (5, 4)->(5, 3) reward=-48.88 steps=18 success=False collision=True epsilon=0.990 updates=111
+episode=17 (3, 1)->(2, 3) reward=-52.51 steps=42 success=False collision=True epsilon=0.988 updates=153
+episode=18 (0, 4)->(0, 3) reward=-45.70 steps=10 success=False collision=True epsilon=0.988 updates=163
+episode=19 (5, 0)->(4, 2) reward=-50.26 steps=42 success=False collision=True epsilon=0.986 updates=205
+episode=20 (2, 0)->(1, 0) reward=-42.51 steps=7 success=False collision=True epsilon=0.985 updates=212
+checkpoint: /home/asesh/.ros/dqn_agent/checkpoints/dqn_maze.npz
+episode=21 (3, 4)->(4, 3) reward=-43.17 steps=6 success=False collision=True epsilon=0.985 updates=218
+episode=22 (5, 1)->(5, 0) reward=-57.17 steps=27 success=False collision=True epsilon=0.984 updates=245
+episode=23 (0, 3)->(1, 4) reward=-42.63 steps=8 success=False collision=True epsilon=0.983 updates=253
+episode=24 (2, 0)->(3, 0) reward=-43.35 steps=8 success=False collision=True epsilon=0.983 updates=261
+episode=25 (5, 2)->(5, 3) reward=-43.51 steps=15 success=False collision=True epsilon=0.982 updates=276
+episode=26 (1, 4)->(0, 3) reward=-44.17 steps=9 success=False collision=True epsilon=0.982 updates=285
+episode=27 (1, 5)->(0, 4) reward=-45.79 steps=11 success=False collision=True epsilon=0.981 updates=296
+episode=28 (3, 2)->(2, 3) reward=-43.29 steps=10 success=False collision=True epsilon=0.981 updates=306
+episode=29 (1, 2)->(3, 1) reward=-42.54 steps=6 success=False collision=True epsilon=0.980 updates=312
+episode=30 (1, 1)->(1, 0) reward=-51.95 steps=22 success=False collision=True epsilon=0.979 updates=334
+checkpoint: /home/asesh/.ros/dqn_agent/checkpoints/dqn_maze.npz
+episode=31 (5, 2)->(5, 1) reward=-49.28 steps=15 success=False collision=True epsilon=0.979 updates=349
+episode=32 (0, 1)->(2, 0) reward=-43.53 steps=8 success=False collision=True epsilon=0.978 updates=357
+episode=33 (2, 5)->(0, 4) reward=-43.15 steps=6 success=False collision=True epsilon=0.978 updates=363
+episode=34 (5, 2)->(4, 1) reward=-45.47 steps=12 success=False collision=True epsilon=0.977 updates=375
+episode=35 (0, 1)->(1, 1) reward=-43.71 steps=10 success=False collision=True epsilon=0.977 updates=385
+episode=36 (2, 4)->(1, 5) reward=-44.75 steps=16 success=False collision=True epsilon=0.976 updates=401
+episode=37 (3, 2)->(1, 1) reward=-43.68 steps=7 success=False collision=True epsilon=0.976 updates=408
+episode=38 (4, 2)->(4, 0) reward=-50.86 steps=19 success=False collision=True epsilon=0.975 updates=427
+episode=39 (5, 2)->(5, 0) reward=-46.05 steps=13 success=False collision=True epsilon=0.974 updates=440
+episode=40 (1, 4)->(0, 5) reward=-40.53 steps=4 success=False collision=True epsilon=0.974 updates=444
+checkpoint: /home/asesh/.ros/dqn_agent/checkpoints/dqn_maze.npz
+episode=41 (2, 3)->(3, 1) reward=-43.96 steps=9 success=False collision=True epsilon=0.974 updates=453
+episode=42 (2, 0)->(4, 0) reward=-43.95 steps=10 success=False collision=True epsilon=0.973 updates=463
+episode=43 (5, 1)->(4, 1) reward=-53.81 steps=30 success=False collision=True epsilon=0.972 updates=493
+episode=44 (0, 0)->(1, 0) reward=-45.06 steps=11 success=False collision=True epsilon=0.971 updates=504
+episode=45 (5, 3)->(5, 5) reward=-43.38 steps=18 success=False collision=True epsilon=0.971 updates=522
+episode=46 (5, 3)->(5, 1) reward=-47.93 steps=13 success=False collision=True epsilon=0.970 updates=535
+episode=47 (4, 2)->(4, 0) reward=-46.05 steps=10 success=False collision=True epsilon=0.969 updates=545
+episode=48 (4, 0)->(4, 2) reward=-41.97 steps=13 success=False collision=True epsilon=0.969 updates=558
+episode=49 (4, 3)->(5, 1) reward=-53.85 steps=25 success=False collision=True epsilon=0.968 updates=583
+episode=50 (3, 2)->(3, 3) reward=-43.24 steps=12 success=False collision=True epsilon=0.967 updates=595
+checkpoint: /home/asesh/.ros/dqn_agent/checkpoints/dqn_maze.npz
+completed=50; checkpoint=/home/asesh/.ros/dqn_agent/checkpoints/dqn_maze.npz
+run=1 (5, 0)->(0, 5) outcome=collision time=2.7s path=0.18m
+run=2 (5, 0)->(0, 5) outcome=collision time=2.4s path=0.16m
+run=3 (5, 0)->(0, 5) outcome=collision time=2.3s path=0.16m
+run=4 (5, 0)->(2, 0) outcome=collision time=2.4s path=0.13m
+run=5 (5, 0)->(2, 0) outcome=collision time=2.4s path=0.13m
+run=6 (5, 0)->(2, 0) outcome=collision time=2.3s path=0.13m
+run=7 (5, 0)->(3, 3) outcome=collision time=2.4s path=0.16m
+run=8 (5, 0)->(3, 3) outcome=collision time=2.8s path=0.19m
+run=9 (5, 0)->(3, 3) outcome=collision time=3.2s path=0.22m
+Evaluation CSV: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/dqn_eval_20261017-000035.csv
+[00:07:05] STAGE RESULT: PASS (dqn); log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/dqn_20261017-000035.log

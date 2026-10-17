@@ -1,0 +1,12 @@
+truth samples 371, duration 113 s
+min distance to a wall centre line: 0.042 m (robot radius ~0.105 + wall half thickness 0.005 => contact below ~0.11)
+samples closer than 0.115 m: 189 of 371
+wp  1 odom-based ( 0.25,-0.00) truth ( 0.25, 0.00) diff 0.00 m
+wp  3 odom-based (-0.23, 0.44) truth (-0.21, 0.44) diff 0.02 m
+wp  7 odom-based (-0.25, 2.19) truth (-0.17, 2.24) diff 0.09 m
+wp  9 odom-based ( 0.25, 1.81) truth ( 0.46, 1.92) diff 0.23 m
+wp 11 odom-based ( 1.01, 2.23) truth ( 0.72, 2.13) diff 0.30 m
+wp 14 odom-based ( 1.69, 1.75) truth ( 1.40, 2.25) diff 0.58 m
+wp 16 odom-based ( 2.55, 2.25) truth ( 1.42, 2.40) diff 1.14 m
+wp 19 odom-based ( 2.31, 1.75) truth ( 1.40, 1.98) diff 0.94 m
+tour end: []

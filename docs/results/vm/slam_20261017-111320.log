@@ -1,0 +1,102 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-17-11-13-24-259058-asesh-QEMU-Virtual-Machine-29567
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [29587]
+[INFO] [create-2]: process started with pid [29588]
+[INFO] [parameter_bridge-3]: process started with pid [29590]
+[INFO] [robot_state_publisher-4]: process started with pid [29591]
+[INFO] [cmd_vel_watchdog.py-5]: process started with pid [29592]
+[robot_state_publisher-4] [37;1m2026-10-17 11:13:24.499 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[robot_state_publisher-4] [INFO] [1792215804.514667990] [robot_state_publisher]: Robot initialized
+[parameter_bridge-3] [37;1m2026-10-17 11:13:24.527 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[create-2] [37;1m2026-10-17 11:13:24.530 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[cmd_vel_watchdog.py-5] [37;1m2026-10-17 11:13:24.725 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[create-2] [INFO] [1792215804.994161456] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-2]: process has finished cleanly [pid 29588]
+[parameter_bridge-3] [INFO] [1792215805.539827955] [ros_gz_bridge]: Creating GZ->ROS Bridge: [clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792215805.541253573] [ros_gz_bridge]: Creating GZ->ROS Bridge: [joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792215805.544077974] [ros_gz_bridge]: Creating GZ->ROS Bridge: [odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792215805.545734104] [ros_gz_bridge]: Creating GZ->ROS Bridge: [tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792215805.547043424] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792215805.547992683] [ros_gz_bridge]: Creating GZ->ROS Bridge: [imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792215805.548429373] [ros_gz_bridge]: Creating GZ->ROS Bridge: [scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-17-11-13-27-517758-asesh-QEMU-Virtual-Machine-29714
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [async_slam_toolbox_node-1]: process started with pid [29731]
+[async_slam_toolbox_node-1] [37;1m2026-10-17 11:13:27.717 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[async_slam_toolbox_node-1] [INFO] [1792215807.732624910] [slam_toolbox]: Node using stack size 40000000
+[async_slam_toolbox_node-1] [INFO] [1792215808.163916135] [slam_toolbox]: Configuring
+[async_slam_toolbox_node-1] [INFO] [1792215808.190867025] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[async_slam_toolbox_node-1] [INFO] [1792215808.204554627] [slam_toolbox]: Activating
+[async_slam_toolbox_node-1] Info: clipped range threshold to be within minimum and maximum range!
+[async_slam_toolbox_node-1] Registering sensor: [Custom Described Lidar]
+[37;1m2026-10-17 11:13:37.968 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[INFO] [1792215818.199691216] [tour_map_drive]: tour: 56 cells, 56 waypoints
+[INFO] [1792215818.235124860] [tour_map_drive]: progress wp 1/55 pos=(0.25,-0.00) yaw=-0.00 target=(0.25,0.25) dist=0.25 front=1.99 sim_t=1792215818
+[parameter_bridge-3] [INFO] [1792215818.237971301] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+[INFO] [1792215818.434840345] [tour_map_drive]: steering by the SLAM pose (map->base_footprint)
+[INFO] [1792215833.287391510] [tour_map_drive]: progress wp 3/55 pos=(-0.19,0.24) yaw=2.08 target=(-0.25,0.75) dist=0.52 front=0.37 sim_t=1792215833
+[INFO] [1792215848.340708436] [tour_map_drive]: progress wp 5/55 pos=(-0.25,1.63) yaw=1.57 target=(-0.25,1.75) dist=0.12 front=0.88 sim_t=1792215848
+[INFO] [1792215863.387275359] [tour_map_drive]: progress wp 7/55 pos=(0.16,2.25) yaw=-0.02 target=(0.25,2.25) dist=0.09 front=0.34 sim_t=1792215863
+[INFO] [1792215878.437989039] [tour_map_drive]: progress wp 9/55 pos=(0.26,1.80) yaw=-0.26 target=(0.75,1.75) dist=0.49 front=0.53 sim_t=1792215878
+[INFO] [1792215893.442990926] [tour_map_drive]: progress wp 11/55 pos=(0.75,2.19) yaw=1.28 target=(1.25,2.25) dist=0.51 front=0.34 sim_t=1792215893
+[INFO] [1792215908.450636054] [tour_map_drive]: progress wp 12/55 pos=(1.25,2.18) yaw=-1.44 target=(1.25,1.75) dist=0.43 front=0.65 sim_t=1792215908
+[INFO] [1792215923.487116622] [tour_map_drive]: progress wp 14/55 pos=(1.70,1.83) yaw=1.40 target=(1.75,2.25) dist=0.42 front=0.72 sim_t=1792215923
+[INFO] [1792215938.487146820] [tour_map_drive]: progress wp 17/55 pos=(2.69,2.25) yaw=-0.03 target=(2.75,1.75) dist=0.50 front=0.32 sim_t=1792215938
+[INFO] [1792215953.490861567] [tour_map_drive]: progress wp 18/55 pos=(2.45,1.75) yaw=-3.12 target=(2.25,1.75) dist=0.20 front=0.44 sim_t=1792215953
+[INFO] [1792215968.536408777] [tour_map_drive]: progress wp 20/55 pos=(1.95,1.25) yaw=-3.11 target=(1.75,1.25) dist=0.20 front=0.41 sim_t=1792215969
+[INFO] [1792215983.537173889] [tour_map_drive]: progress wp 22/55 pos=(2.56,1.24) yaw=0.02 target=(2.75,1.25) dist=0.19 front=0.52 sim_t=1792215984
+[INFO] [1792215998.586063623] [tour_map_drive]: progress wp 25/55 pos=(2.31,0.75) yaw=-3.14 target=(2.25,0.25) dist=0.50 front=0.26 sim_t=1792215999
+[INFO] [1792216013.586751486] [tour_map_drive]: progress wp 27/55 pos=(1.81,0.25) yaw=2.62 target=(1.75,0.75) dist=0.50 front=0.39 sim_t=1792216014
+[INFO] [1792216028.636292557] [tour_map_drive]: progress wp 29/55 pos=(1.31,0.75) yaw=2.34 target=(1.25,1.25) dist=0.50 front=0.28 sim_t=1792216029
+[INFO] [1792216043.636376451] [tour_map_drive]: progress wp 31/55 pos=(0.81,1.24) yaw=-2.05 target=(0.75,0.75) dist=0.49 front=0.39 sim_t=1792216044
+[INFO] [1792216058.636525120] [tour_map_drive]: progress wp 33/55 pos=(0.28,0.82) yaw=1.79 target=(0.25,1.25) dist=0.43 front=0.60 sim_t=1792216059
+[INFO] [1792216073.686175969] [tour_map_drive]: progress wp 35/55 pos=(0.25,0.81) yaw=-0.79 target=(0.75,0.75) dist=0.50 front=0.48 sim_t=1792216074
+[INFO] [1792216088.736099662] [tour_map_drive]: progress wp 37/55 pos=(0.75,1.19) yaw=0.78 target=(1.25,1.25) dist=0.50 front=0.27 sim_t=1792216089
+[INFO] [1792216103.736388521] [tour_map_drive]: progress wp 39/55 pos=(1.26,0.80) yaw=-0.67 target=(1.75,0.75) dist=0.49 front=0.35 sim_t=1792216104
+[INFO] [1792216118.785718620] [tour_map_drive]: progress wp 41/55 pos=(1.73,0.31) yaw=-2.92 target=(1.25,0.25) dist=0.48 front=1.48 sim_t=1792216119
+[INFO] [1792216133.786201063] [tour_map_drive]: progress wp 43/55 pos=(0.75,-0.18) yaw=-1.60 target=(0.75,-0.25) dist=0.07 front=0.41 sim_t=1792216134
+[INFO] [1792216148.786056596] [tour_map_drive]: progress wp 46/55 pos=(2.08,-0.25) yaw=0.01 target=(2.25,-0.25) dist=0.17 front=0.80 sim_t=1792216149
+[INFO] [1792216163.786027574] [tour_map_drive]: progress wp 49/55 pos=(2.75,0.19) yaw=2.82 target=(2.25,0.25) dist=0.50 front=0.77 sim_t=1792216164
+[INFO] [1792216178.835957074] [tour_map_drive]: progress wp 52/55 pos=(1.00,0.25) yaw=3.14 target=(0.75,0.25) dist=0.25 front=0.62 sim_t=1792216179
+[INFO] [1792216193.885883549] [tour_map_drive]: progress wp 55/55 pos=(-0.22,0.08) yaw=-1.72 target=(-0.25,-0.25) dist=0.33 front=0.34 sim_t=1792216194
+[INFO] [1792216196.335432376] [tour_map_drive]: tour complete
+[11:19:57] /map publishers: amcl global_costmap map_server rviz2 
+[11:19:57] FAIL: /map is not published by slam_toolbox alone (found: amcl global_costmap map_server rviz2 ) - stop other ROS stacks
+[37;1m2026-10-17 11:19:57.812 [31;1m[[37;1mRTPS_TRANSPORT_SHM[31;1m Error] [37mFailed init_port fastrtps_port7001: open_and_lock_file failed[34;1m -> Function [36mopen_port_internal[m
+[INFO] [1792216197.837481441] [map_saver]: 
+	map_saver lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792216197.838739729] [map_saver]: Creating
+[INFO] [1792216197.839263495] [map_saver]: Configuring
+[INFO] [1792216197.860818024] [map_saver]: Saving map from 'map' topic to '/home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam' file
+[WARN] [1792216197.860837024] [map_saver]: Free threshold unspecified. Setting it to default value: 0.250000
+[WARN] [1792216197.860841400] [map_saver]: Occupied threshold unspecified. Setting it to default value: 0.650000
+[WARN] [1792216198.767092596] [map_io]: Image format unspecified. Setting it to: pgm
+[INFO] [1792216198.768294382] [map_io]: Received a 77 X 65 map @ 0.05 m/pix
+[INFO] [1792216198.776760347] [map_io]: Writing map occupancy data to /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.pgm
+[INFO] [1792216198.780799677] [map_io]: Writing map metadata to /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml
+[INFO] [1792216198.780956140] [map_io]: Map saved
+[INFO] [1792216198.780977349] [map_saver]: Map saved successfully
+[INFO] [1792216198.781677329] [map_saver]: Destroying
+Saved: /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml
+Validate: python3 validate_map.py /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml --map-origin-in-world 0.25 0.0
+size_px: [77, 65]
+size_m: [3.85, 3.25]
+resolution: 0.05
+unknown_fraction: 0.083
+wall_coverage: 0.971
+precision: 0.819
+free_ok: 1.0
+pass: False
+RESULT: FAIL
+[11:19:58] FAIL: map validation (see slam_validation_20261017-111320.txt)
+[11:19:58] STAGE RESULT: FAIL (slam); log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/slam_20261017-111320.log

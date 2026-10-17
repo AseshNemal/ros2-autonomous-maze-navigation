@@ -36,6 +36,8 @@ venv/
 *.bag
 *.bag.active
 *.log
+# VM run logs are evidence and must be committed
+!docs/results/**/*.log
 rosbag2_*/
 
 # DQN model weights and large experiments
@@ -45,6 +47,8 @@ rosbag2_*/
 checkpoints/
 ros2_ws/src/dqn_agent/models/*
 !ros2_ws/src/dqn_agent/models/.gitkeep
+# the one trained checkpoint kept for reproducibility (60 episodes, evaluated 0/9; see README)
+!ros2_ws/src/dqn_agent/models/dqn_maze_none_60ep_0of9.npz
 !ros2_ws/src/dqn_agent/models/README.md
 wandb/
 runs/

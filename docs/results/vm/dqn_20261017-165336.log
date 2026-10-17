@@ -1,0 +1,49 @@
+[16:53:39] stage dqn started; log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/dqn_20261017-165336.log
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-17-16-53-39-766973-asesh-QEMU-Virtual-Machine-52885
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [52894]
+[INFO] [create-2]: process started with pid [52895]
+[INFO] [parameter_bridge-3]: process started with pid [52897]
+[INFO] [robot_state_publisher-4]: process started with pid [52898]
+[INFO] [cmd_vel_watchdog.py-5]: process started with pid [52899]
+[robot_state_publisher-4] [INFO] [1792236219.994526073] [robot_state_publisher]: Robot initialized
+[create-2] [INFO] [1792236220.525881132] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-2]: process has finished cleanly [pid 52895]
+[parameter_bridge-3] [INFO] [1792236221.002611353] [ros_gz_bridge]: Creating GZ->ROS Bridge: [clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792236221.003813946] [ros_gz_bridge]: Creating GZ->ROS Bridge: [joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792236221.006390757] [ros_gz_bridge]: Creating GZ->ROS Bridge: [odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792236221.008005853] [ros_gz_bridge]: Creating GZ->ROS Bridge: [tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792236221.009325530] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792236221.010158161] [ros_gz_bridge]: Creating GZ->ROS Bridge: [imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792236221.010646290] [ros_gz_bridge]: Creating GZ->ROS Bridge: [scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[parameter_bridge-3] [INFO] [1792236224.015426765] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+[1/10] elapsed=14s eta=122s episode=1 (0, 2)->(0, 1) reward=-53.06 steps=25 success=False collision=True loss=nan epsilon=0.992 updates=0 successes=0
+[2/10] elapsed=27s eta=109s episode=2 (0, 5)->(1, 6) reward=-42.56 steps=24 success=False collision=True loss=nan epsilon=0.984 updates=0 successes=0
+[3/10] elapsed=32s eta=75s episode=3 (5, 6)->(4, 6) reward=-41.17 steps=8 success=False collision=True loss=nan epsilon=0.982 updates=0 successes=0
+[4/10] elapsed=44s eta=66s episode=4 (4, 0)->(5, 2) reward=-40.65 steps=21 success=False collision=True loss=nan epsilon=0.975 updates=0 successes=0
+[5/10] elapsed=54s eta=54s episode=5 (3, 3)->(2, 3) reward=-40.45 steps=16 success=False collision=True loss=nan epsilon=0.970 updates=0 successes=0
+[6/10] elapsed=58s eta=39s episode=6 (3, 4)->(2, 3) reward=-42.77 steps=7 success=False collision=True loss=1.3353 epsilon=0.968 updates=2 successes=0
+[7/10] elapsed=66s eta=28s episode=7 (0, 4)->(1, 6) reward=-41.14 steps=13 success=False collision=True loss=2.7323 epsilon=0.964 updates=15 successes=0
+[8/10] elapsed=92s eta=23s episode=8 (4, 3)->(3, 4) reward=-47.93 steps=43 success=False collision=True loss=1.9667 epsilon=0.950 updates=58 successes=0
+[9/10] elapsed=105s eta=12s episode=9 (1, 1)->(2, 1) reward=-45.82 steps=22 success=False collision=True loss=1.6121 epsilon=0.943 updates=80 successes=0
+[10/10] elapsed=194s eta=0s episode=10 (4, 4)->(4, 3) reward=-14.81 steps=150 success=False collision=False loss=1.4716 epsilon=0.896 updates=230 successes=0
+checkpoint: /home/asesh/.ros/dqn_agent/checkpoints/dqn_maze_none.npz
+completed=10; checkpoint=/home/asesh/.ros/dqn_agent/checkpoints/dqn_maze_none.npz
+run=1 (5, 1)->(0, 3) outcome=collision time=11.0s path=0.61m
+run=2 (5, 1)->(0, 3) outcome=collision time=8.2s path=0.45m
+run=3 (5, 1)->(0, 3) outcome=collision time=13.0s path=0.59m
+run=4 (5, 1)->(3, 3) outcome=collision time=9.0s path=0.50m
+run=5 (5, 1)->(3, 3) outcome=collision time=12.8s path=0.71m
+run=6 (5, 1)->(3, 3) outcome=collision time=9.0s path=0.52m
+run=7 (5, 1)->(3, 0) outcome=collision time=10.8s path=0.48m
+run=8 (5, 1)->(3, 0) outcome=collision time=10.0s path=0.46m
+run=9 (5, 1)->(3, 0) outcome=success time=16.8s path=0.76m
+Evaluation CSV: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/dqn_eval_none_20261017-165336.csv
+[16:58:45] STAGE RESULT: PASS (dqn) in 306 s; log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/dqn_20261017-165336.log

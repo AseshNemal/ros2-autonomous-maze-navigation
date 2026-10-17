@@ -1,29 +1,28 @@
 import os
 from glob import glob
-
 from setuptools import find_packages, setup
 
-package_name = 'dqn_agent'
-
+package_name = "dqn_agent"
 setup(
     name=package_name,
-    version='0.0.1',
-    packages=find_packages(exclude=['test']),
+    version="0.1.0",
+    packages=find_packages(exclude=["test"]),
     data_files=[
-        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
-        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
+        ("share/ament_index/resource_index/packages", ["resource/" + package_name]),
+        ("share/" + package_name, ["package.xml"]),
+        (os.path.join("share", package_name, "config"), glob("config/*.yaml")),
+        (os.path.join("share", package_name, "launch"), glob("launch/*.py")),
     ],
-    install_requires=['setuptools'],
+    install_requires=["setuptools", "numpy", "PyYAML"],
+    tests_require=["pytest"],
     zip_safe=True,
-    maintainer='AseshNemal',
-    maintainer_email='aseshnemal@gmail.com',
-    description='Member 4: Deep Q-Learning navigation and performance analysis.',
-    license='TODO: choose a licence agreed by the group',
-    entry_points={
-        # Add console_scripts here as nodes are implemented, e.g.
-        # 'train = dqn_agent.train:main',
-        'console_scripts': [],
-    },
+    maintainer="AseshNemal",
+    maintainer_email="aseshnemal@gmail.com",
+    description="Lightweight NumPy DQN training and evaluation for TurtleBot3 Gazebo",
+    license="Apache-2.0",
+    entry_points={"console_scripts": [
+        "train_dqn = dqn_agent.train:main",
+        "evaluate_dqn = dqn_agent.evaluate:main",
+        "compare_navigation = dqn_agent.compare:main",
+    ]},
 )

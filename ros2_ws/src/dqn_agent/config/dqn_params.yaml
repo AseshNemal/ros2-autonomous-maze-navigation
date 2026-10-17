@@ -1,0 +1,45 @@
+# Settings used by the Member 4 command-line scripts.
+environment:
+  world: custom_maze   # Gazebo world name in maze_simulation/worlds/custom_maze.sdf
+  robot: burger
+  scan_topic: /scan
+  odom_topic: /odom
+  velocity_topic: /cmd_vel
+  velocity_type: geometry_msgs/msg/TwistStamped
+  goal: [-0.25, 0.75]   # default short evaluation goal (cell 3,0); start (0.25,0.0)
+  goal_tolerance_m: 0.22
+  collision_distance_m: 0.15
+  # A waypoint is a cell centre (cells are 0.5 m). 0.25 m = the cell edge: the target switched as the
+  # robot ENTERED a cell, so it cut every corner into the wall. 0.15 m makes it reach the centre first.
+  waypoint_tolerance_m: 0.15
+  action_duration_s: 0.30
+model:
+  observation_dimensions: 15
+  lidar_sectors: 12
+  hidden_layers: [64, 64]
+  actions: # [linear m/s, angular rad/s]
+    - [0.14, 0.0]
+    - [0.10, 0.8]
+    - [0.10, -0.8]
+    - [0.0, 1.0]
+    - [0.0, -1.0]
+training:
+  algorithm: double_dqn
+  gamma: 0.99
+  learning_rate: 0.0005
+  batch_size: 32
+  replay_capacity: 20000
+  warmup_steps: 100
+  target_update_steps: 200
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  # 3000, not 20000: the real 50-episode run made only ~700 steps (every episode ends in a collision
+  # after ~14 steps), so with 20000 epsilon stayed 0.97 and the agent never left random exploration.
+  epsilon_decay_steps: 3000
+  seed: 42
+rewards:
+  progress_per_meter: 12
+  step_penalty: -0.05
+  near_obstacle_penalty: -0.4
+  collision_penalty: -40
+  goal_reward: 80
