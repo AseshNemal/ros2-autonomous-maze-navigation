@@ -82,7 +82,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument("initial_x", default_value="0.25",
                               description="Spawn x in the MAP frame (SLAM map: 0.0)"),
-        DeclareLaunchArgument("initial_y", default_value="0.0",
+        DeclareLaunchArgument("initial_y", default_value="-0.25",
                               description="Spawn y in the MAP frame (SLAM map: 0.0)"),
         DeclareLaunchArgument("initial_yaw", default_value="0.0"),
         DeclareLaunchArgument(

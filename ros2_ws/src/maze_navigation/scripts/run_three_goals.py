@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Navigate to the three evaluation goals with Nav2 and log metrics (CSV).
 
-Goals come from maze_simulation/config/mission.yaml (goal_cells). Metrics per
+Goals come from maze_simulation/config/maze_layout.yaml (goal_cells). Metrics per
 goal: outcome, simulated seconds, odometry path length, recoveries, grid-optimal
 reference length and efficiency (reference / travelled). Reference lengths are
 cell-centre A* lower-bound estimates (0.5 m per cell), so efficiency can exceed

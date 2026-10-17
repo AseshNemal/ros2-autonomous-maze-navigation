@@ -6,7 +6,7 @@ environment:
   odom_topic: /odom
   velocity_topic: /cmd_vel
   velocity_type: geometry_msgs/msg/TwistStamped
-  goal: [-0.25, 0.75]   # default short evaluation goal (cell 3,0); start (0.25,0.0)
+  goal: [-0.25, 0.75]   # default short evaluation goal (cell 3,0); start (0.25,-0.25)
   goal_tolerance_m: 0.22
   collision_distance_m: 0.15
   action_duration_s: 0.30

@@ -9,4 +9,4 @@ mkdir -p "$dir"
 "$(ros2 pkg prefix nav2_map_server)/lib/nav2_map_server/map_saver_cli" -f "$dir/$name" \
   --ros-args -p save_map_timeout:=10000.0 -p use_sim_time:=true
 echo "Saved: $dir/$name.yaml"
-echo "Validate: python3 validate_map.py $dir/$name.yaml --map-origin-in-world 0.25 0.0"
+echo "Validate: python3 validate_map.py $dir/$name.yaml --map-origin-in-world 0.25 -0.25"

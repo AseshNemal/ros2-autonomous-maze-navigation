@@ -47,7 +47,7 @@ ros2 launch maze_simulation maze_simulation.launch.py
 ```bash
 ros2 launch maze_navigation navigation.launch.py \
   map:=$HOME/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_groundtruth.yaml \
-  initial_x:=0.25 initial_y:=0.0
+  initial_x:=0.25 initial_y:=-0.25
 ```
 
 **Window layout:** press **Super+Left** on the Gazebo window and **Super+Right** on RViz to tile them side by side (see [docs/gui_review.md](docs/gui_review.md)).
@@ -56,7 +56,7 @@ ros2 launch maze_navigation navigation.launch.py \
 
 **SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `python3 ros2_ws/src/slam_mapping/scripts/tour_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.
 
-**Maze:** the only world is main's `worlds/custom_maze.sdf` (unmodified); the planners, ground-truth map and goal cells are read from that file (`maze_tools.py`) plus `config/mission.yaml` (start and goals); see `ros2_ws/src/maze_simulation/FIGURE1_README.md`: 7 x 6 cells, 3.5 m x 3.0 m, spawn (0.25, 0.0). Its Gazebo world name is `custom_maze` (`/world/custom_maze/...`); `tools/demo.sh` uses main's `custom_maze.launch.py`; `maze_simulation.launch.py` (adds the headless option and a cmd_vel watchdog) loads the same world.
+**Maze:** the only world is main's `worlds/custom_maze.sdf` (unmodified); `config/maze_layout.yaml` holds the same Figure 1 walls for the ground-truth map and goals (`generate_maze.py`, `ros2_ws/src/maze_simulation/FIGURE1_README.md`): 7 x 6 cells, 3.5 m x 3.0 m, start (0.25, -0.25). Its Gazebo world name is `custom_maze` (`/world/custom_maze/...`); `maze_simulation.launch.py` loads it by default, and main's `custom_maze.launch.py` also works.
 
 **Rules:** run only ONE of Nav2 / SLAM mapping / DQN at a time (they all control the same robot), and close Gazebo (`Ctrl+C`) before starting something new.
 

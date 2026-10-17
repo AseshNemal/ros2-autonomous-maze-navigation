@@ -25,13 +25,13 @@ Nav2 and DQN are alternative controllers of the same robot; they are never run t
 
 ## 2. Maze design
 
-The maze layout is the Figure 1 approximation from the simulation team member (JayangaWeerasinghe, branch `main`, `generate_maze.py`): a 7 x 6 grid of 0.5 m cells (3.5 m x 3.0 m, outer walls x -0.5..3.0, y -0.5..2.5) with thin 0.01 m, 0.2 m high walls. The Gazebo world is main's `worlds/custom_maze.sdf`, used unmodified (world name `custom_maze`). `maze_tools.py` reads its walls and rasterises them into the ground-truth occupancy map and the path-planning graph; `config/mission.yaml` holds the start and goal cells. The bottom corridor is 1 m wide; the narrowest corridors are one cell (0.5 m) wide. The robot starts in the bottom corridor at main's spawn (0.25, 0.0); the three evaluation goals are cells (0,3), (3,3) and (3,0), with grid-optimal routes of 5.5 m, 3.0 m and 1.5 m. The earlier 6 x 6 layout (3 m x 3 m) used for the measurements in Section 4 was replaced by this one.
+The maze layout is the Figure 1 approximation from the simulation team member (JayangaWeerasinghe, branch `main`, `generate_maze.py`): a 7 x 6 grid of 0.5 m cells (3.5 m x 3.0 m, outer walls x -0.5..3.0, y -0.5..2.5) with thin 0.01 m, 0.2 m high walls. The Gazebo world is main's `worlds/custom_maze.sdf`, used unmodified (world name `custom_maze`). `maze_layout.yaml` holds the same walls; `maze_tools.py` rasterises it into the ground-truth occupancy map and the path-planning graph, and `tools/verify_static.py` checks that the SDF and the layout agree. The bottom corridor is 1 m wide; the narrowest corridors are one cell (0.5 m) wide. The robot starts in the bottom corridor at (0.25, -0.25); the three evaluation goals are cells (0,3), (3,3) and (3,0), with grid-optimal routes of 5.5 m, 3.0 m and 1.5 m. The earlier 6 x 6 layout (3 m x 3 m) used for the measurements in Section 4 was replaced by this one.
 
-Verification: the layout is read from `custom_maze.sdf` itself (`tools/verify_static.py`), the headless simulation loads it, and a raycast of the ground-truth map from the robot's true pose reproduces the real LiDAR scan with a mean range error of 0.05 m. Comparison with Figure 1 by eye should still be done by a human in the VIVA.
+Verification: `custom_maze.sdf` and the layout agree (`tools/verify_static.py`), the headless simulation loads it, and a raycast of the ground-truth map from the robot's true pose reproduces the real LiDAR scan with a mean range error of 0.05 m. Comparison with Figure 1 by eye should still be done by a human in the VIVA.
 
 ### 2.1 `custom_maze` world and launch files
 
-The repository's only world is `worlds/custom_maze.sdf`. `tools/demo.sh` starts it with main's own `custom_maze.launch.py` (spawn 0.25, 0.0); `maze_simulation.launch.py` loads the same world. The older generated `maze.world` was removed.
+The repository's only world is `worlds/custom_maze.sdf`. `maze_simulation.launch.py` loads it by default (spawn at 0.25, -0.25); main's own `custom_maze.launch.py` (spawn at 0.25, 0.0) still works. The older generated `maze.world` was removed.
 
 ## 3. Navigation method
 

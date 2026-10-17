@@ -70,7 +70,7 @@ slam)
     run bash "$WS/src/slam_mapping/scripts/save_map.sh" maze_slam "$WS/src/slam_mapping/maps" || fail "save_map"
     [ -f "$MAPYAML" ] || fail "maze_slam.yaml was not written"
     if [ -f "$MAPYAML" ]; then
-      python3 "$WS/src/slam_mapping/scripts/validate_map.py" "$MAPYAML" --map-origin-in-world 0.25 0.0 \
+      python3 "$WS/src/slam_mapping/scripts/validate_map.py" "$MAPYAML" --map-origin-in-world 0.25 -0.25 \
         2>&1 | tee -a "$OUT/slam_validation_$TS.txt" | tee -a "$LOG"
       [ "${PIPESTATUS[0]}" = 0 ] || fail "map validation (see slam_validation_$TS.txt)"
     fi
@@ -78,7 +78,7 @@ slam)
 nav)
   MAPSRC="${MAP_SOURCE:-world}"   # world = ground-truth map, slam = maze_slam.yaml
   if [ "$MAPSRC" = slam ]; then MAP="$WS/src/slam_mapping/maps/maze_slam.yaml"; IX=0.0; IY=0.0
-  else MAP="$WS/src/slam_mapping/maps/maze_groundtruth.yaml"; IX=0.25; IY=0.0; fi
+  else MAP="$WS/src/slam_mapping/maps/maze_groundtruth.yaml"; IX=0.25; IY=-0.25; fi
   bg ros2 launch maze_simulation maze_simulation.launch.py gui:=false
   wait_scan || fail "no /scan"
   if [ "$RC" = 0 ]; then
@@ -106,16 +106,16 @@ control)
     run python3 "$WS/src/maze_simulation/scripts/check_control.py" teleop --json "$OUT/control_teleop_$TS.json" \
       || fail "teleoperation checks (see control_teleop_$TS.json)"
     bg ros2 launch maze_navigation navigation.launch.py use_rviz:=false \
-        map:="$WS/src/slam_mapping/maps/maze_groundtruth.yaml" initial_x:=0.25 initial_y:=0.0
+        map:="$WS/src/slam_mapping/maps/maze_groundtruth.yaml" initial_x:=0.25 initial_y:=-0.25
     UP=0
     for _ in $(seq 1 40); do
       ros2 lifecycle get /bt_navigator 2>/dev/null | grep -q "active \[3\]" && { UP=1; break; }; sleep 2; done
     if [ "$UP" = 1 ]; then
       # teleop moved the robot: put it back at the start pose AMCL was initialised with
       gz service -s /world/custom_maze/set_pose --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean --timeout 3000 \
-        --req 'name: "turtlebot3_burger" position {x: 0.25 y: 0.0 z: 0.01} orientation {w: 1}' >/dev/null 2>&1
+        --req 'name: "turtlebot3_burger" position {x: 0.25 y: -0.25 z: 0.01} orientation {w: 1}' >/dev/null 2>&1
       sleep 2
-      python3 "$WS/src/slam_mapping/scripts/set_initial_pose.py" --x 0.25 --y 0.0 --yaw 0 --timeout 20 >/dev/null 2>&1
+      python3 "$WS/src/slam_mapping/scripts/set_initial_pose.py" --x 0.25 --y -0.25 --yaw 0 --timeout 20 >/dev/null 2>&1
       run python3 "$WS/src/maze_simulation/scripts/check_control.py" nav --json "$OUT/control_nav_$TS.json" \
         || fail "Nav2 goal checks (see control_nav_$TS.json)"
     else fail "Nav2 never became active"; fi

@@ -3,7 +3,7 @@
 > Every number in "Results" must come from a real run recorded in `docs/results/`. Sections marked PENDING have no data yet. Do not fill them with estimates.
 
 ## 1. Maze design
-The maze is main's 7x6 Figure 1 layout (0.5 m cells, 3.5 m x 3.0 m, `generate_maze.py`). Implementation: main's `custom_maze.sdf` (0.01 m thick, 0.2 m high walls), read by `maze_tools.py`; narrowest corridor 0.5 m. Start (0.25, 0.0); three goals with grid-optimal routes of 5.5 m, 3.0 m and 1.5 m (7, 3 and 2 turns). Include the ASCII/figure comparison. Earlier measurements were in the previous 6x6 layout and must be re-run.
+The maze is main's 7x6 Figure 1 layout (0.5 m cells, 3.5 m x 3.0 m, `generate_maze.py`). Implementation: `maze_layout.yaml` -> generated SDF world (0.01 m thick, 0.2 m high walls); narrowest corridor 0.5 m. Start (0.25,-0.25); three goals with grid-optimal routes of 5.5 m, 3.0 m and 1.5 m (7, 3 and 2 turns). Include the ASCII/figure comparison. Earlier measurements were in the previous 6x6 layout and must be re-run.
 
 ## 2. Navigation method
 SLAM Toolbox (async) builds the map; AMCL localises; Nav2 plans globally with NavFn A* and follows with the MPPI controller over inflated costmaps (robot radius 0.11 m, inflation 0.25 m). Goals are clicked in RViz (`/goal_pose`). Machine learning: Double DQN (15-D state: 12 LiDAR sectors + goal distance/bearing; 5 discrete actions; reward shaping; replay; target network). Explain the optional waypoint-guided hybrid and why pure DQN lacks global information.

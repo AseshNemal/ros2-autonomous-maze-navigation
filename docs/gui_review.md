@@ -14,7 +14,7 @@ Goal: the ordinary Gazebo Harmonic and RViz2 interfaces, configured so the maze,
 | 6 | `slam_mapping/rviz/mapping.rviz` | View class `TopDownOrthoView` does not exist (correct: `TopDownOrtho`), so the camera settings were ignored | RViz class list |
 | 7 | `maze_simulation/worlds/maze.world` | A custom `<gui>` block replaced Gazebo's default GUI (only 3D view + play button; no entity tree / inspector) | `<gui fullscreen="0">` in the world and in `maze_tools.py` |
 
-Not wrong: maze walls (main's `custom_maze.sdf`), the TurtleBot3 Burger model and size (stock `turtlebot3_gazebo` model; it only looks small because the maze is 3 m wide).
+Not wrong: maze walls (generated from `maze_layout.yaml`, checked against Figure 1), the TurtleBot3 Burger model and size (stock `turtlebot3_gazebo` model; it only looks small because the maze is 3 m wide).
 
 ## What was changed
 
