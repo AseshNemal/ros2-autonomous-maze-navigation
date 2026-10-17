@@ -3,7 +3,11 @@ project(slam_mapping)
 
 find_package(ament_cmake REQUIRED)
 
-# Resource-only package for now: no nodes or libraries are built yet.
+install(PROGRAMS
+  scripts/auto_explorer.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 install(DIRECTORY
   launch
   config

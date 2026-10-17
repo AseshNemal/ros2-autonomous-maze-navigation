@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 
 CELL = 0.5
 HEIGHT = 0.2
-THICKNESS = 0.01
+THICKNESS = 0.03
 # (grid_x_start, grid_y_start, grid_x_end, grid_y_end)
 # Outer bounds: x=[-0.5, 3.0], y=[-0.5, 2.5].
 WALLS = [
@@ -42,6 +42,12 @@ def box_model(world, name, x, y, z, sx, sy, sz, rgb):
         obj = ET.SubElement(link, kind, name=kind)
         geometry = ET.SubElement(obj, 'geometry')
         ET.SubElement(ET.SubElement(geometry, 'box'), 'size').text = f'{sx:.4f} {sy:.4f} {sz:.4f}'
+        if kind == 'collision' and name == 'ground_plane':
+            surface = ET.SubElement(obj, 'surface')
+            friction = ET.SubElement(surface, 'friction')
+            ode = ET.SubElement(friction, 'ode')
+            ET.SubElement(ode, 'mu').text = '100.0'
+            ET.SubElement(ode, 'mu2').text = '50.0'
         if kind == 'visual':
             material = ET.SubElement(obj, 'material')
             ET.SubElement(material, 'ambient').text = rgb
@@ -49,9 +55,20 @@ def box_model(world, name, x, y, z, sx, sy, sz, rgb):
 
 root = ET.Element('sdf', version='1.9')
 world = ET.SubElement(root, 'world', name='custom_maze')
-physics = ET.SubElement(world, 'physics', name='default_physics', type='ignored')
+physics = ET.SubElement(world, 'physics', name='default_physics', type='ode')
 ET.SubElement(physics, 'max_step_size').text = '0.001'
 ET.SubElement(physics, 'real_time_factor').text = '1.0'
+ode_sec = ET.SubElement(physics, 'ode')
+solver = ET.SubElement(ode_sec, 'solver')
+ET.SubElement(solver, 'type').text = 'quick'
+ET.SubElement(solver, 'iters').text = '150'
+ET.SubElement(solver, 'sor').text = '1.4'
+constraints = ET.SubElement(ode_sec, 'constraints')
+ET.SubElement(constraints, 'cfm').text = '0.00001'
+ET.SubElement(constraints, 'erp').text = '0.2'
+ET.SubElement(constraints, 'contact_max_correcting_vel').text = '2000.0'
+ET.SubElement(constraints, 'contact_surface_layer').text = '0.01'
+
 for filename, name in [
     ('gz-sim-physics-system','gz::sim::systems::Physics'),
     ('gz-sim-user-commands-system','gz::sim::systems::UserCommands'),
@@ -69,6 +86,13 @@ ET.SubElement(light,'diffuse').text = '0.8 0.8 0.8 1'
 ET.SubElement(light,'specular').text = '0.2 0.2 0.2 1'
 ET.SubElement(light,'direction').text = '-0.5 0.2 -1'
 ET.SubElement(light,'cast_shadows').text = 'true'
+
+gui = ET.SubElement(world, 'gui', fullscreen='0')
+camera = ET.SubElement(gui, 'camera', name='user_camera')
+ET.SubElement(camera, 'pose').text = '0.25 -1.2 2.0 0 0.9 1.57'
+ET.SubElement(camera, 'view_controller').text = 'orbit'
+ET.SubElement(camera, 'projection_type').text = 'perspective'
+
 box_model(world, 'ground_plane', 1.25, 1.0, -0.05, 4.5, 4.0, 0.1, '0.72 0.72 0.72 1')
 for i,(x1,y1,x2,y2) in enumerate(WALLS,1):
     ax,ay = xyz(x1,y1)
@@ -78,7 +102,6 @@ for i,(x1,y1,x2,y2) in enumerate(WALLS,1):
     box_model(world, f'wall_{i:02d}', (ax+bx)/2, (ay+by)/2, HEIGHT/2,
               sx,sy,HEIGHT,'0.85 0.47 0.04 1')
 ET.indent(root, space='  ')
-out = Path(__file__).parent / 'worlds' / 'custom_maze.sdf'
+out = Path(__file__).resolve().parent / 'worlds' / 'custom_maze.sdf'
 ET.ElementTree(root).write(out, encoding='unicode', xml_declaration=True)
 print(f'Generated {out} with {len(WALLS)} wall segments, 3.5m x 3.0m grid')
-print('Robot spawn: (0.25, 0.0, 0.01), yaw=0; bottom corridor')

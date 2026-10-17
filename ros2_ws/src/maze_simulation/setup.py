@@ -11,6 +11,7 @@ setup(
         ('share/' + package_name, ['package.xml', 'FIGURE1_README.md', 'generate_maze.py']),
         (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
         (os.path.join('share', package_name, 'worlds'), glob('worlds/*.sdf')),
+        (os.path.join('share', package_name, 'params'), glob('params/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
