@@ -17,7 +17,7 @@ NOT VERIFIED = not executed on the current maze. Results from the removed 6 x 6 
 | 9 | Efficiency: travel time, path length, obstacle avoidance | PARTIAL | Nav2 times/distances measured (report 4.2 C2). DQN comparison: no data. |
 | 10 | Safety (no runaway) | PASS | `control_20261017-102106.log` 22/22 (watchdog stops the robot after teleop is killed) |
 | 11 | Final report 5-7 pages | NOT DONE (draft ready) | `docs/report.md` updated with real current-maze results; regenerate the PDF: `bash tools/build_report_pdf.sh`; check it is 5-7 pages; put the GitHub link on the cover page |
-| 12 | GitHub repo with packages, launch, config | READY locally | Branch `dev-integration` committed, **not pushed** |
+| 12 | GitHub repo with packages, launch, config | READY locally | Branch `dev-integration` committed; latest commits **not pushed** |
 | 13 | VIVA: 3 different clicked goals | NOT VERIFIED here | Rehearse once on the VM desktop (commands below) |
 
 ## Known failures / risks (be upfront about them)
@@ -53,9 +53,17 @@ MAP_SOURCE=slam bash tools/verify_on_vm.sh nav                   # Nav2 on the S
 bash tools/build_report_pdf.sh                          # -> docs/report.pdf (check 5-7 pages)
 ```
 
-## Minimum remaining work before submission
-1. Rehearse the three clicked goals once on the VM desktop (or use `send_goal.sh`).
-2. Regenerate and check `docs/report.pdf` (5-7 pages); add the GitHub link to the cover page.
-3. Decide about the Figure 1 mismatch (state it, or agree with the teammate to change the maze - not done here by instruction).
-4. Run the DQN training command above if you want a real DQN result; report whatever it gives.
-5. Push `dev-integration` when you approve.
+## Final-session changes (2026-10-17, tested statically only: `verify_static.py` PASS, 8 + 6 + 18 unit tests)
+- Ground-truth map: the east outer wall was missing (fixed in `maze_tools.write_map`, map regenerated, test `test_groundtruth_vs_sdf.py`). The Nav2 results in the table were recorded before this fix.
+- DQN: always-on near-wall penalty removed, truncation no longer stored as terminal, checkpoint keeps hyperparameters/epsilon, reset waits for a post-teleport scan, `-inf` LiDAR treated as close, default training pair = shortest goal.
+- Report rewritten for the current maze with member names/IDs; PDF must be rebuilt on a machine with pandoc + Chromium.
+
+## Still to run on the Ubuntu VM (nothing below is verified yet)
+```bash
+cd ~/ros2-autonomous-maze-navigation && git pull && cd ros2_ws && colcon build --symlink-install --parallel-workers 1 && cd ..
+bash tools/verify_on_vm.sh nav                                          # 1. Nav2 3 goals on the corrected map (C2b)
+EPISODES=8 GUIDANCE=none bash tools/verify_on_vm.sh dqn                 # 2. smoke: confirm updates > 0 (train_steps column)
+EPISODES=60 GUIDANCE=none bash tools/verify_on_vm.sh dqn                # 3. only if 2 is OK: one bounded run
+bash tools/build_report_pdf.sh                                          # 4. report PDF (check 5-7 pages)
+```
+Then: rehearse 3 clicked goals in RViz, take one Gazebo and one RViz screenshot, push only after approval.
