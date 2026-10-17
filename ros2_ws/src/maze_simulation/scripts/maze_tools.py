@@ -180,15 +180,19 @@ def write_map(layout, prefix, res=0.05, margin=0.25):
     img = [[254] * W for _ in range(H)]
     # a wall thinner than a pixel must still be drawn: raster at least one cell wide
     half = max(layout["wall_thickness_m"], res) / 2
+    # Walls sit on multiples of 0.5 m, i.e. exactly on pixel edges, so float noise decided
+    # whether the east outer wall was drawn at all. A tiny fixed bias breaks the tie the same
+    # way everywhere: every wall is exactly one pixel thick and always drawn.
+    bias = 1e-6
     for x0, y0, x1, y1 in wall_segments(layout):
         xa, xb = min(x0, x1) - half, max(x0, x1) + half
         ya, yb = min(y0, y1) - half, max(y0, y1) + half
         for j in range(H):
-            y = cy + hy - (j + 0.5) * res
-            if ya <= y <= yb:
+            y = cy + hy - (j + 0.5) * res + bias
+            if ya <= y < yb:
                 for i in range(W):
-                    x = cx + (i + 0.5) * res - hx
-                    if xa <= x <= xb:
+                    x = cx + (i + 0.5) * res - hx + bias
+                    if xa <= x < xb:
                         img[j][i] = 0
     pgm = Path(f"{prefix}.pgm")
     pgm.write_bytes(f"P5\n{W} {H}\n255\n".encode() + bytes(v for row in img for v in row))

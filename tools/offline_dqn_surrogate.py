@@ -149,7 +149,7 @@ def main(argv=None):
             act = agent.act(s)
             ns, r, term, info = env.step(act)
             trunc = not term and info["steps"] >= a.max_steps
-            agent.observe(s, act, r, ns, term or trunc)
+            agent.observe(s, act, r, ns, term)   # truncation is not terminal
             agent.learn()
             s = ns
             if term or trunc:

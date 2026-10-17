@@ -132,3 +132,67 @@ def test_waypoint_tolerance_is_less_than_half_a_cell_and_matches_config():
     assert cfg["waypoint_tolerance_m"] == default
     assert cfg["waypoint_tolerance_m"] < 0.25
     assert cfg["waypoint_tolerance_m"] >= 0.07   # still reachable with odometry/step quantisation (0.04 m/step)
+
+
+def test_reward_not_penalised_at_corridor_centre():
+    """Centred in a 0.5 m cell the side walls are ~0.245 m away: driving well must pay > 0."""
+    from dqn_agent.env import NEAR_OBSTACLE_M
+    assert NEAR_OBSTACLE_M < 0.245
+    assert compute_reward(1.0, 0.96, 0.245) == pytest.approx(12 * 0.04 - 0.05)
+    assert compute_reward(1.0, 1.0, NEAR_OBSTACLE_M - 0.01) < compute_reward(1.0, 1.0, 0.245)
+
+
+def test_lidar_neg_inf_is_close_not_free():
+    v = valid_ranges([float("-inf"), float("inf"), 1.0])
+    assert v[0] == pytest.approx(0.12) and v[1] == pytest.approx(3.5) and v[2] == pytest.approx(1.0)
+
+
+def test_bellman_target_uses_done_mask_and_target_net():
+    a = DQNAgent(warmup=1, batch_size=2, gamma=0.5, target_update=10**6, seed=3)
+    s = np.zeros(15, dtype=np.float32)
+    ns = np.ones(15, dtype=np.float32)
+    a.target.params["b3"] += np.array([0, 0, 10.0, 0, 0], dtype=a.target.params["b3"].dtype)  # target net differs
+    captured = {}
+    orig = a.online.train_batch
+
+    def spy(states, actions, targets, lr):
+        captured["t"] = targets.copy()
+        return orig(states, actions, targets, lr)
+    a.online.train_batch = spy
+    a.observe(s, 0, 1.0, ns, True)    # terminal: target is the reward only
+    a.observe(s, 1, 1.0, ns, False)   # non-terminal: reward + gamma * target-net Q(ns, argmax online)
+    a.rng = np.random.default_rng(0)
+    a.replay.sample = lambda n: tuple(np.asarray(x) for x in (
+        np.stack([s, s]), [0, 1], [1.0, 1.0], np.stack([ns, ns]), [1.0, 0.0]))
+    a.learn()
+    best = int(np.argmax(a.online.predict(ns)[0]))
+    expected_next = float(a.target.predict(ns)[0][best])
+    assert captured["t"][0] == pytest.approx(1.0)
+    assert captured["t"][1] == pytest.approx(1.0 + 0.5 * expected_next)
+    assert a.train_steps == 1   # an optimizer update really happened
+
+
+def test_checkpoint_restores_hyperparameters_and_epsilon(tmp_path):
+    a = DQNAgent(epsilon_decay=3000, gamma=0.9, batch_size=16, warmup=7, target_update=33, seed=1)
+    a.env_steps = 1500
+    path = a.save(tmp_path / "ckpt")          # no suffix: save and load must agree on the file
+    assert path.suffix == ".npz" and path.is_file()
+    b = DQNAgent.load(tmp_path / "ckpt")
+    assert (b.epsilon_decay, b.gamma, b.batch_size, b.warmup, b.target_update) == (3000, 0.9, 16, 7, 33)
+    assert b.epsilon == pytest.approx(a.epsilon)
+
+
+def test_default_training_pair_is_the_shortest_goal():
+    from dqn_agent import maze
+    from dqn_agent.train import arguments, pick_pair
+    layout = maze.load_layout()
+    a, b = pick_pair(layout, arguments([]), maze.rng_from_seed(0), 1)
+    lengths = [len(maze.cell_path(layout, *p)) for p in maze.evaluation_pairs(layout)]
+    assert len(maze.cell_path(layout, a, b)) == min(lengths)
+
+
+def test_time_limit_truncation_is_not_stored_as_terminal():
+    import inspect
+    from dqn_agent import train
+    src = inspect.getsource(train.run)
+    assert "agent.observe(state, action, reward, next_state, terminated)" in src

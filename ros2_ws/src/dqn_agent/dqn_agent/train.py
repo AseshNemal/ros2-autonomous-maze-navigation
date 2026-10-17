@@ -56,7 +56,8 @@ def pick_pair(layout, args, rng, episode):
         return args.pair
     if args.curriculum_max_cells > 0:
         return maze.sample_pair(layout, rng, 1, args.curriculum_max_cells)
-    return maze.evaluation_pairs(layout)[1]  # default: the short (5-cell) evaluation goal
+    # default: the shortest evaluation goal (chosen by route length, not by list position)
+    return min(maze.evaluation_pairs(layout), key=lambda ab: len(maze.cell_path(layout, *ab)))
 
 
 def run(args):
@@ -74,6 +75,8 @@ def run(args):
     ckpt = Path(args.checkpoint).expanduser()
     if args.resume and ckpt.is_file():
         agent = DQNAgent.load(ckpt)
+        if args.epsilon_decay:
+            agent.epsilon_decay = args.epsilon_decay
         print(f"resumed from {ckpt}: train_steps={agent.train_steps} env_steps={agent.env_steps}")
     else:
         kwargs = agent_kwargs(cfg, seed)
@@ -84,7 +87,7 @@ def run(args):
     log_path.parent.mkdir(parents=True, exist_ok=True)
     rclpy.init()
     env = None
-    completed = 0
+    completed = successes = 0
     try:
         env = GazeboDQNEnv(world=world, action_duration=duration,
                            goal_tolerance=env_cfg["goal_tolerance_m"],
@@ -106,9 +109,10 @@ def run(args):
                 for _ in range(args.max_steps):
                     action = agent.act(state, explore=True)
                     next_state, reward, terminated, info = env.step(action)
-                    # Max steps is a time-limit truncation: do not bootstrap across it.
+                    # Max steps is a time-limit truncation, not a terminal state: store done only for
+                    # a real termination so the target still bootstraps from next_state.
                     truncated = not terminated and info["steps"] >= args.max_steps
-                    agent.observe(state, action, reward, next_state, terminated or truncated)
+                    agent.observe(state, action, reward, next_state, terminated)
                     loss = agent.learn()
                     if loss is not None:
                         losses.append(loss)
@@ -126,11 +130,14 @@ def run(args):
                     train_steps=agent.train_steps))
                 file.flush()
                 completed += 1
+                successes += int(bool(info["success"]))
                 el = time.monotonic() - t_start
                 print(f"[{episode}/{args.episodes}] elapsed={el:.0f}s eta={el / episode * (args.episodes - episode):.0f}s "
                       f"episode={episode} {a}->{b} reward={reward_sum:.2f} steps={info['steps']} "
                       f"success={info['success']} collision={info['collision']} "
-                      f"epsilon={agent.epsilon:.3f} updates={agent.train_steps}", flush=True)
+                      f"loss={np.mean(losses) if losses else float('nan'):.4f} "
+                      f"epsilon={agent.epsilon:.3f} updates={agent.train_steps} "
+                      f"successes={successes}", flush=True)
                 if episode % args.checkpoint_every == 0:
                     print("checkpoint:", agent.save(ckpt), flush=True)
     finally:

@@ -51,20 +51,39 @@ class DQNAgent:
             self.target.copy_from(self.online)
         return loss
 
-    def save(self, path):
+    HYPER = ("gamma", "learning_rate", "batch_size", "replay_capacity", "warmup", "target_update",
+             "epsilon_start", "epsilon_end", "epsilon_decay")
+
+    @staticmethod
+    def _npz(path):
         path = Path(path).expanduser()
+        # np.savez appends ".npz" when missing; keep save and load pointing at the same file
+        return path if path.suffix == ".npz" else path.with_name(path.name + ".npz")
+
+    def save(self, path):
+        path = self._npz(path)
         path.parent.mkdir(parents=True, exist_ok=True)
         data = {"w_" + k: v for k, v in self.online.params.items()}
         data.update(state_dim=np.array(self.state_dim), action_dim=np.array(self.action_dim),
                     hidden=np.array(self.hidden), train_steps=np.array(self.train_steps),
                     env_steps=np.array(self.env_steps))
+        data.update({"h_" + k: np.array(getattr(self, k) if k != "replay_capacity"
+                                        else self.replay.buffer.maxlen) for k in self.HYPER})
         np.savez_compressed(str(path), **data)
         return path
 
     @classmethod
     def load(cls, path):
-        with np.load(Path(path).expanduser(), allow_pickle=False) as data:
+        """Restore weights, counters and hyperparameters (epsilon must resume, not restart).
+
+        The replay buffer and Adam state are not stored; checkpoints from before the
+        hyperparameters were saved load with the constructor defaults.
+        """
+        with np.load(cls._npz(path), allow_pickle=False) as data:
             cfg = {k: int(data[k]) for k in ("state_dim", "action_dim", "hidden")}
+            for k in cls.HYPER:
+                if "h_" + k in data:
+                    cfg[k] = data["h_" + k].item()
             agent = cls(**cfg)
             for k in agent.online.KEYS:
                 value = data["w_" + k]
