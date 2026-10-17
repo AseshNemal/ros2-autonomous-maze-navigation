@@ -1,0 +1,15 @@
+Window-mode Nav2 aborts and the bt_navigator timeout fix, Ubuntu VM, 2026-10-17 ~17:30-17:50 (manual live goals with tools/send_goal.sh G1 after tools/reset_robot.sh).
+
+BEFORE (default_server_timeout: 20 ms, Nav2 default), clean start, no stale processes, while screenshots/diagnostics were running on the same 4-CPU VM:
+  G1  ABORTED after 40.0 s, 1.56 m remaining, recoveries 0
+  bt_navigator log: "Timed out while waiting for action server to acknowledge goal request for compute_path_to_pose" -> "[navigate_to_pose] Aborting handle" -> "Goal failed"
+  (the same message appeared in the earlier aborted run documented in nav2_window_mode_corrected_map_20261017.txt)
+
+CHANGE: ros2_ws/src/maze_navigation/config/nav2_params.yaml  bt_navigator.default_server_timeout 20 -> 1000 (ms); test_config.py asserts >= 500.
+
+AFTER (1000 ms), same window-mode session style:
+  G1  SUCCEEDED in 43.6 s, recoveries 0, with the same screenshot captures running (xwd of the Gazebo and RViz windows)
+  G1  SUCCEEDED in 52.4 s, recoveries 1, with four CPU-burning processes running (load average 15-20 on 4 CPUs); no "Timed out while waiting for action server" line
+
+Limits of this evidence: three live goals, not a statistical test; the VM load was produced by hand; the scripted headless stage (nav2_results_20261017-165127.csv, 3/3) ran before this change.
+Screenshots from the 43.6 s run: docs/screenshots/gazebo_window_goal1_20261017.png and rviz_nav2_goal1_20261017.png (mid-route, 19 s, 2.85 m remaining, 0 recoveries).

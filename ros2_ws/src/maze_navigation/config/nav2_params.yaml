@@ -44,7 +44,9 @@ bt_navigator:
     robot_base_frame: base_link
     odom_topic: /odom
     bt_loop_duration: 10
-    default_server_timeout: 20
+    # 20 ms (Nav2 default) aborted goals on this 4-CPU VM whenever the planner server answered late
+    # ("Timed out while waiting for action server to acknowledge goal request for compute_path_to_pose")
+    default_server_timeout: 1000
     wait_for_service_timeout: 1000
     action_server_result_timeout: 900.0
     navigators: ["navigate_to_pose", "navigate_through_poses"]

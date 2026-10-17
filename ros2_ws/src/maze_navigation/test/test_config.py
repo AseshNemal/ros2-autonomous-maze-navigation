@@ -47,3 +47,8 @@ def test_goals_reachable_and_distinct():
 def test_python_sources_compile(tmp_path):
     for f in list((PKG / "scripts").glob("*.py")) + list((PKG / "launch").glob("*.py")):
         py_compile.compile(str(f), cfile=str(tmp_path / (f.name + "c")), doraise=True)
+
+
+def test_bt_action_server_timeout_tolerates_a_loaded_vm():
+    """A 20 ms acknowledgement timeout aborted live goals when the VM was busy (observed in /rosout)."""
+    assert PARAMS["bt_navigator"]["ros__parameters"]["default_server_timeout"] >= 500
