@@ -1,9 +1,7 @@
 # Member 3 - Autonomous Navigation (`maze_navigation`)
 
-**Yashas S.P.R** - IT23185470 - Nav2 Navigation and Evaluation
-
 Status key: **VERIFIED** (actually run and passed) · **IMPLEMENTED** (code exists, runtime check pending) · **FAILED** · **BLOCKED** · **NOT IMPLEMENTED**.
-Runtime results on the current maze (Ubuntu VM): see [testing.md](../testing.md) and `docs/results/vm/`; the earlier "no runtime test yet" note no longer applies.
+No Gazebo/Nav2/SLAM/DQN runtime test has been run from this branch yet; only the static checks in `tools/verify_static.py` (Mac) have. See [testing.md](../testing.md).
 
 ## Responsibility
 Nav2 integration, A* global planning, costmaps, local obstacle avoidance, RViz goal clicking, three-goal evaluation with metrics.

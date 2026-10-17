@@ -1,9 +1,7 @@
 # Member 4 - Deep Q-Learning (`dqn_agent`)
 
-**Nemal L A** - IT23236264 - Deep Q-Learning
-
 Status key: **VERIFIED** (actually run and passed) · **IMPLEMENTED** (code exists, runtime check pending) · **FAILED** · **BLOCKED** · **NOT IMPLEMENTED**.
-Runtime results on the current maze (Ubuntu VM): see [testing.md](../testing.md) and `docs/results/vm/`; the earlier "no runtime test yet" note no longer applies.
+No Gazebo/Nav2/SLAM/DQN runtime test has been run from this branch yet; only the static checks in `tools/verify_static.py` (Mac) have. See [testing.md](../testing.md).
 
 ## Responsibility
 DQN navigation: state, actions, reward, Q/target networks, replay, epsilon-greedy, Double DQN, checkpoints, training/evaluation, DQN-vs-Nav2 comparison.
