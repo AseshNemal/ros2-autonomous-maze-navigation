@@ -33,12 +33,12 @@ cd ~/ros2-autonomous-maze-navigation && git checkout dev-integration && git stat
 cd ros2_ws && colcon build --symlink-install --parallel-workers 1 && cd ..
 python3 tools/verify_static.py                         # expect OVERALL: PASS (+ one WARN about Figure 1)
 
-# 1. VIVA demo (VM desktop, not SSH). Terminal 1:
+# 1. VIVA demo (VM desktop, not SSH). Terminal 1 (same as: bash tools/auto.sh):
 bash tools/demo.sh                                     # Gazebo + RViz + Nav2; wait for ">>> Nav2 is ACTIVE"
 #    click 2D Goal Pose in RViz, 3 different points.  If the mouse is unreliable, Terminal 2:
 bash tools/send_goal.sh G1 ; bash tools/send_goal.sh G2 ; bash tools/send_goal.sh G3
 
-# 2. Keyboard driving instead (stop the demo first): 
+# 2. Keyboard driving instead (stop the demo first; same as: bash tools/manual.sh):
 bash tools/demo.sh teleop                              # keep that terminal focused; i , j l k ; z slows down
 #    or without keyboard focus: start only the simulation, then drive in steps
 ros2 launch maze_simulation maze_simulation.launch.py &   # (source ROS + ros2_ws/install first)

@@ -26,6 +26,14 @@ STAGES="sim nav" bash tools/run_all.sh               # chosen stages with a timi
 - Stages are headless (no window). Do not start another Gazebo while one runs. Logs and CSV files go to `docs/results/vm/`.
 - Without arguments `bash tools/run_all.sh` runs every stage (long: DQN training dominates).
 
+### The two commands to remember
+
+```bash
+bash tools/manual.sh     # REMOTE / MANUAL control: Gazebo + keyboard (keep the terminal focused: i , j l k, z = slower)
+bash tools/auto.sh       # AUTOMATIC: Gazebo + RViz + Nav2 -> in RViz press "2D Goal Pose", click the map, drag
+```
+Clicking in the Gazebo window does nothing (it only selects objects); the robot is driven by the keyboard in `manual.sh` or by RViz goals in `auto.sh`. Close one before starting the other (both drive `/cmd_vel`).
+
 ### Mouse or keyboard not working over remote desktop? Use commands
 
 ```bash
