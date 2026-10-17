@@ -14,7 +14,7 @@ kill_stack() { pkill -f "ros2 launch" 2>/dev/null; pkill -f "gz sim" 2>/dev/null
   pkill -f robot_state_publisher 2>/dev/null; pkill -f rviz2 2>/dev/null; pkill -f "nav2_|opennav" 2>/dev/null; sleep 2; pkill -9 -f "gz sim|parameter_bridge" 2>/dev/null; true; }
 kill_stack   # a leaked bridge from an earlier run causes TF/clock jumps
 trap 'kill $(jobs -p) 2>/dev/null; kill_stack' EXIT
-ros2 launch maze_simulation maze_simulation.launch.py &
+ros2 launch maze_simulation custom_maze.launch.py &   # main's launch (Gazebo window, robot at 0.25, 0.0)
 for _ in $(seq 1 60); do ros2 topic list 2>/dev/null | grep -qx /scan && break; sleep 2; done
 MODE="${1:-nav}"; MODE="${MODE//[^a-z]/}"   # tolerate a stray comma/period when typing
 # Gazebo can come up paused (the play button shows); make sure the simulation is running
@@ -25,7 +25,7 @@ case "$MODE" in
         bash src/slam_mapping/scripts/save_map.sh maze_slam ;;
   teleop) ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -p stamped:=true ;;
   *) ros2 launch maze_navigation navigation.launch.py \
-       map:="$REPO/ros2_ws/src/slam_mapping/maps/maze_groundtruth.yaml" initial_x:=0.25 initial_y:=-0.25 &
+       map:="$REPO/ros2_ws/src/slam_mapping/maps/maze_groundtruth.yaml" initial_x:=0.25 initial_y:=0.0 &
      NAV=$!
      # wait until Nav2 is really active; if the lifecycle manager gave up, start it again
      for i in $(seq 1 90); do

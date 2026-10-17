@@ -5,23 +5,71 @@
   maze_tools.py paths                 BFS/A* reference path lengths per goal
   maze_tools.py check                 validate layout and print ASCII art
 
-The Gazebo world is main's worlds/custom_maze.sdf (not generated here). The ground-truth map
-is rasterised from the layout; it is NOT a SLAM result.
+The Gazebo world is main's worlds/custom_maze.sdf (not generated here). The layout is read from that file by load(); the ground-truth map
+is rasterised from it; it is NOT a SLAM result.
 """
 import argparse
 import heapq
 import math
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import yaml
 
-DEFAULT_LAYOUT = Path(__file__).resolve().parent.parent / "config" / "maze_layout.yaml"
+CELL = 0.5   # Figure 1 cell size in metres (main's generate_maze.py: CELL = 0.5)
+
+
+def _package_dir():
+    """maze_simulation source dir, or its installed share dir."""
+    here = Path(__file__).resolve().parent.parent
+    if (here / "worlds" / "custom_maze.sdf").is_file():
+        return here
+    from ament_index_python.packages import get_package_share_directory
+    return Path(get_package_share_directory("maze_simulation"))
 
 
 def load(path=None):
-    with open(path or DEFAULT_LAYOUT) as f:
-        return yaml.safe_load(f)
+    """Layout read from main's worlds/custom_maze.sdf (the only maze definition), plus the
+    start/goal cells from config/mission.yaml.
+
+    The SDF boxes are thin walls on a 0.5 m grid; each is converted to the wall-between-cells
+    form used by the planners: vertical_walls [col_line, row], horizontal_walls [row_line, col].
+    """
+    pkg = _package_dir()
+    sdf = Path(path) if path else pkg / "worlds" / "custom_maze.sdf"
+    segs, heights = [], []
+    for m in ET.parse(sdf).getroot().iter("model"):
+        if m.get("name").startswith("ground"):
+            continue
+        x, y = (float(v) for v in m.findtext("pose").split()[:2])
+        sx, sy, sz = (float(v) for v in m.find(".//collision//size").text.split()[:3])
+        heights.append(sz)
+        if sx >= sy:
+            segs.append(("h", y, x - sx / 2, x + sx / 2, sy))
+        else:
+            segs.append(("v", x, y - sy / 2, y + sy / 2, sx))
+    xs = [v for k, c, lo, hi, t in segs for v in ((lo, hi) if k == "h" else (c,))]
+    ys = [v for k, c, lo, hi, t in segs for v in ((lo, hi) if k == "v" else (c,))]
+    x0, x1, y0, y1 = min(xs), max(xs), min(ys), max(ys)
+    cols, rows = round((x1 - x0) / CELL), round((y1 - y0) / CELL)
+    vertical, horizontal = [], []
+    for kind, c, lo, hi, t in segs:
+        if kind == "v":
+            line = round((c - x0) / CELL)
+            if 0 < line < cols:
+                vertical += [[line, r] for r in range(round((y1 - hi) / CELL), round((y1 - lo) / CELL))]
+        else:
+            line = round((y1 - c) / CELL)
+            if 0 < line < rows:
+                horizontal += [[line, col] for col in range(round((lo - x0) / CELL), round((hi - x0) / CELL))]
+    layout = {"cell_size_m": CELL, "rows": rows, "cols": cols,
+              "center_x_m": (x0 + x1) / 2, "center_y_m": (y0 + y1) / 2,
+              "wall_thickness_m": min(t for *_, t in segs), "wall_height_m": max(heights),
+              "vertical_walls": sorted(vertical), "horizontal_walls": sorted(horizontal)}
+    with open(pkg / "config" / "mission.yaml") as f:
+        layout.update(yaml.safe_load(f))
+    return layout
 
 
 def centre(layout):

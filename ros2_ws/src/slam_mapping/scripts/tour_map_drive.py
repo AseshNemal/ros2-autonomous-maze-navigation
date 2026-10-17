@@ -2,7 +2,7 @@
 """Coverage tour for unattended SLAM mapping (publishes TwistStamped /cmd_vel).
 
 Drives through the centre of EVERY maze cell along open corridors (greedy
-nearest-unvisited tour over the cell graph from maze_layout.yaml), slowly enough for
+nearest-unvisited tour over the cell graph read from custom_maze.sdf), slowly enough for
 the ~5 Hz lidar to give overlapping scans. Position comes from /odom only.
 SLAM still builds the map purely from the lidar; the layout is used only to choose
 where to drive (a wall follower cannot reach interior wall islands).
