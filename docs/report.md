@@ -18,7 +18,7 @@
 
 Student names and IDs are to be added on the submitted cover page. Original teammate commits are preserved unmodified in the Git history; `docs/OWNERSHIP.md` separates them from the integration work.
 
-> **Honesty note.** Every number in this report comes from a recorded run in `docs/results/vm/` (command, date and log are in that folder). Where a requirement was not met, the report says so. Items marked **NOT MEASURED** have no data yet.
+> **Honesty note.** Every number in this report comes from a recorded run in `docs/results/vm/` (current maze) or `docs/results/old_6x6_maze/` (previous maze, labelled) (command, date and log are in that folder). Where a requirement was not met, the report says so. Items marked **NOT MEASURED** have no data yet.
 
 ## 1. Introduction and system overview
 
@@ -55,12 +55,43 @@ The repository's only world is `worlds/custom_maze.sdf`. `tools/demo.sh` starts 
 
 ## 4. Results
 
-> **Caveat:** every number in Sections 4 and 5 was measured in the earlier 6 x 6 maze (3 m x 3 m, 0.05 m thick, 0.5 m high walls, start (-1.25, -1.25), goals (1.25, 1.25), (-1.25, 0.25), (0.25, -0.25)). The repository now uses the 7 x 6 maze of Section 2; those results have **not** been reproduced in it and must be re-run (`tools/verify_on_vm.sh`) before they are quoted.
+### Results on the CURRENT maze (`custom_maze.sdf`, 7 x 6, spawn (0.25, 0.0)) - measured 2026-10-17
 
-### 4.1 Simulation interface (headless, `verify_on_vm.sh sim`)
+All numbers below come from the logs in `docs/results/vm/`. Subsections 4.1 to 4.6 further down were measured on the **previous 6 x 6 maze**, which has been removed; they are kept as history and are labelled as such.
+
+**C1. Simulation and control.** Headless simulation: 10 of 10 checks passed (world `custom_maze`, exactly one robot `burger`, `/scan` 5.0 Hz with frame `base_scan`, `/odom` 49.6 Hz, `/clock`, TF `odom -> base_footprint`, `/cmd_vel` is `TwistStamped`). Control: 22 of 22 checks passed on the rerun (teleop forward +0.46 m, backward -0.32 m, left +1.03 rad, right -1.04 rad, stop, the watchdog stops the robot 0.000 m/s after teleop is killed mid-motion, a Nav2 goal reached in 6 s, only the Nav2 chain publishes `/cmd_vel`); the first run passed 21 of 22 (the `/scan` message count was 2 in the first 3 s after start-up; the rerun without code changes counted 15).
+
+**C2. Nav2 three-goal test** (`nav2_results_20261017-113157.csv`; NavFn A* + Regulated Pure Pursuit, ground-truth map, robot reset to the spawn before each goal):
+
+| Goal (world x, y) | Outcome | Time (sim s) | Travelled (m) | Recoveries | Cell-count reference (m) | Reference / travelled |
+|---|---|---|---|---|---|---|
+| 1 (1.25, 2.25) | SUCCEEDED | 39.45 | 5.53 | 0 | 5.5 | 0.99 |
+| 2 (1.25, 0.75) | SUCCEEDED | 16.53 | 2.29 | 1 | 3.0 | 1.31 |
+| 3 (-0.25, 0.75) | SUCCEEDED | 10.30 | 0.88 | 0 | 1.5 | 1.71 |
+
+3 of 3 goals reached. The reference is a cell-count estimate (0.5 m per cell from the cell graph), not a true shortest path, and the robot starts at the spawn rather than a cell centre, so ratios above 1 do not mean the robot was more efficient than optimal. The same goals were also sent from the command line (`tools/send_goal.sh`): both tested goals succeeded (10.3 s and 26.1 s).
+
+**C3. SLAM** (coverage tour + `slam_toolbox`, validated with `validate_map.py` against the maze read from `custom_maze.sdf`):
+
+| Run | Coverage | Precision | Free cells OK | Unknown | Against our own thresholds (0.85 / 0.85 / 0.95) |
+|---|---|---|---|---|---|
+| 1, odometry-steered tour | 0.890 | 0.256 | 0.905 | 0.367 | FAIL |
+| 2, tour steered by the SLAM pose, side-wall centring | 0.971 | **0.819** | 1.000 | 0.083 | FAIL (precision 0.031 short; coverage and free-cell checks pass) |
+
+The assignment only asks to "use SLAM to map the environment"; the 0.85 thresholds are our own validation criteria, so run 2 is reported as a map of the maze with the recorded accuracy and not as a threshold pass. Diagnosis (`tour_odom_vs_truth_*.txt`): in run 1 the robot touched walls in 189 of 371 ground-truth samples, so odometry diverged from Gazebo truth and smeared the map. Navigation was **not** run on the SLAM-built map.
+
+**C4. DQN.** Not trained on the current maze. A 3-episode smoke test (40 s) showed that the training loop, the `burger` reset, the CSV log and the checkpoint work; all 3 episodes ended in collisions, the checkpoint had zero optimizer updates and `evaluate_dqn` correctly refused it. There is **no DQN training or evaluation result and no evidence of learning on the current maze**. The only DQN results (old 6 x 6 maze, Section 4.5) are 0 successes in 50 episodes and 0 of 9 greedy evaluations.
+
+**C5. Comparison.** Nav2 reached 3 of 3 goals; the DQN reached 0 (old maze) and has no current-maze data, so no DQN-vs-Nav2 efficiency comparison on the current maze can be claimed.
+
+**C6. Figure 1 compliance risk.** The assignment's Figure 1 is 6 x 6; the maze used is the teammate's 7 x 6 approximation, so it is not an exact reproduction of the figure.
+
+### Historical results on the previous 6 x 6 maze (not valid for the current maze)
+
+### 4.1 (old 6 x 6 maze) Simulation interface (headless, `verify_on_vm.sh sim`)
 7 of 7 checks passed: `/scan`, `/odom`, `/clock`, frames, `odom -> base_footprint` TF, `/cmd_vel` is `TwistStamped`. LiDAR about 4.4 Hz, odometry about 43 Hz.
 
-### 4.2 Nav2 three-goal test (`nav2_results_20261016-214253.csv`, ground-truth map, robot reset to the start before each goal)
+### 4.2 (old 6 x 6 maze) Nav2 three-goal test (`nav2_results_20261016-214253.csv`, ground-truth map, robot reset to the start before each goal)
 
 | Goal (world x, y) | Outcome | Time (sim s) | Travelled (m) | Recoveries | Reference (m) | Reference / travelled |
 |---|---|---|---|---|---|---|
@@ -70,9 +101,9 @@ The repository's only world is `worlds/custom_maze.sdf`. `tools/demo.sh` starts 
 
 3 of 3 goals reached, no recoveries. The "reference" is a cell-count estimate (0.5 m per cell), not a true lower bound, so the ratio exceeds 1; the planner's own path for goal 1 was 6.9 m. (This CSV's method label still reads `nav2_navfn_astar_mppi` because it was recorded before the controller was relabelled; the controller was Regulated Pure Pursuit.)
 
-Earlier runs, kept in `docs/results/vm/`, document the path to this result: 0 of 3 (Nav2 never started: lowercase `"false"` passed to Nav2's launch file), then 0 of 3 and 2 of 3 with the MPPI controller (zero velocity output in 0.45 m corridors; start pose inside inflated cells).
+Earlier runs, kept in `docs/results/old_6x6_maze/`, document the path to this result: 0 of 3 (Nav2 never started: lowercase `"false"` passed to Nav2's launch file), then 0 of 3 and 2 of 3 with the MPPI controller (zero velocity output in 0.45 m corridors; start pose inside inflated cells).
 
-### 4.3 SLAM map (`validate_map.py`, thresholds: coverage >= 0.85, precision >= 0.85, free cells correct >= 0.95)
+### 4.3 (old 6 x 6 maze) SLAM map (`validate_map.py`, thresholds: coverage >= 0.85, precision >= 0.85, free cells correct >= 0.95)
 
 | Run | Coverage | Precision | Free OK | Result |
 |---|---|---|---|---|
@@ -90,15 +121,15 @@ One further run was discarded: its saved map came from a stray Nav2 map server, 
 
 *Diagnosis from the saved map (offline, `docs/cloud_analysis.md`).* Re-validating the committed map reproduces the 0.759 / 0.577 above. It is distorted, not merely offset: the best rigid re-alignment only reaches precision 0.598, and only 20 % of line-like wall pixels are within 5 degrees of a maze axis (77 % for the ground-truth map): the heading was lost part-way through the tour. A simulated perfect-pose LiDAR map of the same tour passes (1.0 / 1.0), so the tour and the validator are not the limit; the validator tolerates only about 0.2 degrees of uncorrected heading drift per metre. Odometry was accurate in the control test (yaw within 0.04 rad per turn). The most likely cause is the scan-matcher search window (+-0.5 m, +-20 degrees), far larger than the odometry error in 0.45 m self-similar corridors. We narrowed it to 0.2 m and 10 degrees; **this change has not been run in Gazebo yet**, so the table above is unchanged and the SLAM requirement is still unmet.
 
-### 4.4 Remote / manual control (`verify_on_vm.sh control`, `check_control.py`)
+### 4.4 (old 6 x 6 maze) Remote / manual control (`verify_on_vm.sh control`, `check_control.py`)
 Real `teleop_twist_keyboard` driven through a pseudo-terminal; robot motion compared between `/odom` and Gazebo's ground truth. First run: 21 of 22 checks passed (spawn, `/odom`, `/scan`, TF, message type, bridge, forward +0.46 m, backward -0.32 m, left +1.01 rad, right -1.03 rad, stop, Nav2 goal reached in 21 s, only the Nav2 chain publishing during Nav2, real-time factor 1.00). The one failure was a genuine safety defect: after teleop was killed mid-motion, Gazebo kept executing the last command (0.15 m/s, 0.39 m in 2.5 s). A command watchdog (`cmd_vel_watchdog.py`) was added; see Section 4.6 for its re-test.
 
-### 4.5 DQN (`dqn_train_20261017-000035.csv`, `dqn_eval_20261017-000035.csv`; 5-episode timing run `dqn_train_20261016-235928.csv`)
+### 4.5 (old 6 x 6 maze) DQN (`dqn_train_20261017-000035.csv`, `dqn_eval_20261017-000035.csv`; 5-episode timing run `dqn_train_20261016-235928.csv`)
 Unit tests pass (11 of 11). Timing test: 5 episodes lasted about 5 s of simulated time each (collision after 6 to 16 steps), roughly 4 to 6 s of wall time per episode, so training cost was measured rather than assumed. Real training: **50 episodes, 595 optimizer updates, pure DQN (no guidance)**: 0 successes, 50 collisions, mean 13.9 steps and 5.5 simulated seconds per episode, mean reward -45.9, epsilon still 0.967 at the end (exploration had barely started to decay). Greedy evaluation on the three Nav2 goals, 3 trials each: **0 of 9 reached the goal**; every trial ended in a collision after 6 to 8 steps. **The DQN did not learn to navigate the maze in 50 episodes.** This is expected for so little training (an earlier trial also reached 0 of 3), and longer training was not attempted: it is not evidence either way about the method with more training. The comparison with Nav2 is therefore Nav2 3/3 against DQN 0/9.
 
 *Diagnosis without Gazebo (offline, `docs/cloud_analysis.md`).* The 50 episodes made only about 700 environment steps because each ended in a collision, so epsilon (decayed over 20 000 steps) never left random exploration. A kinematic surrogate of the environment (real agent and reward, ray-cast LiDAR on the real maze, no Gazebo) reproduces this run (0 successes). The surrogate also exposed a defect in the hybrid (waypoint) mode: the waypoint switched 0.25 m from a cell centre, i.e. on entering the 0.5 m cell, so each turn cut into the corner (success 92 % for one-cell paths, 29 % for two, 14 % for three). We changed the tolerance to 0.15 m and the epsilon decay to 3000 steps. On the surrogate this gives 20 of 30 greedy trials on the three assignment goals for the hybrid agent, while a pure DQN, which sees only local LiDAR and a straight-line bearing, stays at 0 of 30. **These are surrogate numbers, not Gazebo results**; the new settings have not been run in Gazebo and the table above is unchanged. A DQN that reaches goals only with A\* waypoints is a hybrid and will be reported as one.
 
-### 4.6 Watchdog re-test (`control_teleop_20261016-235730.json`, `control_nav_20261016-235730.json`)
+### 4.6 (old 6 x 6 maze) Watchdog re-test (`control_teleop_20261016-235730.json`, `control_nav_20261016-235730.json`)
 After adding the watchdog: **22 of 22 checks passed** (teleop 16/16, Nav2 6/6). Killing teleop mid-motion now leaves the robot at 0.000 m/s with 0.00 m moved in the following 2.5 s (before: 0.15 m/s, 0.39 m). The Nav2 goal was reached in 13 s. Not verifiable by script: remote-desktop input delay and disconnections; the simulation itself ran at a real-time factor of 1.00 (headless).
 
 ## 5. Challenges faced (all from real runs)
@@ -111,10 +142,10 @@ After adding the watchdog: **22 of 22 checks passed** (teleop 16/16, Nav2 6/6). 
 7. **Small VM.** Concurrent Gazebo, Nav2 and RViz on 3 GB RAM; Nav2's 4 s lifecycle heartbeat shut navigation down, so it was raised to 30 s.
 
 ## 6. Limitations
-SLAM map fails our validation thresholds; Nav2 was tested only on the ground-truth map, from reset start poses, in three runs; DQN has no Gazebo goal-reaching result; the fixes in Sections 4.3 and 4.5 are untested in Gazebo; travel-efficiency uses a cell-count reference rather than the planner path; the LiDAR rate was about 4.4 Hz on a 3 GB VM; collisions are detected from LiDAR range, not a contact sensor.
+The maze is a 7 x 6 approximation, not the 6 x 6 Figure 1. The SLAM map (precision 0.819) is below our own 0.85 threshold and the tour still touches walls at times; Nav2 was tested only on the ground-truth map, from reset spawn poses, in one run of three goals (plus two command-line goals); the DQN has no result on the current maze and showed no learning on the old one; the efficiency reference is a cell-count estimate; the LiDAR rate is about 5 Hz on a small VM; collisions are detected from LiDAR range, not a contact sensor; the RViz click-a-goal interaction was demonstrated on the old maze and by command line on the current one, not re-run by script. Sections 4.1-4.6 are from the removed 6 x 6 maze.
 
 ## 7. Possible improvements
 SLAM accuracy (tune scan-matching parameters, slower motion, re-enable loop closure with stricter thresholds, evaluate with a real exploration algorithm such as frontier exploration); navigate on the SLAM map instead of the ground-truth map; measure path efficiency against the planner's path rather than a cell-count estimate; longer and randomised DQN training, LiDAR history in the state, PyTorch with prioritised replay; a contact sensor for collision counting; automated cross-checking of the maze against Figure 1.
 
 ## 8. How to reproduce
-`bash tools/run_all.sh` (all stages, headless) or `bash tools/verify_on_vm.sh <build|sim|slam|nav|control|dqn>`; live demo `bash tools/demo.sh`. Details in `README.md`; the Ubuntu test order is `docs/ubuntu_test_checklist.md`.
+Live demo: `bash tools/demo.sh` (click **2D Goal Pose**), or without the mouse `bash tools/send_goal.sh G1` / `G2` / `G3` and `bash tools/drive.sh forward 2`. Tests: `bash tools/verify_on_vm.sh <build|sim|control|slam|nav|dqn>` (add `QUICK=1` for a smoke test), `STAGES="sim nav" bash tools/run_all.sh`, `python3 tools/verify_static.py`. Details in `README.md` and `docs/testing.md`.

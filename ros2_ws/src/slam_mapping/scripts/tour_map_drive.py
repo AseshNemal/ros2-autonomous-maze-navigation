@@ -56,6 +56,7 @@ def coverage_route(layout, tools):
 
 def main(argv=None):
     import rclpy
+    from rclpy.time import Time
     from geometry_msgs.msg import TwistStamped
     from nav_msgs.msg import Odometry
     from rclpy.node import Node
@@ -65,12 +66,15 @@ def main(argv=None):
     p = argparse.ArgumentParser()
     p.add_argument("--speed", type=float, default=0.12)
     p.add_argument("--turn", type=float, default=0.45, help="max in-place turn rate (rad/s)")
+    p.add_argument("--max-waypoints", type=int, default=0, help="smoke test: stop after this many waypoints (0 = whole tour)")
     a = p.parse_args(rclpy.utilities.remove_ros_args(argv)[1:] if argv else rclpy.utilities.remove_ros_args()[1:])
 
     tools = _maze_tools()
     layout = tools.load()
     route = coverage_route(layout, tools)
     wps = [tools.cell_center(layout, r, c) for r, c in route]
+    if a.max_waypoints:
+        wps = wps[:a.max_waypoints + 1]
     sx, sy = tools.spawn_xy(layout)        # the robot starts at the original spawn pose
 
     class Tour(Node):
@@ -80,6 +84,13 @@ def main(argv=None):
             self.create_subscription(Odometry, "/odom", self.on_odom, qos_profile_sensor_data)
             self.create_subscription(LaserScan, "/scan", self.on_scan, qos_profile_sensor_data)
             self.pose, self.ref, self.front, self.idx = None, None, float("inf"), 1
+            self.left = self.right = float("inf")
+            # SLAM's corrected pose (map -> base_footprint) when slam_toolbox runs; plain odometry otherwise.
+            # Odometry heading drifts after in-place turns, which in 0.5 m corridors drives the robot into walls.
+            from tf2_ros import Buffer, TransformListener
+            self.tf_buf = Buffer()
+            self.tf_listener = TransformListener(self.tf_buf, self)
+            self.using_slam = False
             self.finished = False
             self.t_log = 0.0
             self.create_timer(0.05, self.tick)
@@ -96,6 +107,16 @@ def main(argv=None):
             c, s = math.cos(-oyaw), math.sin(-oyaw)
             self.pose = (sx + c * dx - s * dy, sy + s * dx + c * dy, cur[2] - oyaw)
 
+        def slam_pose(self):
+            """World pose from the SLAM map frame (its origin is the spawn pose, yaw 0), or None."""
+            try:
+                t = self.tf_buf.lookup_transform("map", "base_footprint", Time())
+            except Exception:
+                return None
+            q = t.transform.rotation
+            yaw = math.atan2(2 * (q.w * q.z + q.x * q.y), 1 - 2 * (q.y * q.y + q.z * q.z))
+            return (sx + t.transform.translation.x, sy + t.transform.translation.y, yaw)
+
         def on_scan(self, m):
             best = float("inf")
             n = len(m.ranges)
@@ -106,6 +127,16 @@ def main(argv=None):
                 if math.isfinite(r) and m.range_min + 0.01 < r <= m.range_max:
                     best = min(best, r)
             self.front = best
+            # side clearances (+-90 deg): used to stay centred in the 0.5 m corridors
+            def side(deg):
+                m_ = float("inf")
+                for k in range(-8, 9):
+                    i = int(round((math.radians(deg + k) - m.angle_min) / m.angle_increment)) % n
+                    r = m.ranges[i]
+                    if math.isfinite(r) and m.range_min + 0.01 < r <= m.range_max:
+                        m_ = min(m_, r)
+                return m_
+            self.left, self.right = side(90), side(-90)
 
         def send(self, v, w):
             m = TwistStamped()
@@ -117,6 +148,12 @@ def main(argv=None):
         def tick(self):
             if self.pose is None or self.finished:
                 return
+            sp = self.slam_pose()
+            if sp is not None:
+                if not self.using_slam:
+                    self.using_slam = True
+                    self.get_logger().info("steering by the SLAM pose (map->base_footprint)")
+                self.pose = sp
             if self.idx >= len(wps):
                 self.send(0.0, 0.0)
                 self.finished = True
@@ -136,13 +173,16 @@ def main(argv=None):
                 return
             err = math.atan2(ty - y, tx - x) - yaw
             err = math.atan2(math.sin(err), math.cos(err))
-            if abs(err) > 0.30:
+            if abs(err) > 0.15:
                 self.send(0.0, max(-a.turn, min(a.turn, 1.5 * err)))      # turn in place
             else:
                 v = min(a.speed, 0.04 + 1.5 * dist)
                 if self.front < 0.12:
                     v = 0.0                                               # safety stop
-                self.send(v, max(-0.4, min(0.4, 1.5 * err)))
+                w = 1.5 * err
+                if self.left < 0.45 and self.right < 0.45:           # walls on both sides: stay centred
+                    w += 1.5 * (self.left - self.right)
+                self.send(v, max(-0.4, min(0.4, w)))
 
     rclpy.init()
     node = Tour()

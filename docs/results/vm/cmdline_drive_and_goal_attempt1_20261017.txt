@@ -1,0 +1,26 @@
+start pose (0.25, 0.00)
+forward for 2 s ...
+stopped
+after forward 2 s: (0.60, 0.00)
+left for 2 s ...
+stopped
+after left 2 s:    (0.58, 0.00)
+back for 1 s ...
+stopped
+after back 1 s:    (0.49, -0.21)
+stopped? (0.49, -0.21) (second reading after 2 s)
+second: (0.49, -0.21)
+Nav2: active [3]
+--- send_goal.sh G3
+usage: ros2 [-h] [--use-python-default-buffering]
+            Call `ros2 <command> -h` for more detailed usage. ...
+ros2: error: argument Call `ros2 <command> -h` for more detailed usage.: invalid choice: 'action' (choose from 'daemon', 'extension_points', 'extensions', 'launch', 'lifecycle', 'node', 'param', 'pkg', 'run', 'service', 'topic')
+Sending Nav2 goal x=-0.25 y=0.75 (frame map) ...
+pose after G3 (0.24, 0.00)  (goal G3 = (-0.25, 0.75))
+--- send_goal.sh 1.25 0.75 (explicit x y)
+usage: ros2 [-h] [--use-python-default-buffering]
+            Call `ros2 <command> -h` for more detailed usage. ...
+ros2: error: argument Call `ros2 <command> -h` for more detailed usage.: invalid choice: 'action' (choose from 'daemon', 'extension_points', 'extensions', 'launch', 'lifecycle', 'node', 'param', 'pkg', 'run', 'service', 'topic')
+Sending Nav2 goal x=1.25 y=0.75 (frame map) ...
+pose after x y goal (0.24, 0.00)  (goal = (1.25, 0.75))
+finished

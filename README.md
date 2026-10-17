@@ -10,19 +10,31 @@ An academic robotics simulation project intended to combine **ROS 2 Jazzy**, **G
 
 Open a terminal in the repo folder. There are two ways to run: an automatic test, and a live demo you can watch.
 
-### A. Automatic test (one command, no window)
+### A. Automatic tests (no window), one stage at a time
 
 ```bash
-bash tools/run_all.sh
+python3 tools/verify_static.py                       # no ROS, ~10 s
+bash tools/verify_on_vm.sh sim                       # ~0.5 min: world, one robot, /scan /odom /tf /clock /cmd_vel
+bash tools/verify_on_vm.sh control                   # ~1.5 min: teleop, watchdog, Nav2 goal
+bash tools/verify_on_vm.sh nav                       # ~2 min: Nav2, 3 goals -> docs/results/vm/nav2_results_*.csv
+bash tools/verify_on_vm.sh slam                      # ~7 min: coverage tour + SLAM + map validation
+QUICK=1 bash tools/verify_on_vm.sh dqn               # ~2 min smoke test (10 episodes); real training: EPISODES=50 bash tools/verify_on_vm.sh dqn
+STAGES="sim nav" bash tools/run_all.sh               # chosen stages with a timing summary
 ```
 
-- On the first run it installs missing ROS packages (asks for your sudo password once).
-- It then runs, in order: build + tests, simulation check, SLAM mapping, Nav2 (3 goals), DQN, and prints a PASS/FAIL summary.
-- It is **headless**: no Gazebo or RViz window opens, so you will only see text. That is normal.
-- Takes 30-60 minutes. Do not start another Gazebo while it runs (the VM is small).
-- Logs and CSV files are saved in `docs/results/vm/`.
-- Shorter test: `EPISODES=50 bash tools/run_all.sh`
-- One stage only: `bash tools/verify_on_vm.sh <build|sim|slam|nav|dqn>`
+- Every stage prints a heartbeat every 30 s and its total time; follow details with `tail -f docs/results/vm/<stage>_*.log`.
+- Stages are headless (no window). Do not start another Gazebo while one runs. Logs and CSV files go to `docs/results/vm/`.
+- Without arguments `bash tools/run_all.sh` runs every stage (long: DQN training dominates).
+
+### Mouse or keyboard not working over remote desktop? Use commands
+
+```bash
+bash tools/demo.sh                    # start Gazebo + RViz + Nav2 (leave running in terminal 1)
+bash tools/send_goal.sh G1            # terminal 2: send goal 1 / G2 / G3 (config/mission.yaml), or: send_goal.sh 1.25 0.75
+bash tools/demo.sh teleop             # alternative: keyboard driving (terminal must be focused); stop Nav2 demo first
+bash tools/drive.sh forward 2         # alternative: timed driving (forward|back|left|right|stop); needs only the simulation
+                                      # (ros2 launch maze_simulation maze_simulation.launch.py), NOT Nav2 at the same time
+```
 
 ### B. Live demo (see the robot, click a goal)
 

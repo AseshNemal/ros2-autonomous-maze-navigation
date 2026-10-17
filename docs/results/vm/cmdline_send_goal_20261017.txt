@@ -1,0 +1,35 @@
+Node not found
+Nav2: 
+--- send_goal.sh G3   (expect goal (-0.25, 0.75))
+Sending Nav2 goal x=-0.25 y=0.75 (frame map) ...
+goal accepted
+  distance remaining 0.00 m, recoveries 0
+  distance remaining 1.06 m, recoveries 0
+  distance remaining 0.93 m, recoveries 0
+  distance remaining 0.65 m, recoveries 0
+  distance remaining 0.35 m, recoveries 0
+  distance remaining 0.17 m, recoveries 0
+RESULT: SUCCEEDED after 10.3 s
+exit status 0
+pose after G3 (-0.25, 0.61)
+--- send_goal.sh 1.25 0.75   (explicit x y)
+Sending Nav2 goal x=1.25 y=0.75 (frame map) ...
+goal accepted
+  distance remaining 3.35 m, recoveries 0
+  distance remaining 3.35 m, recoveries 0
+  distance remaining 3.35 m, recoveries 0
+  distance remaining 3.05 m, recoveries 0
+  distance remaining 2.75 m, recoveries 0
+  distance remaining 2.47 m, recoveries 0
+  distance remaining 2.20 m, recoveries 0
+  distance remaining 1.90 m, recoveries 0
+  distance remaining 1.57 m, recoveries 0
+  distance remaining 1.30 m, recoveries 0
+  distance remaining 0.92 m, recoveries 0
+  distance remaining 0.58 m, recoveries 0
+  distance remaining 0.35 m, recoveries 0
+  distance remaining 0.17 m, recoveries 0
+RESULT: SUCCEEDED after 26.1 s
+exit status 0
+pose after x y goal (1.44, 0.73)
+finished

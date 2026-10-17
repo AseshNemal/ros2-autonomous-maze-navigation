@@ -10,6 +10,7 @@ Do not run Nav2/auto-mapper at the same time: both publish /cmd_vel.
 import argparse
 import csv
 import sys
+import time
 from pathlib import Path
 
 import numpy as np
@@ -89,6 +90,7 @@ def run(args):
                            goal_tolerance=env_cfg["goal_tolerance_m"],
                            collision_distance=env_cfg["collision_distance_m"],
                            waypoint_tolerance=env_cfg.get("waypoint_tolerance_m", 0.15))
+        t_start = time.monotonic()
         with log_path.open("a" if args.resume else "w", newline="") as file:
             writer = csv.DictWriter(file, fieldnames=FIELDS)
             if file.tell() == 0:
@@ -124,7 +126,9 @@ def run(args):
                     train_steps=agent.train_steps))
                 file.flush()
                 completed += 1
-                print(f"episode={episode} {a}->{b} reward={reward_sum:.2f} steps={info['steps']} "
+                el = time.monotonic() - t_start
+                print(f"[{episode}/{args.episodes}] elapsed={el:.0f}s eta={el / episode * (args.episodes - episode):.0f}s "
+                      f"episode={episode} {a}->{b} reward={reward_sum:.2f} steps={info['steps']} "
                       f"success={info['success']} collision={info['collision']} "
                       f"epsilon={agent.epsilon:.3f} updates={agent.train_steps}", flush=True)
                 if episode % args.checkpoint_every == 0:

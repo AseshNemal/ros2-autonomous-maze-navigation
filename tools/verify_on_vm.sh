@@ -32,7 +32,12 @@ kill_stack() {
 }
 [ "$STAGE" = build ] || kill_stack
 PIDS=()
-cleanup() { for p in "${PIDS[@]:-}"; do kill -TERM -- "-$p" 2>/dev/null; done; [ "$STAGE" = build ] || kill_stack; }
+T0=$SECONDS
+# Heartbeat: every 30 s print elapsed time and the last log line, so a long stage never looks frozen.
+# (Watch the full log in another terminal with:  tail -f "$LOG")
+heartbeat() { while sleep 30; do echo "[$(date +%T)] stage '$STAGE' still running, $((SECONDS - T0)) s elapsed | $(tail -n 1 "$LOG" 2>/dev/null | cut -c1-110)"; done; }
+heartbeat & HB=$!
+cleanup() { kill "$HB" 2>/dev/null; for p in "${PIDS[@]:-}"; do kill -TERM -- "-$p" 2>/dev/null; done; [ "$STAGE" = build ] || kill_stack; }
 trap cleanup EXIT
 bg() { setsid "$@" >>"$LOG" 2>&1 & PIDS+=($!); }
 RC=0
@@ -40,6 +45,7 @@ fail() { say "FAIL: $*"; RC=1; }
 # run a command, tee its output to the log, and keep ITS exit status (not tee's)
 run() { "$@" 2>&1 | tee -a "$LOG"; return "${PIPESTATUS[0]}"; }
 say() { echo "[$(date +%T)] $*" | tee -a "$LOG"; }
+say "stage $STAGE started${QUICK:+ (QUICK smoke test)}; log: $LOG"
 # wait until /scan is actually delivering messages (topic listed != data flowing on a slow VM)
 wait_scan() { for _ in $(seq 1 45); do timeout 8 ros2 topic echo --once /scan >/dev/null 2>&1 && return 0; sleep 1; done; return 1; }
 wait_topic() { for _ in $(seq 1 "${2:-60}"); do ros2 topic list 2>/dev/null | grep -qx "$1" && return 0; sleep 2; done; return 1; }
@@ -61,7 +67,7 @@ slam)
   if [ "$RC" = 0 ]; then
     bg ros2 launch slam_mapping mapping.launch.py use_rviz:=false
     sleep 10
-    run timeout "${MAP_TIMEOUT:-900}" python3 "$WS/src/slam_mapping/scripts/tour_map_drive.py" || fail "tour_map_drive (coverage tour did not finish)"
+    run timeout "${MAP_TIMEOUT:-900}" python3 "$WS/src/slam_mapping/scripts/tour_map_drive.py" ${QUICK:+--max-waypoints 12} || fail "tour_map_drive (coverage tour did not finish)"
     MAPYAML="$WS/src/slam_mapping/maps/maze_slam.yaml"; rm -f "$MAPYAML" "${MAPYAML%.yaml}.pgm"
     # the saved map must come from slam_toolbox ONLY (a stray map_server/Nav2 would save the wrong map)
     PUBS=$(ros2 topic info /map -v 2>/dev/null | grep "Node name:" | awk '{print $3}' | sort -u | tr '\n' ' ')
@@ -72,7 +78,8 @@ slam)
     if [ -f "$MAPYAML" ]; then
       python3 "$WS/src/slam_mapping/scripts/validate_map.py" "$MAPYAML" --map-origin-in-world 0.25 0.0 \
         2>&1 | tee -a "$OUT/slam_validation_$TS.txt" | tee -a "$LOG"
-      [ "${PIPESTATUS[0]}" = 0 ] || fail "map validation (see slam_validation_$TS.txt)"
+      if [ -n "${QUICK:-}" ]; then say "QUICK smoke test: partial tour, map validation result is NOT a pass/fail"; else
+      [ "${PIPESTATUS[0]}" = 0 ] || fail "map validation (see slam_validation_$TS.txt)"; fi
     fi
   fi ;;
 nav)
@@ -127,9 +134,10 @@ dqn)
     # GUIDANCE=none -> pure DQN only; GUIDANCE=waypoints -> hybrid only; default: both, separate checkpoints/CSVs.
     # (A pure DQN only sees local LiDAR and a straight-line goal bearing: it cannot plan around walls over
     # 5-8 cells. The hybrid steers between A* cell centres and must be reported as hybrid.)
+    EP="${EPISODES:-300}"; [ -n "${QUICK:-}" ] && EP="${EPISODES:-10}"   # QUICK=1: 10 episodes smoke test
     for G in ${GUIDANCE:-none waypoints}; do
       CK="$HOME/.ros/dqn_agent/checkpoints/dqn_maze_$G.npz"
-      run ros2 run dqn_agent train_dqn --episodes "${EPISODES:-300}" --curriculum-max-cells 3 \
+      run ros2 run dqn_agent train_dqn --episodes "$EP" --curriculum-max-cells 3 \
           --guidance "$G" --checkpoint "$CK" --csv "$OUT/dqn_train_${G}_$TS.csv" || fail "train_dqn ($G)"
       run ros2 run dqn_agent evaluate_dqn --checkpoint "$CK" --episodes "${EVAL_EPISODES:-3}" \
           --guidance "$G" --csv "$OUT/dqn_eval_${G}_$TS.csv" || fail "evaluate_dqn ($G)"
@@ -137,5 +145,5 @@ dqn)
   fi ;;
 *) echo "unknown stage"; exit 2 ;;
 esac
-[ "$RC" = 0 ] && say "STAGE RESULT: PASS ($STAGE); log: $LOG" || say "STAGE RESULT: FAIL ($STAGE); log: $LOG"
+[ "$RC" = 0 ] && say "STAGE RESULT: PASS ($STAGE) in $((SECONDS - T0)) s; log: $LOG" || say "STAGE RESULT: FAIL ($STAGE) in $((SECONDS - T0)) s; log: $LOG"
 exit "$RC"
