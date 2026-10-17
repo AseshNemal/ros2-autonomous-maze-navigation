@@ -1,6 +1,6 @@
 # Settings used by the Member 4 command-line scripts.
 environment:
-  world: custom_maze   # Gazebo world name in maze_simulation/worlds/custom_maze.sdf
+  world: maze   # Gazebo world name in maze_simulation/worlds/maze.world
   robot: turtlebot3_burger
   scan_topic: /scan
   odom_topic: /odom

@@ -31,7 +31,7 @@ def check(name, ok, detail=""):
 
 def gz_pose():
     """Ground-truth (x, y, yaw) of the robot from Gazebo."""
-    out = subprocess.run("timeout 10 gz topic -e -n 1 -t /world/custom_maze/dynamic_pose/info",
+    out = subprocess.run("timeout 10 gz topic -e -n 1 -t /world/maze/dynamic_pose/info",
                          shell=True, capture_output=True, text=True).stdout
     i = out.find('name: "turtlebot3_burger"')
     if i < 0:

@@ -18,7 +18,7 @@ ros2 launch maze_simulation maze_simulation.launch.py &
 for _ in $(seq 1 60); do ros2 topic list 2>/dev/null | grep -qx /scan && break; sleep 2; done
 MODE="${1:-nav}"; MODE="${MODE//[^a-z]/}"   # tolerate a stray comma/period when typing
 # Gazebo can come up paused (the play button shows); make sure the simulation is running
-gz service -s /world/custom_maze/control --reqtype gz.msgs.WorldControl --reptype gz.msgs.Boolean --timeout 3000 --req 'pause: false' >/dev/null 2>&1
+gz service -s /world/maze/control --reqtype gz.msgs.WorldControl --reptype gz.msgs.Boolean --timeout 3000 --req 'pause: false' >/dev/null 2>&1
 case "$MODE" in
   slam) ros2 launch slam_mapping mapping.launch.py &
         sleep 10; python3 src/slam_mapping/scripts/tour_map_drive.py

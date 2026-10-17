@@ -112,7 +112,7 @@ control)
       ros2 lifecycle get /bt_navigator 2>/dev/null | grep -q "active \[3\]" && { UP=1; break; }; sleep 2; done
     if [ "$UP" = 1 ]; then
       # teleop moved the robot: put it back at the start pose AMCL was initialised with
-      gz service -s /world/custom_maze/set_pose --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean --timeout 3000 \
+      gz service -s /world/maze/set_pose --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean --timeout 3000 \
         --req 'name: "turtlebot3_burger" position {x: 0.25 y: -0.25 z: 0.01} orientation {w: 1}' >/dev/null 2>&1
       sleep 2
       python3 "$WS/src/slam_mapping/scripts/set_initial_pose.py" --x 0.25 --y -0.25 --yaw 0 --timeout 20 >/dev/null 2>&1

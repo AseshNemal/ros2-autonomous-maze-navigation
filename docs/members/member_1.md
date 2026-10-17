@@ -11,15 +11,15 @@ Custom Gazebo Harmonic maze from the assignment's Figure 1, TurtleBot3 Burger sp
 
 ## Contribution
 - `config/maze_layout.yaml` - maze of Figure 1 as drawn in main's `generate_maze.py` (JayangaWeerasinghe): 7 columns x 6 rows of 0.5 m cells (3.5 m x 3.0 m), centred at (1.25, 1.0) via `center_x_m/center_y_m`. Main describes it as an approximation of the figure; compare the `maze_tools.py check` ASCII render with the figure by eye.
-- `scripts/maze_tools.py` - from `maze_layout.yaml`: ground-truth map, grid A* reference path lengths, ASCII preview. It no longer generates a world.
-- `worlds/custom_maze.sdf` - main's Figure 1 world, used unmodified (16 wall models, outer 3.5x3.0 m boundary, 0.01 m thick, 0.2 m high). World name `custom_maze`. `tools/verify_static.py` checks that its walls equal `maze_layout.yaml`.
+- `scripts/maze_tools.py` - single source of truth: generates `worlds/maze.world`, a ground-truth map, grid A* reference path lengths, ASCII preview.
+- `worlds/maze.world` - generated SDF (22 wall models, outer 3.5x3.0 m boundary, 0.01 m thick, 0.2 m high, same geometry as main's `custom_maze.sdf`). World name `maze`.
 - `launch/maze_simulation.launch.py` - gz sim (GUI or headless `-s --headless-rendering`), robot_state_publisher, `ros_gz_sim create` of the TurtleBot3 Burger model, `ros_gz_bridge`.
 - `config/bridge.yaml` - bridge for `/clock /odom /tf /joint_states /scan /imu /cmd_vel`.
 - `scripts/check_sim_topics.py` - PASS/FAIL contract check (rates, frames, TF, `/cmd_vel` type).
 
 ## Architecture
 ```
-custom_maze.sdf --gz sim--> TB3 Burger (turtlebot3_gazebo model.sdf)
+maze_layout.yaml --maze_tools.py--> maze.world --gz sim--> TB3 Burger (turtlebot3_gazebo model.sdf)
                                                     |  gz topics
                                               ros_gz_bridge (bridge.yaml)
                               /scan /odom /tf /clock /imu /joint_states  <--  --> /cmd_vel (TwistStamped)
@@ -34,7 +34,7 @@ Robot model and URDF come from the apt `turtlebot3_gazebo` package (not copied).
 | `/tf`, `/tf_static` | `tf2_msgs/TFMessage` | sim/RSP -> all |
 | `/clock` | `rosgraph_msgs/Clock` | sim -> all (`use_sim_time:=true`) |
 | `/cmd_vel` | **`geometry_msgs/TwistStamped`** | controllers -> sim |
-Reset service used by DQN/eval: `gz service -s /world/custom_maze/set_pose` (needs the UserCommands plugin, present in the world).
+Reset service used by DQN/eval: `gz service -s /world/maze/set_pose` (needs the UserCommands plugin, present in the world).
 
 ## Run
 ```bash
@@ -44,7 +44,7 @@ ros2 launch maze_simulation maze_simulation.launch.py gui:=false # headless (VM 
 ros2 run maze_simulation check_sim_topics.py --duration 8
 python3 ros2_ws/src/maze_simulation/scripts/maze_tools.py check   # ASCII maze + goal reference paths (no ROS)
 ```
-If the world is edited, update `config/maze_layout.yaml` to match and regenerate the ground-truth map: `python3 .../maze_tools.py map ros2_ws/src/slam_mapping/maps/maze_groundtruth`.
+Regenerate the world after editing the layout: `python3 .../maze_tools.py world .../worlds/maze.world`.
 
 ## Tests
 - IMPLEMENTED/VERIFIED (static): `tools/verify_static.py` - world XML parses and equals regeneration from the layout.

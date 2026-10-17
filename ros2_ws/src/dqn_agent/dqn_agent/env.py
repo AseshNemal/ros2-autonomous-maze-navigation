@@ -72,7 +72,7 @@ def pose_xyyaw(odom):
 
 
 class GazeboDQNEnv:
-    def __init__(self, world="custom_maze", goal=(-0.25, 0.75),
+    def __init__(self, world="maze", goal=(-0.25, 0.75),
                  start=(0.25, -0.25, 0.0), action_duration=0.30,
                  goal_tolerance=0.22, collision_distance=0.15,
                  waypoint_tolerance=0.25, waypoint_bonus=5.0):

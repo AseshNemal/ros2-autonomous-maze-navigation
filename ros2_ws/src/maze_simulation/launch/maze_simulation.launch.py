@@ -1,6 +1,6 @@
 """Launch the assignment maze in Gazebo Harmonic with a TurtleBot3 Burger.
 
-Starts: gz sim (worlds/custom_maze.sdf, main's Figure 1 maze, unmodified), robot_state_publisher, robot spawn, ros_gz_bridge.
+Starts: gz sim (maze.world), robot_state_publisher, robot spawn, ros_gz_bridge.
 Does NOT start SLAM, Nav2 or DQN; those have their own launch files.
 
 `world:=<path or name>` selects another world (default: the assignment maze).
@@ -25,7 +25,7 @@ def resolve_world(sim_share, value):
     """Return (path, gz_world_name) for the `world` argument.
 
     `value` is a file path, or a name looked up in this package's worlds/ folder
-    (`custom_maze` -> worlds/custom_maze.sdf).
+    (`custom_maze` -> worlds/custom_maze.sdf, `maze` -> worlds/maze.world).
     The Gazebo world name is read from the file's <world name="...">, because the
     robot spawn (`-world <name>`) must match it.
     """
@@ -84,12 +84,12 @@ def generate_launch_description():
         DeclareLaunchArgument("gui", default_value="true",
                               description="false = headless server only (-s), for the VM / training"),
         DeclareLaunchArgument("x_pose", default_value="0.25",
-                              description="spawn x (default: start cell (5,1))"),
+                              description="spawn x (default: start cell (5,0))"),
         DeclareLaunchArgument("y_pose", default_value="-0.25"),
         DeclareLaunchArgument("yaw", default_value="0.0"),
         DeclareLaunchArgument("use_sim_time", default_value="true"),
-        DeclareLaunchArgument("world", default_value="custom_maze.sdf",
+        DeclareLaunchArgument("world", default_value="maze.world",
                               description="world file path, or a name in worlds/ (e.g. custom_maze); "
-                                          "default = the Figure 1 maze"),
+                                          "default = the assignment maze"),
     ]
     return LaunchDescription(args + [OpaqueFunction(function=launch_setup)])
