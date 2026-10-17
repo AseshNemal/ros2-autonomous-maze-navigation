@@ -100,6 +100,34 @@ The default speed is fast for the 0.5 m corridors: press `z` a few times before 
 
 **Rules:** run only ONE of Nav2 / SLAM mapping / DQN at a time (they all control the same robot), and close Gazebo (`Ctrl+C`) before starting something new.
 
+### First time on a fresh Ubuntu 24.04 machine (three commands)
+ROS 2 Jazzy must be installed first ([docs/installation.md](docs/installation.md)); git does not install it. Committing the trained model removes the need to *train* again, not the need to install ROS 2, Gazebo and the dependencies.
+```bash
+git clone https://github.com/AseshNemal/ros2-autonomous-maze-navigation.git
+cd ros2-autonomous-maze-navigation && git checkout dev-integration
+bash tools/install_deps_ubuntu.sh   # once: Gazebo bridge, TurtleBot3, Nav2, SLAM Toolbox, RViz (needs sudo + internet)
+bash tools/setup.sh                 # 1. build the workspace and check the prerequisites and the DQN model
+bash tools/auto.sh                  # 2. Gazebo window + RViz + Nav2: press "Nav2 Goal" in RViz and click the maze
+# stop it with Ctrl+C, then (never both at once - they drive the same robot; each command refuses if the other is running):
+bash tools/run_dqn_model.sh         # 3. the trained DQN model in the Gazebo window, NO training
+```
+`HEADLESS=1 bash tools/run_dqn_model.sh` runs without the Gazebo window and `EPISODES=1` gives one trial per goal (default 3). Results are new files in `~/dqn_eval_results/` (`dqn_eval_<time>.csv` and `.log`); nothing in the repository is overwritten. No hard-coded user name or home directory is used; run the commands from any clone location.
+
+### The trained DQN model (reproducibility only - it does NOT reach the goals)
+| | |
+|---|---|
+| File | `ros2_ws/src/dqn_agent/models/dqn_maze_none_60ep_0of9.npz` (24,488 bytes) |
+| SHA-256 | `d75aa1a533809e8e7075de96058ac58d6026df4afacfdb3ff8c899956b0feaf2` |
+| Network | 15 inputs (12 LiDAR sectors, goal distance, bearing sin/cos), 5 actions, hidden 64, Double DQN, NumPy |
+| Training | pure DQN (`GUIDANCE=none`), 60 episodes in the 7 x 6 maze, 1,587 transitions, 1,488 optimizer updates, final epsilon 0.497 (`docs/results/vm/dqn_train_none_20261017-165910.csv`, `dqn_20261017-165910.log`; 10-episode smoke test `...165336...`) |
+| Authoritative evaluation | **0 of 9 goals reached** (7 collisions, 2 timeouts), success confirmed with Gazebo's true robot pose (`dqn_eval_none_truthconfirmed_20261017-172400.csv`, `dqn_eval_truthconfirmed_20261017-172400.log`) |
+| Invalid earlier result | `dqn_eval_none_20261017-165910.csv` (5 of 9) used wheel odometry for success, which drifts; it is kept only as evidence of that artefact (`dqn_odometry_vs_truth_20261017.txt`) |
+
+- The model was **trained but did not achieve successful goal navigation**; the 0 of 9 result must not be presented as success. The checkpoint exists so the evaluation can be reproduced without retraining (`bash tools/run_dqn_model.sh`), not as a working navigation policy.
+- The training run used the odometry-based success signal (before the ground-truth correction); the final evaluation used the corrected verification.
+- Improving it would need more training, which has not been run. The checkpoint stores the weights, step counters and hyperparameters, **not** the replay buffer, Adam optimizer state or random-number state, so it cannot continue the original training session exactly (`--resume` restarts with an empty replay buffer).
+- Provenance: written at the end of the 60-episode run (17:15, 2026-10-17); its counters (1,488 updates, 1,587 transitions, epsilon 0.4974) equal the training CSV, and the truth-confirmed evaluation started afterwards from this path. No file hash was recorded at evaluation time.
+
 ### Problems
 
 | Problem | Fix |
