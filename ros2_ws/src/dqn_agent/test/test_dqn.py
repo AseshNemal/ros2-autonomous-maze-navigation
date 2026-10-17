@@ -255,3 +255,27 @@ def test_step_does_not_accept_a_scan_from_before_the_stop():
     env = _fake_env([(9.9, 11.0)] * 3)                # odom advances but the scan never gets fresh
     with pytest.raises(RuntimeError, match="Timed out"):
         env._wait(lambda: env._fresh_after(10.5), timeout=0.3)
+
+
+def _success_env(truth):
+    """Fake env whose odometry says it is AT the goal; `truth` is what Gazebo reports (or None)."""
+    env = _fake_env([(10.4, 10.3)])
+    env.goal = (0.0, 0.0)             # odometry position is (0, 0): odom distance 0 <= tolerance
+    env.truth_xy = lambda: truth
+    return env
+
+
+def test_odometry_success_needs_ground_truth_confirmation():
+    # odometry drift: the robot is really 0.4 m from the goal -> NOT a success, episode continues
+    _, _, terminated, info = _success_env((0.4, 0.0)).step(0)
+    assert info["success"] is False and terminated is False
+    assert info["distance_to_goal"] == pytest.approx(0.4)
+    # really within tolerance -> success, distance reported from the truth
+    _, _, terminated, info = _success_env((0.1, 0.0)).step(0)
+    assert info["success"] is True and terminated is True
+    assert info["distance_to_goal"] == pytest.approx(0.1)
+
+
+def test_success_falls_back_to_odometry_when_truth_unavailable():
+    _, _, terminated, info = _success_env(None).step(0)
+    assert info["success"] is True and terminated is True

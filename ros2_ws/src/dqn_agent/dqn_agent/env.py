@@ -146,6 +146,20 @@ class GazeboDQNEnv:
         xy, yaw = pose_xyyaw(self.odom)
         return odom_to_world(xy, yaw, self.odom_ref, self.start)
 
+    def truth_xy(self):
+        """Ground-truth robot (x, y) from Gazebo, or None if it cannot be read.
+
+        Wheel odometry drifts (measured: about 0.2 m after 1.5 m, and it keeps counting while the wheels
+        push against a wall), so a goal claimed from odometry is confirmed with this before it counts.
+        """
+        try:
+            out = subprocess.run(["gz", "topic", "-e", "-t", f"/world/{self.world}/dynamic_pose/info", "-n", "1"],
+                                 capture_output=True, text=True, timeout=15, check=False).stdout
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            return None
+        m = re.search(r'name: "burger"\s+id: \d+\s+position \{\s+x: ([-+0-9.eE]+)\s+y: ([-+0-9.eE]+)', out)
+        return (float(m.group(1)), float(m.group(2))) if m else None
+
     def target(self):
         """Current target: next waypoint when guidance is on, else the final goal."""
         if self.wp_index < len(self.waypoints):
@@ -242,6 +256,11 @@ class GazeboDQNEnv:
         collision = clearance < self.collision_distance
         final_distance = math.hypot(self.goal[0] - xy[0], self.goal[1] - xy[1])
         success = final_distance <= self.goal_tolerance
+        if success:   # odometry says "arrived": confirm with the true pose before ending the episode as a success
+            truth = self.truth_xy()
+            if truth is not None:
+                final_distance = math.hypot(self.goal[0] - truth[0], self.goal[1] - truth[1])
+                success = final_distance <= self.goal_tolerance
         terminated = collision or success
         if waypoint_hit:   # target switched: progress term would compare different targets
             before = distance
