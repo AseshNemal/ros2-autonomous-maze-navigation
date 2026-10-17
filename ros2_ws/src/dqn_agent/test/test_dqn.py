@@ -196,3 +196,62 @@ def test_time_limit_truncation_is_not_stored_as_terminal():
     from dqn_agent import train
     src = inspect.getsource(train.run)
     assert "agent.observe(state, action, reward, next_state, terminated)" in src
+
+
+def _fake_env(stamps_after_stop):
+    """GazeboDQNEnv without ROS: spin_once delivers one scripted (scan_stamp, odom_stamp) pair per call.
+
+    Each scan's ranges are all stamp/10, so the returned clearance identifies which scan step() used.
+    """
+    from types import SimpleNamespace as NS
+    from dqn_agent.env import GazeboDQNEnv
+
+    def msg_stamp(t):
+        return NS(sec=int(t), nanosec=int(round((t - int(t)) * 1e9)))
+
+    def odom(t):
+        return NS(header=NS(stamp=msg_stamp(t)),
+                  pose=NS(pose=NS(position=NS(x=0.0, y=0.0), orientation=NS(x=0.0, y=0.0, z=0.0, w=1.0))))
+
+    def scan(t):
+        return NS(header=NS(stamp=msg_stamp(t)), ranges=[t / 10.0] * 360)
+
+    env = GazeboDQNEnv.__new__(GazeboDQNEnv)
+    script = list(stamps_after_stop)
+    env.calls = 0
+
+    class Rclpy:
+        @staticmethod
+        def spin_once(node, timeout_sec=0.0):
+            env.calls += 1
+            if script:
+                st, ot = script.pop(0)
+                env.scan, env.odom = scan(st), odom(ot)
+
+    env.rclpy, env.node = Rclpy, None
+    env.scan, env.odom = scan(10.0), odom(10.0)       # what was received during the motion
+    env.scan_count = env.odom_count = 5
+    env.publish = lambda *a, **k: None
+    env.stop = lambda: None
+    env.previous_distance, env.action_duration = 1.0, 0.0
+    env.waypoints, env.wp_index, env.waypoint_tolerance, env.waypoint_bonus = [], 0, 0.15, 5.0
+    env.goal, env.start, env.odom_ref = (5.0, 0.0), (0.0, 0.0, 0.0), (0.0, 0.0, 0.0)
+    env.goal_tolerance, env.collision_distance = 0.22, 0.15
+    env.path_length, env.previous_xy, env.steps, env.sim_start = 0.0, (0.0, 0.0), 0, 0.0
+    env.target = lambda: env.goal
+    return env
+
+
+def test_step_waits_for_a_scan_taken_after_the_action():
+    # The stop happens at sim time 10.0 (last odom). A scan stamped 9.9 (older) and one stamped exactly 10.0
+    # (taken at the stop, not after it) must be ignored; the scan stamped 10.3 is the first acceptable one.
+    env = _fake_env([(9.9, 10.1), (10.0, 10.2), (10.3, 10.3)])
+    state, reward, terminated, info = env.step(0)
+    assert info["min_scan"] == pytest.approx(1.03)    # the 10.3 scan, not 9.9 / 10.0
+    assert env.calls >= 3
+
+
+def test_step_does_not_accept_a_scan_from_before_the_stop():
+    env = _fake_env([(9.9, 11.0)] * 3)                # odom advances but the scan never gets fresh
+    with pytest.raises(RuntimeError, match="Timed out"):
+        env._wait(lambda: env._fresh_after(10.5), timeout=0.3)

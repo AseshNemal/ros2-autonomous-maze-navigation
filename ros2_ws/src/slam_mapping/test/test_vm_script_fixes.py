@@ -93,3 +93,28 @@ def test_tf2_ros_py_declared_because_tour_driver_imports_tf2_ros():
     assert "from tf2_ros import" in (PKG / "scripts" / "tour_map_drive.py").read_text()
     deps = {e.text.strip() for e in ET.parse(PKG / "package.xml").getroot().iter("exec_depend")}
     assert "tf2_ros_py" in deps
+
+
+def test_cleanup_sigkills_nav2_processes_that_ignore_sigterm():
+    """A stale lifecycle_manager that ignored SIGTERM survived the cleanup and made later goals abort."""
+    for name in ("demo.sh", "verify_on_vm.sh"):
+        text = (ROOT / "tools" / name).read_text()
+        assert re.search(r'pkill -9 -f "[^"]*lib/nav2_[^"]*"', text), name
+    # mechanics on a harmless dummy (the real pattern would also kill a live Nav2): SIGTERM is ignored,
+    # SIGKILL works
+    import os
+    import signal
+    import time
+    marker = f"dummy_nav2_{os.getpid()}"
+    proc = subprocess.Popen(["bash", "-c", f'trap "" TERM; exec -a {marker} sleep 30'])
+    try:
+        time.sleep(0.3)
+        subprocess.run(["pkill", "-f", marker])
+        time.sleep(0.3)
+        assert proc.poll() is None, "dummy should survive SIGTERM"
+        subprocess.run(["pkill", "-9", "-f", marker])
+        proc.wait(timeout=3)
+        assert proc.returncode == -signal.SIGKILL
+    finally:
+        if proc.poll() is None:
+            proc.kill()

@@ -124,6 +124,10 @@ class GazeboDQNEnv:
     def _stamp(msg):
         return msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
 
+    def _fresh_after(self, t_ref):
+        return (self.scan is not None and self.odom is not None
+                and self._stamp(self.scan) > t_ref and self._stamp(self.odom) > t_ref)
+
     def _wait(self, predicate, timeout=60.0):
         end = time.monotonic() + timeout
         while time.monotonic() < end:
@@ -213,13 +217,16 @@ class GazeboDQNEnv:
             raise RuntimeError("Call reset before step")
         linear, angular = ACTIONS[int(action)]
         before = self.previous_distance
-        s0, o0 = self.scan_count, self.odom_count
         stop_at = time.monotonic() + self.action_duration
         while time.monotonic() < stop_at:
             self.publish(linear, angular)
             self.rclpy.spin_once(self.node, timeout_sec=0.05)
         self.stop()
-        self._wait(lambda: self.scan_count > s0 and self.odom_count > o0, timeout=4.0)
+        # The state must describe the robot AFTER the action: a scan received while the robot was still
+        # moving (up to 0.2 s old at 5 Hz, a third of a 0.3 s step) is not acceptable. Wait for a scan and
+        # an odom stamped later than the stop.
+        t_stop = self._stamp(self.odom)
+        self._wait(lambda: self._fresh_after(t_stop), timeout=4.0)
         xy = self.world_pose()[0]
         waypoint_hit = False
         while (self.wp_index < len(self.waypoints) and
