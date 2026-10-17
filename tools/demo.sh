@@ -5,6 +5,9 @@
 # never run on top of a test run (two programs driving one robot / killing each other's Gazebo)
 if pgrep -f "tools/verify_on_vm.sh|tools/run_all.sh" >/dev/null; then
   echo "A test run (run_all.sh / verify_on_vm.sh) is in progress. Wait for it to finish, then run the demo."; exit 1; fi
+# never run Nav2 on top of a DQN run: both publish /cmd_vel
+if pgrep -f "[t]rain_dqn|[e]valuate_dqn" >/dev/null; then
+  echo "A DQN run (tools/run_dqn_model.sh) is in progress. Stop it first (Ctrl+C in its terminal), then start Nav2."; exit 1; fi
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 export TURTLEBOT3_MODEL=burger MAZE_REPO="$REPO"
 set +u; source /opt/ros/jazzy/setup.bash
