@@ -11,3 +11,4 @@ Notes on individual files:
 - `cmdline_drive_and_goal_attempt1_*.txt`: `drive.sh` worked; its `send_goal.sh` part failed only because the `ros2 action` CLI is not installed (fixed by `tools/send_goal.py`). `cmdline_send_goal_*.txt` is the passing retest.
 - `tour_odom_vs_truth_*`: odometry-based tour pose compared with Gazebo ground truth (before and after the tour change).
 Results from the removed 6 x 6 maze: `../old_6x6_maze/` (historical).
+- `nav2_consecutive_goals_no_reset_*.txt`: 4 goals in a row without reset (clean run). `reset_robot_wrong_pose_estimate_*.txt`: deliberately wrong pose estimate, then `tools/reset_robot.sh`, then a goal (final passing run; two earlier attempts failed because of the `set_initial_pose.py` defects fixed afterwards and are not saved).

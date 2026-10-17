@@ -10,6 +10,9 @@
 | Nav2 3 goals (ground-truth map, reset to spawn before each goal) | **PASS 3/3**, 1 recovery in total (table in report 4.2) | `nav_20261017-113157.log`, `nav2_results_20261017-113157.csv` |
 | command-line goal (`tools/send_goal.sh G3`, `... 1.25 0.75`) | PASS: both reached (10.3 s, 26.1 s). First attempt only failed because Nav2 bring-up aborted once (the retry in `demo.sh` handles it) | `cmdline_send_goal_20261017.txt` |
 | command-line driving (`tools/drive.sh`) | PASS: forward moved 0.35 m, left turned in place, back reversed, stayed at rest afterwards | `cmdline_drive_and_goal_attempt1_20261017.txt` |
+| Nav2, 4 goals in a row WITHOUT reset (G1, G2, G3, G1; the way a user clicks goals) | PASS 4/4, 0 recoveries; AMCL within 0.1 m of Gazebo truth after every goal. (An earlier attempt aborted every goal because a stale copy of my own test script was also sending goals; that attempt is not evidence either way.) | `nav2_consecutive_goals_no_reset_20261017.txt` |
+| "RViz and Gazebo show the robot in different places" (user report) | **Reproduced**: a wrong "2D Pose Estimate" gives AMCL (2.45, 1.99) vs truth (0.12, -0.10) and the next goal ABORTS with 15-17 recoveries. **Fixed/verified**: `tools/reset_robot.sh` -> both (0.24, 0.00)/(0.22, 0.02) and the next goal SUCCEEDED in 10.3 s, 0 recoveries. Two defects found in `set_initial_pose.py` (clock-based timeout expired under sim time; stale latched `/amcl_pose` counted as confirmation) | `reset_robot_wrong_pose_estimate_20261017.txt` |
+| Nav2 bring-up timeouts (`Failed to change state for node: docking_server`, nodes "unconfigured") | Seen when stale FastDDS shared-memory files (180 in `/dev/shm`) were left by killed processes. Scripts now use `FASTDDS_BUILTIN_TRANSPORTS=UDPv4` and clear stale files; 2 clean bring-ups afterwards | scratch logs only |
 | SLAM mapping (coverage tour + slam_toolbox + `validate_map.py`) | **FAIL vs our own thresholds.** Run 1 (odometry-steered tour): coverage 0.890, precision 0.256, free-OK 0.905. Run 2 (tour steered by the SLAM pose with side-wall centring): coverage 0.971, precision **0.819**, free-OK 1.000, unknown 0.083. Thresholds were 0.85 / 0.85 / 0.95; the assignment itself sets no numeric threshold | `slam_20261017-102242.log`, `slam_20261017-111320.log`, `slam_validation_*.txt`, `slam_map_20261017-111320.png` |
 | DQN | **Smoke test only (3 episodes, no learning claimed):** training loop, `burger` reset, CSV and checkpoint work on the new maze; 3/3 episodes ended in collision; `evaluate_dqn` correctly refused the 0-update checkpoint. **No training or evaluation result exists for the current maze.** | `dqn_20261017-115922.log`, `dqn_train_none_20261017-115922.csv` |
 | Nav2 on the SLAM-built map | NOT TESTED | |
@@ -58,7 +61,7 @@ Stage lengths (real time; the simulation cannot be sped up): build ~1 min, sim 0
 | TurtleBot3 Burger + LiDAR | PASS (`/scan` 5 Hz, one robot `burger`) |
 | SLAM mapping | IMPLEMENTED and run on the current maze; map **below our own 0.85 precision threshold** (0.819), coverage 0.971 |
 | Autonomous navigation (Nav2 A*) | PASS 3/3 goals on the current maze (ground-truth map) |
-| User clicks a goal | Command-line equivalent PASS; RViz **2D Goal Pose** click NOT VERIFIED here (needs the VM desktop) |
+| User clicks a goal | Command-line equivalent PASS; RViz **Nav2 Goal** click NOT VERIFIED here (needs the VM desktop) |
 | Deep Q-learning | IMPLEMENTED; unit tests pass; current-maze smoke test only; **no learning demonstrated** |
 | Performance (time, path efficiency) | Nav2 measured (report 4.2); DQN comparison has no data |
 | Report (5-7 pages), demo | draft in `docs/report.md`; PDF must be regenerated (`tools/build_report_pdf.sh`) |

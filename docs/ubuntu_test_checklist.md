@@ -21,7 +21,7 @@ export TURTLEBOT3_MODEL=burger
 | 5b | Nav2 on the SLAM map (only if step 4 passed) | `MAP_SOURCE=slam bash tools/verify_on_vm.sh nav` | 3/3 goals | |
 | 6 | DQN (pure **and** hybrid, changed settings) | `EPISODES=300 bash tools/verify_on_vm.sh dqn` | stage completes; compare the two `dqn_eval_*` CSVs. Expect pure DQN to fail long goals; hybrid should reach some. About 1-2 h | `GUIDANCE=waypoints EPISODES=500 bash tools/verify_on_vm.sh dqn` |
 | 7 | Comparison table | `ros2 run dqn_agent compare_navigation --help` then run with the Nav2 and DQN eval CSVs | table for the report (do not edit numbers by hand) | |
-| 8 | **VIVA / screenshots** | `bash tools/demo.sh` (Gazebo + RViz); press **2D Goal Pose**, click three different points | robot reaches each; screenshot RViz with the path, Gazebo with the maze, the three CSV rows | `docs/demonstration.md`, `docs/viva.md` |
+| 8 | **VIVA / screenshots** | `bash tools/demo.sh` (Gazebo + RViz); press **Nav2 Goal**, click three different points | robot reaches each; screenshot RViz with the path, Gazebo with the maze, the three CSV rows | `docs/demonstration.md`, `docs/viva.md` |
 | 9 | Optional world | `ros2 launch maze_simulation maze_simulation.launch.py world:=custom_maze x_pose:=0.25 y_pose:=0.0` | window shows Jayanga's 7 x 6 arena, one Burger spawned, `/scan` `/odom` publish. Default launch (no `world:=`) must still show our maze | note result honestly in `docs/testing.md` |
 
 ## SLAM fails again - diagnose in this order (do not retune blindly)

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # One command live demo: builds, opens Gazebo (maze + TurtleBot3) and Nav2 + RViz.
-# Then in RViz press "2D Goal Pose" and click on the map. Ctrl+C stops everything.
+# Then in RViz press "Nav2 Goal" and click on the map. Ctrl+C stops everything.
 # Usage: bash tools/demo.sh [teleop|slam]   (default = navigation with the ground-truth map)
 # never run on top of a test run (two programs driving one robot / killing each other's Gazebo)
 if pgrep -f "tools/verify_on_vm.sh|tools/run_all.sh" >/dev/null; then
@@ -8,10 +8,14 @@ if pgrep -f "tools/verify_on_vm.sh|tools/run_all.sh" >/dev/null; then
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 export TURTLEBOT3_MODEL=burger MAZE_REPO="$REPO"
 set +u; source /opt/ros/jazzy/setup.bash
+# FastDDS shared memory leaves stale lock files when processes are killed and then makes Nav2 bring-up time out;
+# use plain UDP (always available, plenty fast for this simulation).
+export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
 cd "$REPO/ros2_ws" && colcon build --symlink-install --parallel-workers 1 || exit 1
 source install/setup.bash
 kill_stack() { pkill -f "ros2 launch" 2>/dev/null; pkill -f "gz sim" 2>/dev/null; pkill -f parameter_bridge 2>/dev/null
-  pkill -f robot_state_publisher 2>/dev/null; pkill -f rviz2 2>/dev/null; pkill -f "nav2_|opennav" 2>/dev/null; sleep 2; pkill -9 -f "gz sim|parameter_bridge" 2>/dev/null; true; }
+  pkill -f robot_state_publisher 2>/dev/null; pkill -f rviz2 2>/dev/null; pkill -f "nav2_|opennav" 2>/dev/null
+  pkill -f "twist_stamper|cmd_vel_watchdog|set_initial_pose|teleop_twist_keyboard|tour_map_drive" 2>/dev/null; rm -f /dev/shm/fastrtps_* /dev/shm/sem.fastrtps_* 2>/dev/null; sleep 2; pkill -9 -f "gz sim|parameter_bridge" 2>/dev/null; true; }
 kill_stack   # a leaked bridge from an earlier run causes TF/clock jumps
 trap 'kill $(jobs -p) 2>/dev/null; kill_stack' EXIT
 ros2 launch maze_simulation maze_simulation.launch.py &   # wraps main's custom_maze.launch.py + cmd_vel watchdog

@@ -1,0 +1,19 @@
+Nav2: active [3]
+at start: truth (0.24, 0.00)  amcl (0.23, 0.01)
+--- goal G1
+  distance remaining 0.20 m, recoveries 0
+RESULT: SUCCEEDED after 38.9 s
+after G1: truth (1.24, 2.14)  amcl (1.19, 2.10)
+--- goal G2
+  distance remaining 0.17 m, recoveries 0
+RESULT: SUCCEEDED after 26.2 s
+after G2: truth (1.25, 0.89)  amcl (1.18, 0.98)
+--- goal G3
+  distance remaining 0.25 m, recoveries 0
+RESULT: SUCCEEDED after 23.5 s
+after G3: truth (-0.27, 0.60)  amcl (-0.30, 0.57)
+--- goal G1
+  distance remaining 0.22 m, recoveries 0
+RESULT: SUCCEEDED after 24.8 s
+after G1: truth (1.14, 2.25)  amcl (1.06, 2.22)
+finished

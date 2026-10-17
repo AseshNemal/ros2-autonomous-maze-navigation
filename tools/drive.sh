@@ -9,6 +9,9 @@
 #   bash tools/drive.sh stop
 set -uo pipefail
 set +u; source /opt/ros/jazzy/setup.bash; set -u
+# FastDDS shared memory leaves stale lock files when processes are killed and then makes Nav2 bring-up time out;
+# use plain UDP (always available, plenty fast for this simulation).
+export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
 CMD="${1:-}"; SECS="${2:-1}"
 case "$CMD" in
   forward) LX=0.15; AZ=0.0 ;;

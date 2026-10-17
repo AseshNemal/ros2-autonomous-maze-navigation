@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Command-line alternative to clicking "2D Goal Pose" in RViz (use when the remote desktop mouse is unreliable).
+# Command-line alternative to clicking "Nav2 Goal" in RViz (use when the remote desktop mouse is unreliable).
 # Needs the simulation and Nav2 to be running (bash tools/demo.sh, or the sim + navigation launch files).
 #
 #   bash tools/send_goal.sh G1            # goal cell 1 from config/mission.yaml
@@ -11,6 +11,9 @@
 set -uo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 set +u; source /opt/ros/jazzy/setup.bash; [ -f "$REPO/ros2_ws/install/setup.bash" ] && source "$REPO/ros2_ws/install/setup.bash"; set -u
+# FastDDS shared memory leaves stale lock files when processes are killed and then makes Nav2 bring-up time out;
+# use plain UDP (always available, plenty fast for this simulation).
+export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
 if [ $# -eq 1 ]; then
   read -r X Y < <(python3 - "$1" "$REPO" <<'EOF'
 import sys

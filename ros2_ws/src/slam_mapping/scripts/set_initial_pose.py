@@ -3,6 +3,7 @@
 import argparse
 import math
 import sys
+import time
 
 import rclpy
 from geometry_msgs.msg import PoseWithCovarianceStamped
@@ -20,13 +21,15 @@ class InitialPose(Node):
         self.create_subscription(PoseWithCovarianceStamped, "/amcl_pose", self.on_pose, qos)
         self.done = False
         self.tries = 0
-        self.deadline = self.get_clock().now().nanoseconds + int(timeout * 1e9)
+        # wall-clock timeout: with use_sim_time the node clock jumps when /clock first arrives, which would
+        # expire a clock-based deadline before anything is published
+        self.deadline = time.monotonic() + timeout
         self.create_timer(2.0, self.tick)
 
     def tick(self):
         if self.done:
             return
-        if self.get_clock().now().nanoseconds > self.deadline:
+        if time.monotonic() > self.deadline:
             self.get_logger().error("AMCL did not confirm the initial pose in time")
             self.done = True
             return
@@ -41,9 +44,12 @@ class InitialPose(Node):
         self.pub.publish(m)
         self.tries += 1
 
-    def on_pose(self, _):
-        if self.tries and not self.done:
-            self.get_logger().info(f"AMCL pose received after {self.tries} publishes")
+    def on_pose(self, m):
+        # /amcl_pose is latched: an OLD pose (e.g. from before a reset) is replayed first, so only a pose near
+        # the requested one counts as confirmation
+        p = m.pose.pose.position
+        if self.tries and not self.done and math.hypot(p.x - self.x, p.y - self.y) < 0.35:
+            self.get_logger().info(f"AMCL pose ({p.x:.2f}, {p.y:.2f}) confirmed after {self.tries} publishes")
             self.done = True
 
 

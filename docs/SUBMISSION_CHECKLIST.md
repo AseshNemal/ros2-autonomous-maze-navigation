@@ -11,7 +11,7 @@ NOT VERIFIED = not executed on the current maze. Results from the removed 6 x 6 
 | 3 | TurtleBot3 Burger + LiDAR | PASS | `sim_20261017-101901.log` (/scan 5 Hz, /odom 49.6 Hz, TF, /clock) |
 | 4 | SLAM / mapping | **PASS (implemented), accuracy below our own threshold** | Coverage 0.971, precision 0.819 (own threshold 0.85), free-OK 1.0. The brief sets no numeric threshold. `slam_validation_20261017-111320.txt`, `slam_map_20261017-111320.png` |
 | 5 | Autonomous navigation (Nav2 Dijkstra/A*) | PASS | 3/3 goals, 1 recovery total: `nav2_results_20261017-113157.csv` |
-| 6 | User clicks a goal; robot goes there avoiding collisions | **PARTIAL** | RViz **2D Goal Pose** click NOT VERIFIED by script (needs the VM desktop - do it at the VIVA). Equivalent command-line goals PASS (`tools/send_goal.sh`, `cmdline_send_goal_20261017.txt`). |
+| 6 | User clicks a goal; robot goes there avoiding collisions | **PARTIAL** | RViz **Nav2 Goal** click NOT VERIFIED by script (needs the VM desktop - do it at the VIVA). Equivalent command-line goals PASS (`tools/send_goal.sh`, `cmdline_send_goal_20261017.txt`). |
 | 7 | Deep Q-learning implemented | PASS (implemented) | 12 unit tests pass; training loop, reset, CSV, checkpoint ran on the current maze (3-episode smoke) |
 | 8 | DQN trained / evaluated, learning shown | **NOT VERIFIED / NOT DEMONSTRATED** | No training or evaluation result on the current maze. Old maze: 0 successes in 50 episodes, 0/9 evaluation (historical). Do not claim learning. |
 | 9 | Efficiency: travel time, path length, obstacle avoidance | PARTIAL | Nav2 times/distances measured (report 4.2 C2). DQN comparison: no data. |
@@ -35,7 +35,7 @@ python3 tools/verify_static.py                         # expect OVERALL: PASS (+
 
 # 1. VIVA demo (VM desktop, not SSH). Terminal 1 (same as: bash tools/auto.sh):
 bash tools/demo.sh                                     # Gazebo + RViz + Nav2; wait for ">>> Nav2 is ACTIVE"
-#    click 2D Goal Pose in RViz, 3 different points.  If the mouse is unreliable, Terminal 2:
+#    click Nav2 Goal in RViz, 3 different points.  If the mouse is unreliable, Terminal 2:
 bash tools/send_goal.sh G1 ; bash tools/send_goal.sh G2 ; bash tools/send_goal.sh G3
 
 # 2. Keyboard driving instead (stop the demo first; same as: bash tools/manual.sh):

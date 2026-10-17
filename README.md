@@ -30,9 +30,9 @@ STAGES="sim nav" bash tools/run_all.sh               # chosen stages with a timi
 
 ```bash
 bash tools/manual.sh     # REMOTE / MANUAL control: Gazebo + keyboard (keep the terminal focused: i , j l k, z = slower)
-bash tools/auto.sh       # AUTOMATIC: Gazebo + RViz + Nav2 -> in RViz press "2D Goal Pose", click the map, drag
+bash tools/auto.sh       # AUTOMATIC: Gazebo + RViz + Nav2 -> in RViz press "Nav2 Goal", click the map, drag
 ```
-Clicking in the Gazebo window does nothing (it only selects objects); the robot is driven by the keyboard in `manual.sh` or by RViz goals in `auto.sh`. Close one before starting the other (both drive `/cmd_vel`).
+**In RViz use the "Nav2 Goal" button (not "2D Pose Estimate": that moves where Nav2 believes the robot is, RViz and Gazebo then show different places and goals abort with many recoveries - fix with `bash tools/reset_robot.sh`).** Clicking in the Gazebo window does nothing (it only selects objects); the robot is driven by the keyboard in `manual.sh` or by RViz goals in `auto.sh`. Close one before starting the other (both drive `/cmd_vel`).
 
 ### Mouse or keyboard not working over remote desktop? Use commands
 
@@ -46,7 +46,7 @@ bash tools/drive.sh forward 2         # alternative: timed driving (forward|back
 
 ### B. Live demo (see the robot, click a goal)
 
-**One command** (VM desktop): `bash tools/demo.sh` - builds, opens Gazebo + RViz. In RViz press **2D Goal Pose** and click the map. `Ctrl+C` stops all. Variants: `bash tools/demo.sh slam` (build the map live), `bash tools/demo.sh teleop` (drive with the keyboard, see "Drive with the keyboard" below). The default mode (Nav2) does **not** accept keyboard input; it only takes clicked goals.
+**One command** (VM desktop): `bash tools/demo.sh` - builds, opens Gazebo + RViz. In RViz press **Nav2 Goal** and click the map. `Ctrl+C` stops all. Variants: `bash tools/demo.sh slam` (build the map live), `bash tools/demo.sh teleop` (drive with the keyboard, see "Drive with the keyboard" below). The default mode (Nav2) does **not** accept keyboard input; it only takes clicked goals.
 
 Or step by step:
 
@@ -72,7 +72,7 @@ ros2 launch maze_navigation navigation.launch.py \
 
 **Window layout:** press **Super+Left** on the Gazebo window and **Super+Right** on RViz to tile them side by side (see [docs/gui_review.md](docs/gui_review.md)).
 
-**Click a goal:** in RViz press **2D Goal Pose** (top toolbar), then click on the map where you want the robot to go and drag to set the direction. The robot drives there by itself. Repeat for 3 different points (this is the VIVA demo).
+**Click a goal:** in RViz press **Nav2 Goal** (top toolbar), then click on the map where you want the robot to go and drag to set the direction. The robot drives there by itself. Repeat for 3 different points (this is the VIVA demo).
 
 **Drive with the keyboard** (instead of clicking goals): stop any running demo (`Ctrl+C`), then in a terminal on the VM desktop run
 

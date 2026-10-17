@@ -18,6 +18,9 @@ LOG="$OUT/${STAGE}_$TS.log"
 export TURTLEBOT3_MODEL=burger MAZE_REPO="$REPO"
 set +u
 source /opt/ros/jazzy/setup.bash
+# FastDDS shared memory leaves stale lock files when processes are killed and then makes Nav2 bring-up time out;
+# use plain UDP (always available, plenty fast for this simulation).
+export FASTDDS_BUILTIN_TRANSPORTS=UDPv4
 [ -f "$WS/install/setup.bash" ] && source "$WS/install/setup.bash"
 set -u
 # Kill EVERYTHING from a previous run. A leaked ros_gz_bridge keeps republishing /clock,/tf,/scan

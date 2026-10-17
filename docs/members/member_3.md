@@ -30,7 +30,7 @@ NavFn planner with `use_astar: true` (A*), MPPI controller (DiffDrive), AMCL loc
 ros2 launch maze_simulation maze_simulation.launch.py gui:=false     # terminal 1 (or gui:=true)
 ros2 launch maze_navigation navigation.launch.py                    # terminal 2: ground-truth map + RViz
 #   SLAM map: map:=<abs>/maze_slam.yaml initial_x:=0.0 initial_y:=0.0
-# RViz: click "2D Goal Pose" (this is the clicked-goal requirement), or:
+# RViz: click "Nav2 Goal" (this is the clicked-goal requirement), or:
 ros2 run maze_navigation run_three_goals.py --csv ~/nav2_results.csv --reset-to-start
 ```
 Or staged: `tools/verify_on_vm.sh nav` (`MAP_SOURCE=slam` for the SLAM map).
