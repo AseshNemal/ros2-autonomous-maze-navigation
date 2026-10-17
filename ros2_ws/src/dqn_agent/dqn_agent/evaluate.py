@@ -61,7 +61,7 @@ def run(args):
             n = 0
             for a, b in maze.evaluation_pairs(layout):
                 ref = (len(maze.cell_path(layout, a, b)) - 1) * layout["cell_size_m"]
-                sx, sy = maze.cell_xy(layout, a)
+                sx, sy = maze.spawn_xy(layout)      # evaluation always starts from the original spawn
                 gx, gy = maze.cell_xy(layout, b)
                 wps = maze.waypoints(layout, a, b) if args.guidance == "waypoints" else []
                 for _ in range(args.episodes):

@@ -166,7 +166,7 @@ class GazeboDQNEnv:
         self.wp_index = 0
         x, y, yaw = self.start
         # No Gazebo-wide reset: other simulations and nodes remain untouched.
-        req = ('name: "turtlebot3_burger" '
+        req = ('name: "burger" '
                f'position: {{x: {x}, y: {y}, z: 0.05}} '
                f'orientation: {{z: {math.sin(yaw / 2)}, w: {math.cos(yaw / 2)}}}')
         try:

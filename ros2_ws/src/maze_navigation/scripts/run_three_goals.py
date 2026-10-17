@@ -10,7 +10,7 @@ cell-centre A* lower-bound estimates (0.5 m per cell), so efficiency can exceed
   ros2 run maze_navigation run_three_goals.py --csv ~/nav2_results.csv \\
       [--map-source world|slam] [--reset-to-start] [--goals 1.25,2.25;-0.25,0.75]
 
---reset-to-start teleports the robot back to the start cell via Gazebo before each
+--reset-to-start teleports the robot back to the spawn pose via Gazebo before each
 goal (same start->goal pairs as the DQN evaluation, for a like-for-like comparison).
 Without it the goals are visited in sequence (what the VIVA demo does) and the
 reference length is measured from the previous goal.
@@ -35,7 +35,7 @@ from rclpy.node import Node
 from rclpy.parameter import Parameter
 from rclpy.qos import qos_profile_sensor_data
 
-ROBOT = "turtlebot3_burger"
+ROBOT = "burger"          # entity spawned by custom_maze.launch.py
 WORLD = "custom_maze"
 
 
@@ -144,7 +144,7 @@ def main():
     tools = load_maze_tools()
     layout = tools.load()
     start_cell = layout["start_cell"]
-    start_w = tools.cell_center(layout, *start_cell)
+    start_w = tools.spawn_xy(layout)
     off = start_w if args.map_source == "slam" else (0.0, 0.0)
     to_map = lambda w: (w[0] - off[0], w[1] - off[1])
 

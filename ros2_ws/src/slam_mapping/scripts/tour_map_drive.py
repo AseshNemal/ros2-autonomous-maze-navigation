@@ -71,7 +71,7 @@ def main(argv=None):
     layout = tools.load()
     route = coverage_route(layout, tools)
     wps = [tools.cell_center(layout, r, c) for r, c in route]
-    sx, sy = wps[0]
+    sx, sy = tools.spawn_xy(layout)        # the robot starts at the original spawn pose
 
     class Tour(Node):
         def __init__(self):
@@ -90,7 +90,7 @@ def main(argv=None):
             yaw = math.atan2(2 * (q.w * q.z + q.x * q.y), 1 - 2 * (q.y * q.y + q.z * q.z))
             cur = (m.pose.pose.position.x, m.pose.pose.position.y, yaw)
             if self.ref is None:
-                self.ref = cur                       # robot starts at the start cell, facing +x
+                self.ref = cur                       # robot starts at the spawn pose, facing +x
             ox, oy, oyaw = self.ref
             dx, dy = cur[0] - ox, cur[1] - oy
             c, s = math.cos(-oyaw), math.sin(-oyaw)

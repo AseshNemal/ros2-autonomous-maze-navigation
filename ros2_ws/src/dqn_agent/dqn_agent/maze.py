@@ -36,6 +36,10 @@ def cell_xy(layout, cell):
     return tools.cell_center(layout, *cell)
 
 
+def spawn_xy(layout):
+    return tools.spawn_xy(layout)
+
+
 def cell_path(layout, a, b):
     return tools.shortest_cells(layout, a, b)
 

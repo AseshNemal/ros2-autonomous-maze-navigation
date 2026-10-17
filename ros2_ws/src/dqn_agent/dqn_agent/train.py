@@ -96,7 +96,8 @@ def run(args):
             for episode in range(1, args.episodes + 1):
                 a, b = pick_pair(layout, args, rng, episode)
                 yaw = rng.uniform(-3.14159, 3.14159) if args.random_heading else 0.0
-                sx, sy = maze.cell_xy(layout, a)
+                sx, sy = (maze.spawn_xy(layout) if a == tuple(layout["start_cell"])
+                          else maze.cell_xy(layout, a))
                 wps = maze.waypoints(layout, a, b) if args.guidance == "waypoints" else []
                 state = env.reset(start=(sx, sy, yaw), goal=maze.cell_xy(layout, b), waypoints=wps)
                 reward_sum, losses, info = 0.0, [], {}

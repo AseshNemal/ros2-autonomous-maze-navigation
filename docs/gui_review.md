@@ -1,5 +1,7 @@
 # Gazebo / RViz GUI review (IE4060 Assignment 02)
 
+> **HISTORICAL (previous 6 x 6 maze).** This document describes analysis/work done on the removed 6 x 6 layout (`maze.world`, `maze_layout.yaml`, start (-1.25, -1.25)). Its numbers, thresholds and corridor widths do not apply to the current maze (`custom_maze.sdf`, 7 x 6, spawn (0.25, 0.0)). Current results: `docs/testing.md`, `docs/results/vm/`.
+
 Goal: the ordinary Gazebo Harmonic and RViz2 interfaces, configured so the maze, robot, goals and path are visible. No custom dashboards, plugins or visual styling.
 
 ## What was actually wrong (checked before changing anything)

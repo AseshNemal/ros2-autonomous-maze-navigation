@@ -1,4 +1,4 @@
-# SLAM Toolbox online async mapping, tuned for the 3 m x 3 m, 0.5 m-cell maze.
+# SLAM Toolbox online async mapping, for the custom_maze world (3.5 m x 3.0 m, 0.5 m cells, thin walls).
 # Frames follow the TurtleBot3 Gazebo simulation (verify with check_sim_topics.py).
 slam_toolbox:
   ros__parameters:

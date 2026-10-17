@@ -60,6 +60,17 @@ with tempfile.TemporaryDirectory() as tmp:
     check("committed ground-truth map == regenerated",
           filecmp.cmp(Path(tmp) / "gt.pgm", SRC / "slam_mapping/maps/maze_groundtruth.pgm", shallow=False))
 
+# the friend's original files (JayangaWeerasinghe, origin/main) must stay byte-identical
+ORIGINALS = ["worlds/custom_maze.sdf", "generate_maze.py", "launch/custom_maze.launch.py"]
+for rel in ORIGINALS:
+    path = f"ros2_ws/src/maze_simulation/{rel}"
+    head = subprocess.run(["git", "hash-object", path], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    main = subprocess.run(["git", "rev-parse", f"origin/main:{path}"], cwd=ROOT, capture_output=True, text=True)
+    if main.returncode:
+        print(f"SKIP  {rel} vs origin/main (origin/main not available)")
+    else:
+        check(f"{rel} is byte-identical to origin/main", head == main.stdout.strip(), f"{head} != {main.stdout.strip()}")
+
 # ---- cross-file consistency (world names, install rules, message types, paths, spawn clearance) ----
 import re  # noqa: E402
 
@@ -67,8 +78,9 @@ SIM = SRC / "maze_simulation"
 world_name = ET.parse(SIM / "worlds/custom_maze.sdf").getroot().find("world").get("name")
 check("the world is named 'custom_maze' (spawn, gz services and DQN env use /world/custom_maze)", world_name == "custom_maze")
 launch_src = (SIM / "launch/maze_simulation.launch.py").read_text()
-check("maze_simulation.launch.py spawns into the world named in the world file",
-      'arguments=["-world", world_name,' in launch_src and 'default_value="custom_maze.sdf"' in launch_src)
+check("maze_simulation.launch.py wraps main's custom_maze.launch.py and adds the cmd_vel watchdog",
+      "custom_maze.launch.py" in launch_src and "cmd_vel_watchdog.py" in launch_src
+      and "turtlebot3_burger" not in launch_src)
 bad = []
 for f in list(SRC.rglob("*.py")) + list(SRC.rglob("*.yaml")) + list((ROOT / "tools").glob("*.sh")):
     for m in re.finditer(r"/world/([A-Za-z_]+)/", f.read_text()):
@@ -110,10 +122,20 @@ for pkg in ("maze_simulation", "slam_mapping", "maze_navigation", "dqn_agent"):
     check(f"{pkg}/package.xml declares the dependencies its code imports", not missing, str(missing))
 
 # velocity message type: the Gazebo bridge expects TwistStamped on /cmd_vel; only twist_stamper may use plain Twist
-bridge = yaml.safe_load((SIM / "config/bridge.yaml").read_text())
-cmd = next(e for e in bridge if e["ros_topic_name"] == "cmd_vel")
-check("bridge /cmd_vel is geometry_msgs/msg/TwistStamped ROS->GZ",
-      cmd["ros_type_name"] == "geometry_msgs/msg/TwistStamped" and cmd["direction"] == "ROS_TO_GZ")
+stock_bridge = Path("/opt/ros/jazzy/share/turtlebot3_gazebo/params/turtlebot3_burger_bridge.yaml")
+if stock_bridge.is_file():   # the bridge used by main's custom_maze.launch.py
+    bridge = yaml.safe_load(stock_bridge.read_text())
+    cmd = next(e for e in bridge if e["ros_topic_name"] == "cmd_vel")
+    check("stock TurtleBot3 bridge /cmd_vel is geometry_msgs/msg/TwistStamped ROS->GZ",
+          cmd["ros_type_name"] == "geometry_msgs/msg/TwistStamped" and cmd["direction"] == "ROS_TO_GZ")
+else:
+    print("SKIP  stock TurtleBot3 bridge check (turtlebot3_gazebo not installed)")
+check("no leftover duplicate bridge config", not (SIM / "config/bridge.yaml").exists())
+check("old 6x6 layout files are gone", not (SIM / "worlds/maze.world").exists()
+      and not (SIM / "config/maze_layout.yaml").exists())
+check("robot entity name 'burger' (main's launcher) is used, not 'turtlebot3_burger'",
+      not [f.name for f in list(SRC.rglob("*.py")) + list((ROOT / "tools").glob("*.sh"))
+           if f.name != "custom_maze.launch.py" and 'name: "turtlebot3_burger"' in f.read_text()])
 plain = [f.name for f in SRC.rglob("*.py") if "test" not in f.parts and
          re.search(r"create_publisher\(\s*Twist\s*,\s*[\"']/cmd_vel[\"']", f.read_text())]
 check("no node publishes plain Twist on /cmd_vel", not plain, str(plain))
@@ -137,7 +159,8 @@ def clearance(px, py, boxes):
                for x0, y0, x1, y1 in boxes)
 
 
-spawn = (0.25, 0.0)
+spawn = maze_tools.spawn_xy(layout)
+check("mission.yaml spawn == main's launcher spawn (0.25, 0.0)", spawn == (0.25, 0.0))
 check("spawn (0.25, 0.0) clears every wall by > 0.105 m + margin",
       clearance(*spawn, [(a - half, b - half, c + half, d + half) for a, b, c, d in walls]) > 0.105 + 0.05)
 for custom in sorted((SIM / "worlds").glob("custom_maze.sdf")):

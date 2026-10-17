@@ -68,7 +68,22 @@ def main():
         "odom_frame": seen["odom_frame"], "odom_child": seen["odom_child"],
         "tf_pairs": sorted(map(list, seen["tf_pairs"])), "cmd_vel_types": cmd_types,
     }
+    # exactly one robot in the custom_maze world, named `burger` (main's launcher), and the right world
+    import re
+    import subprocess
+    try:
+        pose = subprocess.run(["timeout", "10", "gz", "topic", "-e", "-n", "1", "-t",
+                               "/world/custom_maze/dynamic_pose/info"],
+                              capture_output=True, text=True).stdout
+    except FileNotFoundError:
+        pose = ""
+    names = re.findall(r'name: "([^"]+)"', pose)
+    results["gz_entities"] = sorted(set(names))
     checks = [
+        ("Gazebo world is custom_maze (/world/custom_maze/dynamic_pose/info answers)", bool(names)),
+        ("exactly one robot entity 'burger' (no duplicate/turtlebot3_burger)",
+         names.count("burger") == 1 and not any(n.startswith("turtlebot3") for n in names)),
+        ("scan frame is base_scan", seen["scan_frame"] == "base_scan"),
         ("/scan publishing (>=3 Hz)", results["scan_rate_hz"] >= 3),
         ("/odom publishing (>=5 Hz)", results["odom_rate_hz"] >= 5),
         ("/clock publishing", results["clock_rate_hz"] > 0),

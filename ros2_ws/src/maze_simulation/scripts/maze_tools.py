@@ -77,6 +77,11 @@ def centre(layout):
     return layout.get("center_x_m", 0.0), layout.get("center_y_m", 0.0)
 
 
+def spawn_xy(layout):
+    """World (x, y) where the robot is spawned (main's custom_maze.launch.py: 0.25, 0.0)."""
+    return tuple(layout["spawn_xy"])
+
+
 def cell_center(layout, row, col):
     """World (x, y) of a cell centre (maze centre at center_x_m/center_y_m, default origin)."""
     s = layout["cell_size_m"]
@@ -223,7 +228,8 @@ def main(argv=None):
             print(r)
     else:
         print(ascii_art(layout))
-        print("start", layout["start_cell"], cell_center(layout, *layout["start_cell"]))
+        print("spawn", spawn_xy(layout), "start cell", layout["start_cell"],
+              cell_center(layout, *layout["start_cell"]))
         for r in reference_paths(layout):
             print("goal", r["goal_cell"], "xy=(%.2f, %.2f)" % tuple(r["goal_xy"]),
                   "cells", r["cells"], "turns", r["turns"])

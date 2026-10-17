@@ -1,0 +1,60 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-17-10-18-33-787769-asesh-QEMU-Virtual-Machine-8962
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [8971]
+[INFO] [create-2]: process started with pid [8972]
+[INFO] [parameter_bridge-3]: process started with pid [8974]
+[INFO] [robot_state_publisher-4]: process started with pid [8975]
+[INFO] [cmd_vel_watchdog.py-5]: process started with pid [8976]
+[robot_state_publisher-4] [INFO] [1792212514.167688902] [robot_state_publisher]: Robot initialized
+[create-2] [INFO] [1792212514.754557957] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-2]: process has finished cleanly [pid 8972]
+[parameter_bridge-3] [INFO] [1792212515.177174013] [ros_gz_bridge]: Creating GZ->ROS Bridge: [clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792212515.179930885] [ros_gz_bridge]: Creating GZ->ROS Bridge: [joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792212515.184147764] [ros_gz_bridge]: Creating GZ->ROS Bridge: [odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792212515.187043565] [ros_gz_bridge]: Creating GZ->ROS Bridge: [tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792212515.189163880] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792212515.190224309] [ros_gz_bridge]: Creating GZ->ROS Bridge: [imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-3] [INFO] [1792212515.190666723] [ros_gz_bridge]: Creating GZ->ROS Bridge: [scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+PASS  /scan publishing (>=3 Hz)
+PASS  /odom publishing (>=5 Hz)
+PASS  /clock publishing
+PASS  odom frame is 'odom'
+PASS  odom child is base_footprint
+PASS  TF odom->base_footprint present
+PASS  /cmd_vel type is TwistStamped
+{
+  "scan_rate_hz": 5.0,
+  "odom_rate_hz": 49.75,
+  "clock_rate_hz": 995.75,
+  "tf_msgs": 559,
+  "scan_frame": "base_scan",
+  "scan_beams": 360,
+  "scan_range_max": 3.5,
+  "odom_frame": "odom",
+  "odom_child": "base_footprint",
+  "tf_pairs": [
+    [
+      "base_link",
+      "wheel_left_link"
+    ],
+    [
+      "base_link",
+      "wheel_right_link"
+    ],
+    [
+      "odom",
+      "base_footprint"
+    ]
+  ],
+  "cmd_vel_types": [
+    "geometry_msgs/msg/TwistStamped"
+  ]
+}
+[10:18:45] STAGE RESULT: PASS (sim); log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/sim_20261017-101830.log

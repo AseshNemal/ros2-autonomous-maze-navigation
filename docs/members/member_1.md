@@ -1,10 +1,10 @@
 # Member 1 - Gazebo Simulation (`maze_simulation`)
 
 Status key: **VERIFIED** (actually run and passed) · **IMPLEMENTED** (code exists, runtime check pending) · **FAILED** · **BLOCKED** · **NOT IMPLEMENTED**.
-No Gazebo/Nav2/SLAM/DQN runtime test has been run from this branch yet; only the static checks in `tools/verify_static.py` (Mac) have. See [testing.md](../testing.md).
+Runtime status on the current maze (`custom_maze.sdf`): see [testing.md](../testing.md) and `docs/results/vm/`.
 
 ## Responsibility
-Custom Gazebo Harmonic maze from the assignment's Figure 1, TurtleBot3 Burger spawn, LiDAR/odometry bridging, simulation launch, consistent frames and naming.
+JayangaWeerasinghe's Gazebo Harmonic maze (`custom_maze.sdf`, an approximately 7 x 6 approximation of Figure 1, which is 6 x 6), TurtleBot3 Burger spawn, LiDAR/odometry bridging, simulation launch, consistent frames and naming.
 
 ## Provenance
 **Member 1's own commits (JayangaWeerasinghe, on `main`: `541b10a`, `a26c3cf`, `7261e7b`)** are preserved in this branch's history with their authorship: the environment-versions document, test-map assets, and an optional prototype world (`worlds/custom_maze.sdf`, `generate_maze.py`, `FIGURE1_README.md`, `launch/custom_maze.launch.py`). That world is a 7 x 6 approximation of Figure 1, which is a 6 x 6 grid (`tools/check_figure1.py`), so it is **not** the default and is not used for any result; it is selectable with `world:=custom_maze`. The default maze world, the generator, the bridge, spawn, watchdog and verification scripts are *emergency integration code* by the branch owner (AI-assisted), commit `82efae1` (`feat(simulation)`), and must not be presented as Member 1's work.
@@ -13,18 +13,18 @@ Custom Gazebo Harmonic maze from the assignment's Figure 1, TurtleBot3 Burger sp
 - `config/mission.yaml` - start cell and the three goal cells. The maze itself is not duplicated: main's `custom_maze.sdf` (JayangaWeerasinghe, `generate_maze.py`) is 7 columns x 6 rows of 0.5 m cells (3.5 m x 3.0 m). Main describes it as an approximation of Figure 1; compare the `maze_tools.py check` ASCII render with the figure by eye.
 - `scripts/maze_tools.py` - reads the maze from `custom_maze.sdf`: ground-truth map, grid A* reference path lengths, ASCII preview. It no longer generates a world.
 - `worlds/custom_maze.sdf` - main's Figure 1 world, used unmodified (16 wall models, outer 3.5x3.0 m boundary, 0.01 m thick, 0.2 m high). World name `custom_maze`. `maze_tools.py` converts it to the cell/wall graph used by the planners.
-- `launch/maze_simulation.launch.py` - gz sim (GUI or headless `-s --headless-rendering`), robot_state_publisher, `ros_gz_sim create` of the TurtleBot3 Burger model, `ros_gz_bridge`.
-- `config/bridge.yaml` - bridge for `/clock /odom /tf /joint_states /scan /imu /cmd_vel`.
+- `launch/custom_maze.launch.py` - JayangaWeerasinghe's launcher (unchanged from `main`): Gazebo with `custom_maze.sdf`, spawns ONE Burger named `burger` at (0.25, 0.0), the stock TurtleBot3 bridge (`/clock /odom /tf /joint_states /scan /imu /cmd_vel`), robot_state_publisher.
+- `launch/maze_simulation.launch.py` - integration wrapper: includes `custom_maze.launch.py` (`gui:=false` -> `-s -r --headless-rendering`) and adds `cmd_vel_watchdog.py`. All demos, SLAM, Nav2, DQN and the test stages start the world through it; there is no second world or bridge definition.
 - `scripts/check_sim_topics.py` - PASS/FAIL contract check (rates, frames, TF, `/cmd_vel` type).
 
 ## Architecture
 ```
 custom_maze.sdf --gz sim--> TB3 Burger (turtlebot3_gazebo model.sdf)
                                                     |  gz topics
-                                              ros_gz_bridge (bridge.yaml)
+                                              ros_gz_bridge (stock turtlebot3_burger_bridge.yaml)
                               /scan /odom /tf /clock /imu /joint_states  <--  --> /cmd_vel (TwistStamped)
 ```
-Robot model and URDF come from the apt `turtlebot3_gazebo` package (not copied). Entity name: `turtlebot3_burger`. Frames: `odom -> base_footprint -> base_link -> base_scan`. Spawn: world (0.25, 0.0), yaw 0 (main's; nearest cell (5,1)).
+Robot model and URDF come from the apt `turtlebot3_gazebo` package (not copied). Entity name: `burger` (spawned by main's launcher; all reset/pose code uses it). Frames: `odom -> base_footprint -> base_link -> base_scan`. Spawn: world (0.25, 0.0), yaw 0 (main's; nearest cell (5,1)).
 
 ## Interface (contract for the other members)
 | Topic | Type | Direction |

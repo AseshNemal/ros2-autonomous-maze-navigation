@@ -33,7 +33,7 @@ def gz_pose():
     """Ground-truth (x, y, yaw) of the robot from Gazebo."""
     out = subprocess.run("timeout 10 gz topic -e -n 1 -t /world/custom_maze/dynamic_pose/info",
                          shell=True, capture_output=True, text=True).stdout
-    i = out.find('name: "turtlebot3_burger"')
+    i = out.find('name: "burger"')
     if i < 0:
         return None
     blk = out[i:]
@@ -165,7 +165,7 @@ def run_teleop():
     probe = Probe()
     probe.spin(3)
     gt0 = gz_pose()
-    check("robot 'turtlebot3_burger' exists in the Gazebo world", gt0 is not None,
+    check("robot 'burger' exists in the Gazebo world", gt0 is not None,
           "pose=(%.2f, %.2f)" % gt0[:2] if gt0 else "not found")
     check("/odom publishing", probe.n_odom > 5, f"{probe.n_odom} msgs in 3 s")
     check("/scan publishing (360 beams)", probe.n_scan > 3 and probe.scan is not None and len(probe.scan.ranges) == 360,
