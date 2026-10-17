@@ -36,7 +36,7 @@ from rclpy.parameter import Parameter
 from rclpy.qos import qos_profile_sensor_data
 
 ROBOT = "turtlebot3_burger"
-WORLD = "maze"
+WORLD = "custom_maze"
 
 
 def load_maze_tools():

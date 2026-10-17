@@ -117,6 +117,6 @@ def test_curriculum_pairs_and_waypoints():
 def test_config_builds_agent():
     from dqn_agent.config import load_config, agent_kwargs
     cfg = load_config()
-    assert cfg["environment"]["world"] == "maze"
+    assert cfg["environment"]["world"] == "custom_maze"
     a = DQNAgent(**agent_kwargs(cfg))
     assert a.gamma == cfg["training"]["gamma"]
