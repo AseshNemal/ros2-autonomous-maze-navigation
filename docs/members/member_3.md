@@ -1,5 +1,7 @@
 # Member 3 - Autonomous Navigation (`maze_navigation`)
 
+**Yashas S.P.R** - IT23185470 - Nav2 Navigation and Evaluation
+
 Status key: **VERIFIED** (actually run and passed) · **IMPLEMENTED** (code exists, runtime check pending) · **FAILED** · **BLOCKED** · **NOT IMPLEMENTED**.
 Runtime results on the current maze (Ubuntu VM, 2026-10-17): see [testing.md](../testing.md) and `docs/results/vm/`. Summary below under Tests.
 

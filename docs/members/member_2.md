@@ -1,5 +1,7 @@
 # Member 2 - SLAM and Mapping (`slam_mapping`)
 
+**Lakshitha W G D** - IT23367562 - Mapping and Localization
+
 Status key: **VERIFIED** (actually run and passed) · **IMPLEMENTED** (code exists, runtime check pending) · **FAILED** · **BLOCKED** · **NOT IMPLEMENTED**.
 Runtime results on the current maze (Ubuntu VM, 2026-10-17): see [testing.md](../testing.md) and `docs/results/vm/`. Summary below under Tests.
 

@@ -1,5 +1,7 @@
 # Member 4 - Deep Q-Learning (`dqn_agent`)
 
+**Nemal L A** - IT23236264 - Deep Q-Learning
+
 Status key: **VERIFIED** (actually run and passed) · **IMPLEMENTED** (code exists, runtime check pending) · **FAILED** · **BLOCKED** · **NOT IMPLEMENTED**.
 Runtime results on the current maze (Ubuntu VM): see [testing.md](../testing.md) and `docs/results/vm/`. Summary below under Tests; the post-fix DQN runs are still PENDING.
 
