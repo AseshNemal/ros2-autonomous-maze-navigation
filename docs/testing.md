@@ -12,6 +12,8 @@
 | Nav2 on the SLAM map | NOT TESTED |
 | remote-desktop input delay / disconnects | NOT VERIFIABLE by script (sim real-time factor 1.00) |
 
+**Note:** the VM results above were measured in the earlier 6 x 6 maze. The project layout is now main's 7 x 6 Figure 1 maze; the simulation, SLAM, Nav2 and DQN stages have not been re-run in it (only `tools/verify_static.py`).
+
 The older sections below were written before these runs and are kept for history.
 
 

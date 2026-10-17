@@ -80,9 +80,9 @@ def generate_launch_description():
             description="Absolute path to the saved map YAML file "
             "(default: ground-truth maze map; pass your SLAM map for the real pipeline)",
         ),
-        DeclareLaunchArgument("initial_x", default_value="-1.25",
+        DeclareLaunchArgument("initial_x", default_value="0.25",
                               description="Spawn x in the MAP frame (SLAM map: 0.0)"),
-        DeclareLaunchArgument("initial_y", default_value="-1.25",
+        DeclareLaunchArgument("initial_y", default_value="-0.25",
                               description="Spawn y in the MAP frame (SLAM map: 0.0)"),
         DeclareLaunchArgument("initial_yaw", default_value="0.0"),
         DeclareLaunchArgument(

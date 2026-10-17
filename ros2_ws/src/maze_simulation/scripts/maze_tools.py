@@ -25,17 +25,24 @@ def load(path=None):
         return yaml.safe_load(f)
 
 
+def centre(layout):
+    """World position of the maze centre (the Figure 1 maze is not centred on the origin)."""
+    return layout.get("center_x_m", 0.0), layout.get("center_y_m", 0.0)
+
+
 def cell_center(layout, row, col):
-    """World (x, y) of a cell centre; maze centre is the origin."""
+    """World (x, y) of a cell centre (maze centre at center_x_m/center_y_m, default origin)."""
     s = layout["cell_size_m"]
-    return ((col + 0.5) * s - layout["cols"] * s / 2,
-            layout["rows"] * s / 2 - (row + 0.5) * s)
+    cx, cy = centre(layout)
+    return ((col + 0.5) * s - layout["cols"] * s / 2 + cx,
+            layout["rows"] * s / 2 - (row + 0.5) * s + cy)
 
 
 def wall_segments(layout):
     """Return list of (x0, y0, x1, y1) wall centre lines, outer + interior."""
     s, R, C = layout["cell_size_m"], layout["rows"], layout["cols"]
     hx, hy = C * s / 2, R * s / 2
+    cx, cy = centre(layout)
     segs = [(-hx, hy, hx, hy), (-hx, -hy, hx, -hy),
             (-hx, -hy, -hx, hy), (hx, -hy, hx, hy)]
     for line, row in layout["vertical_walls"]:
@@ -44,7 +51,7 @@ def wall_segments(layout):
     for line, col in layout["horizontal_walls"]:
         y = hy - line * s
         segs.append((col * s - hx, y, (col + 1) * s - hx, y))
-    return segs
+    return [(x0 + cx, y0 + cy, x1 + cx, y1 + cy) for x0, y0, x1, y1 in segs]
 
 
 def open_neighbours(layout):
@@ -114,6 +121,7 @@ def reference_paths(layout):
 
 def world_sdf(layout):
     t, h = layout["wall_thickness_m"], layout["wall_height_m"]
+    gx, gy = centre(layout)
     models = []
     for i, (x0, y0, x1, y1) in enumerate(wall_segments(layout)):
         length = math.hypot(x1 - x0, y1 - y0) + t   # overlap corners
@@ -148,6 +156,7 @@ def world_sdf(layout):
     </light>
     <model name="ground_plane">
       <static>true</static>
+      <pose>{gx:.4f} {gy:.4f} 0 0 0 0</pose>
       <link name="link">
         <collision name="collision"><geometry><plane><normal>0 0 1</normal><size>6 6</size></plane></geometry></collision>
         <visual name="visual"><geometry><plane><normal>0 0 1</normal><size>6 6</size></plane></geometry>
@@ -164,24 +173,26 @@ def write_map(layout, prefix, res=0.05, margin=0.25):
     """Rasterise walls into a trinary occupancy grid (free=254, occ=0)."""
     s, R, C = layout["cell_size_m"], layout["rows"], layout["cols"]
     hx, hy = C * s / 2 + margin, R * s / 2 + margin
+    cx, cy = centre(layout)
     W, H = round(2 * hx / res), round(2 * hy / res)
     img = [[254] * W for _ in range(H)]
-    half = layout["wall_thickness_m"] / 2
+    # a wall thinner than a pixel must still be drawn: raster at least one cell wide
+    half = max(layout["wall_thickness_m"], res) / 2
     for x0, y0, x1, y1 in wall_segments(layout):
         xa, xb = min(x0, x1) - half, max(x0, x1) + half
         ya, yb = min(y0, y1) - half, max(y0, y1) + half
         for j in range(H):
-            y = hy - (j + 0.5) * res
+            y = cy + hy - (j + 0.5) * res
             if ya <= y <= yb:
                 for i in range(W):
-                    x = (i + 0.5) * res - hx
+                    x = cx + (i + 0.5) * res - hx
                     if xa <= x <= xb:
                         img[j][i] = 0
     pgm = Path(f"{prefix}.pgm")
     pgm.write_bytes(f"P5\n{W} {H}\n255\n".encode() + bytes(v for row in img for v in row))
     Path(f"{prefix}.yaml").write_text(
         f"image: {pgm.name}\nmode: trinary\nresolution: {res}\n"
-        f"origin: [{-hx:.3f}, {-hy:.3f}, 0.0]\nnegate: 0\n"
+        f"origin: [{cx - hx:.3f}, {cy - hy:.3f}, 0.0]\nnegate: 0\n"
         "occupied_thresh: 0.65\nfree_thresh: 0.196\n")
     return W, H
 
