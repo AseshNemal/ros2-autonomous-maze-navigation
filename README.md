@@ -26,7 +26,7 @@ bash tools/run_all.sh
 
 ### B. Live demo (see the robot, click a goal)
 
-**One command** (VM desktop): `bash tools/demo.sh` - builds, opens Gazebo + RViz. In RViz press **2D Goal Pose** and click the map. `Ctrl+C` stops all. Variants: `bash tools/demo.sh slam` (build the map live), `bash tools/demo.sh teleop` (drive with keyboard).
+**One command** (VM desktop): `bash tools/demo.sh` - builds, opens Gazebo + RViz. In RViz press **2D Goal Pose** and click the map. `Ctrl+C` stops all. Variants: `bash tools/demo.sh slam` (build the map live), `bash tools/demo.sh teleop` (drive with the keyboard, see "Drive with the keyboard" below). The default mode (Nav2) does **not** accept keyboard input; it only takes clicked goals.
 
 Or step by step:
 
@@ -53,6 +53,26 @@ ros2 launch maze_navigation navigation.launch.py \
 **Window layout:** press **Super+Left** on the Gazebo window and **Super+Right** on RViz to tile them side by side (see [docs/gui_review.md](docs/gui_review.md)).
 
 **Click a goal:** in RViz press **2D Goal Pose** (top toolbar), then click on the map where you want the robot to go and drag to set the direction. The robot drives there by itself. Repeat for 3 different points (this is the VIVA demo).
+
+**Drive with the keyboard** (instead of clicking goals): stop any running demo (`Ctrl+C`), then in a terminal on the VM desktop run
+
+```bash
+cd ~/ros2-autonomous-maze-navigation
+bash tools/demo.sh teleop
+```
+
+Gazebo opens and `teleop_twist_keyboard` starts in that same terminal. Keep **that terminal focused** (keys pressed in the Gazebo or RViz window do nothing) and use:
+
+| Key | Action | Key | Action |
+|---|---|---|---|
+| `i` | forward | `,` | backward |
+| `j` | turn left (in place) | `l` | turn right (in place) |
+| `u` | forward + left | `o` | forward + right |
+| `m` | backward + left | `.` | backward + right |
+| `k` or space | stop | `q` / `z` | speed up / slow down (all) |
+| `w` / `x` | speed up / slow down (forward speed only) | `e` / `c` | speed up / slow down (turn speed only) |
+
+The default speed is fast for the 0.5 m corridors: press `z` a few times before driving. `Ctrl+C` quits and stops the simulation. Do not run teleop together with Nav2, SLAM mapping or DQN (all publish `/cmd_vel`).
 
 **SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `python3 ros2_ws/src/slam_mapping/scripts/tour_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.
 
