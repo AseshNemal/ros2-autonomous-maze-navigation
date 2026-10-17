@@ -75,7 +75,7 @@ class GazeboDQNEnv:
     def __init__(self, world="custom_maze", goal=(-0.25, 0.75),
                  start=(0.25, 0.0, 0.0), action_duration=0.30,
                  goal_tolerance=0.22, collision_distance=0.15,
-                 waypoint_tolerance=0.25, waypoint_bonus=5.0):
+                 waypoint_tolerance=0.15, waypoint_bonus=5.0):
         import rclpy
         from rclpy.node import Node
         from rclpy.qos import qos_profile_sensor_data

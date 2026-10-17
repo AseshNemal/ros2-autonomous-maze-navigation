@@ -1,0 +1,35 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-23-59-31-669765-asesh-QEMU-Virtual-Machine-62962
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [62971]
+[INFO] [robot_state_publisher-2]: process started with pid [62972]
+[INFO] [create-3]: process started with pid [62974]
+[INFO] [cmd_vel_watchdog.py-4]: process started with pid [62975]
+[INFO] [parameter_bridge-5]: process started with pid [62976]
+[robot_state_publisher-2] [INFO] [1792175371.950312629] [robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1792175372.522814074] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 62974]
+[parameter_bridge-5] [INFO] [1792175372.986256528] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175372.991457589] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175372.995659681] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175372.999105513] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175373.004079655] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175373.006038678] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1792175373.007214108] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> /cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[parameter_bridge-5] [INFO] [1792175375.843045362] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+episode=1 (1, 1)->(0, 1) reward=-44.28 steps=12 success=False collision=True epsilon=0.999 updates=0
+episode=2 (0, 2)->(0, 1) reward=-49.39 steps=15 success=False collision=True epsilon=0.999 updates=0
+episode=3 (4, 3)->(3, 3) reward=-45.20 steps=14 success=False collision=True epsilon=0.998 updates=0
+episode=4 (4, 0)->(1, 0) reward=-46.24 steps=16 success=False collision=True epsilon=0.997 updates=0
+episode=5 (4, 5)->(5, 4) reward=-43.17 steps=6 success=False collision=True epsilon=0.997 updates=0
+completed=5; checkpoint=/home/asesh/.ros/dqn_agent/checkpoints/dqn_maze.npz
+Evaluation failed: Checkpoint has zero optimizer updates; not a trained model
+[ros2run]: Process exited with failure 1
+[00:00:04] FAIL: evaluate_dqn
+[00:00:04] STAGE RESULT: FAIL (dqn); log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/dqn_20261016-235928.log

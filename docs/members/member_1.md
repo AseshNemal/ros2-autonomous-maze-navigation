@@ -7,7 +7,7 @@ No Gazebo/Nav2/SLAM/DQN runtime test has been run from this branch yet; only the
 Custom Gazebo Harmonic maze from the assignment's Figure 1, TurtleBot3 Burger spawn, LiDAR/odometry bridging, simulation launch, consistent frames and naming.
 
 ## Provenance
-**No original Member 1 commits exist on any branch.** Everything here is *emergency integration code* by the branch owner (AI-assisted), commit `82efae1` (`feat(simulation)`). It must not be presented as a teammate's original work. If Member 1 delivers, review and merge theirs separately and keep whatever is better.
+**Member 1's own commits (JayangaWeerasinghe, on `main`: `541b10a`, `a26c3cf`, `7261e7b`)** are preserved in this branch's history with their authorship: the environment-versions document, test-map assets, and an optional prototype world (`worlds/custom_maze.sdf`, `generate_maze.py`, `FIGURE1_README.md`, `launch/custom_maze.launch.py`). That world is a 7 x 6 approximation of Figure 1, which is a 6 x 6 grid (`tools/check_figure1.py`), so it is **not** the default and is not used for any result; it is selectable with `world:=custom_maze`. The default maze world, the generator, the bridge, spawn, watchdog and verification scripts are *emergency integration code* by the branch owner (AI-assisted), commit `82efae1` (`feat(simulation)`), and must not be presented as Member 1's work.
 
 ## Contribution
 - `config/mission.yaml` - start cell and the three goal cells. The maze itself is not duplicated: main's `custom_maze.sdf` (JayangaWeerasinghe, `generate_maze.py`) is 7 columns x 6 rows of 0.5 m cells (3.5 m x 3.0 m). Main describes it as an approximation of Figure 1; compare the `maze_tools.py check` ASCII render with the figure by eye.

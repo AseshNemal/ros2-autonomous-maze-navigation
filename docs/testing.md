@@ -14,6 +14,16 @@
 
 **Note:** the VM results above were measured in the earlier 6 x 6 maze. The project layout is now main's 7 x 6 Figure 1 maze; the simulation, SLAM, Nav2 and DQN stages have not been re-run in it (only `tools/verify_static.py`).
 
+### Cloud checks without ROS/Gazebo (made on the previous 6 x 6 layout; layout-specific rows no longer apply) (Claude Cloud, 2026-10-16; details `docs/cloud_analysis.md`, raw output `docs/cloud_checks/`)
+| Check | Result |
+|---|---|
+| `python3 tools/verify_static.py` | **PASS** (61 checks: compile, YAML/XML, world and map regeneration, package/CMake/dependency/world-name/message-type/spawn consistency, Figure-1 match, perfect-pose mapping ceiling, pytest slam_mapping 4 / maze_navigation 6 / dqn_agent 12) |
+| `tools/check_figure1.py` | layout == Figure 1: 12 + 12 interior walls, 0 differences |
+| Merge of `origin/main` (JayangaWeerasinghe, `7261e7b`) | merged; ament_cmake kept; his world is optional (`world:=custom_maze`) |
+| SLAM map analysis (`tools/analyse_slam_map.py`) | recorded map is distorted (20 % of wall pixels axis-aligned vs 77 %); scan-matcher window narrowed - **unverified on the VM** |
+| DQN surrogate (`tools/offline_dqn_surrogate.py`, kinematic model, **not Gazebo**) | old settings reproduce the VM failure; new waypoint tolerance / epsilon decay: hybrid 20/30, pure 0/30 on the three goals - **unverified on the VM** |
+| Not runnable here | colcon build, Gazebo, SLAM Toolbox, Nav2, teleop, `world:=custom_maze`, DQN in Gazebo |
+
 The older sections below were written before these runs and are kept for history.
 
 

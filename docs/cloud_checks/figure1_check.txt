@@ -1,0 +1,4 @@
+figure walls: 12 vertical + 12 horizontal interior; layout: 12 + 12
+only in figure: [] []
+only in layout: [] []
+FIGURE1 MATCH

@@ -1,0 +1,65 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-22-24-57-820853-asesh-QEMU-Virtual-Machine-45854
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [45874]
+[INFO] [robot_state_publisher-2]: process started with pid [45876]
+[INFO] [create-3]: process started with pid [45877]
+[INFO] [parameter_bridge-4]: process started with pid [45878]
+[robot_state_publisher-2] [INFO] [1792169698.546334077] [robot_state_publisher]: Robot initialized
+[parameter_bridge-4] [INFO] [1792169699.620892766] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792169699.639888082] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792169699.657394573] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792169699.664991783] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792169699.669143428] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792169699.673174407] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792169699.675988684] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> /cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[create-3] [INFO] [1792169700.416681176] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 45877]
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-22-25-04-581118-asesh-QEMU-Virtual-Machine-45986
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [async_slam_toolbox_node-1]: process started with pid [46007]
+[async_slam_toolbox_node-1] [INFO] [1792169704.862081119] [slam_toolbox]: Node using stack size 40000000
+[async_slam_toolbox_node-1] [INFO] [1792169705.019502622] [slam_toolbox]: Configuring
+[async_slam_toolbox_node-1] [INFO] [1792169705.043543627] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[async_slam_toolbox_node-1] [INFO] [1792169705.060527460] [slam_toolbox]: Activating
+[async_slam_toolbox_node-1] Info: clipped range threshold to be within minimum and maximum range!
+[async_slam_toolbox_node-1] Registering sensor: [Custom Described Lidar]
+[parameter_bridge-4] [INFO] [1792169715.166454357] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+[22:35:15] /map publishers: / slam_toolbox 
+[22:35:15] FAIL: /map is not published by slam_toolbox alone (found: / slam_toolbox ) - stop other ROS stacks
+[INFO] [1792170316.283088814] [map_saver]: 
+	map_saver lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1792170316.284087827] [map_saver]: Creating
+[INFO] [1792170316.284189912] [map_saver]: Configuring
+[INFO] [1792170316.320322715] [map_saver]: Saving map from 'map' topic to '/home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam' file
+[WARN] [1792170316.320360549] [map_saver]: Free threshold unspecified. Setting it to default value: 0.250000
+[WARN] [1792170316.320387799] [map_saver]: Occupied threshold unspecified. Setting it to default value: 0.650000
+[WARN] [1792170317.964688282] [map_io]: Image format unspecified. Setting it to: pgm
+[INFO] [1792170317.966217927] [map_io]: Received a 62 X 61 map @ 0.05 m/pix
+[INFO] [1792170317.978407294] [map_io]: Writing map occupancy data to /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.pgm
+[INFO] [1792170317.981498126] [map_io]: Writing map metadata to /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml
+[INFO] [1792170317.981978965] [map_io]: Map saved
+[INFO] [1792170317.982020716] [map_saver]: Map saved successfully
+[INFO] [1792170317.982619098] [map_saver]: Destroying
+Saved: /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml
+Validate: python3 validate_map.py /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_slam.yaml --map-origin-in-world -1.25 -1.25
+size_px: [62, 61]
+size_m: [3.1, 3.05]
+resolution: 0.05
+unknown_fraction: 0.63
+wall_coverage: 0.518
+precision: 0.821
+free_ok: 1.0
+pass: False
+RESULT: FAIL
+[22:35:18] FAIL: map validation (see slam_validation_20261016-222453.txt)
+[22:35:18] STAGE RESULT: FAIL (slam); log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/slam_20261016-222453.log

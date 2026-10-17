@@ -1,0 +1,1155 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-21-17-18-270494-asesh-QEMU-Virtual-Machine-34446
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [34455]
+[INFO] [robot_state_publisher-2]: process started with pid [34456]
+[INFO] [create-3]: process started with pid [34457]
+[INFO] [parameter_bridge-4]: process started with pid [34459]
+[robot_state_publisher-2] [INFO] [1792165638.604902426] [robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1792165639.273142583] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 34457]
+[parameter_bridge-4] [INFO] [1792165639.616176847] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165639.618585660] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165639.621360198] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165639.622966060] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165639.624384955] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165639.625393999] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165639.626050236] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> /cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[gazebo-1] [1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="turtlebot3_burger"]/link[@name="base_scan"]/sensor[@name="hls_lfcd_lds"]/gz_frame_id:/opt/ros/jazzy/share/turtlebot3_gazebo/models/turtlebot3_burger/model.sdf:L141]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-21-17-20-835550-asesh-QEMU-Virtual-Machine-34530
+[INFO] [launch]: Default logging verbosity is set to INFO
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: egl: failed to create dri2 screen
+[gazebo-1] libEGL warning: NEEDS EXTENSION: falling back to kms_swrast
+[INFO] [map_server-1]: process started with pid [34575]
+[INFO] [amcl-2]: process started with pid [34576]
+[INFO] [lifecycle_manager-3]: process started with pid [34577]
+[INFO] [controller_server-4]: process started with pid [34578]
+[INFO] [smoother_server-5]: process started with pid [34579]
+[INFO] [planner_server-6]: process started with pid [34580]
+[INFO] [route_server-7]: process started with pid [34581]
+[INFO] [behavior_server-8]: process started with pid [34582]
+[INFO] [bt_navigator-9]: process started with pid [34583]
+[INFO] [waypoint_follower-10]: process started with pid [34584]
+[INFO] [velocity_smoother-11]: process started with pid [34585]
+[INFO] [collision_monitor-12]: process started with pid [34586]
+[INFO] [opennav_docking-13]: process started with pid [34587]
+[INFO] [lifecycle_manager-14]: process started with pid [34588]
+[INFO] [twist_stamper.py-15]: process started with pid [34589]
+[INFO] [set_initial_pose.py-16]: process started with pid [34590]
+[amcl-2] [INFO] [1792165641.247579717] [amcl]: 
+[amcl-2] 	amcl lifecycle node launched. 
+[amcl-2] 	Waiting on external lifecycle transitions to activate
+[amcl-2] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[amcl-2] [INFO] [1792165641.313356967] [amcl]: Creating
+[route_server-7] [INFO] [1792165641.512255450] [route_server]: 
+[route_server-7] 	route_server lifecycle node launched. 
+[route_server-7] 	Waiting on external lifecycle transitions to activate
+[route_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-5] [INFO] [1792165641.524013631] [smoother_server]: 
+[smoother_server-5] 	smoother_server lifecycle node launched. 
+[smoother_server-5] 	Waiting on external lifecycle transitions to activate
+[smoother_server-5] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-5] [INFO] [1792165641.525939090] [smoother_server]: Creating smoother server
+[lifecycle_manager-14] [INFO] [1792165641.555576760] [lifecycle_manager_navigation]: Creating
+[lifecycle_manager-14] [INFO] [1792165641.564470191] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[lifecycle_manager-3] [INFO] [1792165641.944011026] [lifecycle_manager_localization]: Creating
+[lifecycle_manager-3] [INFO] [1792165642.013025334] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[opennav_docking-13] [INFO] [1792165642.038144974] [docking_server]: 
+[opennav_docking-13] 	docking_server lifecycle node launched. 
+[opennav_docking-13] 	Waiting on external lifecycle transitions to activate
+[opennav_docking-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[opennav_docking-13] [INFO] [1792165642.038265563] [docking_server]: Creating docking_server
+[collision_monitor-12] [INFO] [1792165642.042517916] [collision_monitor]: 
+[collision_monitor-12] 	collision_monitor lifecycle node launched. 
+[collision_monitor-12] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-10] [INFO] [1792165642.042320157] [waypoint_follower]: 
+[waypoint_follower-10] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-10] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-10] [INFO] [1792165642.052788865] [waypoint_follower]: Creating
+[lifecycle_manager-3] [INFO] [1792165642.086524590] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-3] [INFO] [1792165642.086574967] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[behavior_server-8] [INFO] [1792165642.095302015] [behavior_server]: 
+[behavior_server-8] 	behavior_server lifecycle node launched. 
+[behavior_server-8] 	Waiting on external lifecycle transitions to activate
+[behavior_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[velocity_smoother-11] [INFO] [1792165642.176122841] [velocity_smoother]: 
+[velocity_smoother-11] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-11] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-1] [INFO] [1792165642.179942550] [map_server]: 
+[map_server-1] 	map_server lifecycle node launched. 
+[map_server-1] 	Waiting on external lifecycle transitions to activate
+[map_server-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-1] [INFO] [1792165642.180056596] [map_server]: Creating
+[controller_server-4] [INFO] [1792165642.184099773] [controller_server]: 
+[controller_server-4] 	controller_server lifecycle node launched. 
+[controller_server-4] 	Waiting on external lifecycle transitions to activate
+[controller_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-4] [INFO] [1792165642.211295379] [controller_server]: Creating controller server
+[map_server-1] [INFO] [1792165642.213864533] [map_server]: Configuring
+[map_server-1] [INFO] [1792165642.214033499] [map_io]: Loading yaml file: /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_groundtruth.yaml
+[map_server-1] [INFO] [1792165642.214527187] [map_io]: resolution: 0.05
+[map_server-1] [INFO] [1792165642.214541354] [map_io]: origin[0]: -1.75
+[map_server-1] [INFO] [1792165642.214544729] [map_io]: origin[1]: -1.75
+[map_server-1] [INFO] [1792165642.214547688] [map_io]: origin[2]: 0
+[map_server-1] [INFO] [1792165642.214550980] [map_io]: free_thresh: 0.196
+[map_server-1] [INFO] [1792165642.214554105] [map_io]: occupied_thresh: 0.65
+[map_server-1] [INFO] [1792165642.214559688] [map_io]: mode: trinary
+[map_server-1] [INFO] [1792165642.214567564] [map_io]: negate: 0
+[map_server-1] [INFO] [1792165642.221019137] [map_io]: Loading image_file: /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_groundtruth.pgm
+[map_server-1] [INFO] [1792165642.226535212] [map_io]: Read map /home/asesh/ros2-autonomous-maze-navigation/ros2_ws/src/slam_mapping/maps/maze_groundtruth.pgm: 70 X 70 map @ 0.05 m/cell
+[planner_server-6] [INFO] [1792165642.256420394] [planner_server]: 
+[planner_server-6] 	planner_server lifecycle node launched. 
+[planner_server-6] 	Waiting on external lifecycle transitions to activate
+[planner_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-6] [INFO] [1792165642.269501216] [planner_server]: Creating
+[bt_navigator-9] [INFO] [1792165642.283073184] [bt_navigator]: 
+[bt_navigator-9] 	bt_navigator lifecycle node launched. 
+[bt_navigator-9] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-9] [INFO] [1792165642.290925486] [bt_navigator]: Creating
+[lifecycle_manager-3] [INFO] [1792165642.301629079] [lifecycle_manager_localization]: [34m[1mConfiguring amcl[0m[0m
+[amcl-2] [INFO] [1792165642.302035763] [amcl]: Configuring
+[amcl-2] [INFO] [1792165642.302261482] [amcl]: initTransforms
+[amcl-2] [INFO] [1792165642.386298531] [amcl]: initPubSub
+[planner_server-6] [INFO] [1792165642.392440050] [global_costmap.global_costmap]: 
+[planner_server-6] 	global_costmap lifecycle node launched. 
+[planner_server-6] 	Waiting on external lifecycle transitions to activate
+[planner_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-6] [INFO] [1792165642.396815074] [global_costmap.global_costmap]: Creating Costmap
+[controller_server-4] [INFO] [1792165642.410963651] [local_costmap.local_costmap]: 
+[controller_server-4] 	local_costmap lifecycle node launched. 
+[controller_server-4] 	Waiting on external lifecycle transitions to activate
+[controller_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-4] [INFO] [1792165642.411901484] [local_costmap.local_costmap]: Creating Costmap
+[amcl-2] [INFO] [1792165642.443147184] [amcl]: Subscribed to map topic.
+[lifecycle_manager-3] [INFO] [1792165642.688827843] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[map_server-1] [INFO] [1792165642.692298495] [map_server]: Activating
+[map_server-1] [INFO] [1792165642.692572673] [map_server]: Creating bond (map_server) to lifecycle manager.
+[amcl-2] [INFO] [1792165642.693481838] [amcl]: Received a 70 X 70 map @ 0.050 m/pix
+[lifecycle_manager-3] [INFO] [1792165642.986599655] [lifecycle_manager_localization]: Server map_server connected with bond.
+[lifecycle_manager-3] [INFO] [1792165642.986645574] [lifecycle_manager_localization]: [34m[1mActivating amcl[0m[0m
+[amcl-2] [INFO] [1792165642.990223355] [amcl]: Activating
+[amcl-2] [INFO] [1792165642.990329027] [amcl]: Creating bond (amcl) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165643.071328570] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-14] [INFO] [1792165643.071403740] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-4] [INFO] [1792165643.073843388] [controller_server]: Configuring controller interface
+[controller_server-4] [INFO] [1792165643.073930017] [controller_server]: getting progress checker plugins..
+[controller_server-4] [INFO] [1792165643.074169236] [controller_server]: getting goal checker plugins..
+[controller_server-4] [INFO] [1792165643.074233406] [controller_server]: Controller frequency set to 20.0000Hz
+[controller_server-4] [INFO] [1792165643.074296075] [local_costmap.local_costmap]: Configuring
+[controller_server-4] [INFO] [1792165643.113031603] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[controller_server-4] [INFO] [1792165643.124758574] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-4] [INFO] [1792165643.141232379] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[controller_server-4] [INFO] [1792165643.141256380] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-4] [INFO] [1792165643.141949785] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-4] [INFO] [1792165643.177133158] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-4] [INFO] [1792165643.180647978] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-4] [INFO] [1792165643.182152002] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-4] [INFO] [1792165643.182827490] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-4] [INFO] [1792165643.185611237] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-4] [INFO] [1792165643.187467610] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-4] [INFO] [1792165643.190954179] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-4] [INFO] [1792165643.190988847] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-4] [INFO] [1792165643.193424245] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on circular cost.
+[controller_server-4] [INFO] [1792165643.193490915] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-4] [INFO] [1792165643.193824388] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-4] [INFO] [1792165643.193835972] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-4] [INFO] [1792165643.194585213] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, 0.500000 angular threshold and symmetric_yaw_tolerance disabled
+[controller_server-4] [INFO] [1792165643.194594963] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-4] [INFO] [1792165643.195944147] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 14.000000 weight
+[controller_server-4] [INFO] [1792165643.195955190] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-4] [INFO] [1792165643.196501130] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-4] [INFO] [1792165643.198145660] [controller_server]: PathAngleCritic instantiated with 1 power and 2.000000 weight. Mode set to: Forward Preference
+[controller_server-4] [INFO] [1792165643.198163869] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-4] [INFO] [1792165643.198963613] [controller_server]: PreferForwardCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-4] [INFO] [1792165643.198975363] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-4] [INFO] [1792165643.201673898] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1792165643.214288325] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-4] [INFO] [1792165643.214379662] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-14] [INFO] [1792165643.228948008] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-5] [INFO] [1792165643.229685040] [smoother_server]: Configuring smoother server
+[smoother_server-5] [INFO] [1792165643.257891483] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-5] [INFO] [1792165643.261926368] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-14] [INFO] [1792165643.279412299] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-6] [INFO] [1792165643.279863486] [planner_server]: Configuring
+[planner_server-6] [INFO] [1792165643.279948739] [global_costmap.global_costmap]: Configuring
+[planner_server-6] [INFO] [1792165643.298487467] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-6] [INFO] [1792165643.304189467] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-6] [INFO] [1792165643.307654618] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-6] [INFO] [1792165643.307688495] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-6] [INFO] [1792165643.309241979] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-6] [INFO] [1792165643.312528290] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-6] [INFO] [1792165643.312546207] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-6] [INFO] [1792165643.312833678] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-6] [INFO] [1792165643.325876041] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 70 X 70 at 0.050000 m/pix
+[planner_server-6] [INFO] [1792165643.327868753] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner::NavfnPlanner
+[planner_server-6] [INFO] [1792165643.327891420] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[planner_server-6] [INFO] [1792165643.328233352] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-14] [INFO] [1792165643.346816248] [lifecycle_manager_navigation]: [34m[1mConfiguring route_server[0m[0m
+[route_server-7] [INFO] [1792165643.347682745] [route_server]: Configuring
+[amcl-2] [INFO] [1792165643.364060711] [amcl]: createLaserObject
+[route_server-7] [INFO] [1792165643.421169376] [route_server]: Created GraphFileLoader GeoJsonGraphFileLoader of type nav2_route::GeoJsonGraphFileLoader
+[route_server-7] [INFO] [1792165643.421211420] [route_server]: Configuring geojson graph file loader
+[route_server-7] [INFO] [1792165643.421219712] [route_server]: No graph file provided to load yet.
+[route_server-7] [INFO] [1792165643.423526355] [route_server]: Created edge cost function plugin DistanceScorer of type nav2_route::DistanceScorer
+[route_server-7] [INFO] [1792165643.423553481] [route_server]: Configuring distance scorer.
+[route_server-7] [INFO] [1792165643.423660360] [route_server]: Created edge cost function plugin CostmapScorer of type nav2_route::CostmapScorer
+[route_server-7] [INFO] [1792165643.423665069] [route_server]: Configuring costmap scorer.
+[route_server-7] [INFO] [1792165643.426498401] [route_server]: Created route operation AdjustSpeedLimit of type nav2_route::AdjustSpeedLimit
+[route_server-7] [INFO] [1792165643.426520277] [route_server]: Configuring Adjust speed limit operation.
+[route_server-7] [INFO] [1792165643.428037844] [route_server]: Created route operation ReroutingService of type nav2_route::ReroutingService
+[route_server-7] [INFO] [1792165643.428049469] [route_server]: Configuring Rerouting service operation.
+[route_server-7] [INFO] [1792165643.430655542] [route_server]: Created route operation CollisionMonitor of type nav2_route::CollisionMonitor
+[route_server-7] [INFO] [1792165643.430903927] [route_server]: Using costmap topic: local_costmap/costmap_raw instead of server costmap topic: global_costmap/costmap_raw for CollisionMonitor.
+[lifecycle_manager-14] [INFO] [1792165643.435955482] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-8] [INFO] [1792165643.436696347] [behavior_server]: Configuring
+[behavior_server-8] [INFO] [1792165643.447064259] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors::Spin
+[behavior_server-8] [INFO] [1792165643.449354360] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors::BackUp
+[behavior_server-8] [INFO] [1792165643.452059811] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors::DriveOnHeading
+[behavior_server-8] [INFO] [1792165643.454286075] [behavior_server]: Creating behavior plugin assisted_teleop of type nav2_behaviors::AssistedTeleop
+[behavior_server-8] [INFO] [1792165643.458411881] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[behavior_server-8] [INFO] [1792165643.479872903] [behavior_server]: Configuring spin
+[behavior_server-8] [INFO] [1792165643.495260201] [behavior_server]: Configuring backup
+[behavior_server-8] [INFO] [1792165643.503388974] [behavior_server]: Configuring drive_on_heading
+[behavior_server-8] [INFO] [1792165643.521028537] [behavior_server]: Configuring assisted_teleop
+[lifecycle_manager-3] [INFO] [1792165643.521961995] [lifecycle_manager_localization]: Server amcl connected with bond.
+[lifecycle_manager-3] [INFO] [1792165643.522045373] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-3] [INFO] [1792165643.522067416] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[behavior_server-8] [INFO] [1792165643.545638572] [behavior_server]: Configuring wait
+[lifecycle_manager-14] [INFO] [1792165643.552340407] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-11] [INFO] [1792165643.553359952] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-14] [INFO] [1792165643.564780576] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-12] [INFO] [1792165643.565165843] [collision_monitor]: Configuring
+[collision_monitor-12] [INFO] [1792165643.641898159] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-12] [INFO] [1792165643.646336895] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-12] [INFO] [1792165643.646806874] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-12] [INFO] [1792165643.649486616] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-14] [INFO] [1792165643.671509496] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-9] [INFO] [1792165643.671880637] [bt_navigator]: Configuring
+[bt_navigator-9] [INFO] [1792165643.684229761] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-9] [INFO] [1792165643.853465457] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[lifecycle_manager-14] [INFO] [1792165643.888883382] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-10] [INFO] [1792165643.889470491] [waypoint_follower]: Configuring
+[waypoint_follower-10] [INFO] [1792165643.934472918] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-14] [INFO] [1792165643.935784975] [lifecycle_manager_navigation]: [34m[1mConfiguring docking_server[0m[0m
+[opennav_docking-13] [INFO] [1792165643.936284706] [docking_server]: Configuring docking_server
+[opennav_docking-13] [INFO] [1792165643.936412128] [docking_server]: Controller frequency set to 50.0000Hz
+[opennav_docking-13] [INFO] [1792165643.980194585] [docking_server]: Created charging dock plugin simple_charging_dock of type opennav_docking::SimpleChargingDock
+[opennav_docking-13] [WARN] [1792165643.987312188] [docking_server]: Dock database filepath nor dock parameters set. Docking actions can only be executed specifying the dock pose via the action request. Or update the dock database via the reload_database service.
+[opennav_docking-13] [INFO] [1792165643.987341606] [docking_server]: Docking Server has 1 dock types and 0 dock instances available.
+[lifecycle_manager-14] [INFO] [1792165643.990107061] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-4] [INFO] [1792165643.990563705] [controller_server]: Activating
+[controller_server-4] [INFO] [1792165643.990651668] [local_costmap.local_costmap]: Activating
+[controller_server-4] [INFO] [1792165643.990682044] [local_costmap.local_costmap]: Checking transform
+[controller_server-4] [INFO] [1792165643.990983391] [local_costmap.local_costmap]: start
+[controller_server-4] [WARN] [1792165644.042542356] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-4] [INFO] [1792165644.047405860] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1792165644.047985469] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-4] [INFO] [1792165644.048017012] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165644.160902496] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-14] [INFO] [1792165644.160931247] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-5] [INFO] [1792165644.161235969] [smoother_server]: Activating
+[smoother_server-5] [INFO] [1792165644.161316597] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165644.270104151] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-14] [INFO] [1792165644.270133361] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-6] [INFO] [1792165644.270461667] [planner_server]: Activating
+[planner_server-6] [INFO] [1792165644.270552421] [global_costmap.global_costmap]: Activating
+[planner_server-6] [INFO] [1792165644.270568463] [global_costmap.global_costmap]: Checking transform
+[planner_server-6] [INFO] [1792165644.270594339] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[planner_server-6] [INFO] [1792165644.770799196] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[amcl-2] [INFO] [1792165645.174211528] [amcl]: initialPoseReceived
+[amcl-2] [INFO] [1792165645.174303449] [amcl]: Setting pose (2.000000): -1.250 -1.250 0.000
+[set_initial_pose.py-16] [INFO] [1792165645.216040693] [set_initial_pose]: AMCL pose received after 1 publishes
+[planner_server-6] [INFO] [1792165645.271477330] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation at time 2.080000, but only time 3.000000 is in the buffer, when looking up transform from frame [base_link] to frame [map]
+[INFO] [set_initial_pose.py-16]: process has finished cleanly [pid 34590]
+[planner_server-6] [INFO] [1792165645.770677281] [global_costmap.global_costmap]: Timed out waiting for transform from base_link to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 2.580000 but the earliest data is at time 3.000000, when looking up transform from frame [base_link] to frame [map]
+[planner_server-6] [INFO] [1792165646.270941118] [global_costmap.global_costmap]: start
+[planner_server-6] [INFO] [1792165647.274619408] [planner_server]: Activating plugin GridBased of type NavfnPlanner
+[planner_server-6] [INFO] [1792165647.278816925] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165647.387304683] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-14] [INFO] [1792165647.387343643] [lifecycle_manager_navigation]: [34m[1mActivating route_server[0m[0m
+[route_server-7] [INFO] [1792165647.387690617] [route_server]: Activating
+[route_server-7] [INFO] [1792165647.387936211] [route_server]: Creating bond (route_server) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165647.498983539] [lifecycle_manager_navigation]: Server route_server connected with bond.
+[lifecycle_manager-14] [INFO] [1792165647.499022082] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-8] [INFO] [1792165647.499312387] [behavior_server]: Activating
+[behavior_server-8] [INFO] [1792165647.499413266] [behavior_server]: Activating spin
+[behavior_server-8] [INFO] [1792165647.499436226] [behavior_server]: Activating backup
+[behavior_server-8] [INFO] [1792165647.499455351] [behavior_server]: Activating drive_on_heading
+[behavior_server-8] [INFO] [1792165647.499470894] [behavior_server]: Activating assisted_teleop
+[behavior_server-8] [INFO] [1792165647.499481311] [behavior_server]: Activating wait
+[behavior_server-8] [INFO] [1792165647.499492936] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165647.614474479] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-14] [INFO] [1792165647.614506189] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-11] [INFO] [1792165647.615091923] [velocity_smoother]: Activating
+[velocity_smoother-11] [INFO] [1792165647.615239221] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165647.724783483] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-14] [INFO] [1792165647.727783573] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-12] [INFO] [1792165647.728216259] [collision_monitor]: Activating
+[collision_monitor-12] [INFO] [1792165647.728312596] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165647.836336417] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-14] [INFO] [1792165647.836373669] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-9] [INFO] [1792165647.836682099] [bt_navigator]: Activating
+[bt_navigator-9] [INFO] [1792165647.905885051] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165648.016245933] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-14] [INFO] [1792165648.016287934] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-10] [INFO] [1792165648.016630200] [waypoint_follower]: Activating
+[waypoint_follower-10] [INFO] [1792165648.016872127] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165648.131476614] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-14] [INFO] [1792165648.131513491] [lifecycle_manager_navigation]: [34m[1mActivating docking_server[0m[0m
+[opennav_docking-13] [INFO] [1792165648.132010471] [docking_server]: Activating docking_server
+[opennav_docking-13] [INFO] [1792165648.142485931] [docking_server]: Creating bond (docking_server) to lifecycle manager.
+[lifecycle_manager-14] [INFO] [1792165648.249193321] [lifecycle_manager_navigation]: Server docking_server connected with bond.
+[lifecycle_manager-14] [INFO] [1792165648.249230615] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-14] [INFO] [1792165648.249243865] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[amcl-2] [INFO] [1792166257.416526204] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166257.420687036] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 611.792000 but the latest data is at time 611.780000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166257.420805334] [amcl]: Setting pose (611.796000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166257.918384073] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166257.918586959] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 612.292000 but the latest data is at time 612.280000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166257.918608793] [amcl]: Setting pose (612.292000): -1.250 -1.250 0.000
+[bt_navigator-9] [INFO] [1792166261.472492556] [bt_navigator]: Begin navigating from current location (-1.25, -1.23) to (1.25, 1.25)
+[controller_server-4] [INFO] [1792166261.495537204] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1792166261.495701254] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[controller_server-4] [WARN] [1792166261.495783008] [controller_server]: No progress checker was specified in parameter 'current_progress_checker'. Server will use only plugin loaded progress_checker . This warning will appear once.
+[parameter_bridge-4] [INFO] [1792166261.564591061] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+[controller_server-4] [INFO] [1792166262.545998907] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166263.595983338] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166264.596002824] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166265.646353404] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166266.645986125] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166267.648341193] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166268.695988112] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166269.695989657] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166270.746025274] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166271.746001490] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166272.796015738] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166273.795989520] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166274.846015791] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166275.845996374] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166276.896054773] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166277.895991567] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166278.946518904] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166279.946091630] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166280.995992662] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166281.996075412] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166282.848035597] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166282.849697545] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166282.849816812] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166282.864797127] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1792166282.865560469] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1792166283.003020802] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 7.1429 Hz.
+[controller_server-4] [INFO] [1792166283.003435758] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166284.053809723] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166285.053590502] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166286.053647815] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166287.103670463] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166288.103514782] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166289.153527934] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166290.154212200] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166291.203532352] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166292.203529772] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166293.203516760] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166294.253518060] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166295.253558201] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166296.303559326] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166297.303508508] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166298.303515270] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166299.353518457] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166300.353511392] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166301.403514327] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166302.403508418] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166303.003710889] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166303.004188257] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166303.004205462] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166303.024962121] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166303.025908775] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166303.278268222] [planner_server]: Planner loop missed its desired rate of 20.0000 Hz. Current loop rate is 3.9683 Hz
+[controller_server-4] [INFO] [1792166303.293838652] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166304.343954153] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166305.343961238] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166306.343980260] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166307.393942935] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166308.443988526] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166309.444899304] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166310.443994259] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166311.493976676] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166312.493960558] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166313.543987213] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166314.543975381] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166315.593990606] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166316.594001460] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166317.593962102] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166318.643980901] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166319.643976790] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166320.693955173] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166321.693964094] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166322.743984406] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166323.344196974] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166323.345229253] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166323.345251041] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166323.363983003] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1792166323.364572192] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166323.764703175] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166324.764703557] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166325.814761010] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166326.814690116] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166327.814799230] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166328.864697357] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166329.864711596] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166330.864704079] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166331.914693599] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166332.914686756] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166333.964978383] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166334.964702955] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166336.014704077] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166337.014855895] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166338.064841429] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166339.064774920] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166340.114906176] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166341.114694233] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166342.164699616] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166343.164693463] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166343.414945989] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166343.415653127] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166343.415673374] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166343.437411257] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166343.437948297] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166345.238174323] [behavior_server]: spin completed successfully
+[controller_server-4] [INFO] [1792166345.255437940] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166346.305991653] [controller_server]: Passing new path to controller.
+[planner_server-6] [WARN] [1792166347.285194133] [planner_server]: GridBased plugin failed to plan from (-1.18, -1.09) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166347.285386436] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166347.304543407] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166348.275518881] [planner_server]: GridBased plugin failed to plan from (-1.17, -1.09) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166348.275647944] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166348.306006731] [controller_server]: Cancellation was successful. Stopping the robot.
+[controller_server-4] [INFO] [1792166348.306056639] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[controller_server-4] [INFO] [1792166348.306586099] [controller_server]: Optimizer reset
+[behavior_server-8] [INFO] [1792166348.307404222] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166353.407608495] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166353.424224930] [planner_server]: GridBased plugin failed to plan from (-1.17, -1.09) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166353.424628285] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166353.443676017] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166354.274480788] [planner_server]: GridBased plugin failed to plan from (-1.17, -1.09) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166354.274640514] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166354.295186908] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166354.295568475] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166354.295578932] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166354.295583348] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166354.313512804] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166354.313989315] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166355.274975421] [planner_server]: GridBased plugin failed to plan from (-1.17, -1.09) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166355.275026580] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166355.293566581] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166356.274304357] [planner_server]: GridBased plugin failed to plan from (-1.17, -1.09) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166356.274350267] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166356.294083643] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166356.294137177] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166358.094278347] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166358.114291875] [planner_server]: GridBased plugin failed to plan from (-1.18, -1.09) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166358.114359323] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166358.123676606] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166358.276082888] [planner_server]: GridBased plugin failed to plan from (-1.19, -1.08) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166358.276128631] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166358.294189657] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166363.394367339] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166363.414812078] [planner_server]: GridBased plugin failed to plan from (-1.16, -1.06) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166363.414903773] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166363.423833309] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166364.274631413] [planner_server]: GridBased plugin failed to plan from (-1.16, -1.06) to (1.25, 1.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166364.274809762] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [WARN] [1792166364.304592164] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [ERROR] [1792166364.305932803] [bt_navigator]: Goal failed
+[amcl-2] [INFO] [1792166364.661189059] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166364.662703673] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 718.896000 but the latest data is at time 718.880000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166364.662866316] [amcl]: Setting pose (718.896000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166365.161004973] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166365.161171908] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 719.396000 but the latest data is at time 719.380000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166365.161185906] [amcl]: Setting pose (719.396000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166365.663343285] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166365.663426357] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 719.900000 but the latest data is at time 719.880000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166365.663446812] [amcl]: Setting pose (719.900000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166366.163709861] [amcl]: initialPoseReceived
+[amcl-2] [INFO] [1792166366.163832593] [amcl]: Setting pose (720.400000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166366.664595037] [amcl]: initialPoseReceived
+[amcl-2] [INFO] [1792166366.664632615] [amcl]: Setting pose (720.900000): -1.250 -1.250 0.000
+[bt_navigator-9] [INFO] [1792166370.176609417] [bt_navigator]: Begin navigating from current location (-1.24, -1.24) to (-1.25, 0.25)
+[planner_server-6] [WARN] [1792166370.177887070] [planner_server]: GridBased plugin failed to plan from (-1.24, -1.24) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166370.177910025] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166370.187982607] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166370.278844942] [planner_server]: Planner loop missed its desired rate of 20.0000 Hz. Current loop rate is 11.3636 Hz
+[controller_server-4] [INFO] [1792166370.298269416] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166371.349158662] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166372.348591946] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166373.398630620] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166374.398608984] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166375.448625582] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166376.448620631] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166377.498640889] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166378.498622076] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166379.548613655] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166380.548650919] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166381.549555215] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166382.598615610] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166383.598610930] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166384.598799115] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166385.648618951] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166386.648639255] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166387.698626927] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166388.698615906] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166389.748618384] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166390.748617062] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166391.798616337] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166392.798619249] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166393.848643641] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166394.848620698] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166395.898621454] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166396.900058084] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166397.898657388] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166398.948617054] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166399.948632298] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166400.998646125] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166401.148907822] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166401.149427926] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166401.149444132] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166401.167885626] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1792166401.169217046] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166402.019344416] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166403.019327343] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166404.069334954] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166405.069331181] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166406.119320564] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166407.119364788] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166408.169332475] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166409.169330323] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166410.169941266] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166411.219340630] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166412.219362164] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166413.269335115] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166414.269329082] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166415.319327758] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166416.319348766] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166417.369347370] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166418.369332253] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166419.369323700] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166420.419332768] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166421.220116638] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166421.228875160] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166421.228919739] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166421.249088071] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166421.251459348] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1792166421.287830456] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1792166421.408101908] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 8.3333 Hz.
+[controller_server-4] [INFO] [1792166422.310166810] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166423.360143938] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166424.360176544] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166425.410214973] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166426.410165633] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166427.460167409] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166428.460165100] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166429.460161170] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166430.510145181] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166431.510195436] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166432.510190944] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166433.560170670] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166434.560158982] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166435.610187261] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166436.610179786] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166437.660488960] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166438.660146598] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166439.660147809] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166440.710213221] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166441.410329155] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166441.412228670] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166441.412263042] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166441.427519324] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1792166441.428171216] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1792166441.609105030] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 5.5556 Hz.
+[controller_server-4] [INFO] [1792166441.709249390] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166442.759241213] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166443.759239884] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166444.759371558] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166445.809277404] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166446.809264932] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166447.809230556] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166448.860030187] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166449.859233006] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166450.859239333] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166451.909515245] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166452.909259249] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166453.909234436] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166454.959240253] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166455.959294280] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166457.009239497] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166458.009234245] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166459.059233898] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166460.059255894] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166461.059252336] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166461.659377965] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166461.660111730] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166461.660130479] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166461.678948197] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166461.679146928] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166463.479315612] [behavior_server]: spin completed successfully
+[controller_server-4] [INFO] [1792166463.498556475] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166464.548789518] [controller_server]: Passing new path to controller.
+[planner_server-6] [WARN] [1792166465.527655017] [planner_server]: GridBased plugin failed to plan from (-1.20, -1.11) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166465.527844208] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166465.547506175] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166466.279040471] [planner_server]: GridBased plugin failed to plan from (-1.24, -1.09) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166466.279458141] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166466.298711153] [controller_server]: Cancellation was successful. Stopping the robot.
+[controller_server-4] [INFO] [1792166466.298804561] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[controller_server-4] [INFO] [1792166466.299314140] [controller_server]: Optimizer reset
+[behavior_server-8] [INFO] [1792166466.300210643] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166471.400386534] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166471.418136761] [planner_server]: GridBased plugin failed to plan from (-1.24, -1.09) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166471.418262375] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166471.437390814] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166472.278272481] [planner_server]: GridBased plugin failed to plan from (-1.24, -1.09) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166472.278419010] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166472.298209774] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166472.298377717] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166472.298386716] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166472.298390383] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166472.307483252] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166472.308575448] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166473.279477400] [planner_server]: GridBased plugin failed to plan from (-1.24, -1.09) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166473.279514980] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166473.297302135] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166474.278091633] [planner_server]: GridBased plugin failed to plan from (-1.24, -1.09) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166474.278129838] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166474.297694305] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166474.297801962] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166476.097981237] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166476.117707331] [planner_server]: GridBased plugin failed to plan from (-1.21, -1.07) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166476.117792491] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166476.127479449] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166476.278291682] [planner_server]: GridBased plugin failed to plan from (-1.21, -1.07) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166476.278337594] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166476.297800128] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166481.297969547] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166481.317568985] [planner_server]: GridBased plugin failed to plan from (-1.17, -1.04) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166481.317618147] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166481.327809458] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166482.278579521] [planner_server]: GridBased plugin failed to plan from (-1.17, -1.04) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166482.278744090] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [WARN] [1792166482.307102595] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [ERROR] [1792166482.309260123] [bt_navigator]: Goal failed
+[amcl-2] [INFO] [1792166482.663925401] [amcl]: initialPoseReceived
+[amcl-2] [INFO] [1792166482.664052724] [amcl]: Setting pose (836.760000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166483.167063214] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166483.167172080] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 837.264000 but the latest data is at time 837.260000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166483.167199077] [amcl]: Setting pose (837.264000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166483.669343443] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166483.669470182] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 837.768000 but the latest data is at time 837.760000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166483.669487098] [amcl]: Setting pose (837.768000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166484.169976836] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166484.170035497] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 838.268000 but the latest data is at time 838.260000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166484.170042247] [amcl]: Setting pose (838.268000): -1.250 -1.250 0.000
+[amcl-2] [INFO] [1792166484.673490707] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166484.673552911] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 838.772000 but the latest data is at time 838.760000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166484.673559118] [amcl]: Setting pose (838.772000): -1.250 -1.250 0.000
+[bt_navigator-9] [INFO] [1792166488.190097935] [bt_navigator]: Begin navigating from current location (-1.24, -1.23) to (0.25, -0.25)
+[controller_server-4] [INFO] [1792166488.202457974] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166489.252770168] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166490.252749135] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166491.302748038] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166492.302763102] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166493.302746976] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166494.352747632] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166495.352738887] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166496.402793956] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166497.402730549] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166498.402753102] [controller_server]: Passing new path to controller.
+[planner_server-6] [WARN] [1792166499.391594188] [planner_server]: GridBased plugin failed to plan from (-0.43, -0.64) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166499.391793964] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166499.411638064] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166500.272615603] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166500.272787215] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166500.302812793] [controller_server]: Cancellation was successful. Stopping the robot.
+[controller_server-4] [INFO] [1792166500.302920743] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[controller_server-4] [INFO] [1792166500.303505031] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166500.304439543] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1792166500.312378186] [controller_server]: Optimizer reset
+[planner_server-6] [WARN] [1792166501.277240857] [planner_server]: GridBased plugin failed to plan from (-0.28, -0.60) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166501.277294644] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166501.291344616] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166502.281875158] [planner_server]: GridBased plugin failed to plan from (-0.28, -0.60) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166502.281914863] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166502.306135112] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166502.306668113] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166504.107447426] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166504.122216360] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166504.122307395] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166504.123070296] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166504.273560510] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166504.273593175] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166504.291863638] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166509.392078683] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166509.411668083] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166509.411700331] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166509.421313919] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166510.281866203] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166510.281906700] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166510.301828209] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166510.302117230] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166510.302125354] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166510.302129145] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166510.311206860] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166510.311480007] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166511.272232767] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166511.272335468] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166511.291645945] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166512.272186497] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166512.272223494] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166512.291814291] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166512.291865829] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [WARN] [1792166512.492035823] [behavior_server]: Collision Ahead - Exiting Spin
+[behavior_server-8] [WARN] [1792166512.492061863] [behavior_server]: spin failed
+[behavior_server-8] [WARN] [1792166512.492067029] [behavior_server]: [spin] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166512.511390762] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166517.511539089] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166517.531783291] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166517.531878493] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166517.541362952] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166518.272043085] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166518.272099581] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166518.292178178] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166518.292408328] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166518.292419161] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166518.292429535] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166518.311305382] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166518.311981335] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166519.272982752] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166519.273028457] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166519.291493423] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166520.272159893] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (0.25, -0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166520.272202598] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [WARN] [1792166520.301156303] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [ERROR] [1792166520.302791607] [bt_navigator]: Goal failed
+[bt_navigator-9] [INFO] [1792166621.584411737] [bt_navigator]: Begin navigating from current location (-0.27, -0.61) to (-1.25, 0.25)
+[planner_server-6] [WARN] [1792166621.587981303] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166621.588284832] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166621.606616808] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166622.277958680] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166622.278061175] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166622.297259205] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166622.297690979] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166623.278788791] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166623.278833914] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166623.296976531] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166624.277893204] [planner_server]: GridBased plugin failed to plan from (-0.27, -0.61) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166624.277945952] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166624.297146074] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166624.297955126] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [WARN] [1792166624.498243765] [behavior_server]: Collision Ahead - Exiting Spin
+[behavior_server-8] [WARN] [1792166624.498341345] [behavior_server]: spin failed
+[behavior_server-8] [WARN] [1792166624.498360802] [behavior_server]: [spin] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166624.516668876] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166629.516953269] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166629.538505489] [planner_server]: GridBased plugin failed to plan from (-0.26, -0.60) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166629.538670150] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166629.556642965] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166630.277704065] [planner_server]: GridBased plugin failed to plan from (-0.26, -0.60) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166630.277918265] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166630.297104622] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166630.297300239] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166630.297320905] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166630.297326863] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166630.306315648] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166630.307450730] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166631.278454781] [planner_server]: GridBased plugin failed to plan from (-0.26, -0.60) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166631.278512404] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166631.296348816] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166632.277078221] [planner_server]: GridBased plugin failed to plan from (-0.26, -0.60) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166632.277141302] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166632.296662489] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166632.296817400] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166634.096981665] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166634.116883180] [planner_server]: GridBased plugin failed to plan from (-0.26, -0.59) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166634.116927220] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166634.117492907] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166634.278629828] [planner_server]: GridBased plugin failed to plan from (-0.26, -0.58) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166634.278669576] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166634.296807739] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166639.297090305] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166639.317292997] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.55) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166639.317384453] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166639.326563832] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166640.277323897] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.55) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166640.277381978] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166640.297109775] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166640.297298810] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166640.297307310] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166640.297310602] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166640.316364714] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166640.317191852] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166641.278114180] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.55) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166641.278156470] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166641.296364534] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166642.276814047] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.55) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166642.276859379] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [WARN] [1792166642.306250387] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [ERROR] [1792166642.306515544] [bt_navigator]: Goal failed
+[bt_navigator-9] [INFO] [1792166669.418697049] [bt_navigator]: Begin navigating from current location (-0.29, -0.55) to (-1.25, 0.25)
+[planner_server-6] [WARN] [1792166669.420913359] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.55) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166669.421017605] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166669.430051755] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166670.281205103] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.55) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166670.281390931] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166670.299965634] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166670.300974188] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166671.281871177] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.55) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166671.281915051] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166671.299592993] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166672.280392467] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.55) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166672.280444548] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166672.300211058] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166672.300367262] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166674.100591523] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166674.120427663] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.53) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166674.120457287] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166674.121307471] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166674.281990410] [planner_server]: GridBased plugin failed to plan from (-0.30, -0.53) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166674.282044617] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166674.300046309] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166679.300255435] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166679.320191966] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.51) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166679.320231381] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166679.339530847] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166680.280421008] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.51) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166680.280476923] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166680.300363543] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166680.300531996] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166680.300555287] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166680.300565245] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166680.319538057] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166680.320132249] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166681.281321278] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.51) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166681.281425858] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166681.299486198] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166682.280667778] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.51) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166682.280831190] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166682.300807606] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166682.300880104] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166684.101036689] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166684.120760995] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.49) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166684.120822951] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166684.121983087] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166684.272556807] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.49) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166684.272599139] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166684.289942925] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166689.290097784] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166689.309683611] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166689.309782234] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166689.310232764] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166690.280795142] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166690.280826933] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [WARN] [1792166690.309309327] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [ERROR] [1792166690.309615902] [bt_navigator]: Goal failed
+[bt_navigator-9] [INFO] [1792166707.904552052] [bt_navigator]: Begin navigating from current location (-0.35, -0.48) to (-1.25, 0.25)
+[planner_server-6] [WARN] [1792166707.910197591] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166707.910355962] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166707.925682406] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166708.278324488] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166708.278387236] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166708.296135461] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166708.296827654] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166709.277818301] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166709.277876174] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166709.295893771] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166710.276832417] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166710.276885874] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166710.296588895] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166710.296881597] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166712.097487569] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166712.116243742] [planner_server]: GridBased plugin failed to plan from (-0.34, -0.47) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166712.116393988] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166712.135417989] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166712.276400864] [planner_server]: GridBased plugin failed to plan from (-0.34, -0.45) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166712.276454363] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166712.295771066] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166717.296000306] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166717.318313628] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.41) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166717.318372669] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166717.326126422] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166718.277283278] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.41) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166718.277368276] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166718.295944971] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166718.296167842] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166718.296178883] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166718.296186466] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166718.315316025] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166718.316848160] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166719.278071042] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.41) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166719.278116958] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166719.295286727] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166720.275868404] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.41) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166720.275917070] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166720.295625081] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166720.295792286] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166722.096087575] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166722.115844175] [planner_server]: GridBased plugin failed to plan from (-0.32, -0.42) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166722.115876174] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166722.125353815] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166722.276014765] [planner_server]: GridBased plugin failed to plan from (-0.32, -0.42) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166722.276056056] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166722.295602826] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166727.295854229] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166727.316369496] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.39) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166727.316622950] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166727.318591328] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166728.279379465] [planner_server]: GridBased plugin failed to plan from (-0.29, -0.39) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166728.279454214] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [WARN] [1792166728.305299423] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [ERROR] [1792166728.306504233] [bt_navigator]: Goal failed
+[amcl-2] [INFO] [1792166770.325200980] [amcl]: createLaserObject
+[amcl-2] [INFO] [1792166773.333081951] [amcl]: createLaserObject
+[amcl-2] [INFO] [1792166776.333868607] [amcl]: createLaserObject
+[amcl-2] [INFO] [1792166779.330516348] [amcl]: createLaserObject
+[bt_navigator-9] [INFO] [1792166788.144835850] [bt_navigator]: Begin navigating from current location (-0.31, -0.47) to (-1.25, 0.25)
+[planner_server-6] [WARN] [1792166788.147154950] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.47) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166788.147310865] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166788.148611559] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166788.280483483] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.47) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166788.280516816] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166788.295653358] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166788.296230685] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166789.277542052] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.47) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166789.277651092] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166789.295626980] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166790.276651053] [planner_server]: GridBased plugin failed to plan from (-0.31, -0.47) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166790.276801301] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166790.296124052] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166790.296258926] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166792.096558003] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166792.105838864] [planner_server]: GridBased plugin failed to plan from (-0.34, -0.50) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166792.105874072] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166792.126816268] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166792.278136428] [planner_server]: GridBased plugin failed to plan from (-0.34, -0.50) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166792.278171511] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166792.296005532] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166797.396399863] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166797.418858765] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166797.418964597] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166797.436452966] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166798.279329144] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166798.279437768] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166798.296137063] [behavior_server]: Running backup
+[behavior_server-8] [WARN] [1792166798.296405769] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-8] [WARN] [1792166798.296414644] [behavior_server]: backup failed
+[behavior_server-8] [WARN] [1792166798.296420102] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166798.315418416] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166798.316063826] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166799.278493142] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166799.278657765] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166799.295543227] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166800.276389227] [planner_server]: GridBased plugin failed to plan from (-0.35, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166800.276452101] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166800.296121205] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166800.296219454] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166802.096398720] [behavior_server]: spin completed successfully
+[planner_server-6] [WARN] [1792166802.118485806] [planner_server]: GridBased plugin failed to plan from (-0.37, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166802.118650888] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166802.135810769] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166802.278386940] [planner_server]: GridBased plugin failed to plan from (-0.37, -0.48) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166802.278522480] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166802.296403397] [behavior_server]: Running wait
+[behavior_server-8] [INFO] [1792166807.296646139] [behavior_server]: wait completed successfully
+[planner_server-6] [WARN] [1792166807.316094302] [planner_server]: GridBased plugin failed to plan from (-0.43, -0.49) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166807.316157468] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166807.325999299] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166808.276824178] [planner_server]: GridBased plugin failed to plan from (-0.43, -0.49) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166808.276937469] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [WARN] [1792166808.305343515] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-9] [ERROR] [1792166808.305629096] [bt_navigator]: Goal failed
+[amcl-2] [INFO] [1792166891.702307615] [amcl]: initialPoseReceived
+[amcl-2] [WARN] [1792166891.702557448] [amcl]: Failed to transform initial pose in time (Lookup would require extrapolation into the future.  Requested time 1245.544000 but the latest data is at time 1245.540000, when looking up transform from frame [base_footprint] to frame [odom])
+[amcl-2] [INFO] [1792166891.702578698] [amcl]: Setting pose (1245.544000): -0.226 -0.716 1.008
+[bt_navigator-9] [INFO] [1792166902.899948381] [bt_navigator]: Begin navigating from current location (-0.21, -0.69) to (-1.25, 0.25)
+[planner_server-6] [WARN] [1792166902.903219590] [planner_server]: GridBased plugin failed to plan from (-0.21, -0.69) to (-1.25, 0.25): "Failed to create plan with tolerance of: 0.100000"
+[planner_server-6] [WARN] [1792166902.903325840] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1792166902.921441137] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166903.272352054] [planner_server]: Planner loop missed its desired rate of 20.0000 Hz. Current loop rate is 2.8409 Hz
+[controller_server-4] [INFO] [1792166903.292486228] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166904.342741108] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166905.342732797] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166906.393215220] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166907.392790817] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166908.392787451] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166909.442846787] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166910.442786702] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166911.492874244] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166912.492888482] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166913.492854421] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166914.542777704] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166915.542747380] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166916.542799464] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166917.592820987] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166918.592792182] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166919.592745867] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166920.642738250] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166921.642771128] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166922.642799995] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166923.642748809] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166924.692832169] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166925.692869549] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1792166926.202200429] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 125.0000 Hz.
+[controller_server-4] [WARN] [1792166926.405131896] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 16.6667 Hz.
+[controller_server-4] [WARN] [1792166926.474701875] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 25.0000 Hz.
+[controller_server-4] [WARN] [1792166926.811088206] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 125.0000 Hz.
+[controller_server-4] [WARN] [1792166926.885957280] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 62.5000 Hz.
+[controller_server-4] [INFO] [1792166926.886026322] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1792166926.947061658] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 41.6667 Hz.
+[controller_server-4] [WARN] [1792166927.185282838] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 35.7143 Hz.
+[controller_server-4] [WARN] [1792166927.543804116] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 19.2308 Hz.
+[controller_server-4] [WARN] [1792166927.694919235] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 250.0000 Hz.
+[controller_server-4] [WARN] [1792166927.750156814] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 62.5000 Hz.
+[controller_server-4] [INFO] [1792166927.900294056] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166928.900305998] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166929.950294626] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166930.600564172] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166930.604248181] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166930.604288264] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166930.624342520] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1792166930.625653773] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1792166930.805975120] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 5.5556 Hz.
+[controller_server-4] [INFO] [1792166930.956119894] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166932.006105966] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166933.006166906] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1792166933.857570822] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 22.7273 Hz.
+[controller_server-4] [INFO] [1792166934.007861962] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166935.057845761] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1792166935.432220908] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 27.7778 Hz.
+[controller_server-4] [WARN] [1792166935.544218006] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 25.0000 Hz.
+[controller_server-4] [WARN] [1792166936.166957635] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is inf Hz.
+[controller_server-4] [INFO] [1792166936.218219820] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166937.217894176] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166938.217913393] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166939.267899411] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166940.267893393] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166941.267894026] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166942.317894637] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166943.317947075] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166944.367896413] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166945.367905488] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166946.367904630] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166947.417887681] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166948.417883583] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166949.467893359] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166950.467891145] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166951.517911061] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166951.768023054] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166951.768530598] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166951.768562389] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166951.781552397] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1792166951.781967774] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1792166952.273039242] [planner_server]: Planner loop missed its desired rate of 20.0000 Hz. Current loop rate is 2.0492 Hz
+[controller_server-4] [INFO] [1792166952.291343896] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166953.341477438] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166954.343036190] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166955.391469071] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166956.391489948] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166957.441473181] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166958.441472646] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166959.491534307] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166960.491620527] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166961.491497184] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166962.541491670] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166963.541492580] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166964.591505325] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166965.592513616] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166966.591467418] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166967.641474067] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166968.641501040] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166969.641485949] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166970.691471584] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166971.691484742] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166972.341582796] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166972.342167716] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166972.342187716] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792166972.361480148] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1792166972.362120359] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1792166972.537868508] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 5.6818 Hz.
+[controller_server-4] [INFO] [1792166972.738247032] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166973.737996894] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166974.737999441] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166975.788032605] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166976.788020899] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166977.837995938] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166978.837992477] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166979.888142894] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166980.888008135] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166981.887993643] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166982.938838956] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166983.937992661] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166984.988005093] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166985.987987460] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166987.037994141] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166988.037997042] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166989.038350667] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166990.088096778] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166991.088059016] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166992.137991747] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792166992.588127357] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792166992.588344025] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792166992.588355025] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-8] [INFO] [1792166992.601528399] [behavior_server]: Running spin
+[behavior_server-8] [INFO] [1792166992.601690150] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-8] [INFO] [1792166994.401882728] [behavior_server]: spin completed successfully
+[controller_server-4] [INFO] [1792166994.431697626] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1792166995.481989469] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166996.481992713] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166997.481983969] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166998.531981442] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792166999.532040059] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167000.582002398] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167001.581991709] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167002.632078788] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167003.632007082] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167004.632010388] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167005.631987872] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167006.681983800] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167007.681989016] [controller_server]: Passing new path to controller.
+[collision_monitor-12] [INFO] [1792167008.675710990] [collision_monitor]: Robot to approach for 1.200000 seconds away from collision
+[controller_server-4] [INFO] [1792167008.681984284] [controller_server]: Passing new path to controller.
+[collision_monitor-12] [INFO] [1792167008.715587815] [collision_monitor]: Robot to continue normal operation
+[controller_server-4] [INFO] [1792167009.732004005] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167010.731982504] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167011.731997763] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167012.783985454] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167013.782898810] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167014.781991510] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167015.832390352] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167016.831986159] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167017.832001520] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167018.881990686] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167019.881987941] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167020.882053912] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167021.931987612] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167022.932008184] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167023.931990763] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167024.982021205] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167025.981982426] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167027.031996556] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167028.032060752] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1792167028.532155853] [controller_server]: Failed to make progress
+[controller_server-4] [INFO] [1792167028.534462205] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1792167028.534546080] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1792167028.551164924] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1792167028.551863179] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1792167028.621512620] [controller_server]: Control loop missed its desired rate of 20.0000 Hz. Current loop rate is 13.8889 Hz.
+[controller_server-4] [INFO] [1792167029.071632985] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167030.071637653] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167031.071633744] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167032.121678631] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167033.121894196] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1792167034.171654433] [controller_server]: Passing new path to controller.

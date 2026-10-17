@@ -36,6 +36,8 @@ venv/
 *.bag
 *.bag.active
 *.log
+# VM run logs are evidence and must be committed
+!docs/results/**/*.log
 rosbag2_*/
 
 # DQN model weights and large experiments

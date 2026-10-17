@@ -1,0 +1,23 @@
+[INFO] [launch]: All log files can be found below /home/asesh/.ros/log/2026-10-16-21-10-46-889798-asesh-QEMU-Virtual-Machine-32911
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [gazebo-1]: process started with pid [32924]
+[INFO] [robot_state_publisher-2]: process started with pid [32925]
+[INFO] [create-3]: process started with pid [32927]
+[INFO] [parameter_bridge-4]: process started with pid [32928]
+[robot_state_publisher-2] [INFO] [1792165247.703198242] [robot_state_publisher]: Robot initialized
+[create-3] [INFO] [1792165247.885799265] [ros_gz_sim]: Entity creation successful.
+[INFO] [create-3]: process has finished cleanly [pid 32927]
+[parameter_bridge-4] [INFO] [1792165248.797877917] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165248.806314745] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/odom (gz.msgs.Odometry) -> odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165248.816197060] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/tf (gz.msgs.Pose_V) -> tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165248.819274994] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/joint_states (gz.msgs.Model) -> joint_states (sensor_msgs/msg/JointState)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165248.824799725] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/scan (gz.msgs.LaserScan) -> scan (sensor_msgs/msg/LaserScan)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165248.826664302] [ros_gz_bridge]: Creating GZ->ROS Bridge: [/imu (gz.msgs.IMU) -> imu (sensor_msgs/msg/Imu)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165248.827881076] [ros_gz_bridge]: Creating ROS->GZ Bridge: [cmd_vel (geometry_msgs/msg/TwistStamped) -> /cmd_vel (gz.msgs.Twist)] (Lazy 0)
+[parameter_bridge-4] [INFO] [1792165249.086105957] [ros_gz_bridge]: Passing message from ROS geometry_msgs/msg/TwistStamped to Gazebo gz.msgs.Twist (showing msg only once per type)
+[gazebo-1] [1;31m[Err] [UserCommands.cc:1318] [0m[1;31mUnable to update the pose for entity id:[[0m[1;31m0[0m[1;31m], name[[0m[1;31mturtlebot3_burger[0m[1;31m][0m[1;31m[0m
+Training stopped: Timed out waiting for live /scan and /odom data. Check Gazebo, topic bridges and simulator pause state.
+[ros2run]: Process exited with failure 1
+Evaluation failed: [Errno 2] No such file or directory: '/home/asesh/.ros/dqn_agent/checkpoints/dqn_maze.npz'
+[ros2run]: Process exited with failure 1
+[21:11:05] stage dqn finished; log: /home/asesh/ros2-autonomous-maze-navigation/docs/results/vm/dqn_20261016-211045.log

@@ -76,7 +76,7 @@ The default speed is fast for the 0.5 m corridors: press `z` a few times before 
 
 **SLAM demo instead of navigation** (builds the map live): in Terminal 2 run `ros2 launch slam_mapping mapping.launch.py`, then in a Terminal 3 run `python3 ros2_ws/src/slam_mapping/scripts/tour_map_drive.py`. Save the map with `ros2 run slam_mapping save_map.sh maze_slam`.
 
-**Maze:** the only world is main's `worlds/custom_maze.sdf` (unmodified); the planners, ground-truth map and goal cells are read from that file (`maze_tools.py`) plus `config/mission.yaml` (start and goals); see `ros2_ws/src/maze_simulation/FIGURE1_README.md`: 7 x 6 cells, 3.5 m x 3.0 m, spawn (0.25, 0.0). Its Gazebo world name is `custom_maze` (`/world/custom_maze/...`); `tools/demo.sh` uses main's `custom_maze.launch.py`; `maze_simulation.launch.py` (adds the headless option and a cmd_vel watchdog) loads the same world.
+**Maze:** the only world is main's `worlds/custom_maze.sdf` (unmodified); the planners, ground-truth map and goal cells are read from that file (`maze_tools.py`) plus `config/mission.yaml` (start and goals); see `ros2_ws/src/maze_simulation/FIGURE1_README.md`: 7 x 6 cells, 3.5 m x 3.0 m, spawn (0.25, 0.0). Its Gazebo world name is `custom_maze` (`/world/custom_maze/...`); `tools/demo.sh` uses main's `custom_maze.launch.py`; `maze_simulation.launch.py` (adds the headless option and a cmd_vel watchdog) loads the same world. **Note:** the assignment's Figure 1 is a 6 x 6 grid; main's 7 x 6 maze is an approximation of it (see report section 2). The earlier 6 x 6 results and the cloud checks were measured on the previous layout.
 
 **Rules:** run only ONE of Nav2 / SLAM mapping / DQN at a time (they all control the same robot), and close Gazebo (`Ctrl+C`) before starting something new.
 
@@ -168,7 +168,8 @@ One controller at a time on `/cmd_vel`: mapping, Nav2 or DQN - see [docs/archite
 - [x] Member 2: SLAM/localization workflow + map validator (IMPLEMENTED; real SLAM map pending)
 - [x] Member 3: Nav2 config fixes + 3-goal runner (IMPLEMENTED; no navigation result yet)
 - [x] Member 4: DQN maze adaptation (IMPLEMENTED; unit-tested; no goal-reaching evidence)
-- [ ] Reproducible three-goal demonstration (needs VM run)
+- [ ] Reproducible three-goal demonstration (needs VM run; order in [docs/ubuntu_test_checklist.md](docs/ubuntu_test_checklist.md))
+- [ ] Re-run SLAM and DQN stages with the cloud-analysis fixes ([docs/cloud_analysis.md](docs/cloud_analysis.md)); both still unverified
 - [ ] Evidence, results and final report numbers
 
 ## Repository hygiene

@@ -9,6 +9,9 @@ environment:
   goal: [-0.25, 0.75]   # default short evaluation goal (cell 3,0); start (0.25,0.0)
   goal_tolerance_m: 0.22
   collision_distance_m: 0.15
+  # A waypoint is a cell centre (cells are 0.5 m). 0.25 m = the cell edge: the target switched as the
+  # robot ENTERED a cell, so it cut every corner into the wall. 0.15 m makes it reach the centre first.
+  waypoint_tolerance_m: 0.15
   action_duration_s: 0.30
 model:
   observation_dimensions: 15
@@ -30,7 +33,9 @@ training:
   target_update_steps: 200
   epsilon_start: 1.0
   epsilon_end: 0.05
-  epsilon_decay_steps: 20000
+  # 3000, not 20000: the real 50-episode run made only ~700 steps (every episode ends in a collision
+  # after ~14 steps), so with 20000 epsilon stayed 0.97 and the agent never left random exploration.
+  epsilon_decay_steps: 3000
   seed: 42
 rewards:
   progress_per_meter: 12
