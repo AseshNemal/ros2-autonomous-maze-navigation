@@ -1,0 +1,10 @@
+# Robot start and the three evaluation goals as (row, col) cells of the Figure 1 maze in
+# worlds/custom_maze.sdf (main's world, unmodified; the maze itself is read from that file).
+# Row 0 = top (+y), col 0 = left (-x); cell centres are 0.5 m apart, maze x -0.5..3.0, y -0.5..2.5.
+# The brief does not fix start or goals; the goals are chosen for different route lengths.
+# Spawn pose is main's: (0.25, 0.0), yaw 0 (cell (5,1) is the nearest cell centre).
+start_cell: [5, 1]
+goal_cells:
+  - [0, 3]
+  - [3, 3]
+  - [3, 0]
