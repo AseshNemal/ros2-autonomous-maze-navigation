@@ -1,5 +1,7 @@
 # Member 1 - Gazebo Simulation (`maze_simulation`)
 
+**Weerasinghe KGJP** - IT22273680 - Maze Environment and Simulation
+
 Status key: **VERIFIED** (actually run and passed) · **IMPLEMENTED** (code exists, runtime check pending) · **FAILED** · **BLOCKED** · **NOT IMPLEMENTED**.
 Runtime status on the current maze (`custom_maze.sdf`): see [testing.md](../testing.md) and `docs/results/vm/`.
 

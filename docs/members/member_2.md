@@ -1,7 +1,9 @@
 # Member 2 - SLAM and Mapping (`slam_mapping`)
 
+**Lakshitha W G D** - IT23367562 - Mapping and Localization
+
 Status key: **VERIFIED** (actually run and passed) · **IMPLEMENTED** (code exists, runtime check pending) · **FAILED** · **BLOCKED** · **NOT IMPLEMENTED**.
-No Gazebo/Nav2/SLAM/DQN runtime test has been run from this branch yet; only the static checks in `tools/verify_static.py` (Mac) have. See [testing.md](../testing.md).
+Runtime results on the current maze (Ubuntu VM): see [testing.md](../testing.md) and `docs/results/vm/`; the earlier "no runtime test yet" note no longer applies.
 
 ## Responsibility
 SLAM Toolbox mapping, occupancy grid generation, map save/load, localization (AMCL), map validation against the maze.
@@ -28,7 +30,7 @@ SLAM Toolbox mapping, occupancy grid generation, map save/load, localization (AM
 
 ## Architecture
 `/scan + /odom TF` -> `slam_toolbox` (scan matching, pose graph) -> `/map` + `map->odom` TF -> `map_saver_cli` -> `.pgm/.yaml` -> `map_server` + `amcl` (particle filter, likelihood field) -> `map->odom`.
-The SLAM map frame origin is the robot's spawn pose, so a SLAM map is offset from world coordinates by (0.25,-0.25); the validator, `set_initial_pose.py` and `run_three_goals.py --map-source slam` all account for this (assumes spawn yaw 0).
+The SLAM map frame origin is the robot's spawn pose, so a SLAM map is offset from world coordinates by (0.25, 0.0); the validator, `set_initial_pose.py` and `run_three_goals.py --map-source slam` all account for this (assumes spawn yaw 0).
 
 ## Topics
 Subscribes `/scan`, `/tf`, `/odom` (via TF); publishes `/map`, `/map_metadata`, `map->odom` TF; AMCL publishes `/amcl_pose`, subscribes `/initialpose`.
@@ -39,7 +41,7 @@ ros2 launch maze_simulation maze_simulation.launch.py gui:=false
 ros2 launch slam_mapping mapping.launch.py
 ros2 run slam_mapping auto_map_drive.py --duration 420     # or: ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -p stamped:=true
 export MAZE_REPO=$PWD; ros2 run slam_mapping save_map.sh maze_slam
-python3 ros2_ws/src/slam_mapping/scripts/validate_map.py ros2_ws/src/slam_mapping/maps/maze_slam.yaml --map-origin-in-world 0.25 -0.25
+python3 ros2_ws/src/slam_mapping/scripts/validate_map.py ros2_ws/src/slam_mapping/maps/maze_slam.yaml --map-origin-in-world 0.25 0.0
 ros2 launch slam_mapping localization.launch.py map:=$PWD/ros2_ws/src/slam_mapping/maps/maze_slam.yaml initial_x:=0.0 initial_y:=0.0
 ```
 Or staged: `tools/verify_on_vm.sh slam`.

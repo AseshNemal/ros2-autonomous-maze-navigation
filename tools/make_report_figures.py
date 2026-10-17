@@ -37,10 +37,10 @@ def main():
     fig1 = Image.open(ROOT / "docs/figure1_from_assignment.png")
     side = 300
     row([panel(fig1, (side, round(side * fig1.height / fig1.width)), "Figure 1 (assignment PDF)", smooth=True),
-         panel(gt, (side, side), "Our ground-truth map (from custom_maze.sdf)")], OUT / "fig_maze.png")
+         panel(gt, (side, side), "Ground-truth map of custom_maze.sdf (7x6)")], OUT / "fig_maze.png")
     row([panel(gt, (side, side), "Ground truth"),
          panel(slam, (side, round(side * slam.height / slam.width)),
-               "SLAM Toolbox map, last VM run (FAIL)")], OUT / "fig_slam.png")
+               "SLAM Toolbox map, current maze (precision 0.819)")], OUT / "fig_slam.png")
     print("wrote", OUT / "fig_maze.png", OUT / "fig_slam.png")
 
 
