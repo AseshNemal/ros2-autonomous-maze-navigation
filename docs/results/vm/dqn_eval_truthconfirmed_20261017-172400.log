@@ -1,0 +1,10 @@
+run=1 (5, 1)->(0, 3) outcome=collision time=12.0s path=0.67m
+run=2 (5, 1)->(0, 3) outcome=collision time=12.0s path=0.69m
+run=3 (5, 1)->(0, 3) outcome=collision time=12.0s path=0.44m
+run=4 (5, 1)->(3, 3) outcome=timeout time=146.4s path=2.66m
+run=5 (5, 1)->(3, 3) outcome=collision time=19.8s path=0.99m
+run=6 (5, 1)->(3, 3) outcome=timeout time=147.2s path=2.68m
+run=7 (5, 1)->(3, 0) outcome=collision time=12.2s path=0.50m
+run=8 (5, 1)->(3, 0) outcome=collision time=18.8s path=0.84m
+run=9 (5, 1)->(3, 0) outcome=collision time=9.2s path=0.44m
+Evaluation CSV: docs/results/vm/dqn_eval_none_truthconfirmed_20261017-172400.csv

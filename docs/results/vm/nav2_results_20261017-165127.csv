@@ -1,0 +1,4 @@
+run_id,method,goal_index,goal_world_x,goal_world_y,outcome,elapsed_sim_s,odom_distance_m,recoveries,reference_length_m,efficiency_ref_over_travelled,reset_to_start,map_source
+20261017-165154,nav2_navfn_astar_rpp,1,1.25,2.25,SUCCEEDED,38.49,5.441,0,5.5,1.011,True,world
+20261017-165154,nav2_navfn_astar_rpp,2,1.25,0.75,SUCCEEDED,15.91,2.18,0,3.0,1.376,True,world
+20261017-165154,nav2_navfn_astar_rpp,3,-0.25,0.75,SUCCEEDED,10.28,0.892,0,1.5,1.681,True,world
