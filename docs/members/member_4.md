@@ -25,7 +25,7 @@ State (15): 12 LiDAR sector minima / 3.5, goal distance/5, sin & cos of bearing 
 6. `evaluate_dqn` runs the 3 assignment goals from the fixed start (same pairs as Nav2 `--reset-to-start`), logs grid reference length and efficiency. `compare_navigation` now also reports success-only means.
 
 ## Topics
-Subscribes `/scan`, `/odom`; publishes `/cmd_vel` (**TwistStamped**). Uses `gz service /world/maze/set_pose` for reset. **Never run with Nav2/auto-mapper** (same `/cmd_vel`).
+Subscribes `/scan`, `/odom`; publishes `/cmd_vel` (**TwistStamped**). Uses `gz service /world/custom_maze/set_pose` for reset. **Never run with Nav2/auto-mapper** (same `/cmd_vel`).
 
 ## Run
 ```bash

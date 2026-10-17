@@ -4,7 +4,7 @@
                          maze_layout.yaml  (Figure 1, 7x6 x 0.5 m, from main)
                   +-------------+--------------+------------------+
                   v             v              v                  v
-            maze.world   maze_groundtruth   reference A*    DQN curriculum/
+            custom_maze.sdf   maze_groundtruth   reference A*    DQN curriculum/
           (maze_simulation)  (slam_mapping)    lengths         waypoints
                   |
    Gazebo Harmonic + TurtleBot3 Burger  --ros_gz_bridge-->  /scan /odom /tf /clock
@@ -19,7 +19,7 @@
 ```
 
 ## Shared contract
-- World `maze`, entity `turtlebot3_burger`, frames `map`, `odom`, `base_footprint`, `base_link`, `base_scan`.
+- World `custom_maze` (main's `worlds/custom_maze.sdf`, unmodified), entity `turtlebot3_burger`, frames `map`, `odom`, `base_footprint`, `base_link`, `base_scan`.
 - Everything uses `use_sim_time:=true`.
 - `/cmd_vel` is **TwistStamped** (Jazzy TurtleBot3 bridge). Exactly one controller publishes it at a time: auto-mapper **or** Nav2 (via twist_stamper) **or** DQN.
 - Start (0.25,-0.25), yaw 0 (cell 5,1). Goals (cells): G1 (0,3) = (1.25, 2.25); G2 (3,3) = (1.25, 0.75); G3 (3,0) = (-0.25, 0.75). The maze spans x -0.5..3.0, y -0.5..2.5 (centre (1.25, 1.0)).

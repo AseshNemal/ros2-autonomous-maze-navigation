@@ -18,7 +18,7 @@ The older sections below were written before these runs and are kept for history
 
 
 ## Automated, no ROS (run on the Mac) - `python3 tools/verify_static.py`
-Result on this branch (run 2026-10-16): **PASS** - python compiles; 6 YAML + 5 XML files parse; package names match; `maze.world` and ground-truth map equal their regeneration from `maze_layout.yaml`; pytest: slam_mapping 3 passed, maze_navigation 6 passed, dqn_agent 11 passed.
+Result on this branch (run 2026-10-16): **PASS** - python compiles; 6 YAML + 5 XML files parse; package names match; `custom_maze.sdf` walls match `maze_layout.yaml` and the ground-truth map equals its regeneration; pytest: slam_mapping 3 passed, maze_navigation 6 passed, dqn_agent 11 passed.
 This shows internal consistency only.
 
 ## Runtime on the Ubuntu VM - `tools/verify_on_vm.sh <stage>` (logs to `docs/results/vm/`)
