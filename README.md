@@ -184,7 +184,7 @@ The root-level `worlds/`, `config/`, `launch/` and `dqn/` folders are leftovers 
 | 3 | `maze_navigation` | Nav2 (A* + MPPI), RViz goals, 3-goal metrics | [docs/members/member_3.md](docs/members/member_3.md) |
 | 4 | `dqn_agent` | Double DQN training/evaluation, comparison with Nav2 | [docs/members/member_4.md](docs/members/member_4.md) |
 
-Also: [architecture](docs/architecture.md) · [integration](docs/integration.md) · [installation](docs/installation.md) · [testing & status](docs/testing.md) · [demonstration](docs/demonstration.md) · [VIVA notes](docs/viva.md) · [report draft](docs/report_draft.md).
+Also: [architecture](docs/architecture.md) · [integration](docs/integration.md) · [installation](docs/installation.md) · [testing & status](docs/testing.md) · [demonstration](docs/demonstration.md) · [VIVA notes](docs/viva.md) · [report](docs/report.md).
 
 > **Branch status:** `dev-integration` is an emergency full-project backup. It is code-complete but **runtime-unverified in Gazebo** - read [docs/testing.md](docs/testing.md) for the honest status of each requirement.
 
