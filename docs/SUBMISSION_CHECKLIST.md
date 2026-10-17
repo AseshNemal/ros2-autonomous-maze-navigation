@@ -3,22 +3,22 @@
 PASS = executed and passed on the Ubuntu VM on the **current maze** (`custom_maze.sdf`, 7 x 6). Evidence: `docs/results/vm/`.
 NOT VERIFIED = not executed on the current maze. Results from the removed 6 x 6 maze are in `docs/results/old_6x6_maze/` and do not count.
 
-## Assignment requirements
+## Assignment requirements (final state, Ubuntu VM 2026-10-17; evidence in `docs/results/vm/`)
 | # | Requirement (brief) | Status | Evidence / note |
 |---|---|---|---|
-| 1 | Maze world in Gazebo "as given in Figure 1" | **PARTIAL - COMPLIANCE RISK** | World loads and is used unmodified (VM sim 10/10, one robot `burger`). It is the teammate's **7 x 6** maze; Figure 1 is **6 x 6**. Not an exact match - state this in the report/VIVA. |
-| 2 | Simulation world file (`.world`/SDF) in the repo | PASS | `ros2_ws/src/maze_simulation/worlds/custom_maze.sdf` (byte-identical to origin/main) |
-| 3 | TurtleBot3 Burger + LiDAR | PASS | `sim_20261017-101901.log` (/scan 5 Hz, /odom 49.6 Hz, TF, /clock) |
-| 4 | SLAM / mapping | **PASS (implemented), accuracy below our own threshold** | Coverage 0.971, precision 0.819 (own threshold 0.85), free-OK 1.0. The brief sets no numeric threshold. `slam_validation_20261017-111320.txt`, `slam_map_20261017-111320.png` |
-| 5 | Autonomous navigation (Nav2 Dijkstra/A*) | PASS | 3/3 goals, 1 recovery total: `nav2_results_20261017-113157.csv` |
-| 6 | User clicks a goal; robot goes there avoiding collisions | **PARTIAL** | RViz **Nav2 Goal** click NOT VERIFIED by script (needs the VM desktop - do it at the VIVA). Equivalent command-line goals PASS (`tools/send_goal.sh`, `cmdline_send_goal_20261017.txt`). |
-| 7 | Deep Q-learning implemented | PASS (implemented) | 12 unit tests pass; training loop, reset, CSV, checkpoint ran on the current maze (3-episode smoke) |
-| 8 | DQN trained / evaluated, learning shown | **NOT VERIFIED / NOT DEMONSTRATED** | No training or evaluation result on the current maze. Old maze: 0 successes in 50 episodes, 0/9 evaluation (historical). Do not claim learning. |
-| 9 | Efficiency: travel time, path length, obstacle avoidance | PARTIAL | Nav2 times/distances measured (report 4.2 C2). DQN comparison: no data. |
-| 10 | Safety (no runaway) | PASS | `control_20261017-102106.log` 22/22 (watchdog stops the robot after teleop is killed) |
-| 11 | Final report 5-7 pages | NOT DONE (draft ready) | `docs/report.md` updated with real current-maze results; regenerate the PDF: `bash tools/build_report_pdf.sh`; check it is 5-7 pages; put the GitHub link on the cover page |
-| 12 | GitHub repo with packages, launch, config | READY locally | Branch `dev-integration` committed; latest commits **not pushed** |
-| 13 | VIVA: 3 different clicked goals | NOT VERIFIED here | Rehearse once on the VM desktop (commands below) |
+| 1 | Maze world in Gazebo "as given in Figure 1" | **PARTIAL - COMPLIANCE RISK** | World loads and is used unmodified (sim 10/10). It is the teammate's **7 x 6** maze; Figure 1 is **6 x 6**. Not an exact match; stated in the report. |
+| 2 | Simulation world file in the repo | PASS | `ros2_ws/src/maze_simulation/worlds/custom_maze.sdf` (byte-identical to origin/main) |
+| 3 | TurtleBot3 Burger + LiDAR | PASS | `sim_20261017-101901.log` |
+| 4 | SLAM / mapping | **PASS (implemented), accuracy below our own threshold** | Coverage 0.971, precision 0.819 (own threshold 0.85), free-OK 1.0. `slam_validation_20261017-111320.txt` |
+| 5 | Autonomous navigation (Nav2 A*) | PASS | Scripted `verify_on_vm.sh nav` on the corrected map: 3/3 goals, 0 recoveries, 38.5 / 15.9 / 10.3 s (`nav2_results_20261017-165127.csv`) |
+| 6 | User clicks a goal; robot goes there avoiding collisions | **PARTIAL** | Command-line goals and window-mode goals PASS (`tools/send_goal.sh`). A scripted RViz *Nav2 Goal* click is NOT VERIFIED; rehearse 3 clicks on the VM desktop before the VIVA. |
+| 7 | Deep Q-learning implemented | PASS (implemented) | 22 unit tests; 60-episode training, 1488 optimizer updates |
+| 8 | DQN trained / evaluated, learning shown | **FAIL (no learning shown)** | Truth-confirmed greedy evaluation 0/9 goals (7 collisions, 2 timeouts). An earlier odometry-based 5/9 was a measurement artefact. |
+| 9 | Efficiency: travel time, path length, obstacle avoidance | PARTIAL | Nav2 times/distances measured; no DQN comparison possible (0 goals). |
+| 10 | Safety (no runaway) | PASS | `control_20261017-102106.log` 22/22 |
+| 11 | Final report 5-7 pages | PASS (6 pages) | `docs/report.pdf`, built with the WeasyPrint fallback (pandoc/Chromium need sudo) |
+| 12 | GitHub repo with packages, launch, config | READY | Branch `dev-integration`; the latest local commits are **not pushed** until approved |
+| 13 | VIVA: 3 different clicked goals | NOT VERIFIED here | Rehearse once on the VM desktop |
 
 ## Known failures / risks (be upfront about them)
 1. Maze is 7 x 6, not the 6 x 6 of Figure 1.
@@ -53,17 +53,11 @@ MAP_SOURCE=slam bash tools/verify_on_vm.sh nav                   # Nav2 on the S
 bash tools/build_report_pdf.sh                          # -> docs/report.pdf (check 5-7 pages)
 ```
 
-## Final-session changes (2026-10-17, tested statically only: `verify_static.py` PASS, 8 + 6 + 18 unit tests)
-- Ground-truth map: the east outer wall was missing (fixed in `maze_tools.write_map`, map regenerated, test `test_groundtruth_vs_sdf.py`). The Nav2 results in the table were recorded before this fix.
-- DQN: always-on near-wall penalty removed, truncation no longer stored as terminal, checkpoint keeps hyperparameters/epsilon, reset waits for a post-teleport scan, `-inf` LiDAR treated as close, default training pair = shortest goal.
-- Report rewritten for the current maze with member names/IDs; PDF must be rebuilt on a machine with pandoc + Chromium.
+## Final-session changes (2026-10-17)
+- Ground-truth map east wall fixed; DQN reward, truncation, checkpoint, reset and fresh-scan fixes; DQN success now confirmed with Gazebo ground truth (odometry gave false successes); Nav2 `default_server_timeout` 20 -> 1000 ms; cleanup scripts SIGKILL stale Nav2 nodes and the watchdog.
+- Tests: `python3 tools/verify_static.py` (slam_mapping, maze_navigation, dqn_agent pytest) plus `bash tools/verify_on_vm.sh build`.
 
-## Still to run on the Ubuntu VM (nothing below is verified yet)
-```bash
-cd ~/ros2-autonomous-maze-navigation && git pull && cd ros2_ws && colcon build --symlink-install --parallel-workers 1 && cd ..
-bash tools/verify_on_vm.sh nav                                          # 1. Nav2 3 goals on the corrected map (C2b)
-EPISODES=8 GUIDANCE=none bash tools/verify_on_vm.sh dqn                 # 2. smoke: confirm updates > 0 (train_steps column)
-EPISODES=60 GUIDANCE=none bash tools/verify_on_vm.sh dqn                # 3. only if 2 is OK: one bounded run
-bash tools/build_report_pdf.sh                                          # 4. report PDF (check 5-7 pages)
-```
-Then: rehearse 3 clicked goals in RViz, take one Gazebo and one RViz screenshot, push only after approval.
+## Remaining before the VIVA
+1. Rehearse three clicked *Nav2 Goal* goals in RViz (do not click *2D Pose Estimate*); fallback `bash tools/send_goal.sh G1|G2|G3`.
+2. Decide about the Figure 1 mismatch (7 x 6 vs 6 x 6) and about further DQN training (needs approval; not run).
+3. Push `dev-integration` when approved.
